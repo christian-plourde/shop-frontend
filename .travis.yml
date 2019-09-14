@@ -1,0 +1,12 @@
+language: php
+php:
+  - 7.3
+jobs:
+        include:
+                -stage: setup
+                install:
+                        - composer install --no-interaction
+                        - git clone https://github.com/$TRAVIS_TEST_REPO.git $TRAVIS_TEST_REPO
+                        - cp -R $TRAVIS_TEST_REPO/frontend $TRAVIS_BUILD_DIR/tests/
+                -stage: testing
+                script: php vendor/bin/codecept run --steps
