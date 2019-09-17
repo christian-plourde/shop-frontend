@@ -8,7 +8,7 @@ Backend for shop
   - Accessible through XAMPP window should look like : `/www/html`
 - Install pre-hooks: `npm install`
 - Install composer: `composer install`
-- Create a symbolic link (Shotcut) to the `backend` folder in `shop-tests` and rename it to `tests/`
+- Create a symbolic link (Shotcut) to the `backend` folder in `shop-tests` and rename it to `tests`
 
 ## Usage
 
