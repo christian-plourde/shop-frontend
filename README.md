@@ -7,7 +7,7 @@ Frontend for shop website. Comp-354
 - Clone repo into the root of your apache server:
   - Accessible through XAMPP window should look like : `/www/html`
 - Setup pre-commit hooks to check code: `npm install`
-- Create a symbolic link (Shotcut) to the `frontend` folder in `shop-tests` and rename it to `tests/`
+- Create a symbolic link (Shotcut) to the `frontend` folder in `shop-tests` and rename it to `tests`
 
 ## Usage
 
