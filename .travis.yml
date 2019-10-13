@@ -2,11 +2,26 @@ language: php
 php:
   - 7.3
 
+before_install:
+  - composer clear-cache
 install:
+  - composer self-update
   - composer install --no-interaction
-setup:
-  - git clone https://github.com/$TRAVIS_TEST_REPO.git $TRAVIS_TEST_REPO
-  - echo $TRAVIS_TEST_REPO
-  - ln -s $TRAVIS_TEST_REPO/shop-backend $TRAVIS_BUILD_DIR/tests/
-test:
-  - php vendor/bin/codecept run --steps
+script:
+  - mkdir -p shop-backend
+  - mv !(shop-backend) shop-backend
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-frontend.git
+  - mv shop-frontend/* .
+  - cd shop-backend
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
+  - cp -R shop-tests/backend $TRAVIS_BUILD_DIR/tests/
+  - sudo rm -R shop-tests
+  - cd ..
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU_KEY
+  app: shop-354
+  on: dev-heroku
+  skip_cleanup: true
+  run: rm -R shop-backend/tests
