@@ -3,7 +3,7 @@ node:
   - 10
 
 install:
-  - node install
+  - npm install
 
 script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
