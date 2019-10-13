@@ -1,12 +1,21 @@
-language: php
-php:
-  - 7.3
-jobs:
-        include:
-                -stage: setup
-                install:
-                        - composer install --no-interaction
-                        - git clone https://github.com/$TRAVIS_TEST_REPO.git $TRAVIS_TEST_REPO
-                        - cp -R $TRAVIS_TEST_REPO/frontend $TRAVIS_BUILD_DIR/tests/
-                -stage: testing
-                script: php vendor/bin/codecept run --steps
+language: node_js
+node:
+  - 10
+
+install:
+  - node install
+
+script:
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
+  - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
+  - sudo rm -R shop-tests
+  - node tests/*.js
+deploy:
+  provider: heroku
+  api_key:
+    secure: $HEROKU_KEY
+  app: shop-354
+  on: master
+  skip_cleanup: true
+  run: rm -R tests/
