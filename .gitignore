@@ -1,5 +1,6 @@
 ### Ignore Tests ###
 /tests
+/shop-backend
 tags/
 tags.lock
 tags.temp
