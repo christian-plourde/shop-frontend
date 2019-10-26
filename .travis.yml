@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 language: php
 php:
   - 7.3
@@ -17,6 +18,20 @@ script:
   - cp -R shop-tests/backend $TRAVIS_BUILD_DIR/tests/
   - sudo rm -R shop-tests
   - cd ..
+=======
+language: node_js
+node:
+  - 10
+
+install:
+  - npm install
+
+script:
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
+  - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
+  - sudo rm -R shop-tests
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
 deploy:
   provider: heroku
   api_key:
@@ -24,4 +39,8 @@ deploy:
   app: shop-354
   on: master
   skip_cleanup: true
+<<<<<<< HEAD
   run: rm -R shop-backend/tests
+=======
+  run: rm -R tests/
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0

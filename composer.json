@@ -1,7 +1,13 @@
 {
     "require": {
+<<<<<<< HEAD
         "friendsofphp/php-cs-fixer": "^2.15",
         "phpunit/phpunit": "^8.4"
     }
 }
 
+=======
+        "friendsofphp/php-cs-fixer": "^2.15"
+    }
+}
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0

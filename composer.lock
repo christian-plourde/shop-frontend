@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "1ecd1f071663ae35e88fb576b0b36ee2",
+=======
+    "content-hash": "064c471246c4375bf00eefcf0a07443c",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
     "packages": [
         {
             "name": "composer/semver",
@@ -114,6 +118,7 @@
         },
         {
             "name": "doctrine/annotations",
+<<<<<<< HEAD
             "version": "v1.7.0",
             "source": {
                 "type": "git",
@@ -124,6 +129,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/annotations/zipball/fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
                 "reference": "fa4c4e861e809d6a1103bd620cce63ed91aedfeb",
+=======
+            "version": "v1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/annotations.git",
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/annotations/zipball/904dca4eb10715b92569fbcd79e201d5c349b6bc",
+                "reference": "904dca4eb10715b92569fbcd79e201d5c349b6bc",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
                 "shasum": ""
             },
             "require": {
@@ -132,7 +149,11 @@
             },
             "require-dev": {
                 "doctrine/cache": "1.*",
+<<<<<<< HEAD
                 "phpunit/phpunit": "^7.5@dev"
+=======
+                "phpunit/phpunit": "^7.5"
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
             },
             "type": "library",
             "extra": {
@@ -178,7 +199,11 @@
                 "docblock",
                 "parser"
             ],
+<<<<<<< HEAD
             "time": "2019-08-08T18:11:40+00:00"
+=======
+            "time": "2019-10-01T18:55:10+00:00"
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
         },
         {
             "name": "doctrine/lexer",
@@ -525,6 +550,7 @@
         },
         {
             "name": "symfony/console",
+<<<<<<< HEAD
             "version": "v4.3.4",
             "source": {
                 "type": "git",
@@ -535,6 +561,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/console/zipball/de63799239b3881b8a08f8481b22348f77ed7b36",
                 "reference": "de63799239b3881b8a08f8481b22348f77ed7b36",
+=======
+            "version": "v4.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/console.git",
+                "reference": "929ddf360d401b958f611d44e726094ab46a7369"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/console/zipball/929ddf360d401b958f611d44e726094ab46a7369",
+                "reference": "929ddf360d401b958f611d44e726094ab46a7369",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
                 "shasum": ""
             },
             "require": {
@@ -596,6 +634,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2019-08-26T08:26:39+00:00"
         },
         {
@@ -610,6 +649,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/429d0a1451d4c9c4abe1959b2986b88794b9b7d2",
                 "reference": "429d0a1451d4c9c4abe1959b2986b88794b9b7d2",
+=======
+            "time": "2019-10-07T12:36:49+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher",
+            "version": "v4.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "6229f58993e5a157f6096fc7145c0717d0be8807"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/6229f58993e5a157f6096fc7145c0717d0be8807",
+                "reference": "6229f58993e5a157f6096fc7145c0717d0be8807",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
                 "shasum": ""
             },
             "require": {
@@ -666,6 +721,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2019-08-26T08:55:16+00:00"
         },
         {
@@ -680,6 +736,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/c61766f4440ca687de1084a5c00b08e167a2575c",
                 "reference": "c61766f4440ca687de1084a5c00b08e167a2575c",
+=======
+            "time": "2019-10-01T16:40:32+00:00"
+        },
+        {
+            "name": "symfony/event-dispatcher-contracts",
+            "version": "v1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher-contracts.git",
+                "reference": "c43ab685673fb6c8d84220c77897b1d6cdbe1d18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher-contracts/zipball/c43ab685673fb6c8d84220c77897b1d6cdbe1d18",
+                "reference": "c43ab685673fb6c8d84220c77897b1d6cdbe1d18",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
                 "shasum": ""
             },
             "require": {
@@ -724,11 +796,19 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
             "time": "2019-06-20T06:46:26+00:00"
         },
         {
             "name": "symfony/filesystem",
             "version": "v4.3.4",
+=======
+            "time": "2019-09-17T09:54:03+00:00"
+        },
+        {
+            "name": "symfony/filesystem",
+            "version": "v4.3.5",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
@@ -778,6 +858,7 @@
         },
         {
             "name": "symfony/finder",
+<<<<<<< HEAD
             "version": "v4.3.4",
             "source": {
                 "type": "git",
@@ -788,6 +869,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/finder/zipball/86c1c929f0a4b24812e1eb109262fc3372c8e9f2",
                 "reference": "86c1c929f0a4b24812e1eb109262fc3372c8e9f2",
+=======
+            "version": "v4.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/finder.git",
+                "reference": "5e575faa95548d0586f6bedaeabec259714e44d1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/5e575faa95548d0586f6bedaeabec259714e44d1",
+                "reference": "5e575faa95548d0586f6bedaeabec259714e44d1",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
                 "shasum": ""
             },
             "require": {
@@ -823,11 +916,19 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2019-08-14T12:26:46+00:00"
         },
         {
             "name": "symfony/options-resolver",
             "version": "v4.3.4",
+=======
+            "time": "2019-09-16T11:29:48+00:00"
+        },
+        {
+            "name": "symfony/options-resolver",
+            "version": "v4.3.5",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/options-resolver.git",
@@ -1170,6 +1271,7 @@
         },
         {
             "name": "symfony/process",
+<<<<<<< HEAD
             "version": "v4.3.4",
             "source": {
                 "type": "git",
@@ -1180,6 +1282,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/process/zipball/e89969c00d762349f078db1128506f7f3dcc0d4a",
                 "reference": "e89969c00d762349f078db1128506f7f3dcc0d4a",
+=======
+            "version": "v4.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/process.git",
+                "reference": "50556892f3cc47d4200bfd1075314139c4c9ff4b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/process/zipball/50556892f3cc47d4200bfd1075314139c4c9ff4b",
+                "reference": "50556892f3cc47d4200bfd1075314139c4c9ff4b",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
                 "shasum": ""
             },
             "require": {
@@ -1215,6 +1329,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2019-08-26T08:26:39+00:00"
         },
         {
@@ -1229,6 +1344,22 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/service-contracts/zipball/ea7263d6b6d5f798b56a45a5b8d686725f2719a3",
                 "reference": "ea7263d6b6d5f798b56a45a5b8d686725f2719a3",
+=======
+            "time": "2019-09-26T21:17:10+00:00"
+        },
+        {
+            "name": "symfony/service-contracts",
+            "version": "v1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/service-contracts.git",
+                "reference": "ffcde9615dc5bb4825b9f6aed07716f1f57faae0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/service-contracts/zipball/ffcde9615dc5bb4825b9f6aed07716f1f57faae0",
+                "reference": "ffcde9615dc5bb4825b9f6aed07716f1f57faae0",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
                 "shasum": ""
             },
             "require": {
@@ -1273,11 +1404,19 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
             "time": "2019-08-20T14:44:19+00:00"
         },
         {
             "name": "symfony/stopwatch",
             "version": "v4.3.4",
+=======
+            "time": "2019-09-17T11:12:18+00:00"
+        },
+        {
+            "name": "symfony/stopwatch",
+            "version": "v4.3.5",
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/stopwatch.git",
@@ -1326,6 +1465,7 @@
             "time": "2019-08-07T11:52:19+00:00"
         }
     ],
+<<<<<<< HEAD
     "packages-dev": [
         {
             "name": "behat/gherkin",
@@ -4134,6 +4274,9 @@
             "time": "2019-08-24T08:43:50+00:00"
         }
     ],
+=======
+    "packages-dev": [],
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],

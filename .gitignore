@@ -1,5 +1,10 @@
 ### Ignore Tests ###
 /tests
+<<<<<<< HEAD
+=======
+/shop-tests
+/shop-backend
+>>>>>>> 012098d7613ee2b82c4148e79c25a7c87a5153d0
 tags/
 tags.lock
 tags.temp
