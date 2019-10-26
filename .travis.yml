@@ -19,5 +19,5 @@ deploy:
   api_key:
     secure: $HEROKU_KEY
   app: shop-354
-  on: master
+  on: dev-demo
   skip_cleanup: true
