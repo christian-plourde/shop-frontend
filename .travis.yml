@@ -22,6 +22,6 @@ deploy:
   api_key:
     secure: $HEROKU_KEY
   app: shop-354
-  on: dev-heroku
+  on: dev-demo
   skip_cleanup: true
   run: rm -R shop-backend/tests
