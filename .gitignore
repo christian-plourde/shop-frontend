@@ -1,6 +1,7 @@
 ### Ignore Tests ###
 /tests
 /shop-backend
+/shop-frontend
 tags/
 tags.lock
 tags.temp
