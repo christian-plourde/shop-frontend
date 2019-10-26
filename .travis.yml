@@ -4,6 +4,7 @@ node:
 
 install:
   - npm install
+  - npm upgrade
 
 script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
@@ -13,7 +14,7 @@ script:
   - npm run-script build 
   - sudo rm -R !(build)
   - mv build/* $TRAVIS_BUILD_DIR/
-  - rmdir build
+  - sudo rm -R build
 deploy:
   provider: heroku
   api_key:
