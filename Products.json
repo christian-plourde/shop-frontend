@@ -1,0 +1,1002 @@
+{
+	"products": 
+	[
+		{
+			"ownerID": 1,
+			"productID": 1,
+			"productName": "Microsoft Azure Mug",
+			"modelName": "B46Y9AS0GX",
+			"color": "White",
+			"dimensions": "4\"x4\"",
+			"productPrice": 20.00,
+			"descriptionText": "Stunning Microsoft Azure mug to make all your coworkers jealous.",
+			"picture": "images/azure_mug.jpg",
+			"tags": 
+			[
+				"kitchen",
+				"mug",
+				"white",
+				"microsoft",
+				"azure"
+			]
+		},
+		{
+			"ownerID": 1,
+			"productID": 2,
+			"productName": "6-Outlet Surge Protector Power Strip",
+			"modelName": "MW01720B",
+			"color": "Black",
+			"dimensions": "7\"x2\"",
+			"productPrice": 13.46,
+			"descriptionText": "Power strip with 6 outlets and built in 790 joule surge protection with 6 foot ling power cord.",
+			"picture": "images/power_strip_black.jpg",
+			"tags": 
+			[
+				"electrical",
+				"power",
+				"strip",
+				"black",
+				"electronic"
+			]
+		},
+		{
+			"ownerID": 2,
+			"productID": 3,
+			"productName": "Travel Umbrella",
+			"modelName": "B0160HYB8S",
+			"color": "Black",
+			"dimensions": "12\"x1\"",
+			"productPrice": 26.95,
+			"descriptionText": "Large umbrella with teflon coating and included carrying pouch",
+			"picture": "images/black_umbrella.jpg",
+			"tags": 
+			[
+				"umbrella",
+				"black",
+				"rain",
+				"everyday"
+			]
+		},
+		{
+			"ownerID": 3,
+			"productID": 4,
+			"productName": "Wooden Clothes Hangers (Pack of 10)",
+			"modelName": "B01MPY18P3",
+			"color": "Brown",
+			"dimensions": "7\"x1\"",
+			"productPrice": 26.99,
+			"descriptionText": "Pack of ten wooden clothes hangers, wood.",
+			"picture": "images/wooden_hangers.jpg",
+			"tags": 
+			[
+				"home",
+				"hanger",
+				"wood",
+				"brown",
+				"clothes",
+				"everyday"
+			]
+		},
+		{
+			"ownerID": 4,
+			"productID": 5,
+			"productName": "Professional Microsoft IIS 8",
+			"modelName": "1118388046",
+			"color": "Red",
+			"dimensions": "10\"x2\"",
+			"productPrice": 50.44,
+			"descriptionText": "Comprehensive guide on developing web applications with the wonderful Microsoft IIS 8 Web Server.",
+			"picture": "images/iis_8_textbook.png",
+			"tags": 
+			[
+				"home",
+				"hanger",
+				"wood",
+				"brown",
+				"clothes",
+				"everyday"
+			]
+		},
+		{
+			"ownerID": 4,
+			"productID": 6,
+			"productName": "Titanium Kitchen Scale",
+			"modelName": "B06X9NQ8GX",
+			"color": "Silver",
+			"dimensions": "8\"x1.5\"",
+			"productPrice": 15.24,
+			"descriptionText": "Digital kitchen scale for everyday use. Titanium built to last.",
+			"picture": "images/kitchen_scale.png",
+			"tags": 
+			[
+				"home",
+				"kitchen",
+				"scale",
+				"electronic",
+				"titanium",
+				"cooking"
+			]
+		},
+		{
+			"ownerID": 5,
+			"productID": 7,
+			"productName": "Twin Size Inflatable Mattress",
+			"modelName": "B06Y9MQ9GX",
+			"color": "Blue",
+			"dimensions": "7'x3'",
+			"productPrice": 61.19,
+			"descriptionText": "Twin size inflatable mattress for camping. Pump included.",
+			"picture": "images/air_mattress.jpg",
+			"tags": 
+			[
+				"home",
+				"camping",
+				"mattress",
+				"blue",
+				"pump",
+				"air",
+				"inflatable"
+			]
+		},
+		{
+			"ownerID": 5,
+			"productID": 8,
+			"productName": "Digital Alarm Clock",
+			"modelName": "B26Y9MA9IZ",
+			"color": "Black",
+			"dimensions": "5\"x3\"",
+			"productPrice": 20.19,
+			"descriptionText": "Digital alarm clock with two alarm settings. 4' power cord.",
+			"picture": "images/alarm_clock.jpg",
+			"tags": 
+			[
+				"home",
+				"alarm",
+				"clock",
+				"timer",
+				"black",
+				"electronic"
+			]
+		},
+		{
+			"ownerID": 6,
+			"productID": 9,
+			"productName": "Home Adress Plate",
+			"modelName": "B1A7BMA9IZ",
+			"color": "Black",
+			"dimensions": "12\"x4\"",
+			"productPrice": 25.69,
+			"descriptionText": "LED 4 number home address plate for driveway.",
+			"picture": "images/address_plate.jpg",
+			"tags": 
+			[
+				"home",
+				"address",
+				"LED",
+				"plate",
+				"black",
+				"electronic"
+			]
+		},
+		{
+			"ownerID": 7,
+			"productID": 10,
+			"productName": "Shrek Beanie",
+			"modelName": "B1A7BMB973",
+			"color": "Green",
+			"dimensions": "8\"x8\"",
+			"productPrice": 12.29,
+			"descriptionText": "Kitted green Shrek inspired hat to make everyone get out of your swamp.",
+			"picture": "images/shrek_hat.jpg",
+			"tags": 
+			[
+				"clothing",
+				"green",
+				"shrek",
+				"hat",
+				"knitted",
+				"wool"
+			]
+		},
+		{
+			"ownerID": 7,
+			"productID": 11,
+			"productName": "Shrek Mug",
+			"modelName": "A3B12MB973",
+			"color": "Beige",
+			"dimensions": "6\"x6\"",
+			"productPrice": 10.13,
+			"descriptionText": "Beige mug with entire shrek script printed over an image of Shrek's face. The magical text will always be with you.",
+			"picture": "images/shrek_mug.jpg",
+			"tags": 
+			[
+				"kitchen",
+				"mug",
+				"shrek",
+				"beige",
+				"script"
+			]
+		},
+		{
+			"ownerID": 7,
+			"productID": 12,
+			"productName": "Foldable Wooden Desk",
+			"modelName": "CM7322B973",
+			"color": "Brown",
+			"dimensions": "6'x3'",
+			"productPrice": 30.99,
+			"descriptionText": "Foldable wooden desk for the mobile office. Has enough space to comfortable place all of your tools for work.",
+			"picture": "images/foldable_wooden_desk.jpg",
+			"tags": 
+			[
+				"office",
+				"wood",
+				"desk",
+				"foldable",
+				"work"
+			]
+		},
+		{
+			"ownerID": 8,
+			"productID": 13,
+			"productName": "Shrek T-Shirt",
+			"modelName": "D7CGHKB973",
+			"color": "White",
+			"dimensions": "4'x3'",
+			"productPrice": 10.99,
+			"descriptionText": "A stunning Shrek themed T-Shirt so you can proudly display your ogre friend.",
+			"picture": "images/shrek_shirt.jpg",
+			"tags": 
+			[
+				"clothing",
+				"white",
+				"shirt",
+				"t-shirt",
+				"shrek"
+			]
+		},
+		{
+			"ownerID": 8,
+			"productID": 14,
+			"productName": "Shrek Pillow",
+			"modelName": "F7CGHKB973",
+			"color": "Gold",
+			"dimensions": "2'x2'",
+			"productPrice": 16.97,
+			"descriptionText": "Gold sequin throw pillow blending the faces of the legendary Nicolas Cage and Shrek.",
+			"picture": "images/shrek_pillow.png",
+			"tags": 
+			[
+				"shrek",
+				"gold",
+				"pillow",
+				"home",
+				"nicolas",
+				"cage"
+			]
+		},
+		{
+			"ownerID": 8,
+			"productID": 15,
+			"productName": "Fundamentals of Azure - Second Edition - Michael Collier",
+			"modelName": "G7CGHKB973",
+			"color": "Blue",
+			"dimensions": "8\"x8\"",
+			"productPrice": 30.13,
+			"descriptionText": "Comprehensive guide to Microsoft Azure by Michael Collier and Robin Shahan.",
+			"picture": "images/azure_textbook.png",
+			"tags": 
+			[
+				"microsoft",
+				"azure",
+				"blue",
+				"textbook",
+				"book",
+				"learning",
+				"education"
+			]
+		},
+		{
+			"ownerID": 8,
+			"productID": 16,
+			"productName": "Straw Cowboy Hat",
+			"modelName": "H7CGHKB973",
+			"color": "Beige",
+			"dimensions": "8\"x9\"",
+			"productPrice": 25.99,
+			"descriptionText": "Beige straw cowboy hat for outdoors.",
+			"picture": "images/cowboy_hat.jpg",
+			"tags": 
+			[
+				"clothing",
+				"hat",
+				"beige",
+				"cowboy",
+				"straw",
+				"outdoor"
+			]
+		},
+		{
+			"ownerID": 9,
+			"productID": 17,
+			"productName": "Shrek Clock",
+			"modelName": "I7CGHKB973",
+			"color": "White",
+			"dimensions": "12\"x12\"",
+			"productPrice": 12.99,
+			"descriptionText": "Battery operated Shrek themed wall clock. Batteries not included.",
+			"picture": "images/shrek_clock.jpg",
+			"tags": 
+			[
+				"home",
+				"shrek",
+				"clock",
+				"white"
+			]
+		},
+		{
+			"ownerID": 9,
+			"productID": 18,
+			"productName": "Unisex Running Shoes",
+			"modelName": "J7CGHKB973",
+			"color": "Gray",
+			"dimensions": "15\"x8\"",
+			"productPrice": 40.97,
+			"descriptionText": "Gray men's and women's running shoes. Perfect for running long distances as well as hiking.",
+			"picture": "images/running_shoes.jpg",
+			"tags": 
+			[
+				"clothing",
+				"shoes",
+				"running",
+				"hiking",
+				"unisex",
+				"men",
+				"women",
+				"gray"
+			]
+		},
+		{
+			"ownerID": 9,
+			"productID": 19,
+			"productName": "Sony Overear Headphones",
+			"modelName": "K7CGHKB973",
+			"color": "Blue",
+			"dimensions": "8\"x8\"",
+			"productPrice": 42.12,
+			"descriptionText": "Sony blue overear heaphones with excellent bass.",
+			"picture": "images/heaphones.jpg",
+			"tags": 
+			[
+				"sony",
+				"blue",
+				"headphones",
+				"overear",
+				"electronic"
+			]
+		},
+		{
+			"ownerID": 9,
+			"productID": 20,
+			"productName": "Duracell 9V Batteries (24 Pack)",
+			"modelName": "M7CGHKB973",
+			"color": "Bronze",
+			"dimensions": "4\"x3\"",
+			"productPrice": 50.12,
+			"descriptionText": "24 pack long-lasting Duracell 9V batteries for use in everyday electronics.",
+			"picture": "images/battery.jpg",
+			"tags": 
+			[
+				"electronic",
+				"duracell",
+				"battery",
+				"home",
+				"everyday",
+				"pack",
+				"9V"
+			]
+		},
+		{
+			"ownerID": 10,
+			"productID": 21,
+			"productName": "Shrek Themed Phone Case",
+			"modelName": "N7CGHKB973",
+			"color": "White",
+			"dimensions": "6\"x1\"",
+			"productPrice": 8.99,
+			"descriptionText": "Beautiful Shrek and Mike Wazowski inspired phone case.",
+			"picture": "images/shrek_phone_case.jpg",
+			"tags": 
+			[
+				"electronic",
+				"shrek",
+				"phone",
+				"cellphone",
+				"case",
+				"white",
+				"mike",
+				"wazowski"
+			]
+		},
+		{
+			"ownerID": 10,
+			"productID": 22,
+			"productName": "Bronze Medal",
+			"modelName": "P7CGHKB973",
+			"color": "Bronze",
+			"dimensions": "3\"x3\"",
+			"productPrice": 8.99,
+			"descriptionText": "Bronze medal for feeling humble. Use when you cannot see yourself as a winner. Strap included.",
+			"picture": "images/bronze_medal.jpg",
+			"tags": 
+			[
+				"bronze",
+				"medal",
+				"metal",
+				"strap",
+				"self",
+				"help",
+				"humbling"
+			]
+		},
+		{
+			"ownerID": 10,
+			"productID": 23,
+			"productName": "Roadhouse - 1989 Film",
+			"modelName": "Q7CGHKB973",
+			"color": "Black",
+			"dimensions": "7\"x1\"",
+			"productPrice": 8.99,
+			"descriptionText": "Roadhouse film starring Patrick Swayze from 1989.",
+			"picture": "images/roadhouse.jpg",
+			"tags": 
+			[
+				"roadhouse",
+				"patrick",
+				"swayze",
+				"films",
+				"movies",
+				"action"
+			]
+		},
+		{
+			"ownerID": 11,
+			"productID": 24,
+			"productName": "Men's Hockey Stick - Black",
+			"modelName": "S7CGHKB973",
+			"color": "Black",
+			"dimensions": "60\"x2\"",
+			"productPrice": 120.99,
+			"descriptionText": "Men's black graphite hockey stick. Tape included.",
+			"picture": "images/hockey_stick.jpg",
+			"tags": 
+			[
+				"hockey",
+				"men",
+				"stick",
+				"sports",
+				"outdoor",
+				"black"
+			]
+		},
+		{
+			"ownerID": 11,
+			"productID": 25,
+			"productName": "MLS Soccer Ball",
+			"modelName": "T7CGHKB973",
+			"color": "Blue",
+			"dimensions": "12\"x12\"",
+			"productPrice": 41.99,
+			"descriptionText": "Official Major League Soccer ball. Size 5.",
+			"picture": "images/soccer_ball.jpg",
+			"tags": 
+			[
+				"soccer",
+				"ball",
+				"mls",
+				"sports",
+				"outdoor",
+				"blue",
+				"red",
+				"white"
+			]
+		},
+		{
+			"ownerID": 11,
+			"productID": 26,
+			"productName": "Calculator",
+			"modelName": "U7CGHKB973",
+			"color": "Blue",
+			"dimensions": "8\"x5\"",
+			"productPrice": 6.99,
+			"descriptionText": "Blue non-scientific calculator for everyday use. Batteries not included.",
+			"picture": "images/calculator.jpg",
+			"tags": 
+			[
+				"calculator",
+				"blue",
+				"education",
+				"school",
+				"home",
+				"electronic"
+			]
+		},
+		{
+			"ownerID": 12,
+			"productID": 27,
+			"productName": "Premium Quality Stethoscope",
+			"modelName": "V7CGHKB973",
+			"color": "Black",
+			"dimensions": "12\"x6\"",
+			"productPrice": 50.97,
+			"descriptionText": "Premium quality stethoscope for medical practicioners.",
+			"picture": "images/stethoscope.jpg",
+			"tags": 
+			[
+				"stethoscope",
+				"medical",
+				"doctor",
+				"work",
+				"office",
+				"black"
+			]
+		},
+		{
+			"ownerID": 12,
+			"productID": 28,
+			"productName": "Placebo Pills",
+			"modelName": "W7CGHKB973",
+			"color": "White",
+			"dimensions": "6\"x4\"",
+			"productPrice": 53.12,
+			"descriptionText": "Placebo pills (60 capsules) for treating nothing at all. Sugary flavour.",
+			"picture": "images/placebo.jpg",
+			"tags": 
+			[
+				"placebo",
+				"medical",
+				"doctor",
+				"pills",
+				"capsule",
+				"treatment",
+				"home",
+				"everyday"
+			]
+		},
+		{
+			"ownerID": 12,
+			"productID": 29,
+			"productName": "Shrek Halloween Costume",
+			"modelName": "X7CGHKB973",
+			"color": "Green",
+			"dimensions": "6'x4'",
+			"productPrice": 53.12,
+			"descriptionText": "Shrek children's halloween costume. Terrify your neighbors!",
+			"picture": "images/shrek_costume.jpg",
+			"tags": 
+			[
+				"shrek",
+				"clothing",
+				"costume",
+				"halloween",
+				"holiday"
+			]
+		},
+		{
+			"ownerID": 12,
+			"productID": 30,
+			"productName": "Dog Backpack",
+			"modelName": "Y7CGHKB973",
+			"color": "Green",
+			"dimensions": "3'x2'",
+			"productPrice": 67.99,
+			"descriptionText": "Backpack for dogs. Perfect for hiking with your best friend.",
+			"picture": "images/dog_backpack.jpg",
+			"tags": 
+			[
+				"dog",
+				"backpack",
+				"hiking",
+				"outdoor",
+				"pets",
+				"animals"
+			]
+		},
+		{
+			"ownerID": 13,
+			"productID": 31,
+			"productName": "Cloak of Invisibility",
+			"modelName": "Z7CGHKB973",
+			"color": "Clear",
+			"dimensions": "5'x4'",
+			"productPrice": 45.99,
+			"descriptionText": "Invisible hoodie. Green camouflage men's hoodie.",
+			"picture": "images/camo_hoodie.jpg",
+			"tags": 
+			[
+				"men",
+				"clothing",
+				"camouflage",
+				"outdoor",
+				"hoodie",
+				"invisibility"
+			]
+		},
+		{
+			"ownerID": 13,
+			"productID": 32,
+			"productName": "Hotdog Halloween Costume",
+			"modelName": "A8CGHKB973",
+			"color": "Red",
+			"dimensions": "6'x4'",
+			"productPrice": 100.99,
+			"descriptionText": "Adult inflatable hotdog costume for halloween. Batteries not included.",
+			"picture": "images/sausage_costume.jpg",
+			"tags": 
+			[
+				"sausage",
+				"hotdog",
+				"clothing",
+				"costume",
+				"halloween",
+				"holiday"
+			]
+		},
+		{
+			"ownerID": 13,
+			"productID": 33,
+			"productName": "Bronze Cooking Pot",
+			"modelName": "B8CGHKB973",
+			"color": "Bronze",
+			"dimensions": "10\"x8\"",
+			"productPrice": 25.99,
+			"descriptionText": "Bronze coated cooking pot.",
+			"picture": "images/pot.jpg",
+			"tags": 
+			[
+				"cooking",
+				"kitchen",
+				"home",
+				"everyday",
+				"pot",
+				"bronze"
+			]
+		},
+		{
+			"ownerID": 14,
+			"productID": 34,
+			"productName": "Happy Birthday Lollipop",
+			"modelName": "C8CGHKB973",
+			"color": "Red",
+			"dimensions": "5\"x5\"",
+			"productPrice": 3.99,
+			"descriptionText": "Birthday celebration lollipop. Used.",
+			"picture": "images/lollipop.jpg",
+			"tags": 
+			[
+				"birthday",
+				"home",
+				"party",
+				"lollipop",
+				"used"
+			]
+		},
+		{
+			"ownerID": 14,
+			"productID": 35,
+			"productName": "Crazy Straws (4 Pack)",
+			"modelName": "D8CGHKB973",
+			"color": "Multicolor",
+			"dimensions": "6\"x0.5\"",
+			"productPrice": 6.99,
+			"descriptionText": "Crazy drinking straw assortment for parties. Contains 4.",
+			"picture": "images/crazy_straw.jpg",
+			"tags": 
+			[
+				"party",
+				"home",
+				"straw",
+				"children",
+				"crazy",
+				"kitchen"
+			]
+		},
+		{
+			"ownerID": 15,
+			"productID": 36,
+			"productName": "Banana Carriers (3 Pack)",
+			"modelName": "E8CGHKB973",
+			"color": "Multicolor",
+			"dimensions": "6\"x2\"",
+			"productPrice": 4.99,
+			"descriptionText": "Plastic carrying container for bananas. 3 pack.",
+			"picture": "images/banana_holder.jpg",
+			"tags": 
+			[
+				"kitchen",
+				"home",
+				"banana",
+				"lunch",
+				"everyday"
+			]
+		},
+		{
+			"ownerID": 15,
+			"productID": 37,
+			"productName": "Slap Chop",
+			"modelName": "F8CGHKB973",
+			"color": "White",
+			"dimensions": "6\"x3\"",
+			"productPrice": 17.99,
+			"descriptionText": "Plastic food slicer. Can be used with almost anything.",
+			"picture": "images/slap_chop.jpg",
+			"tags": 
+			[
+				"kitchen",
+				"home",
+				"slap",
+				"chop",
+				"lunch",
+				"everyday",
+				"white"
+			]
+		},
+		{
+			"ownerID": 15,
+			"productID": 38,
+			"productName": "Flex Tape",
+			"modelName": "G8CGHKB973",
+			"color": "Black",
+			"dimensions": "6\"x6\"",
+			"productPrice": 8.99,
+			"descriptionText": "Waterproof tape for sealing anything. Especially effective on boats.",
+			"picture": "images/flex_tape.jpg",
+			"tags": 
+			[
+				"flex",
+				"home",
+				"tape",
+				"hardware",
+				"tools",
+				"black"
+			]
+		},
+		{
+			"ownerID": 15,
+			"productID": 39,
+			"productName": "Tide Pods Laundry Detergent Capsules",
+			"modelName": "H8CGHKB973",
+			"color": "Orange",
+			"dimensions": "8\"x9\"",
+			"productPrice": 13.99,
+			"descriptionText": "Laundry detergent capsules that dissolve in the wash. Pack of 20. Do not eat.",
+			"picture": "images/tide_pods.jpg",
+			"tags": 
+			[
+				"tide",
+				"pods",
+				"laundry",
+				"detergent",
+				"cleaning",
+				"home",
+				"orange"
+			]
+		},
+		{
+			"ownerID": 16,
+			"productID": 40,
+			"productName": "Short Wave Radio Receiver",
+			"modelName": "I8CGHKB973",
+			"color": "White",
+			"dimensions": "8\"x4\"",
+			"productPrice": 85.99,
+			"descriptionText": "State of the art short wave radio receiver pair. Perfect for communicating with your grandparents.",
+			"picture": "images/short_wave_radio.jpg",
+			"tags": 
+			[
+				"short",
+				"wave",
+				"radio",
+				"white",
+				"receiver",
+				"electronic"
+			]
+		},
+		{
+			"ownerID": 17,
+			"productID": 41,
+			"productName": "Gold Medal",
+			"modelName": "J8CGHKB973",
+			"color": "Gold",
+			"dimensions": "3\"x3\"",
+			"productPrice": 5.99,
+			"descriptionText": "Gold medal for self help purposes. Feel like a winner! Strap not included.",
+			"picture": "images/gold_medal.jpg",
+			"tags": 
+			[
+				"gold",
+				"medal",
+				"metal",
+				"strap",
+				"self",
+				"help"
+			]
+		},
+		{
+			"ownerID": 17,
+			"productID": 42,
+			"productName": "Men's Rollerblades",
+			"modelName": "K8CGHKB973",
+			"color": "Black",
+			"dimensions": "30\"x8\"",
+			"productPrice": 67.99,
+			"descriptionText": "Men's rollerblades. Three wheels for added speed.",
+			"picture": "images/rollerblades.jpg",
+			"tags": 
+			[
+				"black",
+				"men",
+				"rollerblades",
+				"wheels",
+				"sports",
+				"speed"
+			]
+		},
+		{
+			"ownerID": 17,
+			"productID": 43,
+			"productName": "Industrial Quality Trash Can",
+			"modelName": "L8CGHKB973",
+			"color": "Silver",
+			"dimensions": "36\"x12\"",
+			"productPrice": 112.99,
+			"descriptionText": "Industrial quality waste basket. Made from the best aerospace grade materials.",
+			"picture": "images/trash_can.jpg",
+			"tags": 
+			[
+				"silver",
+				"trash",
+				"can",
+				"everyday",
+				"home",
+				"cleaning"
+			]
+		},
+		{
+			"ownerID": 18,
+			"productID": 44,
+			"productName": "Telescopic Back Scratcher",
+			"modelName": "M8CGHKB973",
+			"color": "Silver",
+			"dimensions": "36\"x2\"",
+			"productPrice": 10.99,
+			"descriptionText": "Revolutionary telescopic back scratcher.",
+			"picture": "images/back_scratcher.jpg",
+			"tags": 
+			[
+				"back",
+				"scratcher",
+				"telescopic",
+				"silver",
+				"medical"
+			]
+		},
+		{
+			"ownerID": 18,
+			"productID": 45,
+			"productName": "New Car Scent Air Freshener",
+			"modelName": "N8CGHKB973",
+			"color": "Pink",
+			"dimensions": "12\"x6\"",
+			"productPrice": 25.99,
+			"descriptionText": "Car air freshener refill to give your car that new car smell. 1 gallon.",
+			"picture": "images/air_freshener.png",
+			"tags": 
+			[
+				"car",
+				"air",
+				"freshener",
+				"cleaning"
+			]
+		},
+		{
+			"ownerID": 19,
+			"productID": 46,
+			"productName": "Stuffed Animal - Penguin",
+			"modelName": "O8CGHKB973",
+			"color": "Black",
+			"dimensions": "12\"x6\"",
+			"productPrice": 11.27,
+			"descriptionText": "Stuffed animal shaped like a penguin.",
+			"picture": "images/penguin.jpg",
+			"tags": 
+			[
+				"stuffed",
+				"animal",
+				"toy",
+				"children",
+				"penguin"
+			]
+		},
+		{
+			"ownerID": 19,
+			"productID": 47,
+			"productName": "Q-Tips Cotton Swabs",
+			"modelName": "P8CGHKB973",
+			"color": "White",
+			"dimensions": "8\"x4\"",
+			"productPrice": 8.27,
+			"descriptionText": "Box of 100 Q-Tips brand cotton swap. Opened and used.",
+			"picture": "images/q_tips.jpg",
+			"tags": 
+			[
+				"q-tips",
+				"cotton",
+				"swabs",
+				"cleaning",
+				"self",
+				"care",
+				"home"
+			]
+		},
+		{
+			"ownerID": 19,
+			"productID": 48,
+			"productName": "Thomas The Tank Engine Children's Toy Model Train",
+			"modelName": "Q8CGHKB973",
+			"color": "Blue",
+			"dimensions": "6\"x2\"",
+			"productPrice": 29.87,
+			"descriptionText": "Model train toy of Thomas the Tank Engine.",
+			"picture": "images/thomas.jpg",
+			"tags": 
+			[
+				"thomas",
+				"tank",
+				"engine",
+				"children",
+				"toy",
+				"model",
+				"train"
+			]
+		},
+		{
+			"ownerID": 19,
+			"productID": 49,
+			"productName": "VGA Cable - 12 ft.",
+			"modelName": "R8CGHKB973",
+			"color": "Black",
+			"dimensions": "12'x1\"",
+			"productPrice": 37.87,
+			"descriptionText": "12 ft. long VGA cable perfect for connecting all your obsolete devices.",
+			"picture": "images/vga_cable.jpg",
+			"tags": 
+			[
+				"VGA",
+				"cable",
+				"electronic",
+				"adapter"
+			]
+		},
+		{
+			"ownerID": 20,
+			"productID": 50,
+			"productName": "Daft Serious Authentic Star Wars Action Figure",
+			"modelName": "S8CGHKB973",
+			"color": "Black",
+			"dimensions": "5\"x3\"",
+			"productPrice": 2.99,
+			"descriptionText": "Authentic Star Wars action figure of famous villain Daft Serious.",
+			"picture": "images/daft_serious.jpg",
+			"tags": 
+			[
+				"wars",
+				"star",
+				"action",
+				"figure",
+				"toy",
+				"children"
+			]
+		}
+	]
+}

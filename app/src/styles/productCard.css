@@ -1,0 +1,46 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+   -webkit-appearance: none; 
+   margin: 0; 
+ }
+body{
+   
+   text-decoration: none;
+   
+}
+a{
+   text-decoration: none;
+}
+a:hover{
+   text-decoration:none;
+}
+img {
+   max-width:80%;
+   height:auto;
+}
+.productContainer{
+   text-align:center;
+   border:solid;
+   border-color:blue;
+   width:350px;
+   height:500px;
+}
+.cartElements{
+   position:relative;
+   right:35px;
+}
+.incrementCart{
+   position:relative;
+   left:100px; 
+}
+.decrementCart{
+   position:relative;
+}
+.addToCart{
+   position:relative;
+   left:30px;
+}
+.numItems{
+   text-align:center;
+   width:40px;
+}
