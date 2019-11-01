@@ -48,6 +48,7 @@ class App extends Component {
               <InputBox title = "First Name" placeholder = "First Name" />
               <InputBox title = "Last Name" placeholder = "Last Name" />
               <InputBox title = "Address" placeholder = "Address" />
+              <InputBox title = "Email" placeholder = "Email" />
               <InputBox title = "Username" placeholder = "Username" />
               <InputBox title = "Password" placeholder = "Password" type = "password"/>
               <InputBox title = "Confirm Password" placeholder = "Password" type = "password"/>
