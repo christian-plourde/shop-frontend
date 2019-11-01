@@ -15,8 +15,8 @@ a:hover{
    text-decoration:none;
 }
 img {
-   max-width:80%;
-   height:auto;
+   max-width:60%;
+   max-height:auto;
 }
 .productContainer{
    text-align:center;
@@ -24,6 +24,9 @@ img {
    border-color:blue;
    width:350px;
    height:500px;
+}
+.productContainerInner{
+   margin-bottom:1px;
 }
 .cartElements{
    position:relative;
