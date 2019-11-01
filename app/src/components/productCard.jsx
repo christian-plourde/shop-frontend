@@ -18,11 +18,11 @@ class ProductCard extends Component {
       return(
          
          <div className="productContainer">
-          <a href="#"><img src="" alt="product"/></a>
+          <a href="#"><img  src = {this.props.picture}alt="product"/></a>
           <div>
-               <h1 className="productTitle">Home Adress Plate</h1>
-               <p className="productDescription">LED 4 number home address plate for driveway.</p>
-               <p className="price">25.69</p>
+               <h1 className="productTitle">{this.props.name}</h1>
+               <p className="productDescription">{this.props.description}</p>
+               <p className="price">${this.props.price}</p>
                <p className="brand">brand</p>
                <div className="cartElements">
                <button className="incrementCart" onClick={this.handleIncrement}><span className="glyphicon glyphicon-chevron-right"></span></button>
