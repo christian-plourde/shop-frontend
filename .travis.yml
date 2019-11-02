@@ -1,7 +1,11 @@
+cache:
+  npm: true
+  directories:
+    - "node_modules"
+    
 language: node_js
 node:
   - 10
-
 install:
   - npm install
   - npm upgrade
@@ -11,8 +15,11 @@ script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
   - sudo rm -R shop-tests
-  - npm run-script build 
+  - ls
+  - npm build 
+  - ls
   - sudo rm -R !(build)
+  - ls
   - mv build/* $TRAVIS_BUILD_DIR/
   - sudo rm -R build
 deploy:
