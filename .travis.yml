@@ -4,22 +4,21 @@ cache:
     - "node_modules"
     
 language: node_js
-node:
-  - 10
 install:
   - npm install
   - npm upgrade
 
 script:
+  - rm -R *
+  - git clone --single-branch --branch login_frontend https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-frontend.git
+  - cp shop-frontend/* $TRAVIS_BUILD_DIR/
+  - rm -R shop-frontend
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
   - sudo rm -R shop-tests
-  - ls
-  - npm build 
-  - ls
-  - sudo rm -R !(build)
-  - ls
+  - npm run-script build 
+  - sudo rm -R !(build || node_modules)
   - mv build/* $TRAVIS_BUILD_DIR/
   - sudo rm -R build
 deploy:
