@@ -3,12 +3,10 @@ cache:
   directories:
     - "node_modules"
     
-language: node_js
 before_install:
   - nvm install v10.16.2
+  
 install:
-  - npm install
-  - npm install react-scripts
   - npm upgrade
 
 script:
@@ -16,6 +14,8 @@ script:
   - git clone --single-branch --branch login_frontend https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-frontend.git
   - cp -R shop-frontend/* $TRAVIS_BUILD_DIR/
   - sudo rm -R shop-frontend
+  - npm install
+  - npm install react-scripts
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
