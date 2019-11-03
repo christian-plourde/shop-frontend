@@ -1,4 +1,3 @@
-warnings_are_errors: false
 cache:
   npm: true
   directories:
@@ -20,7 +19,7 @@ script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - sudo cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
   - sudo rm -R shop-tests
-  - npm run-script build 
+  - CI=false npm run-script build 
   - sudo rm -R !(build || node_modules)
   - ls
   - mv build/* $TRAVIS_BUILD_DIR/
