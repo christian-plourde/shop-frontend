@@ -4,8 +4,11 @@ cache:
     - "node_modules"
     
 language: node_js
+before_install:
+  - nvm install v10.16.2
 install:
   - npm install
+  - npm install react-scripts
   - npm upgrade
 
 script:
