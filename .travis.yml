@@ -14,7 +14,8 @@ script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
   - sudo rm -R shop-tests
-  - CI=false npm run-script build
+  - unset CI 
+  - npm run-script build
   - sudo rm -R !(build || node_modules)
   - mv build/* $TRAVIS_BUILD_DIR/
   - sudo rm -R build
