@@ -1,3 +1,4 @@
+warnings_are_errors: false
 cache:
   npm: true
   directories:
@@ -15,7 +16,6 @@ script:
   - sudo cp -R shop-frontend/* $TRAVIS_BUILD_DIR/
   - sudo rm -R shop-frontend
   - npm install
-  - npm install react-scripts
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - sudo cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
