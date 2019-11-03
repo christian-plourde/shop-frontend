@@ -21,6 +21,6 @@ deploy:
   api_key:
     secure: $HEROKU_KEY
   app: shop-354
-  on: test-merge
+  on: master
   skip_cleanup: true
   run: rm -R tests/
