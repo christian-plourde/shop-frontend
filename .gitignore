@@ -1,5 +1,10 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+# Heroku
+/tests
+/shop-tests
+/shop-backend
+
 # dependencies
 /node_modules
 

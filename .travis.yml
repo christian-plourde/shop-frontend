@@ -1,6 +1,10 @@
-language: node_js
-node:
-  - 10
+cache:
+  npm: true
+  directories:
+    - "node_modules"
+
+before_install:
+  - nvm install v10.16.2
 
 install:
   - npm install
@@ -10,11 +14,15 @@ script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
   - sudo rm -R shop-tests
+    CI=false npm run-script build
+  - sudo rm -R !(build || node_modules)
+  - mv build/* $TRAVIS_BUILD_DIR/
+  - sudo rm -R build
 deploy:
   provider: heroku
   api_key:
     secure: $HEROKU_KEY
   app: shop-354
-  on: master
+  on: test-merge
   skip_cleanup: true
   run: rm -R tests/
