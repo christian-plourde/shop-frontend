@@ -17,7 +17,7 @@ script:
   - unset CI 
   - npm run-script build
   - ls
-  - sudo rm -R !(build | node_modules)
+  - sudo rm -R !("build"|"node_modules")
   - ls
   - mv build/* $TRAVIS_BUILD_DIR/
   - sudo rm -R build
