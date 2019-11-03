@@ -16,7 +16,9 @@ script:
   - sudo rm -R shop-tests
   - unset CI 
   - npm run-script build
-  - sudo rm -R !(build || node_modules)
+  - ls
+  - sudo rm -R !(build | node_modules)
+  - ls
   - mv build/* $TRAVIS_BUILD_DIR/
   - sudo rm -R build
 deploy:
