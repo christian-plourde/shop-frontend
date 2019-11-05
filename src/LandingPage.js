@@ -100,10 +100,10 @@ class LandingPage extends Component {
                <Carousel data = {clothingProducts} category ="Clothing Products" /> 
              </div>
              <div> 
-               <Carousel data = {data} category ="Home Products" /> 
+               <Carousel data = {homeProducts} category ="Home Products" /> 
              </div>
              <div> 
-               <Carousel data = {data} category = "Electronic Products" /> 
+               <Carousel data = {electronicProducts} category = "Electronic Products" /> 
              </div>
             </div>
            

@@ -10,7 +10,7 @@ class Carousel extends Component{
     super(props);
     
     this.state = {
-       data : [],
+       
        isLoaded : false
     };
   }
@@ -34,7 +34,7 @@ class Carousel extends Component{
         slidesToScroll: 1,
         className: 'slides'
       }
-      const{isLoaded,data} = this.state;
+      const{isLoaded} = this.state;
       if(!isLoaded){
         return <div> loading...</div>;
      }
