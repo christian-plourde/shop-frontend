@@ -20,7 +20,7 @@ class ProductCard extends Component {
          <div className="productContainer">
           <a href="#"><img  src = {this.props.picture}alt="product"/></a>
           <div className="productContainerInner">
-               <h2 className="productTitle">{this.props.name}</h2>
+               <h3 className="productTitle">{this.props.name}</h3>
                <p className="productDescription">{this.props.description}</p>
                <p className="price">${this.props.price}</p>
                <p className="brand">brand</p>

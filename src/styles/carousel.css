@@ -1,0 +1,20 @@
+.div-1{
+   height: 200px;
+   width: 20px;
+}
+.slides .slick-next, .slides .slick-prev  { 
+   background-color: grey ;
+   border-radius: 50%
+ 
+ }
+
+.slides .slick-next:hover, .slides .slick-prev:hover{
+     background-color: grey ;
+     border-radius: 50%;   
+ }   
+
+.slides .slick-next:focus, .slides .slick-prev:focus{
+     background-color: grey ;
+     border-radius: 50%;  
+      
+ }  
