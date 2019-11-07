@@ -30,7 +30,7 @@ function UsernameBox(props)
 		<div style = {style}>
 			<div style = {inner_style}>
 				<h2>{props.props.user_text ? props.props.user_text : "Username or email"}</h2>
-				<input style = {input_style} placeholder = {props.props.user_text ? props.props.user_text : "Username or email"} />
+				<input style = {input_style} placeholder = {props.props.user_text ? props.props.user_text : "Username or email"} required/>
 			</div>
 		</div>
 

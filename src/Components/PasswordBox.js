@@ -31,7 +31,7 @@ function PasswordBox(props)
 		<div style = {style}>
 			<div style = {inner_style}>
 				<h2>{props.props.password_text ? props.props.password_text : "Password"}</h2>
-				<input style = {input_style} placeholder = {props.props.password_text ? props.props.password_text : "Password"} type = "password" />
+				<input style = {input_style} placeholder = {props.props.password_text ? props.props.password_text : "Password"} type = "password" required/>
 			</div>
 		</div>
 

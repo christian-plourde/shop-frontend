@@ -4,7 +4,6 @@ import PasswordBox from "./PasswordBox.js";
 import SubmitButton from "./SubmitButton.js";
 import Link from "./Link.js";
 
-
 function Login(props)
 {
 	var password_redirect_link = 
@@ -23,7 +22,7 @@ function Login(props)
 	<form action = "">
 		<div>
 		       <UsernameBox props = {props}/>
-        	       <PasswordBox props = {props}/>
+        	       <PasswordBox props = {props} />
         	       <SubmitButton />
         	       <Link redirect_link = {register_redirect_link}/>
                    <Link redirect_link = {password_redirect_link}/>
