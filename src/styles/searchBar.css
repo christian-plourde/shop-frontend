@@ -1,0 +1,15 @@
+.SearchBox{
+   background: url(../ressources/images/search.png) no-repeat left;
+   background-position-x:10px;
+   background-size: 10%;
+   border-radius: 100px;
+   padding-left:15px;
+   width:500px;
+   height:50px;
+   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   text-indent: 50px;
+   
+   border:none;
+   border: solid 2px grey;   
+
+}

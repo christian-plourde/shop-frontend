@@ -16,9 +16,7 @@ class Carousel extends Component{
   }
     componentDidMount(){
       this.setState({
-        isLoaded:true,
-        data: this.props.data
-        
+        isLoaded:true,  
      })
     }
 

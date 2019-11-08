@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import "./styles/LandingPage.css";
 import ProductCard from "./components/productCard";
 import Carousel from "./components/carousel"
+import SearchBar from "./components/searchBar"
+import SearchResults from "./components/searchResults"
 
 class LandingPage extends Component {
    constructor(props){
@@ -12,6 +14,7 @@ class LandingPage extends Component {
          isLoaded:false,
          data: [],
          tags:[],
+         productNames:[],
          clothingProducts:[],
          homeProducts:[],
          electronicProducts:[]  
@@ -34,11 +37,12 @@ class LandingPage extends Component {
          })
         let jsonArray = JSON.parse(JSON.stringify(this.state.data));
         let tagsArray = [];
-        for(var j in jsonArray)
+        let productNamesArray = [];
+        for(var j in jsonArray){
             tagsArray.push(jsonArray[j].tags);
-
-         //console.log(tagsArray);
-
+            productNamesArray.push(jsonArray[j].productName);
+        }
+         //console.log(productNamesArray);
          let clothing = [];
          let home = [];
          let electronic = [];
@@ -58,7 +62,8 @@ class LandingPage extends Component {
               clothingProducts:clothing,
               homeProducts:home,
               electronicProducts:electronic,
-              tags:tagsArray
+              tags:tagsArray,
+              productNames:productNamesArray
            })
           // console.log(this.state.clothingProducts);
            //console.log(this.state.homeProducts);
@@ -73,11 +78,21 @@ class LandingPage extends Component {
      // .then(data => this.setState({data}))
       //console.log(this.state.data)      
    }
+   searchProducts = (e) => {
+      let value = e.target.value.toLowerCase();
+      for(var x in this.state.productNames){
+         if(value =="")
+            console.log("empty search field");
+         else if(this.state.productNames[x].toLowerCase().includes(value) )
+            console.log("****there is a match***");
+         else{}
+            
+      }
+      
+   }
+
    render(){
-      const {isLoaded,data,tags,clothingProducts,homeProducts,electronicProducts}= this.state;
-      
-      
-      
+      const {isLoaded,data,tags,clothingProducts,homeProducts,electronicProducts,productNames}= this.state;
       //clothing tags
       //let clothingItems = data.filter(data => data.)
       //const counters = this.state.counters.filter(c => c.id !== counterId);
@@ -96,6 +111,9 @@ class LandingPage extends Component {
             </div>
             */},
             <div>
+             <div className="SearchBoxContainer">
+               <SearchResults productNames ={productNames} tags = {tags}/>
+             </div>
              <div> 
                <Carousel data = {clothingProducts} category ="Clothing Products" /> 
              </div>

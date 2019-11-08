@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import LandingPage from './LandingPage';
 import ProductCard from "./components/productCard"
+import SearchBar from "./components/searchBar"
+import SearchResults from "./components/searchResults"
 import './styles/index.css';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
