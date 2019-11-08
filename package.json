@@ -14,19 +14,44 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.1.1",
     "eslint": "^5.16.0",
-    "husky": "^3.0.5",
     "lint-staged": "^9.2.5",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "react-slick": "^0.25.2",
+    "react-ui-cards": "^2.0.0",
+    "slick-carousel": "^1.8.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-eslint": "^8.0.2",
+    "eslint": "^4.12.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-flowtype": "2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "husky": "^3.0.9"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "parser": "babel-eslint",
+    "plugins": [
+      "babel",
+      "react",
+      "promise"
+    ],
+    "env": {
+      "browser": true,
+      "jest": true
+    }
   }
 }
