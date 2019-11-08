@@ -6,14 +6,22 @@ import {BrowserRouter as Router, Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
 import InputBox from "./Components/InputBox";
 import SubmitButton from "./Components/SubmitButton";
+//import LandingPage from "./LandingPage.js";
+import ProductCard from "./Components/productCard.jsx"; 
 
 class App extends Component {
   render() {
     return (
+      
     	<Router>
 
         {/*The main login page*/}
-    		<Route path = "/" exact strict render = {() => {
+        <Route path = "/" exact strict render = {() => {
+          return (<ProductCard />);
+        }} />
+
+        {/*The main login page*/}
+    		<Route path = "/login" exact strict render = {() => {
     			return (<div>
         				<Header text="Login"/>
         				<Login user_text = "Username" password_text = "Password" 
