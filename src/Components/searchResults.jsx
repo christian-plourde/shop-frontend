@@ -5,7 +5,6 @@ class SearchResults extends Component {
    constructor(){
       super();
       this.state = {
-         isHidden:false,
          suggestions:[],
          text:'',
          productNames:[],
@@ -35,9 +34,8 @@ class SearchResults extends Component {
                }
             }
          }
-         //console.log(tags);
          suggestions = this.props.productNames.filter(v=>regex.test(v)).concat(tags);
-         //console.log(suggestions);
+
       }
       this.setState(() => ({suggestions,text:value}));
    }
