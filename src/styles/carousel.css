@@ -13,4 +13,10 @@
      background-color: grey ;
      border-radius: 50%;  
       
- }  
+ } 
+.carousel-wrapper{
+   margin-bottom:30px;
+ }
+ .Category{
+    margin-bottom:20px;
+ }

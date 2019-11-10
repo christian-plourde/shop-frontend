@@ -1,0 +1,79 @@
+#Navbar {
+   background-color: #1d1e22 !important;
+ }
+ 
+ #brand {
+   color: white !important;
+   background-color: #1d1e22 !important;
+ }
+ 
+ #brandLogo {
+   margin-right: 10px;
+   font-size: 25px;
+ }
+ 
+ #dropdown-basic {
+   background-color: #1d1e22 !important;
+   border-color: #1d1e22 !important;
+   margin-right: 10px;
+   margin-left: 10px;
+ }
+ 
+ #search {
+   margin-right: 25px;
+   background-color: #1d1e22 !important;
+   border-color: whitesmoke !important;
+   color: whitesmoke !important;
+ }
+ 
+ #secondContainer {
+   margin-top: 0px;
+   padding-top: 0px;
+   background-color: #1d1e22 !important;
+ }
+ 
+ #button2 {
+   color: white !important;
+   margin-right: 12px;
+   background-color: #393f4d !important;
+   border-color: #1d1e22 !important;
+ }
+ 
+ #login {
+   margin-right: 10px;
+   background-color: #1d1e22 !important;
+   border-color: #1d1e22 !important;
+ }
+ 
+ #login:hover {
+   border-color: whitesmoke !important;
+ }
+ 
+ #signup {
+   margin-right: 10px;
+   background-color: #1d1e22 !important;
+   border-color: #1d1e22 !important;
+ }
+ 
+ #signup:hover {
+   border-color: whitesmoke !important;
+ }
+ 
+ #signup:visited {
+   border-color: whitesmoke !important;
+   background-color: whitesmoke !important;
+ }
+ 
+ #cart {
+   margin-right: 20px;
+   background-color: #1d1e22 !important;
+   border-color: #1d1e22 !important;
+ }
+ 
+ #cart:hover {
+   border-color: whitesmoke !important;
+ }
+ 
+ #shoppingCart {
+   font-size: 15px;
+ }
