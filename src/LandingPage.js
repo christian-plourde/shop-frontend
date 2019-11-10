@@ -1,10 +1,10 @@
 
 import React, {Component} from 'react';
 import "./styles/LandingPage.css";
-import ProductCard from "./Components/productCard";
 import Carousel from "./Components/carousel";
-import SearchResults from "./Components/searchResults";
-
+import Navbar from "./Components/Navbar";
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 class LandingPage extends Component {
    constructor(props){
       super(props);
@@ -21,7 +21,7 @@ class LandingPage extends Component {
    }
 
    componentDidMount(){
-      fetch('http://localhost:3000/Products.json',{
+      fetch('https://shop-354.herokuapp.com/Products.json',{
          headers : { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -69,9 +69,8 @@ class LandingPage extends Component {
       else{
          return(
             <div>
-             <div className="SearchBoxContainer">
-               <SearchResults productNames={productNames} tags={tags}/>
-             </div>
+               <Navbar productNames={productNames} tags={tags} />
+             <div className="LandingPageBody">
              <div> 
                <Carousel data={clothingProducts} category="Clothing Products" /> 
              </div>
@@ -80,6 +79,7 @@ class LandingPage extends Component {
              </div>
              <div> 
                <Carousel data={electronicProducts} category="Electronic Products" /> 
+             </div>
              </div>
             </div>      
          );

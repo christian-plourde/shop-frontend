@@ -39,7 +39,7 @@ class Carousel extends Component{
      else{
       return(
          <div className="carousel-wrapper">
-        <h2> {this.props.category}</h2>
+        <h2 className="Category"> {this.props.category}</h2>
         <Slider {...settings}>
           {this.props.data.map((data,index) =>(
           

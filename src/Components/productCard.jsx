@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import '../styles/productCard.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css.map';
 
 
 class ProductCard extends Component {
@@ -19,9 +22,10 @@ class ProductCard extends Component {
       return(
          
          <div className="productContainer">
+          <h3 className="productTitle">{this.props.name}</h3>
           <a href="#"><img  src = {this.props.picture}alt="product"/></a>
           <div className="productContainerInner">
-               <h3 className="productTitle">{this.props.name}</h3>
+               
                <p className="productDescription">{this.props.description}</p>
                <p className="price">${this.props.price}</p>
                <p className="brand">brand</p>
