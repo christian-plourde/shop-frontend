@@ -11,9 +11,13 @@ script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
+  - rm -R tests/
+  - unset CI
+  - npm run-script build
   - sudo rm -R shop-tests
   - sudo rm -R node_modules
-  - rm -R tests/
+  - sudo rm -R build/
+
 deploy:
   provider: heroku
   api_key:
