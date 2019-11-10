@@ -1,46 +1,47 @@
-
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import "./styles/LandingPage.css";
 import Carousel from "./Components/carousel";
 import Navbar from "./Components/Navbar";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 class LandingPage extends Component {
-   constructor(props){
-      super(props);
-      
-      this.state = {
-         isLoaded:false,
-         data: [],
-         tags:[],
-         productNames:[],
-         clothingProducts:[],
-         homeProducts:[],
-         electronicProducts:[]  
-      };
-   }
+  constructor(props) {
+    super(props);
 
-   componentDidMount(){
-      fetch('https://shop-354.herokuapp.com/Products.json',{
-         headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-           }
-      })
+    this.state = {
+      isLoaded: false,
+      data: [],
+      tags: [],
+      productNames: [],
+      clothingProducts: [],
+      homeProducts: [],
+      electronicProducts: []
+    };
+  }
+
+
+  componentDidMount() {
+    fetch("https://shop-354.herokuapp.com/Products.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+
       .then(response => response.json())
-      .then( (productData) => {
-         this.setState({
-            isLoaded:true,
-            data:productData.products
-         
-         })
+      .then(productData => {
+        this.setState({
+          isLoaded: true,
+          data: productData.products
+        });
         let jsonArray = JSON.parse(JSON.stringify(this.state.data));
         let tagsArray = [];
         let productNamesArray = [];
-        for(var j in jsonArray){
-            tagsArray.push(jsonArray[j].tags);
-            productNamesArray.push(jsonArray[j].productName);
+        for (var j in jsonArray) {
+          tagsArray.push(jsonArray[j].tags);
+          productNamesArray.push(jsonArray[j].productName);
         }
+
          let clothing = [];
          let home = [];
          let electronic = [];
@@ -86,6 +87,7 @@ class LandingPage extends Component {
 
       }
    }
+
 }
 
 export default LandingPage;
