@@ -2,25 +2,22 @@ language: node_js
 cache:
   npm: true
   directories:
-    - "node_modules"
-
+  - node_modules
 before_install:
-  - nvm install v10.16.2
-
+- nvm install v10.16.2
 install:
-  - npm install
-
+- npm install
 script:
-  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
-  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
-  - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
-  - sudo rm -R shop-tests
-  - sudo rm -R node_modules
+- git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
+- git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
+- cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
+- sudo rm -R shop-tests
+- sudo rm -R node_modules
+- rm -R tests/
 deploy:
   provider: heroku
   api_key:
-    secure: $HEROKU_KEY
+    secure: RCPvYE9YlKq9Xs/M5gO9asAfrqpnCsMui7GnlVKt9keBzYSNwKLl+VaeU6xJOH3XgHpv5/v2zqc4gZ/V6dX3nkMADePCkvxjFqeg1qyMSn/DRWPNClXhDNq6m5p+1BFR5K7VpkP0X63kXy24IHqb8i+2c33jddmGA7rdS1WgZn2kbLUW5BOUX6xdXkH03+Z4TMlqdtekmhY4yQeULdm25dXedfhJ9QXcUuLpX/D0cxBGGZQ5TQBr34kN3dh93OORC+r4N+KHyMRpCBDLCnE5xqv1ayca3djRej0IO9GGo+u7QMYJXHQoj+Mey2iVPm2zbGazdaPBEr6Y5QwVR6RwVbmqVmMFHs7SBAeWkA/7CYrFVuXZMmqsy22PAmaaEOxHjOIqGiJZ3OkJ7/vqroTbAx5h5XqCAhaDINTeGp25oOp/FvG9QYsuaB/IgktSD8EWasa9STyGryDukEhK6Z+c4ht5m8UCmSr59DlF1hM1j2PmdX3o+aewLweod/I06ahGrTYOJojud3qNFchS3Yf2dy5LTwii8joyWgTuvi7IKiaK09zb+ZbeKTKhu0nW0bqRzJcAIt2+ymlKDkRc41BE1TVTzqbXmdNhx98M5Z8jy7G3KZSs55lDgHXSXFhMQLCPalWk9evF0b88ghW7GJ4zxTXMV1Jobn3uUWMjUTEoZ8E=
   app: shop-354
-  on: master
+  on: test-merge
   skip_cleanup: true
-  run: rm -R tests/
