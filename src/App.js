@@ -8,6 +8,7 @@ import InputBox from "./Components/InputBox";
 import SubmitButton from "./Components/SubmitButton";
 import LandingPage from "./LandingPage.js";
 import ProductCard from "./Components/productCard.jsx"; 
+import ForgotPasswordText from "./Components/ForgotPasswordText.js";
 
 class App extends Component {
   render() {
@@ -39,7 +40,10 @@ class App extends Component {
 
       			return(<div>
               <Header text="Password Recovery"/>
-
+              <form action="">
+              <ForgotPasswordText text="Please click the button below to reset your password. An email will be sent to you." />
+              <SubmitButton />
+              </form>
               </div>
               );
 
