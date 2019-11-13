@@ -21,7 +21,7 @@ class LandingPage extends Component {
    }
 
    componentDidMount(){
-      fetch('https://shop-354.herokuapp.com/Products.json',{
+      fetch('http://localhost:3000/Products.json',{
          headers : { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -57,7 +57,8 @@ class LandingPage extends Component {
               homeProducts:home,
               electronicProducts:electronic,
               tags:tagsArray,
-              productNames:productNamesArray
+              productNames:productNamesArray,
+              data:jsonArray
            })
       })     
    }
@@ -69,7 +70,7 @@ class LandingPage extends Component {
       else{
          return(
             <div>
-               <Navbar productNames={productNames} tags={tags} />
+               <Navbar productNames={productNames} tags={tags} products={data} />
              <div className="LandingPageBody">
              <div> 
                <Carousel data={clothingProducts} category="Clothing Products" /> 
