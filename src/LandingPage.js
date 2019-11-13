@@ -58,7 +58,8 @@ class LandingPage extends Component {
               homeProducts:home,
               electronicProducts:electronic,
               tags:tagsArray,
-              productNames:productNamesArray
+              productNames:productNamesArray,
+              data:jsonArray
            })
       })     
    }
@@ -70,7 +71,7 @@ class LandingPage extends Component {
       else{
          return(
             <div>
-               <Navbar productNames={productNames} tags={tags} />
+               <Navbar productNames={productNames} tags={tags} products={data} />
              <div className="LandingPageBody">
              <div> 
                <Carousel data={clothingProducts} category="Clothing Products" /> 

@@ -1,0 +1,32 @@
+.Results{
+   width:100%;
+   border:1px solid grey;
+   box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 2px 4px 1px rgba(0,0,0,.18);
+   font-family:Arial, Helvetica,sans-serif;
+   font-size:14px;
+   color: rgba(0,0,0,0.73);
+
+}
+.Results ul {
+   width: 58.3%;
+    display: block;
+    background-color: white;
+    position: absolute;
+    z-index: 10;
+    list-style-type: none;
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    border: 1px solid grey;
+}
+.Results ul::before{
+   content:"";
+}
+.Results li{
+   padding:10px 5px;
+   cursor:pointer;
+}
+.Results li:hover {
+   text-decoration:underline;
+   background-color: rgba(128,128,128,0.20);
+}
