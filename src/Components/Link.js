@@ -15,7 +15,7 @@ function Link(redirect_link)
 
 	const inner_style = 
 	{
-	margin: "auto auto auto 40%",
+	margin: "15px auto 15px 40%",
 	width: "20%",
 	textAlign: 'center'
 	};
