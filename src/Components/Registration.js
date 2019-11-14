@@ -44,43 +44,43 @@ class Registration extends Component
               <div style = {style}>
                      <div style = {inner_style}>
                             <h2>First Name</h2>
-                            <input style = {input_style} placeholder = "First Name" required/>
+                            <input name="first_name" id="first_name" style = {input_style} placeholder = "First Name" required/>
                      </div>
               </div>
               <div style = {style}>
                      <div style = {inner_style}>
                             <h2>Last Name</h2>
-                            <input style = {input_style} placeholder = "Last Name" required/>
+                            <input name="last_name" id="last_name" style = {input_style} placeholder = "Last Name" required/>
                      </div>
               </div>
               <div style = {style}>
                      <div style = {inner_style}>
                             <h2>Address</h2>
-                            <input style = {input_style} placeholder = "Address" required/>
+                            <input name="address" id="address" style = {input_style} placeholder = "Address" required/>
                      </div>
               </div>
               <div style = {style}>
                      <div style = {inner_style}>
                             <h2>Email</h2>
-                            <input style = {input_style} placeholder = "Email" required/>
+                            <input name="email" id="email" style = {input_style} placeholder = "Email" required/>
                      </div>
               </div>
               <div style = {style}>
                      <div style = {inner_style}>
                             <h2>Username</h2>
-                            <input style = {input_style} placeholder = "Username" required/>
+                            <input name="username" id="username" style = {input_style} placeholder = "Username" required/>
                      </div>
               </div>
               <div style = {style}>
                      <div style = {inner_style}>
                             <h2>Password</h2>
-                            <input style = {input_style} placeholder = "Password" type="password" required/>
+                            <input name="password" id="password" style = {input_style} placeholder = "Password" type="password" required/>
                      </div>
               </div>
               <div style = {style}>
                      <div style = {inner_style}>
                             <h2>Confirm Password</h2>
-                            <input style = {input_style} placeholder = "Password" type="password" required/>
+                            <input name="confirm_password" id="confirm_password" style = {input_style} placeholder = "Password" type="password" required/>
                      </div>
               </div>
               <SubmitButton />
