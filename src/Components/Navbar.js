@@ -6,7 +6,9 @@ import Nav from "react-bootstrap/Nav";
 import Dropdown from "react-bootstrap/Dropdown";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
-import "../styles/searchResults.css";
+import "../styles/autoComplete.css";
+import {BrowserRouter as Router, Link} from "react-router-dom";
+import Route from "react-router-dom/Route";
 
 // The Navigation Bar
 class NavbarFunction extends Component {
@@ -24,8 +26,33 @@ class NavbarFunction extends Component {
         isLoaded:true,
      })
    }
+   onSubmit = (e) =>{
+      const value = e;
+      let suggestions = [];
+      if(value.length >0){
+         const regex = new RegExp(`^${value}`,'i');
+         let tags = [];
+         let isAlreadyInArray=false;
+         for(var x in this.props.tags){
+            for(var y in this.props.tags[x]){
+               if(regex.test(this.props.tags[x][y])){
+                  for(var i in tags){
+                     if(this.props.tags[x][y] === tags[i]){isAlreadyInArray=true;}     
+                  }
+                  if(!isAlreadyInArray){tags.push(this.props.tags[x][y])};
+                  isAlreadyInArray=false;
+               }
+            }
+         }
+         suggestions = this.props.productNames.filter(v=>regex.test(v)).concat(tags);
+
+      }
+      this.setState(() => ({suggestions,text:value}));
+      console.log(suggestions);
+      
+      
+   }
    onTextChanged = (e) =>{
-      console.log("in hiya")
       const value = e.target.value;
       let suggestions = [];
       if(value.length >0){
@@ -53,6 +80,7 @@ class NavbarFunction extends Component {
          text:value,
          suggestions:[],
       }))
+
    }
    renderSuggestions () {
       const{suggestions} = this.state;
@@ -60,8 +88,14 @@ class NavbarFunction extends Component {
          return null;
       }
       return (
-         <ul>
-            {suggestions.map((item)=> <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
+        <ul>
+            {suggestions.map((item)=><Link to={{
+               pathname:"/results",
+               query:this.props.products,
+               element:item
+            }}
+            >
+               <li onClick={() => this.suggestionSelected(item)}>{item}</li> </Link>)}
          </ul>
       );
    }
@@ -99,44 +133,119 @@ class NavbarFunction extends Component {
                     <tr>
                       <td>
                         <Dropdown.Item href="#/action-1">
-                          <h6> Electronics </h6>
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Home"
+
+                        } }> 
+                         <h6> Home </h6>
+                        </Link>
                         </Dropdown.Item>{" "}
                       </td>
 
                       <td>
                         <Dropdown.Item href="#/action-1">
-                          <h6> Electronics </h6>
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Clothing"
+
+                        } }> 
+                          <h6> Clothing </h6>
+                        </Link>
                         </Dropdown.Item>{" "}
                       </td>
 
                       <td>
                         <Dropdown.Item href="#/action-1">
-                          <h6> Electronics </h6>
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Kitchen"
+
+                        } }>
+                          <h6> Kitchen </h6>
+                        </Link>
                         </Dropdown.Item>{" "}
                       </td>
                     </tr>
 
                     <tr>
                       <td>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>{" "}
+                        <Dropdown.Item href="#/action-1">
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Electronic"
+
+                        } }>
+                          <h6> Electronics</h6>
+                        </Link>
+                        </Dropdown.Item>{" "}
                       </td>
                       <td>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>{" "}
+                        <Dropdown.Item href="#/action-1">
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Shrek"
+
+                        } }>
+                          <h6> Shrek </h6>
+                        </Link>   
+                        </Dropdown.Item>{" "}
                       </td>
                       <td>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>{" "}
+                        <Dropdown.Item href="#/action-1">
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Book"
+
+                        } }>
+                          <h6> Books </h6>
+                        </Link>  
+                        </Dropdown.Item>{" "}
                       </td>
                     </tr>
 
                     <tr>
                       <td>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>{" "}
+                        <Dropdown.Item href="#/action-1">
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Microsoft"
+
+                        } }>
+                          <h6> Microsoft</h6>
+                        </Link>
+                        </Dropdown.Item>{" "}
                       </td>
                       <td>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>{" "}
+                        <Dropdown.Item href="#/action-1">
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Everyday"
+
+                        } }>
+                          <h6> Everyday</h6>
+                        </Link> 
+                        </Dropdown.Item>{" "}
                       </td>
                       <td>
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>{" "}
+                        <Dropdown.Item href="#/action-1">
+                        <Link to={{
+                           pathname:"/results",
+                           query: this.props.products,
+                           element:"Toy"
+
+                        } }>
+                          <h6> Toys </h6>
+                        </Link>
+                        </Dropdown.Item>{" "}
                       </td>
                     </tr>
                   </table>
@@ -151,18 +260,29 @@ class NavbarFunction extends Component {
             {this.renderSuggestions()}
             </div>
             
+          <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:this.state.text
+
+           } }>  
             <Button id="search" variant="outline-success">
               Search
             </Button>
+         </Link>
 
             {/* Login */}
-            <button id="login" type="button" class="btn btn-secondary btn-sm">
+           <Link to="/login">
+              <button id="login" type="button" class="btn btn-secondary btn-sm">
               Login
-            </button>
+              </button>
+            </Link>
 
-            <button id="signup" type="button" class="btn btn-secondary btn-sm">
-              SignUp
-            </button>
+            <Link to="/register">
+               <button id="signup" type="button" class="btn btn-secondary btn-sm">
+               SignUp
+               </button>
+            </Link>
 
             {/* Cart */}
             <button id="cart" type="button" class="btn btn-secondary btn-sm">
@@ -174,43 +294,125 @@ class NavbarFunction extends Component {
 
       {/* Second Container */}
       <div id="secondContainer">
-        <Button id="button2" variant="secondary" size="sm">
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Home"
+
+           } }>  <Button id="button2" variant="secondary" size="sm">
           Home
         </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Clothing"
+
+           } }> 
         <Button id="button2" variant="secondary" size="sm">
           Clothing
         </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Kitchen"
+
+           } }>
         <Button id="button2" variant="secondary" size="sm">
-          Gaming
+          Kitchen
         </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Electronic"
+
+           } }>
         <Button id="button2" variant="secondary" size="sm">
           Electronics
         </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Shrek"
+
+           } }>
+        <Button id="button2" variant="secondary" size="sm">
+          Shrek
+        </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Book"
+
+           } }>
         <Button id="button2" variant="secondary" size="sm">
           Books
         </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Microsoft"
+
+           } }>
+        <Button id="button2" variant="secondary" size="sm">
+          Microsoft
+        </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Everyday"
+
+           } }>
+        <Button id="button2" variant="secondary" size="sm">
+          Everyday
+        </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Toy"
+
+           } }>
         <Button id="button2" variant="secondary" size="sm">
           Toys
         </Button>
-        <Button id="button2" variant="secondary" size="sm">
-          Garden
-        </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Sports"
+
+           } }>
         <Button id="button2" variant="secondary" size="sm">
           Sports
         </Button>
-        <Button id="button2" variant="secondary" size="sm">
-          Cars
-        </Button>
-        <Button id="button2" variant="secondary" size="sm">
-          Gifts
-        </Button>
-        <Button id="button2" variant="secondary" size="sm">
-          Hobbies
-        </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Outdoor"
 
+           } }>
         <Button id="button2" variant="secondary" size="sm">
-          WishList
+          Outdoors
         </Button>
+      </Link>
+      <Link to={{
+             pathname:"/results",
+             query: this.props.products,
+             element:"Children"
+
+           } }>
+        <Button id="button2" variant="secondary" size="sm">
+          Children
+        </Button>
+      </Link>
       </div>
     </div>
   );
