@@ -4,12 +4,12 @@ import Header from "./Components/Header.js";
 import Login from "./Components/Login.js";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
-import InputBox from "./Components/InputBox";
 import SubmitButton from "./Components/SubmitButton";
 import LandingPage from "./LandingPage.js";
 import ProductCard from "./Components/productCard.jsx"; 
 import ForgotPasswordText from "./Components/ForgotPasswordText.js";
 import SearchResults from "./Components/searchResults";
+import Registration from "./Components/Registration.js";
 
 class App extends Component {
   render() {
@@ -54,20 +54,8 @@ class App extends Component {
 
       		<Route path="/register" exact strict render={() => {
 
-      			return(<div>
-              <Header text="Register"/>
-              {/*should have first name box, last name box, username box, password box and address box*/}
-              <form action="">
-              <InputBox title="First Name" placeholder="First Name" />
-              <InputBox title="Last Name" placeholder="Last Name" />
-              <InputBox title="Address" placeholder="Address" />
-              <InputBox title="Email" placeholder="Email" />
-              <InputBox title="Username" placeholder="Username" />
-              <InputBox title="Password" placeholder="Password" type="password"/>
-              <InputBox title="Confirm Password" placeholder="Password" type="password"/>
-              <SubmitButton />
-              </form>
-              </div>
+      			return(
+                <Registration />
               );
 
       		}} />
