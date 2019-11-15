@@ -61,6 +61,12 @@ class Registration extends Component
               </div>
               <div style = {style}>
                      <div style = {inner_style}>
+                            <h2>Country</h2>
+                            <input name="country" id="country" style = {input_style} placeholder = "Country" required/>
+                     </div>
+              </div>
+              <div style = {style}>
+                     <div style = {inner_style}>
                             <h2>Email</h2>
                             <input name="email" id="email" style = {input_style} placeholder = "Email" required/>
                      </div>
