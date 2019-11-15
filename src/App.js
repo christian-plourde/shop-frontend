@@ -75,7 +75,8 @@ class App extends Component {
 
           <Route path="/results" exact strict component={SearchResults}/>
 
-          <Route path="/productPage/:product_id" exact strict component={ProductPage}/>
+
+          <Route path="/productPage/:product_id" exact strict render={(props) => <ProductPage {...props} />}/>
 
       	</Router>
     );
