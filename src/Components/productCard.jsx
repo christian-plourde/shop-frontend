@@ -19,11 +19,14 @@ class ProductCard extends Component {
 
 
    render(){
+
+    var href = "/productPage/" + this.props.id;
+
       return(
 
          <div className="productContainer">
           <h3 className="productTitle">{this.props.name}</h3>
-          <a href="#"><img  src={this.props.picture} alt="product"/></a>
+          <a href={href}><img  src={this.props.picture} alt="product"/></a>
           <div className="productContainerInner">
 
                <p className="productDescription">{this.props.description}</p>

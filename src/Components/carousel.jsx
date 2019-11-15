@@ -53,6 +53,7 @@ class Carousel extends Component{
                           price={data.productPrice}
                           description={data.descriptionText}
                           picture= {data.picture}
+                          id={data.productID}
 
             />
 
