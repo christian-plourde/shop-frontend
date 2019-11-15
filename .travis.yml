@@ -10,6 +10,7 @@ install:
 script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
+  - sudo mv shop-backend/php/* public/
   - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
   - rm -R tests/
   - unset CI
@@ -17,11 +18,10 @@ script:
   - sudo rm -R shop-tests
   - sudo rm -R node_modules
   - sudo rm -R build/
-
 deploy:
   provider: heroku
   api_key:
-    secure: RCPvYE9YlKq9Xs/M5gO9asAfrqpnCsMui7GnlVKt9keBzYSNwKLl+VaeU6xJOH3XgHpv5/v2zqc4gZ/V6dX3nkMADePCkvxjFqeg1qyMSn/DRWPNClXhDNq6m5p+1BFR5K7VpkP0X63kXy24IHqb8i+2c33jddmGA7rdS1WgZn2kbLUW5BOUX6xdXkH03+Z4TMlqdtekmhY4yQeULdm25dXedfhJ9QXcUuLpX/D0cxBGGZQ5TQBr34kN3dh93OORC+r4N+KHyMRpCBDLCnE5xqv1ayca3djRej0IO9GGo+u7QMYJXHQoj+Mey2iVPm2zbGazdaPBEr6Y5QwVR6RwVbmqVmMFHs7SBAeWkA/7CYrFVuXZMmqsy22PAmaaEOxHjOIqGiJZ3OkJ7/vqroTbAx5h5XqCAhaDINTeGp25oOp/FvG9QYsuaB/IgktSD8EWasa9STyGryDukEhK6Z+c4ht5m8UCmSr59DlF1hM1j2PmdX3o+aewLweod/I06ahGrTYOJojud3qNFchS3Yf2dy5LTwii8joyWgTuvi7IKiaK09zb+ZbeKTKhu0nW0bqRzJcAIt2+ymlKDkRc41BE1TVTzqbXmdNhx98M5Z8jy7G3KZSs55lDgHXSXFhMQLCPalWk9evF0b88ghW7GJ4zxTXMV1Jobn3uUWMjUTEoZ8E=
+    secure: 2YBgbS/yYbYM5WA2FAXuFyvVOn4VKV2S2M9/owh6+snsPOutyNdVp6YcvoiC6HJCVeDVGqGew+IQKUFW/PAFihAyzHL3yQW/y3lOtsALCNbsJnTdhNfdqur4i5T8aSQ1kj26l2IkD817rYi6r3Mkz13ZFW0EtOtUnZpYD7yzpNDtmsFiGYtHvM9VuOl8UBzkn5hwWzbA24I2xJJHZaeDBKULhBZeLhp34zkdxjlFp/er4SaGu1XgK2J72JsyNcuGNM+MUyCuKeYN7uKQBS1PsApxsNE3YOIlilRcep27HgSjcUZiFx3MsnYf2HE2kPGxbqvNUoAtCMWgbhKgLSNH8U77loCSkNdm2x5qB6H9rKrbjt6EBgds0VS7R0lfD/BAFwPYE1TvisHCuZk+Jz6+jdPXAapcCctJzNUQek80iIDB0/QSALkQve5CsDg5NsVBxXPuEW8/yMnYcCFPR/0OATHFHhjvPykRrrgIo5Ze5/1DtVTffcyEaw2EX+Nh+W74j3bEDIh1KcQfJNBauezyV84vu21OnmfSvWOk6QnQtiGW1VPw3D4X1GNadQt+joJAssAqT57NJQIN9MOFwP3umMD3aKJlMu+sEJSUGY0qir37K5YxXQncA0kXNq+bRbV1UodFd5n1bsFRC/85sEWgJBE5xPsIIIeYpW/UESrGEgA=
   app: shop-354
   on: master
   skip_cleanup: true
