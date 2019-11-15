@@ -7,9 +7,10 @@ import Route from "react-router-dom/Route";
 import InputBox from "./Components/InputBox";
 import SubmitButton from "./Components/SubmitButton";
 import LandingPage from "./LandingPage.js";
-import ProductCard from "./Components/productCard.jsx"; 
+import ProductCard from "./Components/productCard.jsx";
 import ForgotPasswordText from "./Components/ForgotPasswordText.js";
 import SearchResults from "./Components/searchResults";
+import ProductPage from './Components/ProductPage.js';
 
 class App extends Component {
   render() {
@@ -26,7 +27,7 @@ class App extends Component {
     		<Route path="/login" exact strict render={() => {
     			return (<div>
         				<Header text="Login"/>
-        				<Login user_text="Username" password_text="Password" 
+        				<Login user_text="Username" password_text="Password"
         				password_link="forgot_password"
         				password_link_text="Forgot Password"
         				register_link="register"
@@ -34,7 +35,7 @@ class App extends Component {
         				/>
       					</div>);
     		}} />
-      		
+
         {/*The page to recover the user's password*/}
 
       		<Route path="/forgot_password" exact strict render={() => {
@@ -73,6 +74,8 @@ class App extends Component {
       		}} />
 
           <Route path="/results" exact strict component={SearchResults}/>
+
+          <Route path="/productPage/:product_id" exact strict component={ProductPage}/>
 
       	</Router>
     );

@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import "./styles/LandingPage.css";
-import Carousel from "./Components/carousel";
-import Navbar from "./Components/Navbar";
+import "../styles/LandingPage.css";
+import Navbar from "./Navbar.js";
+import Carousel from "./carousel.jsx";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-class LandingPage extends Component {
+
+class ProductPage extends Component {
+
+//Product id
   constructor(props) {
     super(props);
 
@@ -92,4 +95,4 @@ class LandingPage extends Component {
 
 }
 
-export default LandingPage;
+export default ProductPage;
