@@ -24,8 +24,7 @@ class ProductPage extends Component {
 
 
   componentDidMount() {
-    // fetch("https://shop-354.herokuapp.com/Products.json", {
-    fetch("http://localhost:3000/Products.json", {
+    fetch("https://shop-354.herokuapp.com/Products.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
