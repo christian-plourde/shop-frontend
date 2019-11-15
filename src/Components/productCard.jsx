@@ -9,7 +9,7 @@ class ProductCard extends Component {
    state = {
       quantity:0
    }
-   
+
    handleIncrement = () =>{
       this.setState({quantity: this.state.quantity + 1});
    }
@@ -19,13 +19,16 @@ class ProductCard extends Component {
 
 
    render(){
+
+    var href = "/productPage/" + this.props.id;
+
       return(
-         
+
          <div className="productContainer">
           <h3 className="productTitle">{this.props.name}</h3>
-          <a href="#"><img  src = {this.props.picture}alt="product"/></a>
+          <a href={href}><img  src={this.props.picture} alt="product"/></a>
           <div className="productContainerInner">
-               
+
                <p className="productDescription">{this.props.description}</p>
                <p className="price">${this.props.price}</p>
                <p className="brand">brand</p>
@@ -39,11 +42,11 @@ class ProductCard extends Component {
             </div>
 
          </div>
-   
+
       )
 
-      
+
    }
-   
+
 }
 export default ProductCard;
