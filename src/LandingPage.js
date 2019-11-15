@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "./styles/LandingPage.css";
 import Carousel from "./Components/carousel";
 import Navbar from "./Components/Navbar";
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -19,7 +19,6 @@ class LandingPage extends Component {
     };
   }
 
-
   componentDidMount() {
     fetch("https://shop-354.herokuapp.com/Products.json", {
       headers: {
@@ -27,7 +26,6 @@ class LandingPage extends Component {
         Accept: "application/json"
       }
     })
-
       .then(response => response.json())
       .then(productData => {
         this.setState({
@@ -42,53 +40,65 @@ class LandingPage extends Component {
           productNamesArray.push(jsonArray[j].productName);
         }
 
-         let clothing = [];
-         let home = [];
-         let electronic = [];
-           for(var x in tagsArray){
-               for(var y in tagsArray[x]){
-                  if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
-                  if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
-                  if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
-               }
-
-           }
-           this.setState({
-              clothingProducts:clothing,
-              homeProducts:home,
-              electronicProducts:electronic,
-              tags:tagsArray,
-              productNames:productNamesArray,
-              data:jsonArray
-           })
-      })     
-   }
-   render(){
-      const {isLoaded,data,tags,clothingProducts,homeProducts,electronicProducts,productNames}= this.state;
-      if(!isLoaded){
-         return <div> loading...</div>;
-      }
-      else{
-         return(
+        let clothing = [];
+        let home = [];
+        let electronic = [];
+        for (var x in tagsArray) {
+          for (var y in tagsArray[x]) {
+            if (tagsArray[x][y] === "clothing") {
+              clothing.push(jsonArray[x]);
+            }
+            if (tagsArray[x][y] === "home") {
+              home.push(jsonArray[x]);
+            }
+            if (tagsArray[x][y] === "electronic") {
+              electronic.push(jsonArray[x]);
+            }
+          }
+        }
+        this.setState({
+          clothingProducts: clothing,
+          homeProducts: home,
+          electronicProducts: electronic,
+          tags: tagsArray,
+          productNames: productNamesArray
+        });
+      });
+  }
+  render() {
+    const {
+      isLoaded,
+      data,
+      tags,
+      clothingProducts,
+      homeProducts,
+      electronicProducts,
+      productNames
+    } = this.state;
+    if (!isLoaded) {
+      return <div> loading...</div>;
+    } else {
+      return (
+        <div>
+          <Navbar productNames={productNames} tags={tags} />
+          <div className="LandingPageBody">
             <div>
-               <Navbar productNames={productNames} tags={tags} products={data} />
-             <div className="LandingPageBody">
-             <div> 
-               <Carousel data={clothingProducts} category="Clothing Products" /> 
-             </div>
-             <div> 
-               <Carousel data={homeProducts} category="Home Products" /> 
-             </div>
-             <div> 
-               <Carousel data={electronicProducts} category="Electronic Products" /> 
-             </div>
-             </div>
-            </div>      
-         );
-
-      }
-   }
-
+              <Carousel data={clothingProducts} category="Clothing Products" />
+            </div>
+            <div>
+              <Carousel data={homeProducts} category="Home Products" />
+            </div>
+            <div>
+              <Carousel
+                data={electronicProducts}
+                category="Electronic Products"
+              />
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
 }
 
 export default LandingPage;
