@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import SubmitButton from "./SubmitButton.js";
+import Navbar from "./Navbar.js";
 import Link from "./Link.js";
 
 class Login extends Component
@@ -86,7 +87,7 @@ class Login extends Component
 		}
 
 	return(
-	<form name="login" id="login_form" method="post" action="http://localhost/www/test.php">
+	<form name="login" id="login_form" method="post" action="">
 		<div style = {style}>
 			<div style = {inner_style}>
 				<h2>{this.props.user_text ? this.props.user_text : "Username or email"}</h2>
