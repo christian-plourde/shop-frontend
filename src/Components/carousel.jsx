@@ -8,15 +8,14 @@ import ProductCard from "./productCard"
 class Carousel extends Component{
   constructor(props){
     super(props);
-    
+
     this.state = {
-       
        isLoaded : false
     };
   }
     componentDidMount(){
       this.setState({
-        isLoaded:true,  
+        isLoaded:true,
      })
     }
 
@@ -42,9 +41,22 @@ class Carousel extends Component{
         <h2 className="Category"> {this.props.category}</h2>
         <Slider {...settings}>
           {this.props.data.map((data,index) =>(
-          
-            <ProductCard  key={index} name = {data.productName} price = {data.productPrice} description = {data.descriptionText} picture= {data.picture}/>
-          
+
+            // <ProductCard  key={index}
+            //               name={data.productName}
+            //               price={data.productPrice}
+            //               description={data.descriptionText}
+            //               picture= {data.picture}
+            // />
+            <ProductCard  key={index}
+                          name={data.productName}
+                          price={data.productPrice}
+                          description={data.descriptionText}
+                          picture= {data.picture}
+                          id={data.productID}
+
+            />
+
           ))}
         </Slider>
       </div>

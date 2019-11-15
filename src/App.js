@@ -4,13 +4,14 @@ import Header from "./Components/Header.js";
 import Login from "./Components/Login.js";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Route from "react-router-dom/Route";
-import InputBox from "./Components/InputBox";
 import SubmitButton from "./Components/SubmitButton";
 import LandingPage from "./LandingPage.js";
 import ProductCard from "./Components/productCard.jsx";
 import ForgotPasswordText from "./Components/ForgotPasswordText.js";
 import SearchResults from "./Components/searchResults";
 import Cart from "./Components/Cart";
+import Registration from "./Components/Registration.js";
+import ProductPage from "./Components/ProductPage.js";
 
 class App extends Component {
   render() {
@@ -25,7 +26,6 @@ class App extends Component {
             return <LandingPage />;
           }}
         />
-
         {/*The main login page*/}
         <Route
           path="/login"
@@ -47,9 +47,7 @@ class App extends Component {
             );
           }}
         />
-
         {/*The page to recover the user's password*/}
-
         <Route
           path="/forgot_password"
           exact
@@ -66,43 +64,28 @@ class App extends Component {
             );
           }}
         />
-
-        {/*The pafe for the user to register a new account on the site*/}
-
+        {/*The page to recover the user's password*/}
         <Route
-          path="/register"
+          path="/forgot_password"
           exact
           strict
           render={() => {
             return (
               <div>
-                <Header text="Register" />
-                {/*should have first name box, last name box, username box, password box and address box*/}
+                <Header text="Password Recovery" />
                 <form action="">
-                  <InputBox title="First Name" placeholder="First Name" />
-                  <InputBox title="Last Name" placeholder="Last Name" />
-                  <InputBox title="Address" placeholder="Address" />
-                  <InputBox title="Email" placeholder="Email" />
-                  <InputBox title="Username" placeholder="Username" />
-                  <InputBox
-                    title="Password"
-                    placeholder="Password"
-                    type="password"
-                  />
-                  <InputBox
-                    title="Confirm Password"
-                    placeholder="Password"
-                    type="password"
-                  />
+                  <ForgotPasswordText text="Please click the button below to reset your password. An email will be sent to you." />
                   <SubmitButton />
                 </form>
               </div>
             );
           }}
         />
-
+        {/*The pafe for the user to register a new account on the site*/}
+        return(
+        <Registration />
+        );
         <Route path="/results" exact strict component={SearchResults} />
-
         <Route
           path="/checkout"
           exact
@@ -114,6 +97,13 @@ class App extends Component {
               </div>
             );
           }}
+        />
+        <Route path="/results" exact strict component={SearchResults} />
+        <Route
+          path="/productPage/:product_id"
+          exact
+          strict
+          render={props => <ProductPage {...props} />}
         />
       </Router>
     );
