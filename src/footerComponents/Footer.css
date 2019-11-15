@@ -1,0 +1,115 @@
+/* Entire Footer */
+.footer { 
+    background-color: #1d1e22;
+    height: 350px;
+    position: relative;
+}
+
+/* Footer Contents */
+.footer .footer-content { 
+    height: 300px;
+    color: whitesmoke;
+    display: flex;
+}
+
+/* Footer Sections */
+.footer .footer-content .footer-section {
+    flex: 1;
+    text-align: left;
+    padding: 25px;
+    padding-bottom: 250px;
+    border: 1px solid  #181818;
+}
+
+@media only screen and (max-width: 934px) {
+
+    /* Entire Footer */
+.footer { 
+    height: auto;
+}
+
+/* Footer Contents */
+.footer .footer-content { 
+    height: auto;
+    flex-direction: column;
+}
+  
+}
+
+#mainBrandLogo {
+    font-size: 35px;
+}
+
+#contactHeader { 
+    padding-bottom: 10px;
+}
+
+#quickLinksHeader {
+     padding-bottom: 10px;
+}
+
+#brandHeader {
+    padding-bottom: 10px;
+}
+
+#email {
+    padding-right: 10px;
+}
+
+#phone {
+    padding-right: 10px;
+}
+
+#address {
+    padding-right: 10px;
+}
+
+#social {
+    color: white;
+    font-size: 30px;
+    padding-right: 10px;
+    padding-left: 5px;
+    text-decoration: none!important;
+}
+
+.contactInfo { 
+    padding-bottom:15px!important;
+}
+
+.socials a{
+    border: 1px solid gray;
+    width: 45px;
+    height: 41px;
+    padding-top: 5px;
+    margin-right: 5px;
+    text-align: center;
+    display: inline-block;
+    font-size: 1.3em;
+    border-radius: 5px;
+}
+
+
+.footer .footer-content h1 h2 { 
+    color: white;
+}
+
+.footer .footer-content .quickLinks ul a {
+    color: white;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+
+/* Footer Bottom */
+.footer .footer-bottom {
+    background-color: #181818;
+    color: white;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    left:0px;
+    padding-top: 20px;
+}
