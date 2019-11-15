@@ -40,7 +40,7 @@ class Registration extends Component
               <div>
               <Header text="Register"/>
               {/*should have first name box, last name box, username box, password box and address box*/}
-              <form name="registration" id="registration" method="POST" action="https://shop-354.herokuapp.com/shop-backend/php/registration.php">
+              <form name="registration" id="registration" method="POST" action="https://shop-354.herokuapp.com/registration.php">
               <div style = {style}>
                      <div style = {inner_style}>
                             <h2>First Name</h2>
