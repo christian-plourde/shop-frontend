@@ -10,7 +10,7 @@ install:
 script:
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
-  - sudo mv shop-backend/ public/
+  - sudo mv shop-backend/php/* public/
   - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
   - rm -R tests/
   - unset CI
