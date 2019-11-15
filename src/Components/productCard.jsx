@@ -3,7 +3,7 @@ import '../styles/productCard.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css.map';
-
+import {Link} from "react-router-dom";
 
 class ProductCard extends Component {
    state = {
@@ -26,7 +26,7 @@ class ProductCard extends Component {
 
          <div className="productContainer">
           <h3 className="productTitle">{this.props.name}</h3>
-          <a href={href}><img  src={this.props.picture} alt="product"/></a>
+          <Link to={href} ><img  src={this.props.picture} alt="product"/></Link>
           <div className="productContainerInner">
 
                <p className="productDescription">{this.props.description}</p>
