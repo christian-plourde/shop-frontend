@@ -2,21 +2,22 @@ language: node_js
 cache:
   npm: true
   directories:
-  - node_modules
+    - node_modules
 before_install:
-- nvm install v10.16.2
+  - nvm install v10.16.2
 install:
-- npm install
+  - npm install
 script:
-- git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
-- git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
-- cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
-- rm -R tests/
-- unset CI
-- npm run-script build
-- sudo rm -R shop-tests
-- sudo rm -R node_modules
-- sudo rm -R build/
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
+  - sudo mv shop-backend/ public/
+  - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
+  - rm -R tests/
+  - unset CI
+  - npm run-script build
+  - sudo rm -R shop-tests
+  - sudo rm -R node_modules
+  - sudo rm -R build/
 deploy:
   provider: heroku
   api_key:
