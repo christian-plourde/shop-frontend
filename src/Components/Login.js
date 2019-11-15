@@ -87,7 +87,7 @@ class Login extends Component
 		}
 
 	return(
-	<form name="login" id="login_form" method="post" action="https://shop-354.herokuapp.com/login.php">
+	<form name="login" id="login_form" method="POST" action="https://shop-354.herokuapp.com/login.php ">
 		<div style = {style}>
 			<div style = {inner_style}>
 				<h2>{this.props.user_text ? this.props.user_text : "Username or email"}</h2>
