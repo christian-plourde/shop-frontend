@@ -1,7 +1,10 @@
 import React, {Component} from "react";
 import SubmitButton from "./SubmitButton.js";
 import Navbar from "./Navbar.js";
+import {Redirect} from "react-router";
 import Link from "./Link.js";
+import axios from 'axios';
+import cookie from 'react-cookies';
 
 class Login extends Component
 {
@@ -9,7 +12,9 @@ class Login extends Component
 	state = 
 	{
 		username: "",
-		encrypted_password: ""
+		encrypted_password: "",
+		redirect: false,
+		wrong_information: false
 	}
 
 	componentDidMount()
@@ -42,6 +47,35 @@ class Login extends Component
 	handleUserNameChange = (e) =>
   	{
   		this.setState({username: e.target.value});
+  	}
+
+  	handleSubmit = (event) =>
+  	{
+  		event.preventDefault();
+  		const data = {username: this.state.username, password: this.state.encrypted_password};
+  		{/*https://shop-354.herokuapp.com/login.php*/}
+  		{/*http://localhost/www/shop-backend/php/login.php*/}
+    	axios.post('https://shop-354.herokuapp.com/login.php', JSON.stringify(data), {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    	})
+		.then((response) => {
+  			
+			if(response.data.Accepted)
+			{
+				this.setState({redirect: true});
+			}
+
+			else
+			{
+				this.setState({wrong_information: true});
+			}
+
+
+		}, (error) => {
+  		console.log(error);
+		});
   	}
 
 	render()
@@ -86,8 +120,23 @@ class Login extends Component
 			borderRadius: '10px'
 		}
 
+		const error_div_style = 
+		{
+			margin: "15px auto 15px 40%",
+			width: "20%",
+			textAlign: 'center'
+		};
+
+		const error_mess_style = 
+		{
+			color: "#993232",
+			textDecoration:'none',
+			fontSize: '18px',
+			fontWeight: 'bold'
+		};
+
 	return(
-	<form name="login" id="login_form" method="POST" action="https://shop-354.herokuapp.com/login.php ">
+	<form onSubmit={this.handleSubmit}>
 		<div style = {style}>
 			<div style = {inner_style}>
 				<h2>{this.props.user_text ? this.props.user_text : "Username or email"}</h2>
@@ -103,11 +152,21 @@ class Login extends Component
 			</div>
 		</div>
 		<div>
+		{this.state.wrong_information && (
+			<div style = {error_div_style}>
+          		<h2 style = {error_mess_style}>The username or password is incorrect. Please try again.</h2>
+          	</div>
+        )}
         	 <SubmitButton />
         	 <Link redirect_link = {register_redirect_link}/>
              <Link redirect_link = {password_redirect_link}/>
         </div>
+    {/*https://shop-354.herokuapp.com*/}
+        {this.state.redirect && (
+          <Redirect to={"/"}/>
+        )}
     </form>
+    
 		);
 	}
 	
