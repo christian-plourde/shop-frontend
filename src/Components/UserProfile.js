@@ -14,7 +14,10 @@ class UserProfile extends Component
 		username: sessionStorage.getItem("logged_in_user"),
 		email: "",
 		firstName: "",
-		lastName: ""
+		lastName: "",
+		address: "",
+		country: "",
+		isAdmin: false
 	}
 
 	constructor(props)
@@ -38,6 +41,9 @@ class UserProfile extends Component
   				this.setState({email: response.data.email});
   				this.setState({firstName: response.data.firstName});
   				this.setState({lastName: response.data.lastName});
+  				this.setState({address: response.data.address});
+  				this.setState({country: response.data.country});
+  				this.setState({isAdmin: response.data.isAdmin});
   			}
 
   			else
@@ -80,7 +86,7 @@ class UserProfile extends Component
 			padding: "20px",
 			border: "2px solid #333",
 			borderRadius: '10px',
-			height: "300px"
+			height: "375px"
 		}
 
 		const inner_style = 
@@ -92,10 +98,10 @@ class UserProfile extends Component
 
 		const input_style = 
 		{
-			width: "30%",
+			width: "60%",
 			fontSize: "20px",
 			borderColor: "#333",
-			marginTop: "4px",
+			marginTop: "5px",
 			marginLeft: "5px",
 			paddingLeft: "13px",
 			borderRadius: '10px',
@@ -108,13 +114,15 @@ class UserProfile extends Component
 			float: "left",
 			color: "#20ab51",
 			paddingTop: "10px",
-			paddingLeft: "20px"
+			paddingLeft: "20px",
+			width: "60%"
 		}
 
 		const field_indentifier_style =
 		{
 			float: "left",
-			paddingTop: "10px"
+			paddingTop: "10px",
+			width: "30%"
 		}
 
 		const account_info_style =
@@ -127,6 +135,11 @@ class UserProfile extends Component
 			float: "right",
 			paddingRight: "40px",
 			paddingTop: "8px"
+		}
+
+		const test =
+		{
+			color: "blue"
 		}
 
 		return(
@@ -155,9 +168,6 @@ class UserProfile extends Component
 								)
 								}
 
-								<br/>
-								<br/>
-								<br/>
 								<h2 style={field_indentifier_style}>Email:</h2>
 								{
 								(
@@ -172,9 +182,6 @@ class UserProfile extends Component
 								)
 								}
 
-								<br/>
-								<br/>
-								<br/>
 								<h2 style={field_indentifier_style}>First Name:</h2>
 								{
 								(
@@ -189,9 +196,6 @@ class UserProfile extends Component
 								)
 								}
 
-								<br/>
-								<br/>
-								<br/>
 								<h2 style={field_indentifier_style}>Last Name:</h2>
 								{
 								(
@@ -206,6 +210,39 @@ class UserProfile extends Component
 								)
 								}
 
+								<h2 style={field_indentifier_style}>Address:</h2>
+								{
+								(
+									this.state.edit_mode &&
+									<input style = {input_style} value={this.state.address} required/>
+								)
+								}
+								{
+								(
+									!this.state.edit_mode &&
+									<h2 style={field_value_style}>{this.state.address}</h2>
+								)
+								}
+
+								<h2 style={field_indentifier_style}>Country:</h2>
+								{
+								(
+									this.state.edit_mode &&
+									<input style = {input_style} value={this.state.country} required/>
+								)
+								}
+								{
+								(
+									!this.state.edit_mode &&
+									<h2 style={field_value_style}>{this.state.country}</h2>
+								)
+								}
+
+
+								<h2 style={field_indentifier_style}>Account Type:</h2>
+								<h2 style={field_value_style}>{this.state.isAdmin ? "Administrator" : "Regular"}</h2>
+								
+								
 						</div>
 					</div>
 				</form>
