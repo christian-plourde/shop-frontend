@@ -15,6 +15,7 @@
 
 .product-quantity {
   float: left;
+  text-align: center;
   width: 10%;
 }
 
@@ -26,7 +27,6 @@
 .product-line-price {
   float: left;
   width: 12%;
-  text-align: right;
 }
 
 /* This is used as the traditional .clearfix class */
@@ -93,6 +93,7 @@ label {
   padding-bottom: 15px;
   margin-bottom: 15px;
   border-bottom: 1px solid #eee;
+  font-size: 18px;
 }
 .column-labels .product-image,
 .column-labels .product-details,
@@ -103,8 +104,10 @@ label {
 /* Product entries */
 .product {
   margin-bottom: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   border-bottom: 1px solid #eee;
+  font-size: 15px;
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
 }
 .product .product-image {
   text-align: center;
@@ -119,10 +122,39 @@ label {
 .product .product-details .product-description {
   margin: 5px 20px 5px 0;
   line-height: 1.4em;
+  font-family: "HelveticaNeue-Medium";
 }
-.product .product-quantity input {
-  width: 40px;
+.product .product-quantity .plus {
+  width: 30px;
+  border: 0;
+  padding: 4px 8px;
+  background-color: #6b6;
+  color: #fff;
+  font-family: "HelveticaNeue-Medium";
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 12px;
 }
+
+.product .product-quantity .minus {
+  width: 30px;
+  border: 0;
+  padding: 4px 8px;
+  background-color: #c66;
+  color: #fff;
+  font-family: "HelveticaNeue-Medium";
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 12px;
+}
+.product .product-quantity .minus:hover {
+  background-color: #a44;
+}
+
+.product .product-quantity .plus:hover {
+  background-color: #494;
+}
+
 .product .remove-product {
   border: 0;
   padding: 4px 8px;
@@ -131,6 +163,7 @@ label {
   font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
   font-size: 12px;
   border-radius: 3px;
+  text-align: center;
 }
 .product .remove-product:hover {
   background-color: #a44;
@@ -141,16 +174,20 @@ label {
   float: right;
   clear: both;
   width: 100%;
+  font-family: "HelveticaNeue-Medium";
   margin-bottom: 10px;
 }
 .totals .totals-item label {
   float: left;
+  font-size: 15px;
   clear: both;
   width: 79%;
+  font-family: "HelveticaNeue-Medium";
   text-align: right;
 }
 .totals .totals-item .totals-value {
   float: right;
+  font-size: 15px;
   width: 21%;
   text-align: right;
 }

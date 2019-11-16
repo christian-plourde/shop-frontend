@@ -20,8 +20,10 @@ class CheckOut extends Component {
         <div>
           <Navbar />
         </div>
-        <div className="CheckOutBody">
+        <div>
           <h1>Check Out</h1>
+        </div>
+        <div className="CheckOutBody">
           <Cart products={this.state.products}></Cart>
         </div>
       </div>

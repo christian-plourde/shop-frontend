@@ -2,26 +2,45 @@ import React from "react";
 import "../styles/Cart.css";
 export default class CartItem extends React.Component {
   state = {
-    quantity: 1,
-    total: this.props.price
+    quantity: 0,
+    total: 0
   };
   handleIncrement = () => {
     this.setState({ quantity: this.state.quantity + 1 });
     this.setState({ total: this.state.total + this.props.price });
+    this.sendTotal("+");
+    this.sendQuantity();
   };
   handleDecrement = () => {
-    if (this.state.quantity !== 0) {
+    if (this.state.quantity !== 1) {
       this.setState({ quantity: this.state.quantity - 1 });
       this.setState({ total: this.state.total - this.props.price });
+      this.sendTotal("-");
+      this.sendQuantity();
     }
   };
 
+  sendTotal = s => {
+    if (s == "+") this.props.receiveTotal(this.props.price);
+    else this.props.receiveTotal(-this.props.price);
+    console.log("here");
+  };
+
+  sendQuantity = () => {
+    this.props.receiveQuantity(this.state.quantity, this.props.id);
+    console.log("hi");
+  };
+  componentDidMount() {
+    this.setState({
+      quantity: this.props.quantity,
+      total: this.props.price
+    });
+  }
   render() {
     // let product = this.props.product;
     const { name, brand, id, description, price, image } = this.props;
-
     return (
-      <div className="product">
+      <div className="product" onLoad={this.sendQuantity}>
         <div className="product-image">
           <img src={image} alt="Product" />
         </div>
@@ -32,10 +51,14 @@ export default class CartItem extends React.Component {
         </div>
         <div className="product-price">{price}</div>
         <div className="product-quantity">
-          Quantity: {this.state.quantity}
           <div>
-            <button onClick={this.handleIncrement.bind()}>+</button>
-            <button onClick={this.handleDecrement.bind()}>-</button>
+            <div>{this.state.quantity}</div>
+            <button className="plus" onClick={this.handleIncrement}>
+              +
+            </button>
+            <button className="minus" onClick={this.handleDecrement}>
+              -
+            </button>
           </div>
         </div>
         <div class="product-removal">
