@@ -27,6 +27,7 @@ class NavbarFunction extends Component {
 
    componentDidMount(){
       //https://shop-354.herokuapp.com/Products.json
+      //http://localhost/www/Products.json
       fetch("https://shop-354.herokuapp.com/Products.json", {
       headers: {
         "Content-Type": "application/json",
@@ -311,7 +312,7 @@ class NavbarFunction extends Component {
 
             {/* Login */}
 
-            <Link to="/login">
+            <Link to={sessionStorage.getItem("logged_in_user") ? "/user" : "/login"}>
               <button id="user_profile" type="button" class="btn btn-secondary btn-sm">
               {sessionStorage.getItem("logged_in_user") ? sessionStorage.getItem("logged_in_user") : "Guest"}
               </button>

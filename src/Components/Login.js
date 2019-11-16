@@ -40,7 +40,6 @@ class Login extends Component
     		enc_pwd += String.fromCharCode(pwd.charCodeAt(i) + 1);
     	}
     	this.setState({encrypted_password: enc_pwd});
-    	document.getElementById("password").value = enc_pwd;
   	}
 
 	handleUserNameChange = (e) =>
@@ -148,7 +147,7 @@ class Login extends Component
 		<div style = {user_div_style}>
 			<div style = {inner_style}>
 				<h2>{this.props.user_text ? this.props.user_text : "Username or email"}</h2>
-				<input name = "username" id="username" onChange = {this.handleUserNameChange} value = {this.state.username} style = {input_style} placeholder = {this.props.user_text ? this.props.user_text : "Username or email"} required/>
+				<input onChange = {this.handleUserNameChange} value = {this.state.username} style = {input_style} placeholder = {this.props.user_text ? this.props.user_text : "Username or email"} required/>
 			</div>
 		</div>
 		       	   
@@ -156,7 +155,6 @@ class Login extends Component
 			<div style = {inner_style}>
 				<h2>{this.props.password_text ? this.props.password_text : "Password"}</h2>
 				<input onInput = {this.handlePasswordChange} style = {input_style} placeholder = {this.props.password_text ? this.props.password_text : "Password"} type = "password" required />
-				<input name = "password" id="password" style = {input_style} placeholder = {this.props.password_text ? this.props.password_text : "Password"} hidden/>
 			</div>
 		</div>
 		<div>

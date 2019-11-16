@@ -12,6 +12,7 @@ import SearchResults from "./Components/searchResults";
 import Registration from "./Components/Registration.js";
 import ProductPage from './Components/ProductPage.js';
 import Navbar from "./Components/Navbar";
+import UserProfile from "./Components/UserProfile";
 
 class App extends Component {
   render() {
@@ -66,6 +67,8 @@ class App extends Component {
 
 
           <Route path="/productPage/:product_id" exact strict render={(props) => <ProductPage {...props} />}/>
+
+          <Route path="/user" exact strict component={UserProfile} />
 
       	</Router>
     );
