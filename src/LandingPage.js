@@ -21,6 +21,7 @@ class LandingPage extends Component {
 
 
   componentDidMount() {
+    //https://shop-354.herokuapp.com/Products.json
     fetch("https://shop-354.herokuapp.com/Products.json", {
       headers: {
         "Content-Type": "application/json",
@@ -71,7 +72,7 @@ class LandingPage extends Component {
       else{
          return(
             <div>
-               <Navbar productNames={productNames} tags={tags} products={data} />
+               <Navbar />
              <div className="LandingPageBody">
              <div>
                <Carousel data={clothingProducts} category="Clothing Products" />
