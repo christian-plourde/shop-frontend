@@ -54,7 +54,7 @@ class Login extends Component
   		const data = {username: this.state.username, password: this.state.encrypted_password};
   		{/*https://shop-354.herokuapp.com/login.php*/}
   		{/*http://localhost/www/shop-backend/php/login.php*/}
-    	axios.post('http://localhost/www/shop-backend/php/login.php', JSON.stringify(data), {
+    	axios.post('https://shop-354.herokuapp.com/login.php', JSON.stringify(data), {
         headers: {
             'Content-Type': 'application/json',
         }
