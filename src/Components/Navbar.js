@@ -141,6 +141,7 @@ class NavbarFunction extends Component {
 
  render(){
   const{isLoaded,text}= this.state;
+
   if(!isLoaded){
    return <div> loading...</div>;
   }
@@ -318,17 +319,24 @@ class NavbarFunction extends Component {
               </button>
             </Link>
 
-           <Link to="/login">
-              <button id="login" type="button" class="btn btn-secondary btn-sm">
-              Login
-              </button>
-            </Link>
 
-            <Link to="/register">
+            {
+              !sessionStorage.getItem("logged_in_user") &&
+              <Link to="/login">
+                <button id="login" type="button" class="btn btn-secondary btn-sm">
+                  Login
+                </button>
+              </Link>
+           }
+
+           {
+              !sessionStorage.getItem("logged_in_user") &&
+              <Link to="/register">
                <button id="signup" type="button" class="btn btn-secondary btn-sm">
-               SignUp
+                  SignUp
                </button>
-            </Link>
+              </Link>
+            }
 
             {/* Cart */}
             <button id="cart" type="button" class="btn btn-secondary btn-sm">
