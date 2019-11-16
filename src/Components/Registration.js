@@ -3,6 +3,7 @@ import SubmitButton from "./SubmitButton.js";
 import Header from "./Header.js";
 import Navbar from "./Navbar.js";
 import axios from 'axios';
+import {Redirect} from "react-router";
 
 class Registration extends Component
 {
@@ -16,7 +17,9 @@ class Registration extends Component
               address: "",
               Country: "",
               confirmed_password: "",
-              password_mismatch: false
+              password_mismatch: false,
+              registration_failed: false,
+              redirect: false
        }
 
        constructor(props)
@@ -36,6 +39,8 @@ class Registration extends Component
               }
 
 
+              this.setState({password_mismatch: false});
+
               var encrypted_password = "";
               for(var i = 0; i < this.state.password.length; i++)
               {
@@ -54,14 +59,22 @@ class Registration extends Component
 
               {/*https://shop-354.herokuapp.com/registration.php*/}
               {/*http://localhost/www/shop-backend/php/registration.php*/}
-              axios.post('http://localhost/www/shop-backend/php/registration.php', JSON.stringify(data), {
+              axios.post('https://shop-354.herokuapp.com/registration.php', JSON.stringify(data), {
               headers: {
                      'Content-Type': 'application/json',
               }
               })
               .then((response) => {
                      
-                     console.log(response.data);
+                     if(response.data.Accepted)
+                     {
+                            this.setState({redirect: true})
+                     }
+
+                     else
+                     {
+                            this.setState({registration_failed: true});
+                     }
                     
               });
        }
@@ -120,7 +133,6 @@ class Registration extends Component
               fontWeight: 'bold'
        };
 
-
        return(
               <div>
               <Navbar />
@@ -178,9 +190,17 @@ class Registration extends Component
               <div style = {error_div_style}>
                      <h2 style = {error_mess_style}>The passwords do not match. Please try again.</h2>
               </div>
-              )}    
+              )}
+              {this.state.registration_failed && (
+              <div style = {error_div_style}>
+                     <h2 style = {error_mess_style}>Unable to register this user.</h2>
+              </div>
+              )}      
               <SubmitButton />
               </form>
+              {this.state.redirect && (
+                            <Redirect to={"/login"}/>
+                            )}
               </div>
               );
        }
