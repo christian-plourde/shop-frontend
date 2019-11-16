@@ -7,7 +7,8 @@ function SubmitButton()
 		height: "30px",
 		color: "#333",
 		textAlign: "center",
-		padding: "25px"
+		padding: "25px",
+		margin: "30px"
 	};
 
 	const button_style = 

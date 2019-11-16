@@ -4,7 +4,6 @@ import Navbar from "./Navbar.js";
 import {Redirect} from "react-router";
 import Link from "./Link.js";
 import axios from 'axios';
-import cookie from 'react-cookies';
 
 class Login extends Component
 {
@@ -55,7 +54,7 @@ class Login extends Component
   		const data = {username: this.state.username, password: this.state.encrypted_password};
   		{/*https://shop-354.herokuapp.com/login.php*/}
   		{/*http://localhost/www/shop-backend/php/login.php*/}
-    	axios.post('https://shop-354.herokuapp.com/login.php', JSON.stringify(data), {
+    	axios.post('http://localhost/www/shop-backend/php/login.php', JSON.stringify(data), {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -65,6 +64,7 @@ class Login extends Component
 			if(response.data.Accepted)
 			{
 				this.setState({redirect: true});
+				sessionStorage.setItem("logged_in_user", this.state.username);
 			}
 
 			else
@@ -94,7 +94,15 @@ class Login extends Component
 
 		const div_style = 
 		{
-			width: "40%",
+			width: "40%"
+		}
+
+		const user_div_style = 
+		{
+			height: "100px",
+			color: "#333",
+			textAlign: "center",
+			marginTop: "2%"
 		}
 
 		const style = 
@@ -137,7 +145,7 @@ class Login extends Component
 
 	return(
 	<form onSubmit={this.handleSubmit}>
-		<div style = {style}>
+		<div style = {user_div_style}>
 			<div style = {inner_style}>
 				<h2>{this.props.user_text ? this.props.user_text : "Username or email"}</h2>
 				<input name = "username" id="username" onChange = {this.handleUserNameChange} value = {this.state.username} style = {input_style} placeholder = {this.props.user_text ? this.props.user_text : "Username or email"} required/>
@@ -161,7 +169,6 @@ class Login extends Component
         	 <Link redirect_link = {register_redirect_link}/>
              <Link redirect_link = {password_redirect_link}/>
         </div>
-    {/*https://shop-354.herokuapp.com*/}
         {this.state.redirect && (
           <Redirect to={"/"}/>
         )}

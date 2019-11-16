@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import SubmitButton from "./SubmitButton.js";
 import Header from "./Header.js";
+import Navbar from "./Navbar.js";
 
 class Registration extends Component
 {
@@ -33,15 +34,23 @@ class Registration extends Component
               borderColor: "#333",
               padding: "8px",
               borderRadius: '10px'
-       }
+       };
+
+       const first_input_style = 
+       {
+              height: "100px",
+              color: "#333",
+              textAlign: "center",
+              marginTop: "20px"
+       };
 
 
        return(
               <div>
-              <Header text="Register"/>
+              <Navbar />
               {/*should have first name box, last name box, username box, password box and address box*/}
               <form name="registration" id="registration" method="POST" action="https://shop-354.herokuapp.com/registration.php">
-              <div style = {style}>
+              <div style = {first_input_style}>
                      <div style = {inner_style}>
                             <h2>First Name</h2>
                             <input name="first_name" id="first_name" style = {input_style} placeholder = "First Name" required/>
