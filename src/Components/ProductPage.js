@@ -104,8 +104,8 @@ class ProductPage extends Component {
                 <h1>{product.productName}</h1>
                 <div className="rating"> product rating</div>
                 <div className="inner_container"> 
-                    <div>
-                        <img src={`"localhost:3000${product.picture.substring(1)}"`} />
+                    <div id="photo">
+                        <img id="product_image" src={`http://localhost:3000${product.picture.substring(1)}`}/>
                     </div>
                     <div id="text">
                       <p>Item Description:<br/>{product.descriptionText}</p>
