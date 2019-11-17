@@ -36,6 +36,14 @@ export default class CartItem extends React.Component {
       total: this.props.price
     });
   }
+  componentDidUpdate() {
+    if (this.state.quantity !== this.props.quantity) {
+      this.setState({
+        quantity: this.props.quantity,
+        total: this.props.quantity * this.props.price
+      });
+    }
+  }
   render() {
     // let product = this.props.product;
     const { name, brand, id, description, price, image } = this.props;
