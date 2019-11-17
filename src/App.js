@@ -11,6 +11,8 @@ import ForgotPasswordText from "./Components/ForgotPasswordText.js";
 import SearchResults from "./Components/searchResults";
 import Registration from "./Components/Registration.js";
 import ProductPage from './Components/ProductPage.js';
+import Navbar from "./Components/Navbar";
+import UserProfile from "./Components/UserProfile";
 
 class App extends Component {
   render() {
@@ -26,7 +28,7 @@ class App extends Component {
         {/*The main login page*/}
     		<Route path="/login" exact strict render={() => {
     			return (<div>
-        				<Header text="Login"/>
+                <Navbar />
         				<Login user_text="Username" password_text="Password"
         				password_link="forgot_password"
         				password_link_text="Forgot Password"
@@ -41,7 +43,7 @@ class App extends Component {
       		<Route path="/forgot_password" exact strict render={() => {
 
       			return(<div>
-              <Header text="Password Recovery"/>
+              <Navbar />
               <form action="">
               <ForgotPasswordText text="Please click the button below to reset your password. An email will be sent to you." />
               <SubmitButton />
@@ -65,6 +67,8 @@ class App extends Component {
 
 
           <Route path="/productPage/:product_id" exact strict render={(props) => <ProductPage {...props} />}/>
+
+          <Route path="/user" exact strict component={UserProfile} />
 
       	</Router>
     );

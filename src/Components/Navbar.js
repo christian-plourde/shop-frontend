@@ -18,13 +18,52 @@ class NavbarFunction extends Component {
          suggestions:[],
          text:'',
          productNames:[],
-         isLoaded:false
+         isLoaded:false,
+         productNamesArray: [],
+         tagsArray: [],
+         productData: []
       }
    }
+
    componentDidMount(){
-      this.setState({
-        isLoaded:true,
-     })
+      //https://shop-354.herokuapp.com/Products.json
+      //http://localhost/www/Products.json
+      fetch("https://shop-354.herokuapp.com/Products.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+
+      .then(response => response.json())
+      .then(productData => {
+        this.setState({
+          isLoaded: true
+        });
+        let jsonArray = JSON.parse(JSON.stringify(productData.products));
+        let tagsArray = [];
+        let productNamesArray = [];
+        for (var j in jsonArray) {
+          tagsArray.push(jsonArray[j].tags);
+          productNamesArray.push(jsonArray[j].productName);
+        }
+
+         let clothing = [];
+         let home = [];
+         let electronic = [];
+           for(var x in tagsArray){
+               for(var y in tagsArray[x]){
+                  if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
+                  if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
+                  if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
+               }
+
+           }
+
+          this.setState({productNamesArray: productNamesArray,
+            tagsArray: tagsArray,
+            productData: jsonArray});
+      })
    }
    onSubmit = (e) =>{
       const value = e;
@@ -33,18 +72,18 @@ class NavbarFunction extends Component {
          const regex = new RegExp(`^${value}`,'i');
          let tags = [];
          let isAlreadyInArray=false;
-         for(var x in this.props.tags){
-            for(var y in this.props.tags[x]){
-               if(regex.test(this.props.tags[x][y])){
+         for(var x in this.state.tagsArray){
+            for(var y in this.state.tagsArray[x]){
+               if(regex.test(this.state.tagsArray[x][y])){
                   for(var i in tags){
-                     if(this.props.tags[x][y] === tags[i]){isAlreadyInArray=true;}     
+                     if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}     
                   }
-                  if(!isAlreadyInArray){tags.push(this.props.tags[x][y])};
+                  if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
                   isAlreadyInArray=false;
                }
             }
          }
-         suggestions = this.props.productNames.filter(v=>regex.test(v)).concat(tags);
+         suggestions = this.state.productNamesArray.filter(v=>regex.test(v)).concat(tags);
 
       }
       this.setState(() => ({suggestions,text:value}));
@@ -59,18 +98,18 @@ class NavbarFunction extends Component {
          const regex = new RegExp(`^${value}`,'i');
          let tags = [];
          let isAlreadyInArray=false;
-         for(var x in this.props.tags){
-            for(var y in this.props.tags[x]){
-               if(regex.test(this.props.tags[x][y])){
+         for(var x in this.state.tagsArray){
+            for(var y in this.state.tagsArray[x]){
+               if(regex.test(this.state.tagsArray[x][y])){
                   for(var i in tags){
-                     if(this.props.tags[x][y] === tags[i]){isAlreadyInArray=true;}     
+                     if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}     
                   }
-                  if(!isAlreadyInArray){tags.push(this.props.tags[x][y])};
+                  if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
                   isAlreadyInArray=false;
                }
             }
          }
-         suggestions = this.props.productNames.filter(v=>regex.test(v)).concat(tags);
+         suggestions = this.state.productNamesArray.filter(v=>regex.test(v)).concat(tags);
 
       }
       this.setState(() => ({suggestions,text:value}));
@@ -91,7 +130,7 @@ class NavbarFunction extends Component {
         <ul>
             {suggestions.map((item)=><Link to={{
                pathname:"/results",
-               query:this.props.products,
+               query:this.state.productData,
                element:item
             }}
             >
@@ -102,6 +141,7 @@ class NavbarFunction extends Component {
 
  render(){
   const{isLoaded,text}= this.state;
+
   if(!isLoaded){
    return <div> loading...</div>;
   }
@@ -135,7 +175,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Home"
 
                         } }> 
@@ -148,7 +188,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Clothing"
 
                         } }> 
@@ -161,7 +201,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Kitchen"
 
                         } }>
@@ -176,7 +216,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Electronic"
 
                         } }>
@@ -188,7 +228,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Shrek"
 
                         } }>
@@ -200,7 +240,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Book"
 
                         } }>
@@ -215,7 +255,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Microsoft"
 
                         } }>
@@ -227,7 +267,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Everyday"
 
                         } }>
@@ -239,7 +279,7 @@ class NavbarFunction extends Component {
                         <Dropdown.Item href="#/action-1">
                         <Link to={{
                            pathname:"/results",
-                           query: this.props.products,
+                           query: this.state.productData,
                            element:"Toy"
 
                         } }>
@@ -262,7 +302,7 @@ class NavbarFunction extends Component {
             
           <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:this.state.text
 
            } }>  
@@ -272,17 +312,31 @@ class NavbarFunction extends Component {
          </Link>
 
             {/* Login */}
-           <Link to="/login">
-              <button id="login" type="button" class="btn btn-secondary btn-sm">
-              Login
+
+            <Link to={sessionStorage.getItem("logged_in_user") ? "/user" : "/login"}>
+              <button id="user_profile" type="button" class="btn btn-secondary btn-sm">
+              {sessionStorage.getItem("logged_in_user") ? sessionStorage.getItem("logged_in_user") : "Guest"}
               </button>
             </Link>
 
-            <Link to="/register">
+
+            {
+              !sessionStorage.getItem("logged_in_user") &&
+              <Link to="/login">
+                <button id="login" type="button" class="btn btn-secondary btn-sm">
+                  Login
+                </button>
+              </Link>
+           }
+
+           {
+              !sessionStorage.getItem("logged_in_user") &&
+              <Link to="/register">
                <button id="signup" type="button" class="btn btn-secondary btn-sm">
-               SignUp
+                  SignUp
                </button>
-            </Link>
+              </Link>
+            }
 
             {/* Cart */}
             <button id="cart" type="button" class="btn btn-secondary btn-sm">
@@ -296,7 +350,7 @@ class NavbarFunction extends Component {
       <div id="secondContainer">
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Home"
 
            } }>  <Button id="button2" variant="secondary" size="sm">
@@ -305,7 +359,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Clothing"
 
            } }> 
@@ -315,7 +369,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Kitchen"
 
            } }>
@@ -325,7 +379,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Electronic"
 
            } }>
@@ -335,7 +389,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Shrek"
 
            } }>
@@ -345,7 +399,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Book"
 
            } }>
@@ -355,7 +409,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Microsoft"
 
            } }>
@@ -365,7 +419,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Everyday"
 
            } }>
@@ -375,7 +429,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Toy"
 
            } }>
@@ -385,7 +439,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Sports"
 
            } }>
@@ -395,7 +449,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Outdoor"
 
            } }>
@@ -405,7 +459,7 @@ class NavbarFunction extends Component {
       </Link>
       <Link to={{
              pathname:"/results",
-             query: this.props.products,
+             query: this.state.productData,
              element:"Children"
 
            } }>

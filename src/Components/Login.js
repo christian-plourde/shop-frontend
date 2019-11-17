@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import SubmitButton from "./SubmitButton.js";
 import Navbar from "./Navbar.js";
+import {Redirect} from "react-router";
 import Link from "./Link.js";
+import axios from 'axios';
 
 class Login extends Component
 {
@@ -9,7 +11,9 @@ class Login extends Component
 	state = 
 	{
 		username: "",
-		encrypted_password: ""
+		encrypted_password: "",
+		redirect: false,
+		wrong_information: false
 	}
 
 	componentDidMount()
@@ -36,12 +40,41 @@ class Login extends Component
     		enc_pwd += String.fromCharCode(pwd.charCodeAt(i) + 1);
     	}
     	this.setState({encrypted_password: enc_pwd});
-    	document.getElementById("password").value = enc_pwd;
   	}
 
 	handleUserNameChange = (e) =>
   	{
   		this.setState({username: e.target.value});
+  	}
+
+  	handleSubmit = (event) =>
+  	{
+  		event.preventDefault();
+  		const data = {username: this.state.username, password: this.state.encrypted_password};
+  		{/*https://shop-354.herokuapp.com/login.php*/}
+  		{/*http://localhost/www/shop-backend/php/login.php*/}
+    	axios.post('https://shop-354.herokuapp.com/login.php', JSON.stringify(data), {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    	})
+		.then((response) => {
+  			
+			if(response.data.Accepted)
+			{
+				this.setState({redirect: true});
+				sessionStorage.setItem("logged_in_user", this.state.username);
+			}
+
+			else
+			{
+				this.setState({wrong_information: true});
+			}
+
+
+		}, (error) => {
+  		console.log(error);
+		});
   	}
 
 	render()
@@ -60,7 +93,15 @@ class Login extends Component
 
 		const div_style = 
 		{
-			width: "40%",
+			width: "40%"
+		}
+
+		const user_div_style = 
+		{
+			height: "100px",
+			color: "#333",
+			textAlign: "center",
+			marginTop: "2%"
 		}
 
 		const style = 
@@ -86,28 +127,51 @@ class Login extends Component
 			borderRadius: '10px'
 		}
 
+		const error_div_style = 
+		{
+			margin: "15px auto 15px 40%",
+			width: "20%",
+			textAlign: 'center'
+		};
+
+		const error_mess_style = 
+		{
+			color: "#993232",
+			textDecoration:'none',
+			fontSize: '18px',
+			fontWeight: 'bold'
+		};
+
 	return(
-	<form name="login" id="login_form" method="POST" action="https://shop-354.herokuapp.com/login.php ">
-		<div style = {style}>
-			<div style = {inner_style}>
+	<form onSubmit={this.handleSubmit}>
+		<div style={user_div_style}>
+			<div style={inner_style}>
 				<h2>{this.props.user_text ? this.props.user_text : "Username or email"}</h2>
-				<input name = "username" id="username" onChange = {this.handleUserNameChange} value = {this.state.username} style = {input_style} placeholder = {this.props.user_text ? this.props.user_text : "Username or email"} required/>
+				<input onChange={this.handleUserNameChange} value={this.state.username} style={input_style} placeholder={this.props.user_text ? this.props.user_text : "Username or email"} required/>
 			</div>
 		</div>
 		       	   
-        <div style = {style}>
-			<div style = {inner_style}>
+        <div style={style}>
+			<div style={inner_style}>
 				<h2>{this.props.password_text ? this.props.password_text : "Password"}</h2>
-				<input onInput = {this.handlePasswordChange} style = {input_style} placeholder = {this.props.password_text ? this.props.password_text : "Password"} type = "password" required />
-				<input name = "password" id="password" style = {input_style} placeholder = {this.props.password_text ? this.props.password_text : "Password"} hidden/>
+				<input onInput={this.handlePasswordChange} style={input_style} placeholder={this.props.password_text ? this.props.password_text : "Password"} type="password" required />
 			</div>
 		</div>
 		<div>
+		{this.state.wrong_information && (
+			<div style={error_div_style}>
+          		<h2 style={error_mess_style}>The username or password is incorrect. Please try again.</h2>
+          	</div>
+        )}
         	 <SubmitButton />
-        	 <Link redirect_link = {register_redirect_link}/>
-             <Link redirect_link = {password_redirect_link}/>
+        	 <Link redirect_link={register_redirect_link}/>
+             <Link redirect_link={password_redirect_link}/>
         </div>
+        {this.state.redirect && (
+          <Redirect to={"/"}/>
+        )}
     </form>
+    
 		);
 	}
 	
