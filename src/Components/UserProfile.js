@@ -21,7 +21,9 @@ class UserProfile extends Component
 		address: "",
 		country: "",
 		isAdmin: false,
-		redirect: false
+		logout: false,
+		changeError: false,
+		changeSuccess: false
 	}
 
 	constructor(props)
@@ -33,7 +35,7 @@ class UserProfile extends Component
 	{
 		{/*https://shop-354.herokuapp.com/user_profile_display.php*/}
   		{/*http://localhost/www/shop-backend/php/user_profile_display.php*/}
-		axios.post('https://shop-354.herokuapp.com/user_profile_display.php', JSON.stringify({username: sessionStorage.getItem("logged_in_user")}), {
+		axios.post('http://localhost/www/shop-backend/php/user_profile_display.php', JSON.stringify({username: sessionStorage.getItem("logged_in_user")}), {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -58,6 +60,44 @@ class UserProfile extends Component
 
 		});
 	}
+
+
+	handleSubmit = (e) => 
+	{
+		e.preventDefault();
+		const data = {userName: this.state.username, 
+					  email: this.state.email, 
+					  firstName: this.state.firstName, 
+					  lastName: this.state.lastName,
+					  address: this.state.address,
+					  country: this.state.country
+					  };
+
+		{/*https://shop-354.herokuapp.com/user_profile_modification.php*/}
+  		{/*http://localhost/www/shop-backend/php/user_profile_modification.php*/}
+    	axios.post('https://shop-354.herokuapp.com/user_profile_modification.php', JSON.stringify(data), {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    	})
+		.then((response) => {
+  			
+			if(response.data.Accepted)
+			{
+				this.setState({changeError: false, changeSuccess: true, edit_mode: false});
+			}
+
+			else
+			{
+				this.setState({changeError: true});
+			}
+
+
+		}, (error) => {
+  		console.log(error);
+		});
+	}
+
 
 	handleEditMouseEnter = (e) => {
 
@@ -89,7 +129,7 @@ class UserProfile extends Component
 	handleExitClick = (e) => {
 
 		sessionStorage.removeItem("logged_in_user");
-		this.setState({redirect: true});
+		this.setState({logout: true});
 	}
 
 
@@ -111,7 +151,7 @@ class UserProfile extends Component
 			padding: "20px",
 			border: "2px solid #333",
 			borderRadius: '10px',
-			height: "450px"
+			height: "460px"
 		}
 
 		const inner_style = 
@@ -186,11 +226,27 @@ class UserProfile extends Component
 			fontSize: '15px'
 		};
 
+		const error_mess_style = 
+		{
+			color: "#993232",
+			textDecoration:'none',
+			fontSize: '18px',
+			fontWeight: 'bold'
+		};
+
+		const success_mess_style = 
+		{
+			color: "#20ab51",
+			textDecoration:'none',
+			fontSize: '18px',
+			fontWeight: 'bold'
+		};
+
 		return(
 		
 			<div>
 				<Navbar />
-				<form>
+				<form onSubmit={this.handleSubmit}>
 					<div style = {user_div_style}>
 						<div style = {inner_style}>
 							<img style={edit_button} src={edit_blue} onMouseEnter={this.handleEditMouseEnter}
@@ -199,18 +255,7 @@ class UserProfile extends Component
 							<h1 style={account_info_style}>Account Information</h1>
 
 								<h2 style={field_indentifier_style}>Username:</h2>
-								{
-								(
-									this.state.edit_mode &&
-									<input onInput={this.handleInput} name = "username" style = {input_style} value={this.state.username} required/>
-								)
-								}
-								{
-								(
-									!this.state.edit_mode &&
-									<h2 style={field_value_style}>{this.state.username}</h2>
-								)
-								}
+								<h2 style={field_value_style}>{this.state.username}</h2>
 
 								<h2 style={field_indentifier_style}>Email:</h2>
 								{
@@ -288,13 +333,29 @@ class UserProfile extends Component
 
 						</div>
 
+						{
+							this.state.changeError && (
+								<div>
+									<h2 style={error_mess_style}>There was an error in your resquested changes. Please review them and try again.</h2>
+								</div>
+								)
+						}
+
+						{
+							this.state.changeSuccess && (
+								<div>
+									<h2 style={success_mess_style}>Changes to your profile have been saved.</h2>
+								</div>
+								)
+						}
+
 						<button style={button_style} type="submit">Save Changes</button>
 
 						<img title= "Logout" style={exit_button} src={exit_blue} onMouseEnter={this.handleExitMouseEnter}
 							onMouseLeave={this.handleExitMouseLeave}
 							onClick={this.handleExitClick}/>
 
-							{this.state.redirect && (
+							{this.state.logout && (
           						<Redirect to={"/"}/>
         					)}
 					</div>
