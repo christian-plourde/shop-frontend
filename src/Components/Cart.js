@@ -22,8 +22,8 @@ class Cart extends Component {
         quantity: 1
       }
     ],
-    subtotal: 0,
-    total: 0,
+    subtotal: 0.0,
+    total: 0.0,
     shipping: 15
   };
 
@@ -37,16 +37,10 @@ class Cart extends Component {
       toRemove => toRemove.id === productID
     );
     let total = product.price * product.quantity;
-    if (product.quantity == 1) {
-      this.setState({
-        products: productList,
-        subtotal: this.state.subtotal - total
-      });
-    } else
-      this.setState({
-        products: productList,
-        subtotal: this.state.subtotal - total - product.price
-      });
+    this.setState({
+      products: productList,
+      subtotal: this.state.subtotal - total
+    });
   };
 
   adjustSubTotal = price => {
@@ -59,6 +53,9 @@ class Cart extends Component {
       toChange => toChange.id === productID
     ).quantity = quantity;
     this.setState({ products: updatedProducts });
+    console.log(
+      this.state.products.find(toChange => toChange.id === productID).quantity
+    );
   };
 
   componentDidMount() {

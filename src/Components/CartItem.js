@@ -2,18 +2,18 @@ import React from "react";
 import "../styles/Cart.css";
 export default class CartItem extends React.Component {
   state = {
-    quantity: 0,
+    quantity: 1,
     total: 0
   };
   handleIncrement = () => {
-    this.setState({ quantity: this.state.quantity + 1 });
+    this.setState({ quantity: ++this.state.quantity });
     this.setState({ total: this.state.total + this.props.price });
     this.sendTotal("+");
     this.sendQuantity();
   };
   handleDecrement = () => {
     if (this.state.quantity !== 1) {
-      this.setState({ quantity: this.state.quantity - 1 });
+      this.setState({ quantity: --this.state.quantity });
       this.setState({ total: this.state.total - this.props.price });
       this.sendTotal("-");
       this.sendQuantity();
@@ -28,7 +28,7 @@ export default class CartItem extends React.Component {
 
   sendQuantity = () => {
     this.props.receiveQuantity(this.state.quantity, this.props.id);
-    console.log("hi");
+    console.log(this.state.quantity);
   };
   componentDidMount() {
     this.setState({
