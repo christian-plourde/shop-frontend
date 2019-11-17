@@ -35,7 +35,7 @@ class UserProfile extends Component
 	{
 		{/*https://shop-354.herokuapp.com/user_profile_display.php*/}
   		{/*http://localhost/www/shop-backend/php/user_profile_display.php*/}
-		axios.post('http://localhost/www/shop-backend/php/user_profile_display.php', JSON.stringify({username: sessionStorage.getItem("logged_in_user")}), {
+		axios.post('https://shop-354.herokuapp.com/user_profile_display.php', JSON.stringify({username: sessionStorage.getItem("logged_in_user")}), {
         headers: {
             'Content-Type': 'application/json',
         }
