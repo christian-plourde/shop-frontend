@@ -4,6 +4,9 @@ import Navbar from "./Navbar.js";
 import axios from 'axios';
 import edit_blue from "../ressources/icons/edit_blue.png";
 import edit_green from "../ressources/icons/edit_green.png";
+import exit_blue from "../ressources/icons/exit_blue.png";
+import exit_green from "../ressources/icons/exit_green.png";
+import {Redirect} from "react-router";
 
 class UserProfile extends Component
 {
@@ -17,7 +20,8 @@ class UserProfile extends Component
 		lastName: "",
 		address: "",
 		country: "",
-		isAdmin: false
+		isAdmin: false,
+		redirect: false
 	}
 
 	constructor(props)
@@ -64,6 +68,15 @@ class UserProfile extends Component
 		e.target.src = edit_blue;
 	}
 
+	handleExitMouseEnter = (e) => {
+
+		e.target.src = exit_green;
+	}
+
+	handleExitMouseLeave = (e) => {
+		e.target.src = exit_blue;
+	}
+
 	handleEditClick = (e) => {
 
 		if(!this.state.edit_mode)
@@ -71,6 +84,18 @@ class UserProfile extends Component
 		else
 			this.setState({edit_mode: false});
 
+	}
+
+	handleExitClick = (e) => {
+
+		sessionStorage.removeItem("logged_in_user");
+		this.setState({redirect: true});
+	}
+
+
+	handleInput = (e) =>
+	{
+		this.setState({[e.target.name]: e.target.value});
 	}
 
 	render()
@@ -82,11 +107,11 @@ class UserProfile extends Component
 			textAlign: "center",
 			marginTop: "2%",
 			width: "40%",
-			marginLeft: "2%",
+			marginLeft: "30%",
 			padding: "20px",
 			border: "2px solid #333",
 			borderRadius: '10px',
-			height: "375px"
+			height: "450px"
 		}
 
 		const inner_style = 
@@ -137,10 +162,29 @@ class UserProfile extends Component
 			paddingTop: "8px"
 		}
 
+		const exit_button = 
+		{
+			float: "right",
+			marginRight: "10px",
+			marginTop: "25px"
+		}
+
 		const test =
 		{
 			color: "blue"
 		}
+
+		const button_style = 
+		{
+			margin: "0 auto",
+			marginTop: "20px",
+			border: "3px solid #333",
+			padding: "5px",
+			borderRadius: "10px",
+			backgroundColor: "whitesmoke",
+			color: "#333",
+			fontSize: '15px'
+		};
 
 		return(
 		
@@ -158,7 +202,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.username} required/>
+									<input onInput={this.handleInput} name = "username" style = {input_style} value={this.state.username} required/>
 								)
 								}
 								{
@@ -172,7 +216,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.email} required/>
+									<input onInput={this.handleInput} name = "email" style = {input_style} value={this.state.email} required/>
 								)
 								}
 								{
@@ -186,7 +230,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.firstName} required/>
+									<input onInput={this.handleInput} name = "firstName" style = {input_style} value={this.state.firstName} required/>
 								)
 								}
 								{
@@ -200,7 +244,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.lastName} required/>
+									<input onInput={this.handleInput} name = "lastName" style = {input_style} value={this.state.lastName} required/>
 								)
 								}
 								{
@@ -214,7 +258,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.address} required/>
+									<input onInput={this.handleInput} name = "address" style = {input_style} value={this.state.address} required/>
 								)
 								}
 								{
@@ -228,7 +272,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.country} required/>
+									<input onInput={this.handleInput} name = "country" style = {input_style} value={this.state.country} required/>
 								)
 								}
 								{
@@ -241,9 +285,18 @@ class UserProfile extends Component
 
 								<h2 style={field_indentifier_style}>Account Type:</h2>
 								<h2 style={field_value_style}>{this.state.isAdmin ? "Administrator" : "Regular"}</h2>
-								
-								
+
 						</div>
+
+						<button style={button_style} type="submit">Save Changes</button>
+
+						<img title= "Logout" style={exit_button} src={exit_blue} onMouseEnter={this.handleExitMouseEnter}
+							onMouseLeave={this.handleExitMouseLeave}
+							onClick={this.handleExitClick}/>
+
+							{this.state.redirect && (
+          						<Redirect to={"/"}/>
+        					)}
 					</div>
 				</form>
 			</div>
