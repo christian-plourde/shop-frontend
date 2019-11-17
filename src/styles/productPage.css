@@ -1,0 +1,38 @@
+.rating{
+    border: 15px solid darkslategray;
+    padding: 15px;
+    margin: 20px;
+}
+
+.photo{
+    background: grey;
+    border: 15px solid darkslategray;
+    margin: 20px;
+}
+
+.text{
+    background: dimgray;
+    border: 15px solid darkslategray;
+    padding: 50px;
+    margin: 20px;
+}
+
+.purchase{
+    background: grey;
+    border: 15px solid darkslategray;
+    padding: 50px;
+    margin: 20px;
+}
+
+/* .container{
+    background:whitesmoke;
+    display:flex;
+    flex-flow: column;
+    
+}
+
+.inner_container{
+    display:flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+} */

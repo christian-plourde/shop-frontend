@@ -147,8 +147,8 @@ class UserProfile extends Component
 			<div>
 				<Navbar />
 				<form>
-					<div style = {user_div_style}>
-						<div style = {inner_style}>
+					<div style={user_div_style}>
+						<div style={inner_style}>
 							<img style={edit_button} src={edit_blue} onMouseEnter={this.handleEditMouseEnter}
 							onMouseLeave={this.handleEditMouseLeave}
 							onClick={this.handleEditClick}/>
@@ -158,7 +158,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.username} required/>
+									<input style={input_style} value={this.state.username} required/>
 								)
 								}
 								{
@@ -172,7 +172,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.email} required/>
+									<input style={input_style} value={this.state.email} required/>
 								)
 								}
 								{
@@ -186,7 +186,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.firstName} required/>
+									<input style={input_style} value={this.state.firstName} required/>
 								)
 								}
 								{
@@ -200,7 +200,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.lastName} required/>
+									<input style={input_style} value={this.state.lastName} required/>
 								)
 								}
 								{
@@ -214,7 +214,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.address} required/>
+									<input style={input_style} value={this.state.address} required/>
 								)
 								}
 								{
@@ -228,7 +228,7 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
-									<input style = {input_style} value={this.state.country} required/>
+									<input style={input_style} value={this.state.country} required/>
 								)
 								}
 								{

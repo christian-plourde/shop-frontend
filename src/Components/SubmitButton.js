@@ -22,8 +22,8 @@ function SubmitButton()
 
 	return(
 
-		<div style = {style}>
-			<button style = {button_style} type = "submit">Submit</button>
+		<div style={style}>
+			<button style={button_style} type="submit">Submit</button>
 		</div>
 		);
 }
