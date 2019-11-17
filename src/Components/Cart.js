@@ -65,6 +65,17 @@ class Cart extends Component {
     }
     this.setState({ subtotal: sTotal, total: sTotal + sTotal * 0.05 });
   }
+  componentDidUpdate() {
+    if (
+      this.state.total !==
+      this.state.subtotal + this.state.subtotal * 0.05 + this.state.shipping
+    ) {
+      this.setState({
+        total:
+          this.state.subtotal + this.state.subtotal * 0.05 + this.state.shipping
+      });
+    }
+  }
   render() {
     return (
       <div>
@@ -117,9 +128,7 @@ class Cart extends Component {
             <div class="totals-item totals-item-total">
               <label>Grand Total</label>
               <div class="totals-value" id="cart-total">
-                {this.state.subtotal +
-                  this.state.subtotal * 0.05 +
-                  this.state.shipping}
+                {this.state.total}
               </div>
             </div>
           </div>
