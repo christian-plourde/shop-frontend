@@ -246,22 +246,28 @@ class UserProfile extends Component
 		
 			<div>
 				<Navbar />
+
 				<form onSubmit={this.handleSubmit}>
 					<div style = {user_div_style}>
 						<div style = {inner_style}>
+
 							<img style={edit_button} src={edit_blue} onMouseEnter={this.handleEditMouseEnter}
 							onMouseLeave={this.handleEditMouseLeave}
 							onClick={this.handleEditClick}/>
 							<h1 style={account_info_style}>Account Information</h1>
 
 								<h2 style={field_indentifier_style}>Username:</h2>
+
 								<h2 style={field_value_style}>{this.state.username}</h2>
+
 
 								<h2 style={field_indentifier_style}>Email:</h2>
 								{
 								(
 									this.state.edit_mode &&
+
 									<input onInput={this.handleInput} name = "email" style = {input_style} value={this.state.email} required/>
+
 								)
 								}
 								{
@@ -275,7 +281,9 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
+
 									<input onInput={this.handleInput} name = "firstName" style = {input_style} value={this.state.firstName} required/>
+
 								)
 								}
 								{
@@ -289,7 +297,9 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
+
 									<input onInput={this.handleInput} name = "lastName" style = {input_style} value={this.state.lastName} required/>
+
 								)
 								}
 								{
@@ -303,7 +313,9 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
+
 									<input onInput={this.handleInput} name = "address" style = {input_style} value={this.state.address} required/>
+
 								)
 								}
 								{
@@ -317,7 +329,9 @@ class UserProfile extends Component
 								{
 								(
 									this.state.edit_mode &&
+
 									<input onInput={this.handleInput} name = "country" style = {input_style} value={this.state.country} required/>
+
 								)
 								}
 								{

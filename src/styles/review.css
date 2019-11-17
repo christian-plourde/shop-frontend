@@ -1,0 +1,8 @@
+.review{
+    background: dimgrey;
+    /* width: 700px;
+    height: 700px; */
+    border: 15px solid darkslategray;
+    padding: 50px;
+    margin: 20px;
+}

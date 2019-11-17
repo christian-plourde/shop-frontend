@@ -147,53 +147,53 @@ class Registration extends Component
               <div>
               <Navbar />
               {/*should have first name box, last name box, username box, password box and address box*/}
-              <form onSubmit ={this.handleSubmit}>
-              <div style = {first_input_style}>
-                     <div style = {inner_style}>
+              <form onSubmit={this.handleSubmit}>
+              <div style={first_input_style}>
+                     <div style={inner_style}>
                             <h2>First Name</h2>
-                            <input name="firstName" onChange={this.handleInputChange} style = {input_style} placeholder = "First Name" required/>
+                            <input name="firstName" onChange={this.handleInputChange} style={input_style} placeholder="First Name" required/>
                      </div>
               </div>
-              <div style = {style}>
-                     <div style = {inner_style}>
+              <div style={style}>
+                     <div style={inner_style}>
                             <h2>Last Name</h2>
-                            <input name="lastName" onChange={this.handleInputChange} style = {input_style} placeholder = "Last Name" required/>
+                            <input name="lastName" onChange={this.handleInputChange} style={input_style} placeholder="Last Name" required/>
                      </div>
               </div>
-              <div style = {style}>
-                     <div style = {inner_style}>
+              <div style={style}>
+                     <div style={inner_style}>
                             <h2>Address</h2>
-                            <input name="address" onChange={this.handleInputChange} style = {input_style} placeholder = "Address" required/>
+                            <input name="address" onChange={this.handleInputChange} style={input_style} placeholder="Address" required/>
                      </div>
               </div>
-              <div style = {style}>
-                     <div style = {inner_style}>
+              <div style={style}>
+                     <div style={inner_style}>
                             <h2>Country</h2>
-                            <input name="Country" onChange={this.handleInputChange} style = {input_style} placeholder = "Country" required/>
+                            <input name="Country" onChange={this.handleInputChange} style={input_style} placeholder="Country" required/>
                      </div>
               </div>
-              <div style = {style}>
-                     <div style = {inner_style}>
+              <div style={style}>
+                     <div style={inner_style}>
                             <h2>Email</h2>
-                            <input name="email" onChange={this.handleInputChange} style = {input_style} placeholder = "Email" required/>
+                            <input name="email" onChange={this.handleInputChange} style={input_style} placeholder="Email" required/>
                      </div>
               </div>
-              <div style = {style}>
-                     <div style = {inner_style}>
+              <div style={style}>
+                     <div style={inner_style}>
                             <h2>Username</h2>
-                            <input name="username" onChange={this.handleInputChange} style = {input_style} placeholder = "Username" required/>
+                            <input name="username" onChange={this.handleInputChange} style={input_style} placeholder="Username" required/>
                      </div>
               </div>
-              <div style = {style}>
-                     <div style = {inner_style}>
+              <div style={style}>
+                     <div style={inner_style}>
                             <h2>Password</h2>
-                            <input name="password" onChange={this.handleInputChange} style = {input_style} placeholder = "Password" type="password" required/>
+                            <input name="password" onChange={this.handleInputChange} style={input_style} placeholder="Password" type="password" required/>
                      </div>
               </div>
-              <div style = {style}>
-                     <div style = {inner_style}>
+              <div style={style}>
+                     <div style={inner_style}>
                             <h2>Confirm Password</h2>
-                            <input name="confirmed_password" onChange={this.handleInputChange} style = {input_style} placeholder = "Password" type="password" required/>
+                            <input name="confirmed_password" onChange={this.handleInputChange} style={input_style} placeholder="Password" type="password" required/>
                      </div>
               </div>
               {this.state.email_mismatch && (
@@ -202,13 +202,13 @@ class Registration extends Component
               </div>
               )}
               {this.state.password_mismatch && (
-              <div style = {error_div_style}>
-                     <h2 style = {error_mess_style}>The passwords do not match. Please try again.</h2>
+              <div style={error_div_style}>
+                     <h2 style={error_mess_style}>The passwords do not match. Please try again.</h2>
               </div>
               )}
               {this.state.registration_failed && (
-              <div style = {error_div_style}>
-                     <h2 style = {error_mess_style}>Unable to register this user.</h2>
+              <div style={error_div_style}>
+                     <h2 style={error_mess_style}>Unable to register this user.</h2>
               </div>
               )}      
               <SubmitButton />

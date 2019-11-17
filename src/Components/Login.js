@@ -144,28 +144,28 @@ class Login extends Component
 
 	return(
 	<form onSubmit={this.handleSubmit}>
-		<div style = {user_div_style}>
-			<div style = {inner_style}>
+		<div style={user_div_style}>
+			<div style={inner_style}>
 				<h2>{this.props.user_text ? this.props.user_text : "Username or email"}</h2>
-				<input onChange = {this.handleUserNameChange} value = {this.state.username} style = {input_style} placeholder = {this.props.user_text ? this.props.user_text : "Username or email"} required/>
+				<input onChange={this.handleUserNameChange} value={this.state.username} style={input_style} placeholder={this.props.user_text ? this.props.user_text : "Username or email"} required/>
 			</div>
 		</div>
 		       	   
-        <div style = {style}>
-			<div style = {inner_style}>
+        <div style={style}>
+			<div style={inner_style}>
 				<h2>{this.props.password_text ? this.props.password_text : "Password"}</h2>
-				<input onInput = {this.handlePasswordChange} style = {input_style} placeholder = {this.props.password_text ? this.props.password_text : "Password"} type = "password" required />
+				<input onInput={this.handlePasswordChange} style={input_style} placeholder={this.props.password_text ? this.props.password_text : "Password"} type="password" required />
 			</div>
 		</div>
 		<div>
 		{this.state.wrong_information && (
-			<div style = {error_div_style}>
-          		<h2 style = {error_mess_style}>The username or password is incorrect. Please try again.</h2>
+			<div style={error_div_style}>
+          		<h2 style={error_mess_style}>The username or password is incorrect. Please try again.</h2>
           	</div>
         )}
         	 <SubmitButton />
-        	 <Link redirect_link = {register_redirect_link}/>
-             <Link redirect_link = {password_redirect_link}/>
+        	 <Link redirect_link={register_redirect_link}/>
+             <Link redirect_link={password_redirect_link}/>
         </div>
         {this.state.redirect && (
           <Redirect to={"/"}/>
