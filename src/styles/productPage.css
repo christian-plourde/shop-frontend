@@ -1,4 +1,30 @@
-.container{
+.rating{
+    border: 15px solid darkslategray;
+    padding: 15px;
+    margin: 20px;
+}
+
+.photo{
+    background: grey;
+    border: 15px solid darkslategray;
+    margin: 20px;
+}
+
+.text{
+    background: dimgray;
+    border: 15px solid darkslategray;
+    padding: 50px;
+    margin: 20px;
+}
+
+.purchase{
+    background: grey;
+    border: 15px solid darkslategray;
+    padding: 50px;
+    margin: 20px;
+}
+
+/* .container{
     background:whitesmoke;
     display:flex;
     flex-flow: column;
@@ -9,61 +35,4 @@
     display:flex;
     flex-flow: row wrap;
     align-items: flex-start;
-}
-
-h1{
-    background: grey;
-    width: 100px;
-    height: 25px;
-    border: 15px solid darkslategray;
-    padding: 25px;
-    margin: 20px;
-}
-
-.rating{
-    width: 100px;
-    height: 25px;
-    border: 15px solid darkslategray;
-    padding: 15px;
-    margin: 20px;
-}
-
-#photo{
-    background: grey;
-    width: 300px;
-    height: 300px;
-    border: 15px solid darkslategray;
-    margin: 20px;
-}
-
-#product_image{
-    height: 100%;
-    width: 100%
-}
-
-#text{
-    background: dimgray;
-    width: 300px;
-    height: 300px;
-    border: 15px solid darkslategray;
-    padding: 50px;
-    margin: 20px;
-}
-
-#purchase{
-    background: grey;
-    width: 100px;
-    height: 100px;
-    border: 15px solid darkslategray;
-    padding: 50px;
-    margin: 20px;
-}
-
-#comments{
-    background: dimgrey;
-    width: 700px;
-    height: 700px;
-    border: 15px solid darkslategray;
-    padding: 50px;
-    margin: 20px;
-}
+} */
