@@ -27,7 +27,7 @@ class NavbarFunction extends Component {
 
    componentDidMount(){
       //https://shop-354.herokuapp.com/Products.json
-      //http://localhost/www/Products.json
+      //http://localhost:3000/Products.json
       fetch("https://shop-354.herokuapp.com/Products.json", {
       headers: {
         "Content-Type": "application/json",

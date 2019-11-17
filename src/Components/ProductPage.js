@@ -38,7 +38,7 @@ class ProductPage extends React.Component {
   componentDidMount() {
     //https://shop-354.herokuapp.com/Products.json
     //http://localhost:3000/Products.json
-    fetch("http://localhost:3000/Products.json", {
+    fetch("https://shop-354.herokuapp.com/Products.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -85,7 +85,7 @@ class ProductPage extends React.Component {
     //`http://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
     let review_product_id = this.props.match.params.product_id;
     this.setState({ isLoaded: false })
-    fetch(`http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`, {
+    fetch(`http://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -133,7 +133,7 @@ class ProductPage extends React.Component {
 
       //`https://shop-354.herokuapp.com/${product.picture.substring(1)}`
       //`http://localhost:3000${product.picture.substring(1)}`
-      const imageSource = `http://localhost:3000${product.picture.substring(1)}`
+      const imageSource = `https://shop-354.herokuapp.com/${product.picture.substring(1)}`
 
       return (
         <div className="container">
