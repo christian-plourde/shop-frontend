@@ -19,6 +19,7 @@ class Registration extends Component
               confirmed_password: "",
               password_mismatch: false,
               registration_failed: false,
+              email_mismatch: false,
               redirect: false
        }
 
@@ -40,6 +41,15 @@ class Registration extends Component
 
 
               this.setState({password_mismatch: false});
+
+              //check email
+              if(!this.state.email.match("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", "igm"))
+              {
+                     this.setState({email_mismatch: true});
+                     return;
+              }
+
+              this.setState({email_mismatch: false});
 
               var encrypted_password = "";
               for(var i = 0; i < this.state.password.length; i++)
@@ -186,6 +196,11 @@ class Registration extends Component
                             <input name="confirmed_password" onChange={this.handleInputChange} style={input_style} placeholder="Password" type="password" required/>
                      </div>
               </div>
+              {this.state.email_mismatch && (
+              <div style = {error_div_style}>
+                     <h2 style = {error_mess_style}>The email is not of the correct format. Please try again.</h2>
+              </div>
+              )}
               {this.state.password_mismatch && (
               <div style={error_div_style}>
                      <h2 style={error_mess_style}>The passwords do not match. Please try again.</h2>
