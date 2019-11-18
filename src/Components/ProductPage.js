@@ -82,10 +82,10 @@ class ProductPage extends React.Component {
 
     //acquiring the review array associated with the received prop's ID
     //`http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`
-    //`http://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
+    //`https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
     let review_product_id = this.props.match.params.product_id;
     this.setState({ isLoaded: false })
-    fetch(`http://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`, {
+    fetch(`https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
