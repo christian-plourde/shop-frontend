@@ -1,6 +1,8 @@
 // All imports
 import React, { Component } from 'react';
 import "../styles/Navbar.css";
+import"../styles/fonts/fontAwesome/all.css"
+import"../styles/fonts/fontAwesome/all.min.css"
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -285,9 +287,10 @@ class NavbarFunction extends Component {
             </Link>
 
             {/* Cart */}
-            <button id="cart" type="button" class="btn btn-secondary btn-sm">
+           <Link to="/checkout"><button id="cart" type="button" class="btn btn-secondary btn-sm">
               <i id="shoppingCart" class="fas fa-shopping-cart"></i>
             </button>
+            </Link>
           </Navbar.Collapse>
         </Navbar>
       </div>

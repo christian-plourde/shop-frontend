@@ -83,6 +83,7 @@ class App extends Component {
           path="/checkout"
           exact
           strict
+          component={CheckOut}
           render={() => {
             return <CheckOut />;
           }}
