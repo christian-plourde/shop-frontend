@@ -7,7 +7,6 @@ import Cart from "./Components/Cart";
 class CheckOut extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       isLoaded: false,
       products: []

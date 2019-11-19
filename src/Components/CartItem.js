@@ -60,10 +60,10 @@ export default class CartItem extends React.Component {
         <div className="product-price">{price}</div>
         <div className="product-quantity">
           <div>
-            <div>{this.state.quantity}</div>
             <button className="plus" onClick={this.handleIncrement}>
               +
             </button>
+            <div>{this.state.quantity}</div>
             <button className="minus" onClick={this.handleDecrement}>
               -
             </button>
