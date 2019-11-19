@@ -216,3 +216,20 @@ label {
 .checkout:hover {
   background-color: #494;
 }
+
+.shipping-method {
+  text-align: right;
+  padding-right: 50px;
+  padding-bottom: 25px;
+}
+.shipping-method label {
+  padding: 5px;
+  font-family: "HelveticaNeue-Medium";
+  font-size: 15px;
+}
+.shipping-method .shipping {
+  padding-left: 50px;
+  font-size: 15px;
+  color: black;
+  font-family: "HelveticaNeue-Medium";
+}

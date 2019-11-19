@@ -24,7 +24,17 @@ class Cart extends Component {
     ],
     subtotal: 0.0,
     total: 0.0,
-    shipping: 15
+    shipping: 5,
+    methodSelected: "standard"
+  };
+
+  handleShipping = () => {
+    if (document.getElementById("exp").checked) {
+      this.setState({ shipping: 15, methodSelected: "express" });
+    }
+    if (document.getElementById("stan").checked) {
+      this.setState({ shipping: 5, methodSelected: "standard" });
+    }
   };
 
   handleRemove = productID => {
@@ -66,6 +76,12 @@ class Cart extends Component {
     this.setState({ subtotal: sTotal, total: sTotal + sTotal * 0.05 });
   }
   componentDidUpdate() {
+    // if (document.getElementById("exp").checked) {
+    //   this.setState({ shipping: 15 });
+    // }
+    // if (document.getElementById("stan").checked) {
+    //   this.setState({ shipping: 5 });
+    // }
     if (
       this.state.total !==
       this.state.subtotal + this.state.subtotal * 0.05 + this.state.shipping
@@ -106,6 +122,29 @@ class Cart extends Component {
               );
             })}
           </div>
+          <div class="shipping-method">
+            <form>
+              <label>Choose a shipping method</label>
+              <label class="shipping">Standard - $5</label>
+              <input
+                type="radio"
+                value="standard"
+                name="shipping"
+                checked={this.state.methodSelected === "standard"}
+                id="stan"
+                onClick={this.handleShipping}
+              />
+              <label class="shipping">Express - $15</label>
+              <input
+                type="radio"
+                value="express"
+                name="shipping"
+                id="exp"
+                checked={this.state.methodSelected === "express"}
+                onClick={this.handleShipping}
+              />
+            </form>
+          </div>
           <div class="totals">
             <div class="totals-item">
               <label>Subtotal</label>
@@ -121,7 +160,7 @@ class Cart extends Component {
             </div>
             <div class="totals-item">
               <label>Shipping </label>
-              <div class="totals-value" id="cart-tax">
+              <div class="totals-value" id="cart-shipping">
                 {this.state.shipping}
               </div>
             </div>
