@@ -23,7 +23,6 @@ export default class CartItem extends React.Component {
   sendTotal = s => {
     if (s == "+") this.props.receiveTotal(this.props.price);
     else this.props.receiveTotal(-this.props.price);
-    console.log("here");
   };
 
   sendQuantity = () => {

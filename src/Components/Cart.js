@@ -71,9 +71,6 @@ class Cart extends Component {
       toChange => toChange.id === productID
     ).quantity = quantity;
     this.setState({ products: updatedProducts });
-    console.log(
-      this.state.products.find(toChange => toChange.id === productID).quantity
-    );
   };
 
   componentDidMount() {
@@ -87,12 +84,6 @@ class Cart extends Component {
     });
   }
   componentDidUpdate() {
-    // if (document.getElementById("exp").checked) {
-    //   this.setState({ shipping: 15 });
-    // }
-    // if (document.getElementById("stan").checked) {
-    //   this.setState({ shipping: 5 });
-    // }
     if (
       this.state.total !==
       this.state.subtotal + this.state.subtotal * 0.05 + this.state.shipping
