@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./styles/LandingPage.css";
+import "./styles/Cart.css";
 import Navbar from "./Components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -18,9 +18,6 @@ class CheckOut extends Component {
       <div>
         <div>
           <Navbar />
-        </div>
-        <div>
-          <h1>Check Out</h1>
         </div>
         <div className="CheckOutBody">
           <Cart products={this.state.products}></Cart>

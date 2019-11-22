@@ -20,6 +20,14 @@ class Cart extends Component {
         price: 5,
         description: "chips n shit",
         quantity: 1
+      },
+      {
+        name: "Yogurt",
+        id: 3,
+        brand: "IA",
+        price: 8,
+        description: "Yogurt ",
+        quantity: 1
       }
     ],
     subtotal: 0.0,
@@ -73,7 +81,10 @@ class Cart extends Component {
     for (var x in this.state.products) {
       sTotal += this.state.products[x].price;
     }
-    this.setState({ subtotal: sTotal, total: sTotal + sTotal * 0.05 });
+    this.setState({
+      subtotal: sTotal,
+      total: sTotal + sTotal * 0.05
+    });
   }
   componentDidUpdate() {
     // if (document.getElementById("exp").checked) {
@@ -94,8 +105,8 @@ class Cart extends Component {
   }
   render() {
     return (
-      <div>
-        <h3>Cart</h3>
+      <div class="checkout-body">
+        <h3 class="cart-title">Cart</h3>
         <div className="shopping-cart">
           <div class="column-labels">
             <label class="product-image">Image</label>
@@ -155,7 +166,7 @@ class Cart extends Component {
             <div class="totals-item">
               <label>Tax (5%)</label>
               <div class="totals-value" id="cart-tax">
-                {this.state.subtotal * 0.05}
+                {(this.state.subtotal * 0.05).toPrecision(2)}
               </div>
             </div>
             <div class="totals-item">

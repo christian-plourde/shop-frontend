@@ -85,7 +85,13 @@ h1 {
 label {
   color: #aaa;
 }
-
+.checkout-body .cart-title {
+  text-align: center;
+  font-family: "Helvetica Neue";
+  font-size: 30px;
+  color: #eee;
+  background-color: #1d1e22;
+}
 .shopping-cart {
   margin-top: -45px;
 }
@@ -95,6 +101,7 @@ label {
   padding-bottom: 15px;
   padding-top: 15px;
   margin-bottom: 15px;
+  margin-top: 40px;
   border-bottom: 1px solid #eee;
   font-size: 18px;
 }
@@ -230,6 +237,12 @@ label {
 .shipping-method .shipping {
   padding-left: 50px;
   font-size: 15px;
-  color: black;
+  color: #1d1e22;
   font-family: "HelveticaNeue-Medium";
+}
+
+.checkout-title {
+  background-color: #1d1e22;
+  color: #eee;
+  text-align: center;
 }
