@@ -20,7 +20,7 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    fetch("hsttp://localhost:3000/Products.json", {
+    fetch("https://localhost:3000/Products.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
