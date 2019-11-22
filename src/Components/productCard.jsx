@@ -43,6 +43,9 @@ class ProductCard extends Component {
       temp.push(JSON.parse(localStorage.getItem("cart")))
       //let temp1 = JSON.parse(temp);
       temp.push(this.state.product)
+      localStorage.setItem("cart",JSON.stringify(temp))
+
+
       console.log(temp);
   }
    render(){
