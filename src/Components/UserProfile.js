@@ -248,8 +248,8 @@ class UserProfile extends Component
 				<Navbar />
 
 				<form onSubmit={this.handleSubmit}>
-					<div style = {user_div_style}>
-						<div style = {inner_style}>
+					<div style={user_div_style}>
+						<div style={inner_style}>
 
 							<img style={edit_button} src={edit_blue} onMouseEnter={this.handleEditMouseEnter}
 							onMouseLeave={this.handleEditMouseLeave}
@@ -266,7 +266,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "email" style = {input_style} value={this.state.email} required/>
+									<input onInput={this.handleInput} name="email" style={input_style} value={this.state.email} required/>
 
 								)
 								}
@@ -282,7 +282,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "firstName" style = {input_style} value={this.state.firstName} required/>
+									<input onInput={this.handleInput} name="firstName" style={input_style} value={this.state.firstName} required/>
 
 								)
 								}
@@ -298,7 +298,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "lastName" style = {input_style} value={this.state.lastName} required/>
+									<input onInput={this.handleInput} name="lastName" style={input_style} value={this.state.lastName} required/>
 
 								)
 								}
@@ -314,7 +314,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "address" style = {input_style} value={this.state.address} required/>
+									<input onInput={this.handleInput} name="address" style={input_style} value={this.state.address} required/>
 
 								)
 								}
@@ -330,7 +330,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "country" style = {input_style} value={this.state.country} required/>
+									<input onInput={this.handleInput} name="country" style={input_style} value={this.state.country} required/>
 
 								)
 								}
@@ -365,7 +365,7 @@ class UserProfile extends Component
 
 						<button style={button_style} type="submit">Save Changes</button>
 
-						<img title= "Logout" style={exit_button} src={exit_blue} onMouseEnter={this.handleExitMouseEnter}
+						<img title="Logout" style={exit_button} src={exit_blue} onMouseEnter={this.handleExitMouseEnter}
 							onMouseLeave={this.handleExitMouseLeave}
 							onClick={this.handleExitClick}/>
 
