@@ -28,7 +28,7 @@ const SearchResults = ({match,location}) => {
       {elementsToDisplay.map((data,index) =>(
         <ul className="ResultsList">
          <li className="ResultsList-inner">
-            <ProductCard  key={index} name = {data.productName} price = {data.productPrice} description = {data.descriptionText} picture= {data.picture}/>
+            <ProductCard  key={index} name = {data.productName} price = {data.productPrice} description = {data.descriptionText} picture= {data.picture} id={data.productID}/>
          </li>
         </ul> 
       ))}
