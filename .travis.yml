@@ -20,7 +20,6 @@ script:
   - sudo rm -R shop-tests
   - sudo rm -R node_modules
   - sudo rm -R build/
-  - sudo rm -R composer/
   - sudo rm -R vendor/
 deploy:
   provider: heroku
