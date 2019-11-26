@@ -10,6 +10,9 @@ import "../styles/autoComplete.css";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
 
+import DropdownItem from './Navbar/DropdownItem.js';
+import CategoryButton from './Navbar/CategoryButton.js';
+
 const localhost = false;//Set to true if working locally
 
 // The Navigation Bar
@@ -174,122 +177,25 @@ class NavbarFunction extends Component {
                   <Dropdown.Menu>
                   <table>
                     <tr>
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Home"
-
-                        } }>
-                         <h6> Home </h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
-
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Clothing"
-
-                        } }>
-                          <h6> Clothing </h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
-
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Kitchen"
-
-                        } }>
-                          <h6> Kitchen </h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
+                      <DropdownItem query={this.state.productData} element="Home" />
+                      <DropdownItem query={this.state.productData} element="Clothing" />
+                      <DropdownItem query={this.state.productData} element="Kitchen" />
                     </tr>
-
                     <tr>
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Electronic"
-
-                        } }>
-                          <h6> Electronics</h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Shrek"
-
-                        } }>
-                          <h6> Shrek </h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Book"
-
-                        } }>
-                          <h6> Books </h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
+                      <DropdownItem query={this.state.productData} element="Electronics" />
+                      <DropdownItem query={this.state.productData} element="Shrek" />
+                      <DropdownItem query={this.state.productData} element="Book" />
                     </tr>
-
                     <tr>
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Microsoft"
-
-                        } }>
-                          <h6> Microsoft</h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Everyday"
-
-                        } }>
-                          <h6> Everyday</h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
-                      <td>
-                        <Dropdown.Item href="#/action-1">
-                        <Link to={{
-                           pathname:"/results",
-                           query: this.state.productData,
-                           element:"Toy"
-
-                        } }>
-                          <h6> Toys </h6>
-                        </Link>
-                        </Dropdown.Item>{" "}
-                      </td>
+                      <DropdownItem query={this.state.productData} element="Microsoft" />
+                      <DropdownItem query={this.state.productData} element="Everyday" />
+                      <DropdownItem query={this.state.productData} element="Toy" />
+                    </tr>
+                    <tr>
+                    <DropdownItem query={this.state.productData} element="A - Z" />
+                    <DropdownItem query={this.state.productData} element="Z - A" />
+                    <DropdownItem query={this.state.productData} element="Least to most expensive" />
+                    <DropdownItem query={this.state.productData} element="Most to least expensive" />
                     </tr>
                   </table>
                 </Dropdown.Menu>
@@ -351,125 +257,24 @@ class NavbarFunction extends Component {
 
       {/* Second Container */}
       <div id="secondContainer">
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Home"
-
-           } }>  <Button id="button2" variant="secondary" size="sm">
-          Home
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Clothing"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Clothing
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Kitchen"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Kitchen
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Electronic"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Electronics
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Shrek"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Shrek
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Book"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Books
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Microsoft"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Microsoft
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Everyday"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Everyday
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Toy"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Toys
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Sports"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Sports
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Outdoor"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Outdoors
-        </Button>
-      </Link>
-      <Link to={{
-             pathname:"/results",
-             query: this.state.productData,
-             element:"Children"
-
-           } }>
-        <Button id="button2" variant="secondary" size="sm">
-          Children
-        </Button>
-      </Link>
+        <table>
+          <tr>
+            <CategoryButton query={this.state.productData} element="Home" />
+            <CategoryButton query={this.state.productData} element="Clothing" />
+            <CategoryButton query={this.state.productData} element="Kitchen" />
+            <CategoryButton query={this.state.productData} element="Electronic" />
+            <CategoryButton query={this.state.productData} element="Shrek" />
+            <CategoryButton query={this.state.productData} element="Book" />
+            <CategoryButton query={this.state.productData} element="Microsoft" />
+            <CategoryButton query={this.state.productData} element="Everyday" />
+            <CategoryButton query={this.state.productData} element="Toy" />
+            <CategoryButton query={this.state.productData} element="Sports" />
+            <CategoryButton query={this.state.productData} element="Outdoor" />
+            <CategoryButton query={this.state.productData} element="Children" />
+            <CategoryButton query={this.state.productData} element="A - Z" />
+            <CategoryButton query={this.state.productData} element="Z - A" />
+          </tr>
+        </table>
       </div>
     </div>
   );
