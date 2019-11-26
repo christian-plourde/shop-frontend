@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ProductCard from "./productCard";
+import Navbar from './Navbar.js';
 import "../styles/searchResults.css";
 const SearchResults = ({match,location}) => {
 
    let products = location.query;
-   
+
    let searchElement = location.element;
    console.log(searchElement);
    let elementsToDisplay=[];
@@ -14,7 +15,7 @@ const SearchResults = ({match,location}) => {
       }
       else{
          for(var y in products[x].tags){
-            
+
             if(products[x].tags[y].toLowerCase() == searchElement.toLowerCase()){
             elementsToDisplay.push(products[x]);
             console.log(products[x]);
@@ -22,16 +23,20 @@ const SearchResults = ({match,location}) => {
          }
       }
    }
+
    return(
-      <div className="ResultsDisplay">
-      <h2 className="TitleResults">Search results related to {searchElement}</h2>
-      {elementsToDisplay.map((data,index) =>(
-        <ul className="ResultsList">
-         <li className="ResultsList-inner">
-            <ProductCard  key={index} name = {data.productName} price = {data.productPrice} description = {data.descriptionText} picture= {data.picture} id={data.productID}/>
-         </li>
-        </ul> 
-      ))}
+      <div>
+        <Navbar />
+        <div className="ResultsDisplay">
+        <h2 className="TitleResults">Search results related to {searchElement}</h2>
+        {elementsToDisplay.map((data,index) =>(
+          <ul className="ResultsList">
+           <li className="ResultsList-inner">
+              <ProductCard  key={index} name = {data.productName} price = {data.productPrice} description = {data.descriptionText} picture= {data.picture} id={data.productID}/>
+           </li>
+          </ul>
+        ))}
+        </div>
       </div>
    )
 }
