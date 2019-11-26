@@ -4,7 +4,6 @@ import Carousel from "./Components/carousel";
 import Navbar from "./Components/Navbar";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import isLocalhost from './index.js';
 //Quickly adjust links
 const localhost = false;//Set to true if working locally
 
