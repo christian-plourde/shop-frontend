@@ -10,6 +10,8 @@ import "../styles/autoComplete.css";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
 
+const localhost = false;//Set to true if working locally
+
 // The Navigation Bar
 class NavbarFunction extends Component {
    constructor(){
@@ -26,9 +28,10 @@ class NavbarFunction extends Component {
    }
 
    componentDidMount(){
-      //https://shop-354.herokuapp.com/Products.json
-      //http://localhost:3000/Products.json
-      fetch("https://shop-354.herokuapp.com/Products.json", {
+     var site = (localhost) ?
+       "http://localhost:3000/Products.json"
+       : "https://shop-354.herokuapp.com/Products.json";
+      fetch(site, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -76,7 +79,7 @@ class NavbarFunction extends Component {
             for(var y in this.state.tagsArray[x]){
                if(regex.test(this.state.tagsArray[x][y])){
                   for(var i in tags){
-                     if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}     
+                     if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}
                   }
                   if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
                   isAlreadyInArray=false;
@@ -88,8 +91,8 @@ class NavbarFunction extends Component {
       }
       this.setState(() => ({suggestions,text:value}));
       console.log(suggestions);
-      
-      
+
+
    }
    onTextChanged = (e) =>{
       const value = e.target.value;
@@ -102,7 +105,7 @@ class NavbarFunction extends Component {
             for(var y in this.state.tagsArray[x]){
                if(regex.test(this.state.tagsArray[x][y])){
                   for(var i in tags){
-                     if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}     
+                     if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}
                   }
                   if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
                   isAlreadyInArray=false;
@@ -178,7 +181,7 @@ class NavbarFunction extends Component {
                            query: this.state.productData,
                            element:"Home"
 
-                        } }> 
+                        } }>
                          <h6> Home </h6>
                         </Link>
                         </Dropdown.Item>{" "}
@@ -191,7 +194,7 @@ class NavbarFunction extends Component {
                            query: this.state.productData,
                            element:"Clothing"
 
-                        } }> 
+                        } }>
                           <h6> Clothing </h6>
                         </Link>
                         </Dropdown.Item>{" "}
@@ -233,7 +236,7 @@ class NavbarFunction extends Component {
 
                         } }>
                           <h6> Shrek </h6>
-                        </Link>   
+                        </Link>
                         </Dropdown.Item>{" "}
                       </td>
                       <td>
@@ -245,7 +248,7 @@ class NavbarFunction extends Component {
 
                         } }>
                           <h6> Books </h6>
-                        </Link>  
+                        </Link>
                         </Dropdown.Item>{" "}
                       </td>
                     </tr>
@@ -272,7 +275,7 @@ class NavbarFunction extends Component {
 
                         } }>
                           <h6> Everyday</h6>
-                        </Link> 
+                        </Link>
                         </Dropdown.Item>{" "}
                       </td>
                       <td>
@@ -296,16 +299,16 @@ class NavbarFunction extends Component {
             {/* Search Option */}
             <div className="Results">
             <FormControl value={text} onChange={this.onTextChanged} type="text" placeholder="Search" className="mr-sm-2" />
-            
+
             {this.renderSuggestions()}
             </div>
-            
+
           <Link to={{
              pathname:"/results",
              query: this.state.productData,
              element:this.state.text
 
-           } }>  
+           } }>
             <Button id="search" variant="outline-success">
               Search
             </Button>
@@ -362,7 +365,7 @@ class NavbarFunction extends Component {
              query: this.state.productData,
              element:"Clothing"
 
-           } }> 
+           } }>
         <Button id="button2" variant="secondary" size="sm">
           Clothing
         </Button>
