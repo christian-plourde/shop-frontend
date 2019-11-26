@@ -9,7 +9,7 @@ class Cart extends Component {
         name: "Water",
         id: 2,
         brand: "Evian",
-        price: 50,
+        price: 49.99,
         description: "Water for rich ass mofos",
         quantity: 1
       },
@@ -17,7 +17,7 @@ class Cart extends Component {
         name: "Chips",
         id: 1,
         brand: "Kettle",
-        price: 5,
+        price: 4.99,
         description: "chips n shit",
         quantity: 1
       },
@@ -80,17 +80,17 @@ class Cart extends Component {
     }
     this.setState({
       subtotal: sTotal,
-      total: sTotal + sTotal * 0.05
+      total: sTotal + sTotal * 0.15
     });
   }
   componentDidUpdate() {
     if (
       this.state.total !==
-      this.state.subtotal + this.state.subtotal * 0.05 + this.state.shipping
+      this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
     ) {
       this.setState({
         total:
-          this.state.subtotal + this.state.subtotal * 0.05 + this.state.shipping
+          this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
       });
     }
   }
@@ -151,13 +151,13 @@ class Cart extends Component {
             <div class="totals-item">
               <label>Subtotal</label>
               <div class="totals-value" id="cart-subtotal">
-                {this.state.subtotal}
+                {this.state.subtotal.toFixed(2)}
               </div>
             </div>
             <div class="totals-item">
-              <label>Tax (5%)</label>
+              <label>Tax (15%)</label>
               <div class="totals-value" id="cart-tax">
-                {(this.state.subtotal * 0.05).toPrecision(2)}
+                {(this.state.subtotal * 0.15).toFixed(2)}
               </div>
             </div>
             <div class="totals-item">
@@ -169,7 +169,7 @@ class Cart extends Component {
             <div class="totals-item totals-item-total">
               <label>Grand Total</label>
               <div class="totals-value" id="cart-total">
-                {this.state.total}
+                {this.state.total.toFixed(2)}
               </div>
             </div>
           </div>

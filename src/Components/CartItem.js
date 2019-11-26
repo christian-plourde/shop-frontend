@@ -17,11 +17,14 @@ export default class CartItem extends React.Component {
       this.setState({ total: this.state.total - this.props.price });
       this.sendTotal("-");
       this.sendQuantity();
-    }
+    } else
+      alert(
+        "Cannot decrease quantity. If you want to remove a product, please use the 'Remove' button"
+      );
   };
 
   sendTotal = s => {
-    if (s == "+") this.props.receiveTotal(this.props.price);
+    if (s === "+") this.props.receiveTotal(this.props.price);
     else this.props.receiveTotal(-this.props.price);
   };
 
@@ -76,7 +79,7 @@ export default class CartItem extends React.Component {
             Remove
           </button>
         </div>
-        <div class="product-line-price">{this.state.total}</div>
+        <div class="product-line-price">{this.state.total.toFixed(2)}</div>
       </div>
     );
   }
