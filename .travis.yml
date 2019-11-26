@@ -2,25 +2,25 @@ language: node_js
 cache:
   npm: true
   directories:
-  - node_modules
+    - node_modules
 before_install:
-- nvm install v10.16.2
+  - nvm install v10.16.2
 install:
-- npm install
+  - npm install
 script:
-- git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
-- git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
-- sudo mv shop-backend/php/* public/
-- sudo mv shop-backend/composer.* .
-- composer install
-- cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
-- rm -R tests/
-- unset CI
-- npm run-script build
-- sudo rm -R shop-tests
-- sudo rm -R node_modules
-- sudo rm -R build/
-- sudo rm -R vendor/
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
+  - sudo mv shop-backend/php/* public/
+  - sudo mv shop-backend/composer.* .
+  - composer install
+  - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
+  - rm -R tests/
+  - unset CI
+  - npm run-script build
+  - sudo rm -R shop-tests
+  - sudo rm -R node_modules
+  - sudo rm -R build/
+  - sudo rm -R vendor/
 deploy:
   provider: heroku
   api_key:
@@ -28,3 +28,4 @@ deploy:
   app: shop-354
   on: test-merge
   skip_cleanup: true
+  run: sudo mv vendor/ build/
