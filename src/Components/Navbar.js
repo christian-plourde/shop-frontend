@@ -155,7 +155,7 @@ class NavbarFunction extends Component {
          <div id="firstContainer">
             <Navbar id="Navbar" bg="light" expand="lg">
                {/* Navbar Brand */}
-            <Navbar.Brand href="#home" id="brand">
+            <Navbar.Brand href="../" id="brand">
                <i id="brandLogo" class="fas fa-spa"></i>
                BrandTitle
             </Navbar.Brand>
