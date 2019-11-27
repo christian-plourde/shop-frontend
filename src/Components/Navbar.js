@@ -194,8 +194,8 @@ class NavbarFunction extends Component {
                     <tr>
                     <DropdownItem query={this.state.productData} element="A - Z" />
                     <DropdownItem query={this.state.productData} element="Z - A" />
-                    <DropdownItem query={this.state.productData} element="Least to most Expensive" />
-                    <DropdownItem query={this.state.productData} element="Most to least Expensive" />
+                    <DropdownItem query={this.state.productData} element="Least to Most Expensive" />
+                    <DropdownItem query={this.state.productData} element="Most to Least Expensive" />
                     </tr>
                   </table>
                 </Dropdown.Menu>
