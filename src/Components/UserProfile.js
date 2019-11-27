@@ -41,7 +41,7 @@ class UserProfile extends Component
         }
     	})
 		.then((response) => {
-  			
+
   			if(response.data.Accepted)
   			{
   				this.setState({email: response.data.email});
@@ -56,18 +56,18 @@ class UserProfile extends Component
   			{
 
   			}
-  			
+
 
 		});
 	}
 
 
-	handleSubmit = (e) => 
+	handleSubmit = (e) =>
 	{
 		e.preventDefault();
-		const data = {userName: this.state.username, 
-					  email: this.state.email, 
-					  firstName: this.state.firstName, 
+		const data = {userName: this.state.username,
+					  email: this.state.email,
+					  firstName: this.state.firstName,
 					  lastName: this.state.lastName,
 					  address: this.state.address,
 					  country: this.state.country
@@ -81,7 +81,7 @@ class UserProfile extends Component
         }
     	})
 		.then((response) => {
-  			
+
 			if(response.data.Accepted)
 			{
 				this.setState({changeError: false, changeSuccess: true, edit_mode: false});
@@ -141,7 +141,7 @@ class UserProfile extends Component
 	render()
 	{
 
-		const user_div_style = 
+		const user_div_style =
 		{
 			color: "#333",
 			textAlign: "center",
@@ -154,14 +154,14 @@ class UserProfile extends Component
 			height: "460px"
 		}
 
-		const inner_style = 
+		const inner_style =
 		{
 			margin: "auto auto auto 5%",
 			width: "100%",
 			textAlign: 'left'
 		};
 
-		const input_style = 
+		const input_style =
 		{
 			width: "60%",
 			fontSize: "20px",
@@ -202,7 +202,7 @@ class UserProfile extends Component
 			paddingTop: "8px"
 		}
 
-		const exit_button = 
+		const exit_button =
 		{
 			float: "right",
 			marginRight: "10px",
@@ -214,7 +214,7 @@ class UserProfile extends Component
 			color: "blue"
 		}
 
-		const button_style = 
+		const button_style =
 		{
 			margin: "0 auto",
 			marginTop: "20px",
@@ -226,7 +226,7 @@ class UserProfile extends Component
 			fontSize: '15px'
 		};
 
-		const error_mess_style = 
+		const error_mess_style =
 		{
 			color: "#993232",
 			textDecoration:'none',
@@ -234,7 +234,7 @@ class UserProfile extends Component
 			fontWeight: 'bold'
 		};
 
-		const success_mess_style = 
+		const success_mess_style =
 		{
 			color: "#20ab51",
 			textDecoration:'none',
@@ -243,13 +243,13 @@ class UserProfile extends Component
 		};
 
 		return(
-		
+
 			<div>
 				<Navbar />
 
 				<form onSubmit={this.handleSubmit}>
-					<div style = {user_div_style}>
-						<div style = {inner_style}>
+					<div style={user_div_style}>
+						<div style={inner_style}>
 
 							<img style={edit_button} src={edit_blue} onMouseEnter={this.handleEditMouseEnter}
 							onMouseLeave={this.handleEditMouseLeave}
@@ -266,7 +266,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "email" style = {input_style} value={this.state.email} required/>
+									<input onInput={this.handleInput} name="email" style={input_style} value={this.state.email} required/>
 
 								)
 								}
@@ -282,7 +282,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "firstName" style = {input_style} value={this.state.firstName} required/>
+									<input onInput={this.handleInput} name="firstName" style={input_style} value={this.state.firstName} required/>
 
 								)
 								}
@@ -298,7 +298,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "lastName" style = {input_style} value={this.state.lastName} required/>
+									<input onInput={this.handleInput} name="lastName" style={input_style} value={this.state.lastName} required/>
 
 								)
 								}
@@ -314,7 +314,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "address" style = {input_style} value={this.state.address} required/>
+									<input onInput={this.handleInput} name="address" style={input_style} value={this.state.address} required/>
 
 								)
 								}
@@ -330,7 +330,7 @@ class UserProfile extends Component
 								(
 									this.state.edit_mode &&
 
-									<input onInput={this.handleInput} name = "country" style = {input_style} value={this.state.country} required/>
+									<input onInput={this.handleInput} name="country" style={input_style} value={this.state.country} required/>
 
 								)
 								}
@@ -350,7 +350,7 @@ class UserProfile extends Component
 						{
 							this.state.changeError && (
 								<div>
-									<h2 style={error_mess_style}>There was an error in your resquested changes. Please review them and try again.</h2>
+									<h2 style={error_mess_style}>There was an error in your requested changes. Please review them and try again.</h2>
 								</div>
 								)
 						}
@@ -365,7 +365,7 @@ class UserProfile extends Component
 
 						<button style={button_style} type="submit">Save Changes</button>
 
-						<img title= "Logout" style={exit_button} src={exit_blue} onMouseEnter={this.handleExitMouseEnter}
+						<img title="Logout" style={exit_button} src={exit_blue} onMouseEnter={this.handleExitMouseEnter}
 							onMouseLeave={this.handleExitMouseLeave}
 							onClick={this.handleExitClick}/>
 
@@ -375,10 +375,10 @@ class UserProfile extends Component
 					</div>
 				</form>
 			</div>
-    
+
 			);
 	}
-	
+
 }
 
 export default UserProfile;
