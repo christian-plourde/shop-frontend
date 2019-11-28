@@ -4,6 +4,35 @@ import Navbar from "./Navbar.js";
 import {Redirect} from "react-router";
 import Link from "./Link.js";
 import axios from 'axios';
+// const axios = require('axios').default;
+
+//A variable to make our lives easier
+import localhost from '../LocalHost.js';
+
+
+//Delete me
+	const getBreeds = () => {
+	  try {
+	    return axios.get('https://dog.ceo/api/breeds/list/all')
+	  } catch (error) {
+	    console.error(error)
+	  }
+	}
+
+	const countBreeds = async () => {
+	  const breeds = getBreeds()
+	    .then(response => {
+	      if (response.data.message) {
+	        console.log(
+	          `Got ${Object.entries(response.data.message).length} breeds`
+	        )
+	      }
+	    })
+	    .catch(error => {
+	      console.log(error)
+	    })
+	}
+//End delete me
 
 class Login extends Component
 {
@@ -49,33 +78,48 @@ class Login extends Component
 
   	handleSubmit = (event) =>
   	{
-  		event.preventDefault();
-  		const data = {username: this.state.username, password: this.state.encrypted_password};
-  		{/*https://shop-354.herokuapp.com/login.php*/}
-  		{/*http://localhost/www/shop-backend/php/login.php*/}
-    	axios.post('https://shop-354.herokuapp.com/login.php', JSON.stringify(data), {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    	})
-		.then((response) => {
+			const site = (localhost) ?
+				'http://localhost/shop-backend/php/login.php'
+				: 'https://shop-354.herokuapp.com/login.php';
+			// const site = (localhost) ?
+			// 	'http://192.168.0.53:80/shop-backend/php/login.php'
+			// 	: 'https://shop-354.herokuapp.com/login.php';
+			// const site = 'https://shop-354.herokuapp.com/login.php';
 
+  		event.preventDefault();
+			const axiosConfig = {
+				headers: {
+            'Content-Type': 'application/json',
+						"Access-Control-Allow-Origin":"*",
+        },
+			};
+  		const data = JSON.stringify({username: this.state.username, password: this.state.encrypted_password});
+			// const data = {
+			// 	username: this.state.username,
+			// 	password: this.state.encrypted_password,
+			// };
+
+			countBreeds();//prints "90 breeds" if axios.get works
+
+    	axios.post(site, data, axiosConfig)
+		.then((response) => {
+			console.log("Response : this never prints");
 			if(response.data.Accepted)
 			{
 				this.setState({redirect: true});
 				sessionStorage.setItem("logged_in_user", this.state.username);
 			}
-
 			else
 			{
 				this.setState({wrong_information: true});
 			}
-
-
 		}, (error) => {
-  		console.log(error);
+			console.log("Didn't succeed for axios.post call with params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
+			console.log("Error",error);
+			console.log("Error message",error.message);
+  		console.log("Request",error.request);
 		});
-  	}
+	}//end handle Submit
 
 	render()
 	{

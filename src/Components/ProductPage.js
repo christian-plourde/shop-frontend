@@ -7,7 +7,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/productPage.css";
 import Review from "./Review.js";
 
-const localhost = false;//Set to true if working locally
+//A variable to make our lives easier
+import localhost from '../LocalHost.js';
+
+// const localhost = true;//Set to true if working locally
 
 //2019-11-15, product page layout prototype, cannot access the product image for some reason, scr links to the images readily accessible via localhost url address
 //added: basic layout, working rendering of text attributes for product page
