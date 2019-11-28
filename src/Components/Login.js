@@ -52,21 +52,22 @@ class Login extends Component
 
   	handleSubmit = (event) =>
   	{
+			event.preventDefault();
+
 			const site = (localhost) ?
 				'http://localhost/shop-backend/php/login.php'
 				: 'https://shop-354.herokuapp.com/login.php';
 
-  		event.preventDefault();
+			const data = {
+				username: this.state.username,
+				password: this.state.encrypted_password,
+			};
+
 			const axiosConfig = {
 				headers: {
             'Content-Type': 'application/json',
 						"Access-Control-Allow-Origin":"*",
         },
-			};
-
-			const data = {
-				username: this.state.username,
-				password: this.state.encrypted_password,
 			};
 
     	axios.post(site, data, axiosConfig)

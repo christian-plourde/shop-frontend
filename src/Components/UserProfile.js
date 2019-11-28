@@ -8,6 +8,9 @@ import exit_blue from "../ressources/icons/exit_blue.png";
 import exit_green from "../ressources/icons/exit_green.png";
 import {Redirect} from "react-router";
 
+//A variable to make our lives easier
+import localhost from '../LocalHost.js';
+
 import ProductThumbnail from './ProductThumbnail.js';
 
 class UserProfile extends Component
@@ -35,17 +38,25 @@ class UserProfile extends Component
 
 	componentDidMount()
 	{
-		{/*https://shop-354.herokuapp.com/user_profile_display.php*/}
-  		{/*http://localhost/www/shop-backend/php/user_profile_display.php*/}
-		axios.post('https://shop-354.herokuapp.com/user_profile_display.php', JSON.stringify({username: sessionStorage.getItem("logged_in_user")}), {
+
+		const site = (localhost) ?
+			'http://localhost/shop-backend/php/user_profile_display.php'
+			: 'https://shop-354.herokuapp.com/user_profile_display.php';
+		const data = {username: sessionStorage.getItem("logged_in_user")};
+		const axiosConfig = {
         headers: {
             'Content-Type': 'application/json',
-        }
-    	})
-		.then((response) => {
+						"Access-Control-Allow-Origin":"*",
+        },
+    	};
 
+		axios.post(site, data, axiosConfig)
+		.then((response) => {
+				console.log("axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
+				console.log("Response", response.data);
   			if(response.data.Accepted)
   			{
+					console.log("Response accepted");
   				this.setState({email: response.data.email});
   				this.setState({firstName: response.data.firstName});
   				this.setState({lastName: response.data.lastName});
@@ -53,13 +64,8 @@ class UserProfile extends Component
   				this.setState({country: response.data.country});
   				this.setState({isAdmin: response.data.isAdmin});
   			}
-
-  			else
-  			{
-
-  			}
-
-
+		}, (error) => {
+			console.log("Didn't succeed for axios.post call with params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
 		});
 	}
 
