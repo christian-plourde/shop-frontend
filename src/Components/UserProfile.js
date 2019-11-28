@@ -11,6 +11,7 @@ import {Redirect} from "react-router";
 //A variable to make our lives easier
 import localhost from '../LocalHost.js';
 
+import UserProfileLowerDisplay from './UserProfileLowerDisplay.js';
 import ProductThumbnail from './ProductThumbnail.js';
 
 class UserProfile extends Component
@@ -36,6 +37,7 @@ class UserProfile extends Component
 		super(props);
 	}
 
+
 	componentDidMount()
 	{
 
@@ -52,11 +54,11 @@ class UserProfile extends Component
 
 		axios.post(site, data, axiosConfig)
 		.then((response) => {
-				console.log("axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
-				console.log("Response", response.data);
+				// console.log("user profile display :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
+				// console.log("Response", response.data);
   			if(response.data.Accepted)
   			{
-					console.log("Response accepted");
+					// console.log("Response accepted");
   				this.setState({email: response.data.email});
   				this.setState({firstName: response.data.firstName});
   				this.setState({lastName: response.data.lastName});
@@ -65,90 +67,91 @@ class UserProfile extends Component
   				this.setState({isAdmin: response.data.isAdmin});
   			}
 		}, (error) => {
-			console.log("Didn't succeed for axios.post call with params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
+			// console.log("user profile accepted :: Didn't succeed for axios.post call with params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
 		});
 	}
 
-
+//A function to manage user info editing; triggered on submission of the user info form.
+//Collects all modification input at once.
 	handleSubmit = (e) =>
 	{
-		e.preventDefault();
-		const data = {userName: this.state.username,
+			e.preventDefault();
+
+			const site = (localhost) ?
+					'http://localhost/shop-backend/php/user_profile_modification.php'
+					: 'https://shop-354.herokuapp.com/user_profile_modification.php';
+
+			const data = JSON.stringify({userName: this.state.username,
 					  email: this.state.email,
 					  firstName: this.state.firstName,
 					  lastName: this.state.lastName,
 					  address: this.state.address,
 					  country: this.state.country
-					  };
+					});
+			const axiosConfig = {
+					headers: {
+							'Content-Type': 'application/json',
+							"Access-Control-Allow-Origin":"*",
+					},
+				};
 
-		{/*https://shop-354.herokuapp.com/user_profile_modification.php*/}
-  		{/*http://localhost/www/shop-backend/php/user_profile_modification.php*/}
-    	axios.post('https://shop-354.herokuapp.com/user_profile_modification.php', JSON.stringify(data), {
-        headers: {
-            'Content-Type': 'application/json',
-        }
-    	})
-		.then((response) => {
+			axios.post(site, data, axiosConfig)
+			.then((response) => {
+					// console.log("user profile modification :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
+					if(response.data.Accepted)
+					{
+						this.setState({changeError: false, changeSuccess: true, edit_mode: false});
+					}
+					else
+					{
+						this.setState({changeError: true});
+					}
+			},
+			(error) => {
+				// console.log("user profile modification :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
+			});
+	}//end handleSubmit
 
-			if(response.data.Accepted)
-			{
-				this.setState({changeError: false, changeSuccess: true, edit_mode: false});
-			}
-
-			else
-			{
-				this.setState({changeError: true});
-			}
-
-
-		}, (error) => {
-  		console.log(error);
-		});
-	}
-
-
+//A function to modify the color of the edit symbol in response to the user mouse position (if mouse enters)
 	handleEditMouseEnter = (e) => {
-
 		e.target.src = edit_green;
 	}
 
+//A function to modify the color of the edit symbol in response to the user mouse position (if mouse leaves)
 	handleEditMouseLeave = (e) => {
 		e.target.src = edit_blue;
 	}
 
+//A function to modify the color of the logout symbol in response to the user mouse position (if mouse enters)
 	handleExitMouseEnter = (e) => {
-
 		e.target.src = exit_green;
 	}
 
+//A function to modify the color of the logout symbol in response to the user mouse position (if mouse leaves)
 	handleExitMouseLeave = (e) => {
 		e.target.src = exit_blue;
 	}
 
+//A function to enable user information editing on click of the edit symbol
 	handleEditClick = (e) => {
-
-		if(!this.state.edit_mode)
-			this.setState({edit_mode: true});
-		else
-			this.setState({edit_mode: false});
-
+			this.setState({edit_mode: !this.state.edit_mode});
 	}
 
+//A function to handle the user click of the logout symbol
 	handleExitClick = (e) => {
-
 		sessionStorage.removeItem("logged_in_user");
 		this.setState({logout: true});
 	}
 
-
+//A function to handle the state change reflective of any user input for that state
 	handleInput = (e) =>
 	{
 		this.setState({[e.target.name]: e.target.value});
 	}
 
+
 	render()
 	{
-
 		const user_div_style =
 		{
 			color: "#333",
@@ -250,98 +253,8 @@ class UserProfile extends Component
 			fontWeight: 'bold'
 		};
 
-		function displayUserProductsCurrentlyForSale()
-		{
-			//MISSING: Get list of products for some given user. We will do this through the transaction table, using the user's username. The query should be something like this:
-			//	SELECT FROM * Products where ownerid = (select from account where username={this.state.username} limit 1);
-			//Now, when we get it from our PHP file, odds are we'll be getting it in some encoded JSON format, like this.
-			const product_list_JSON = {
-				"products":
-				[
-					{
-						"ownerID": 1,
-						"productID": 1,
-						"productName": "Microsoft Azure Mug",
-						"modelName": "B46Y9AS0GX",
-						"color": "White",
-						"dimensions": "4\"x4\"",
-						"productPrice": 20.00,
-						"descriptionText": "Stunning Microsoft Azure mug to make all your coworkers jealous.",
-						"picture": "./ressources/img/images/azure_mug.jpg",
-						"tags":
-						[
-							"kitchen",
-							"mug",
-							"white",
-							"microsoft",
-							"azure"
-						]
-					},
-					{
-						"ownerID": 1,
-						"productID": 2,
-						"productName": "6-Outlet Surge Protector Power Strip",
-						"modelName": "MW01720B",
-						"color": "Black",
-						"dimensions": "7\"x2\"",
-						"productPrice": 13.46,
-						"descriptionText": "Power strip with 6 outlets and built in 790 joule surge protection with 6 foot ling power cord.",
-						"picture": "./ressources/img/images/power_strip_black.jpg",
-						"tags":
-						[
-							"electrical",
-							"power",
-							"strip",
-							"black",
-							"electronic"
-						]
-					}
-				]
-			};
-
-			const list_of_products = product_list_JSON["products"]
-
-			//If there are no items in this list, then the user has no items for sale
-			if (list_of_products.length < 1)
-			{
-				return (
-					<div>
-						You have no items for sale!
-					</div>
-				);
-			}
-			else{
-				//For every product in the JSON list of products, we want to be passing the product dictionary's values to this ProductThumbnail object, to display it to the user.
-				const product_thumbnails = list_of_products.map((product) =>
-					<tr>
-						<td>
-							<ProductThumbnail 	id={product["productID"]}
-																	name={product["productName"]}
-																	picture={product["picture"]}
-																	price={product["productPrice"]}
-																	description={product["descriptionText"]}
-							/>
-						</td>
-					</tr>
-				)//end map f'n
-
-				return(
-					<div>
-						<h2>Products for sale</h2>
-						<table>
-							{product_thumbnails}
-						</table>
-					</div>
-				);
-			}//end else
-		}//end function displayUserProductsCurrentlyForSale()
-
-		function displayAdminSiteEarnings()
-		{
 
 
-			return(<h1>Site Earnings</h1>);
-		}
 
 		return(
 
@@ -477,7 +390,10 @@ class UserProfile extends Component
 				</form>
 				<div>
 					{/*if the user is an admin, display site earnings. Else, display user products for sale.*/}
-						{(!this.state.isAdmin) ? displayUserProductsCurrentlyForSale() : displayAdminSiteEarnings()}
+
+						<UserProfileLowerDisplay 	isAdmin={this.state.isAdmin}
+																			username={this.state.username}
+						/>
 
 				</div>
 

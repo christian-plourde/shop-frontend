@@ -21,8 +21,7 @@ class ProductThumbnail extends Component {
                <p className="price">${this.props.price}</p>
           </div>
           </div>
-
-      )
+      );
 
 
    }
