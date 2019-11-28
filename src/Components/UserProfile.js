@@ -332,6 +332,8 @@ class UserProfile extends Component
 
 		function displayAdminSiteEarnings()
 		{
+
+
 			return(<h1>Site Earnings</h1>);
 		}
 
