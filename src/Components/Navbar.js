@@ -13,7 +13,8 @@ import Route from "react-router-dom/Route";
 import DropdownItem from './Navbar/DropdownItem.js';
 import CategoryButton from './Navbar/CategoryButton.js';
 
-const localhost = false;//Set to true if working locally
+//A variable to make our lives easier.
+import localhost from '../LocalHost.js';
 
 // The Navigation Bar
 class NavbarFunction extends Component {

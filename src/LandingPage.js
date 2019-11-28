@@ -4,8 +4,9 @@ import Carousel from "./Components/carousel";
 import Navbar from "./Components/Navbar";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//Quickly adjust links
-const localhost = false;//Set to true if working locally
+
+//A variable to make our lives easier
+import localhost from './LocalHost.js';//Set to true if working locally
 
 class LandingPage extends Component {
   constructor(props) {
