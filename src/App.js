@@ -7,7 +7,7 @@ import Route from "react-router-dom/Route";
 import SubmitButton from "./Components/SubmitButton";
 import LandingPage from "./LandingPage.js";
 import ProductCard from "./Components/productCard.jsx";
-import ForgotPasswordText from "./Components/ForgotPasswordText.js";
+import ForgotPassword from "./Components/ForgotPassword.js";
 import SearchResults from "./Components/searchResults";
 import Registration from "./Components/Registration.js";
 import ProductPage from './Components/ProductPage.js';
@@ -44,10 +44,7 @@ class App extends Component {
 
       			return(<div>
               <Navbar />
-              <form action="">
-              <ForgotPasswordText text="Please click the button below to reset your password. An email will be sent to you." />
-              <SubmitButton />
-              </form>
+              <ForgotPassword />
               </div>
               );
 
