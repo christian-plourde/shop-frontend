@@ -46,10 +46,10 @@ class Cart extends Component {
   };
 
   handleRemove = productID => {
-    let productList = this.state.products.filter(toRemove => {
-      return toRemove.id !== productID;
+    let productList = this.props.products.filter(toRemove => {
+      return toRemove.productID !== productID;
     });
-
+    console.log("Cart-52",productList)
     /*Subtracts the necessary value from the subtotal*/
     let product = this.state.products.find(
       toRemove => toRemove.id === productID
@@ -117,18 +117,19 @@ class Cart extends Component {
             <label class="product-line-price">Total</label>
           </div>
           <div>
-            {this.state.products.map(x => {
+            {this.props.products.map(x => {
               return (
                 <CartItem
-                  id={x.id}
-                  name={x.name}
-                  description={x.description}
-                  price={x.price}
-                  brand={x.brand}
+                  id={x.productID}
+                  name={x.productName}
+                  description={x.descriptionText}
+                  price={x.productPrice}
+                  brand={x.modelName}
                   quantity={x.quantity}
-                  onRemove={this.handleRemove.bind(this)}
+                  onRemove={this.handleRemove.bind(this.productID)}
                   receiveTotal={this.adjustSubTotal}
                   receiveQuantity={this.receiveQuantity}
+                  image={x.picture}
                 />
               );
             })}
