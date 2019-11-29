@@ -5,8 +5,6 @@ import Navbar from "./Components/Navbar";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//A variable to make our lives easier
-import localhost from './LocalHost.js';//Set to true if working locally
 
 class LandingPage extends Component {
   constructor(props) {
@@ -25,10 +23,8 @@ class LandingPage extends Component {
 
 
   componentDidMount() {
-    var site = (localhost) ?
-      "http://localhost:3000/Products.json"
-      : "https://shop-354.herokuapp.com/Products.json";
-    fetch(site, {
+    //https://shop-354.herokuapp.com/Products.json
+    fetch("http://localhost:3000/Products.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
