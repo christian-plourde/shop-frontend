@@ -28,7 +28,12 @@ class UserProfile extends Component
 		isAdmin: false,
 		logout: false,
 		changeError: false,
-		changeSuccess: false
+		changeSuccess: false,
+		new_password: "", //new password
+		new_password_conf: "", //confirmed new password
+		password_mismatch: false,
+		password_change_success: false,
+		password_change_failure: false
 	}
 
 	constructor(props)
@@ -146,6 +151,61 @@ class UserProfile extends Component
 		this.setState({[e.target.name]: e.target.value});
 	}
 
+	handlePasswordSubmit = (e) =>
+	{
+		e.preventDefault();
+
+		//check if the passwords match first
+
+		if(this.state.new_password != this.state.new_password_conf)
+		{
+			this.setState({password_mismatch: true});
+			return;
+		}
+
+		this.setState({password_mismatch: false});
+
+		var pwd =this.state.new_password;
+    	var enc_pwd = "";
+    	for(var i = 0; i < pwd.length; i++)
+    	{
+    		enc_pwd += String.fromCharCode(pwd.charCodeAt(i) + 1);
+    	}
+
+		const data = {
+
+						username: this.state.username,
+						password: enc_pwd
+
+					  };
+
+
+		{/*https://shop-354.herokuapp.com/change_user_password.php*/}
+  		{/*http://localhost/www/shop-backend/php/change_user_password.php*/}
+    	axios.post('https://shop-354.herokuapp.com/change_user_password.php', JSON.stringify(data), {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    	})
+		.then((response) => {
+  			
+			if(response.data.Accepted)
+			{
+				this.setState({password_change_success: true});
+			}
+			else
+			{
+
+			}
+
+
+		}, (error) => {
+  		console.log(error);
+		});
+
+
+	}
+
 	render()
 	{
 
@@ -155,13 +215,27 @@ class UserProfile extends Component
 			textAlign: "center",
 			marginTop: "2%",
 			width: "40%",
-			marginLeft: "30%",
+			float: "left",
+			marginLeft: "5%",
 			padding: "20px",
 			border: "2px solid #333",
 			borderRadius: '10px',
 			height: "460px"
 		}
 
+		const change_password_div_style = 
+		{
+			color: "#333",
+			textAlign: "center",
+			marginTop: "2%",
+			marginLeft: "5%",
+			width: "45%",
+			float: "left",
+			padding: "20px",
+			border: "2px solid #333",
+			borderRadius: '10px'
+		}
+    
 		const inner_style =
 		{
 			margin: "auto auto auto 5%",
@@ -234,6 +308,19 @@ class UserProfile extends Component
 			fontSize: '15px'
 		};
 
+		const pass_button_style = 
+		{
+			margin: "0 auto",
+			marginLeft: "40%",
+			marginTop: "20px",
+			border: "3px solid #333",
+			padding: "5px",
+			borderRadius: "10px",
+			backgroundColor: "whitesmoke",
+			color: "#333",
+			fontSize: '15px'
+		};
+    
 		const error_mess_style =
 		{
 			color: "#993232",
@@ -247,7 +334,8 @@ class UserProfile extends Component
 			color: "#20ab51",
 			textDecoration:'none',
 			fontSize: '18px',
-			fontWeight: 'bold'
+			fontWeight: 'bold',
+			marginLeft: "17%"
 		};
 
 		function displayUserProductsCurrentlyForSale()
@@ -474,10 +562,46 @@ class UserProfile extends Component
           						<Redirect to={"/"}/>
         					)}
 					</div>
+
 				</form>
-				<div>
-					{/*if the user is an admin, display site earnings. Else, display user products for sale.*/}
-						{(!this.state.isAdmin) ? displayUserProductsCurrentlyForSale() : displayAdminSiteEarnings()}
+
+				<div style={change_password_div_style}>
+
+					<div style={inner_style}>
+						<form onSubmit={this.handlePasswordSubmit}>
+							<h1 style={account_info_style}>Password Management</h1>
+							<h2 style={field_indentifier_style}>New Password:</h2>
+							<input type = "password" onInput={this.handleInput} name = "new_password" style = {input_style} value={this.state.new_password} required/>
+							<h2 style={field_indentifier_style}>Confirm Password:</h2>
+							<input type = "password" onInput={this.handleInput} name = "new_password_conf" style = {input_style} value={this.state.new_password_conf} required/>
+							
+							{
+							this.state.password_mismatch && (
+								<div>
+									<h2 style={error_mess_style}>There was an error in your requested changes. Please review them and try again.</h2>
+								</div>
+								)
+						}
+
+						{
+							this.state.password_change_failure && (
+								<div>
+									<h2 style={error_mess_style}>There was an error in your requested changes. Please review them and try again.</h2>
+								</div>
+								)
+						}
+
+						{
+							this.state.password_change_success && (
+								<div>
+									<h2 style={success_mess_style}>Changes to your profile have been saved.</h2>
+								</div>
+								)
+						}
+
+							<button style={pass_button_style} type="submit">Submit</button>
+						</form>
+					</div>
 
 				</div>
 
