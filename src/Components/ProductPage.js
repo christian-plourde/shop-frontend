@@ -7,6 +7,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/productPage.css";
 import Review from "./Review.js";
 
+//A variable to make our lives easier
+import localhost from '../LocalHost.js';
+
+// const localhost = true;//Set to true if working locally
+
 //2019-11-15, product page layout prototype, cannot access the product image for some reason, scr links to the images readily accessible via localhost url address
 //added: basic layout, working rendering of text attributes for product page
 
@@ -36,9 +41,10 @@ class ProductPage extends React.Component {
   }
 
   componentDidMount() {
-    //https://shop-354.herokuapp.com/Products.json
-    //http://localhost:3000/Products.json
-    fetch("https://shop-354.herokuapp.com/Products.json", {
+    var site = (localhost) ?
+      "http://localhost:3000/Products.json"
+      : "https://shop-354.herokuapp.com/Products.json";
+    fetch(site, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -82,10 +88,10 @@ class ProductPage extends React.Component {
 
     //acquiring the review array associated with the received prop's ID
     //`http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`
-    //`http://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
+    //`https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
     let review_product_id = this.props.match.params.product_id;
     this.setState({ isLoaded: false })
-    fetch(`http://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`, {
+    fetch(`https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -136,27 +142,31 @@ class ProductPage extends React.Component {
       const imageSource = `https://shop-354.herokuapp.com/${product.picture.substring(1)}`
 
       return (
-        <div className="container">
-          <h1>{product.productName}</h1>
-          <div className="rating"> product rating</div>
-          <div className="inner_container">
-            <div className="photo">
-              <img className="product_image" src={imageSource} />
+
+        <div>
+          <Navbar />
+          <div className="container">
+            <h1>{product.productName}</h1>
+            <div className="rating"> product rating</div>
+            <div className="inner_container">
+              <div className="photo">
+                <img className="product_image" src={imageSource} />
+              </div>
+              <div className="text">
+                <p>Item Description:<br />{product.descriptionText}</p>
+                <ul>
+                  <li>Model Name:{product.modelName}</li>
+                  <li>Product Color:{product.color}</li>
+                  <li>Product Dimension{product.dimensions}</li>
+                </ul>
+              </div>
+              <div id="purchase">
+                purchase box
+                      </div>
             </div>
-            <div className="text">
-              <p>Item Description:<br />{product.descriptionText}</p>
-              <ul>
-                <li>Model Name:{product.modelName}</li>
-                <li>Product Color:{product.color}</li>
-                <li>Product Dimension{product.dimensions}</li>
-              </ul>
+            <div>
+              {reviewComponents}
             </div>
-            <div id="purchase">
-              purchase box
-                    </div>
-          </div>
-          <div>
-            {reviewComponents}
           </div>
         </div>
       );
