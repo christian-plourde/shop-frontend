@@ -19,7 +19,7 @@ class UserProfile extends Component
 	state =
 	{
 		edit_mode: false,
-		username: sessionStorage.getItem("logged_in_user"),
+		username: localStorage.getItem("logged_in_user"),
 		email: "",
 		firstName: "",
 		lastName: "",
@@ -47,7 +47,7 @@ class UserProfile extends Component
 		const site = (localhost) ?
 			'http://localhost/shop-backend/php/user_profile_display.php'
 			: 'https://shop-354.herokuapp.com/user_profile_display.php';
-		const data = {username: sessionStorage.getItem("logged_in_user")};
+		const data = {username: localStorage.getItem("logged_in_user")};
 		const axiosConfig = {
         headers: {
             'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ class UserProfile extends Component
 
 	handleExitClick = (e) => {
 
-		sessionStorage.removeItem("logged_in_user");
+		localStorage.removeItem("logged_in_user");
 		this.setState({logout: true});
 	}
 
