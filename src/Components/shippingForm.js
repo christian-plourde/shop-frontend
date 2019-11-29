@@ -3,17 +3,18 @@ import "../styles/shippingform.css";
 export default class ShippingForm extends Component {
   state = {
     address: "",
-    city: "",
     country: "",
-    province: "",
-    postalcode: "",
     validity: false
   };
 
   handleVerify = () => {
-    this.setState({ validity: true });
-    this.sendValidityToCart();
-    document.getElementById("verify").innerHTML = "Verified!";
+    if (this.state.address.length == 0 || this.state.country.length == 0) {
+      document.getElementById("verify").innerHTML = "Not Valid!";
+    } else {
+      this.setState({ validity: true });
+      this.sendValidityToCart();
+      document.getElementById("verify").innerHTML = "Verified!";
+    }
   };
 
   handleInputChange = e => {
@@ -38,37 +39,11 @@ export default class ShippingForm extends Component {
             onChange={this.handleInputChange}
           />
           <br />
-          <label>City</label>
-          <input
-            class="ship"
-            type="text"
-            name="city"
-            required
-            onChange={this.handleInputChange}
-          />
           <label>Country</label>
           <input
             class="ship"
             type="text"
             name="country"
-            required
-            onChange={this.handleInputChange}
-          />
-          <br />
-          <label>Province/State</label>
-          <input
-            class="ship"
-            type="text"
-            name="province"
-            required
-            onChange={this.handleInputChange}
-          />
-          <br />
-          <label>Postal Code</label>
-          <input
-            class="ship"
-            type="text"
-            name="postalcode"
             required
             onChange={this.handleInputChange}
           />

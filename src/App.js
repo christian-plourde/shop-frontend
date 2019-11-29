@@ -29,58 +29,6 @@ class App extends Component {
           }}
         />
 
-        {/*The main login page*/}
-        <Route
-          path="/login"
-          exact
-          strict
-          render={() => {
-            return (
-              <div>
-                <Header text="Login" />
-                <Login
-                  user_text="Username"
-                  password_text="Password"
-                  password_link="forgot_password"
-                  password_link_text="Forgot Password"
-                  register_link="register"
-                  register_link_text="Register"
-                />
-              </div>
-            );
-          }}
-        />
-
-        {/*The page to recover the user's password*/}
-
-        <Route
-          path="/forgot_password"
-          exact
-          strict
-          render={() => {
-            return (
-              <div>
-                <Header text="Password Recovery" />
-                <form action="">
-                  <ForgotPasswordText text="Please click the button below to reset your password. An email will be sent to you." />
-                  <SubmitButton />
-                </form>
-              </div>
-            );
-          }}
-        />
-        
-        {/*The pafe for the user to register a new account on the site*/}
-
-        <Route
-          path="/register"
-          exact
-          strict
-          render={() => {
-            return <Registration />;
-          }}
-        />
-
         <Route
           path="/checkout"
           exact

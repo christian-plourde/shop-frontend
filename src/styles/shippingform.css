@@ -43,9 +43,9 @@
   border: 0;
   margin-top: 20px;
   margin-right: 50px;
-  padding: 6px 25px;
-  background-color: rgb(171, 187, 102);
+  padding: 6px 6px;
+  background-color: rgb(187, 181, 102);
   color: #fff;
-  font-size: 25px;
+  font-size: 20px;
   border-radius: 3px;
 }
