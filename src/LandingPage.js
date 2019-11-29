@@ -84,7 +84,6 @@ class LandingPage extends Component {
           <Navbar productNames={productNames} tags={tags} products={data} />
           <div className="LandingPageBody">
             <div>
-              <Navbar />
               <div className="LandingPageBody">
                 <div>
                   <Carousel
