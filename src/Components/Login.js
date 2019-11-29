@@ -76,7 +76,7 @@ class Login extends Component
 			if(response.data.Accepted)
 			{
 				this.setState({redirect: true});
-				sessionStorage.setItem("logged_in_user", this.state.username);
+				localStorage.setItem("logged_in_user", this.state.username);
 			}
 			else
 			{
