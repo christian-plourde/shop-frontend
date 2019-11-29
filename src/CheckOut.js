@@ -9,21 +9,33 @@ class CheckOut extends Component {
     super(props);
     this.state = {
       isLoaded: false,
-      products: []
     };
+  }
+  getCart(){
+    //const{products}= this.state
+    let storage = localStorage.getItem("cart")
+    //console.log(temp);
+    let productArrayStrings= storage.split("|") // array of products as Strings
+    let productArrayObjects=[]
+    for(var x in productArrayStrings){
+      productArrayObjects.push(JSON.parse(productArrayStrings[x]))
+    }
+    return productArrayObjects
   }
 
   render() {
+    
     return (
       <div>
         <div>
           <Navbar />
         </div>
         <div className="CheckOutBody">
-          <Cart products={this.state.products}></Cart>
+          <Cart products={this.getCart()}></Cart>
         </div>
       </div>
     );
   }
+  
 }
 export default CheckOut;
