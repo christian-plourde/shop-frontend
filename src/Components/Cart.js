@@ -3,8 +3,32 @@ import "../styles/Cart.css";
 import CartItem from "./CartItem";
 
 class Cart extends Component {
-  state = {
-    products: [
+  constructor(props){
+    super();
+    this.state = {
+      products:[],
+      subtotal: 0.0,
+      total: 0.0,
+      shipping: 5,
+      methodSelected: "standard"
+    }
+  }
+  componentDidMount() {
+    this.setState({
+      products: this.props.products
+    })
+    let sTotal = 0;
+    for (var x in this.props.products) {
+      
+      sTotal += this.props.products[x].productPrice;
+    }
+    this.setState({
+      subtotal: sTotal,
+      total: sTotal + sTotal * 0.15
+    });
+  }
+/*  state = {
+    /*products: [
       {
         name: "Water",
         id: 2,
@@ -29,12 +53,9 @@ class Cart extends Component {
         description: "Yogurt ",
         quantity: 1
       }
-    ],
-    subtotal: 0.0,
-    total: 0.0,
-    shipping: 5,
-    methodSelected: "standard"
-  };
+    ]
+  
+  };*/
 
   handleShipping = () => {
     if (document.getElementById("exp").checked) {
@@ -46,43 +67,35 @@ class Cart extends Component {
   };
 
   handleRemove = productID => {
-    let productList = this.props.products.filter(toRemove => {
+    let productList = this.state.products.filter(toRemove => {
       return toRemove.productID !== productID;
     });
-    console.log("Cart-52",productList)
+    console.log("Cart-52",productID)
     /*Subtracts the necessary value from the subtotal*/
     let product = this.state.products.find(
-      toRemove => toRemove.id === productID
+      toRemove => toRemove.productID === productID
     );
-    let total = product.price * product.quantity;
+    console.log("Cart-78",product)
+    let total = product.productPrice * product.quantity;
     this.setState({
       products: productList,
       subtotal: this.state.subtotal - total
     });
+    console.log("Cart-83")
   };
 
   adjustSubTotal = price => {
-    this.setState({ subtotal: price + this.state.subtotal });
+    this.setState({ subtotal: price + this.state.subtotal 
+    });
   };
 
   receiveQuantity = (quantity, productID) => {
     let updatedProducts = this.state.products;
     updatedProducts.find(
-      toChange => toChange.id === productID
+      toChange => toChange.productID === productID
     ).quantity = quantity;
     this.setState({ products: updatedProducts });
   };
-
-  componentDidMount() {
-    let sTotal = 0;
-    for (var x in this.state.products) {
-      sTotal += this.state.products[x].price;
-    }
-    this.setState({
-      subtotal: sTotal,
-      total: sTotal + sTotal * 0.15
-    });
-  }
   componentDidUpdate() {
     if (
       this.state.total !==
@@ -108,7 +121,7 @@ class Cart extends Component {
             <label class="product-line-price">Total</label>
           </div>
           <div>
-            {this.props.products.map(x => {
+            {this.state.products.map(x => {
               return (
                 <CartItem
                   id={x.productID}
@@ -117,7 +130,7 @@ class Cart extends Component {
                   price={x.productPrice}
                   brand={x.modelName}
                   quantity={x.quantity}
-                  onRemove={this.handleRemove.bind(this.productID)}
+                  onRemove={() => this.handleRemove(x.productID)}
                   receiveTotal={this.adjustSubTotal}
                   receiveQuantity={this.receiveQuantity}
                   image={x.picture}

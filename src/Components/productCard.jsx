@@ -11,7 +11,7 @@ class ProductCard extends Component {
       super();
    
       this.state = {
-         quantity:0,
+         quantity:1,
          product:this.props,
       }
       this.addToCart = this.addToCart.bind(this)
@@ -80,7 +80,7 @@ class ProductCard extends Component {
                <p className="brand">brand</p>
                <div className="cartElements">
                <button className="incrementCart" onClick={this.handleIncrement}><span className="glyphicon glyphicon-chevron-right"></span></button>
-               <button className="decrementCart" onClick={this.handleDecrement} disabled={this.state.quantity === 0}><span className="glyphicon glyphicon-chevron-left"></span></button>
+               <button className="decrementCart" onClick={this.handleDecrement} disabled={this.state.quantity === 1}><span className="glyphicon glyphicon-chevron-left"></span></button>
                <input type="number" className="numItems" value={this.state.quantity}></input>
                <p><button className="addToCart" onClick={() => this.addToCart(this.state.quantity)}>Add to Cart</button></p>
                </div>
