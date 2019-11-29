@@ -313,15 +313,15 @@ class NavbarFunction extends Component {
 
             {/* Login */}
 
-            <Link to={sessionStorage.getItem("logged_in_user") ? "/user" : "/login"}>
+            <Link to={localStorage.getItem("logged_in_user") ? "/user" : "/login"}>
               <button id="user_profile" type="button" class="btn btn-secondary btn-sm">
-              {sessionStorage.getItem("logged_in_user") ? sessionStorage.getItem("logged_in_user") : "Guest"}
+              {localStorage.getItem("logged_in_user") ? localStorage.getItem("logged_in_user") : "Guest"}
               </button>
             </Link>
 
 
             {
-              !sessionStorage.getItem("logged_in_user") &&
+              !localStorage.getItem("logged_in_user") &&
               <Link to="/login">
                 <button id="login" type="button" class="btn btn-secondary btn-sm">
                   Login
@@ -330,7 +330,7 @@ class NavbarFunction extends Component {
            }
 
            {
-              !sessionStorage.getItem("logged_in_user") &&
+              !localStorage.getItem("logged_in_user") &&
               <Link to="/register">
                <button id="signup" type="button" class="btn btn-secondary btn-sm">
                   SignUp
