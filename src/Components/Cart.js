@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styles/Cart.css";
 import CartItem from "./CartItem";
+import ShippingForm from "./shippingForm";
 
 class Cart extends Component {
   state = {
@@ -32,16 +33,17 @@ class Cart extends Component {
     ],
     subtotal: 0.0,
     total: 0.0,
-    shipping: 5,
-    methodSelected: "standard"
+    shipping: 5.0,
+    methodSelected: "standard",
+    ableToCheckout: false
   };
 
   handleShipping = () => {
     if (document.getElementById("exp").checked) {
-      this.setState({ shipping: 15, methodSelected: "express" });
+      this.setState({ shipping: 15.0, methodSelected: "express" });
     }
     if (document.getElementById("stan").checked) {
-      this.setState({ shipping: 5, methodSelected: "standard" });
+      this.setState({ shipping: 5.0, methodSelected: "standard" });
     }
   };
 
@@ -61,6 +63,12 @@ class Cart extends Component {
     });
   };
 
+  handleCheckout = () => {
+    if (this.state.ableToCheckout == true) {
+      console.log("can checkout");
+    } else alert("Verify the delivery address before checking out!");
+  };
+
   adjustSubTotal = price => {
     this.setState({ subtotal: price + this.state.subtotal });
   };
@@ -71,6 +79,17 @@ class Cart extends Component {
       toChange => toChange.id === productID
     ).quantity = quantity;
     this.setState({ products: updatedProducts });
+  };
+
+  checkShippingInfo = validity => {
+    if (validity == true) {
+      this.setState({ ableToCheckout: true });
+      console.log("yes");
+      return true;
+    } else {
+      console.log("no");
+      return false;
+    }
   };
 
   componentDidMount() {
@@ -124,56 +143,69 @@ class Cart extends Component {
               );
             })}
           </div>
-          <div class="shipping-method">
-            <form>
-              <label>Choose a shipping method</label>
-              <label class="shipping">Standard - $5</label>
-              <input
-                type="radio"
-                value="standard"
-                name="shipping"
-                checked={this.state.methodSelected === "standard"}
-                id="stan"
-                onClick={this.handleShipping}
-              />
-              <label class="shipping">Express - $15</label>
-              <input
-                type="radio"
-                value="express"
-                name="shipping"
-                id="exp"
-                checked={this.state.methodSelected === "express"}
-                onClick={this.handleShipping}
-              />
-            </form>
+
+          <div class="Cart-shipping">
+            <div>
+              <ShippingForm shippingValidity={this.checkShippingInfo} />
+            </div>
+            <div class="financial-details">
+              <div>
+                <div class="shipping-method">
+                  <form>
+                    <label>Choose a shipping method</label>
+                    <br />
+                    <label class="shipping">Standard - $5</label>
+                    <input
+                      type="radio"
+                      value="standard"
+                      name="shipping"
+                      checked={this.state.methodSelected === "standard"}
+                      id="stan"
+                      onClick={this.handleShipping}
+                    />
+                    <label class="shipping">Express - $15</label>
+                    <input
+                      type="radio"
+                      value="express"
+                      name="shipping"
+                      id="exp"
+                      checked={this.state.methodSelected === "express"}
+                      onClick={this.handleShipping}
+                    />
+                  </form>
+                </div>
+                <div class="totals">
+                  <div class="totals-item">
+                    <label>Subtotal</label>
+                    <div class="totals-value" id="cart-subtotal">
+                      {this.state.subtotal.toFixed(2)}
+                    </div>
+                  </div>
+                  <div class="totals-item">
+                    <label>Tax (15%)</label>
+                    <div class="totals-value" id="cart-tax">
+                      {(this.state.subtotal * 0.15).toFixed(2)}
+                    </div>
+                  </div>
+                  <div class="totals-item">
+                    <label>Shipping </label>
+                    <div class="totals-value" id="cart-shipping">
+                      {this.state.shipping}
+                    </div>
+                  </div>
+                  <div class="totals-item totals-item-total">
+                    <label>Grand Total</label>
+                    <div class="totals-value" id="cart-total">
+                      {this.state.total.toFixed(2)}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="checkout" onClick={this.handleCheckout}>
+                Checkout
+              </button>
+            </div>
           </div>
-          <div class="totals">
-            <div class="totals-item">
-              <label>Subtotal</label>
-              <div class="totals-value" id="cart-subtotal">
-                {this.state.subtotal.toFixed(2)}
-              </div>
-            </div>
-            <div class="totals-item">
-              <label>Tax (15%)</label>
-              <div class="totals-value" id="cart-tax">
-                {(this.state.subtotal * 0.15).toFixed(2)}
-              </div>
-            </div>
-            <div class="totals-item">
-              <label>Shipping </label>
-              <div class="totals-value" id="cart-shipping">
-                {this.state.shipping}
-              </div>
-            </div>
-            <div class="totals-item totals-item-total">
-              <label>Grand Total</label>
-              <div class="totals-value" id="cart-total">
-                {this.state.total.toFixed(2)}
-              </div>
-            </div>
-          </div>
-          <button class="checkout">Checkout</button>
         </div>
       </div>
     );

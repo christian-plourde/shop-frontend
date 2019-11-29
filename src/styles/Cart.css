@@ -245,3 +245,12 @@ label {
   color: #eee;
   text-align: center;
 }
+
+.Cart-shipping {
+  display: flex;
+  flex-direction: row;
+}
+
+.financial-details {
+  width: 100%;
+}
