@@ -1,5 +1,4 @@
 .shippingform {
-  clear: both;
   width: 100%;
   float: left;
   padding-left: 50px;
@@ -16,9 +15,9 @@
 }
 
 .ship {
-  width: 100%;
+  width: 600px;
   height: 40px;
-  padding: 0px 150px;
+  padding: 2px 2px;
   border-width: 1px;
   border-radius: 4px;
   font-family: "HelveticaNeue-Medium";
