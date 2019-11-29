@@ -23,7 +23,11 @@ class UserProfile extends Component
 		isAdmin: false,
 		logout: false,
 		changeError: false,
-		changeSuccess: false
+		changeSuccess: false,
+		new_password: "", //new password
+		new_password_conf: "", //confirmed new password
+		password_mismatch: false,
+		password_change_success: false
 	}
 
 	constructor(props)
@@ -138,6 +142,50 @@ class UserProfile extends Component
 		this.setState({[e.target.name]: e.target.value});
 	}
 
+	handlePasswordSubmit = (e) =>
+	{
+		e.preventDefault();
+
+		//check if the passwords match first
+
+		if(this.state.new_password != this.state.new_password_conf)
+		{
+			this.setState({password_mismatch: true});
+			return;
+		}
+
+		this.setState({password_mismatch: false});
+
+		const data = {
+
+						new_password: this.state.new_password
+
+					  };
+
+    	axios.post('', JSON.stringify(data), {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    	})
+		.then((response) => {
+  			
+			if(response.data.Accepted)
+			{
+				this.state.password_change_success = true;
+			}
+			else
+			{
+
+			}
+
+
+		}, (error) => {
+  		console.log(error);
+		});
+
+
+	}
+
 	render()
 	{
 
@@ -147,11 +195,25 @@ class UserProfile extends Component
 			textAlign: "center",
 			marginTop: "2%",
 			width: "40%",
-			marginLeft: "30%",
+			float: "left",
+			marginLeft: "5%",
 			padding: "20px",
 			border: "2px solid #333",
 			borderRadius: '10px',
 			height: "460px"
+		}
+
+		const change_password_div_style = 
+		{
+			color: "#333",
+			textAlign: "center",
+			marginTop: "2%",
+			marginLeft: "5%",
+			width: "45%",
+			float: "left",
+			padding: "20px",
+			border: "2px solid #333",
+			borderRadius: '10px'
 		}
 
 		const inner_style = 
@@ -217,6 +279,19 @@ class UserProfile extends Component
 		const button_style = 
 		{
 			margin: "0 auto",
+			marginTop: "20px",
+			border: "3px solid #333",
+			padding: "5px",
+			borderRadius: "10px",
+			backgroundColor: "whitesmoke",
+			color: "#333",
+			fontSize: '15px'
+		};
+
+		const pass_button_style = 
+		{
+			margin: "0 auto",
+			marginLeft: "40%",
 			marginTop: "20px",
 			border: "3px solid #333",
 			padding: "5px",
@@ -373,7 +448,40 @@ class UserProfile extends Component
           						<Redirect to={"/"}/>
         					)}
 					</div>
+
 				</form>
+
+				<div style={change_password_div_style}>
+
+					<div style={inner_style}>
+						<form onSubmit={this.handlePasswordSubmit}>
+							<h1 style={account_info_style}>Password Management</h1>
+							<h2 style={field_indentifier_style}>New Password:</h2>
+							<input type = "password" onInput={this.handleInput} name = "new_password" style = {input_style} value={this.state.new_password} required/>
+							<h2 style={field_indentifier_style}>Confirm Password:</h2>
+							<input type = "password" onInput={this.handleInput} name = "new_password_conf" style = {input_style} value={this.state.new_password_conf} required/>
+							
+							{
+							this.state.password_mismatch && (
+								<div>
+									<h2 style={error_mess_style}>There was an error in your resquested changes. Please review them and try again.</h2>
+								</div>
+								)
+						}
+
+						{
+							this.state.password_change_success && (
+								<div>
+									<h2 style={success_mess_style}>Changes to your profile have been saved.</h2>
+								</div>
+								)
+						}
+
+							<button style={pass_button_style} type="submit">Submit</button>
+						</form>
+					</div>
+				</div>
+
 			</div>
     
 			);
