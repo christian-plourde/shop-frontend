@@ -9,7 +9,9 @@ class ForgotPassword extends Component
 	state = 
 	{
 		email: "",
-		email_mismatch: false
+		email_mismatch: false,
+		success: false,
+		failure: false
 	}
 
 	constructor()
@@ -34,9 +36,9 @@ class ForgotPassword extends Component
                             };
 
 
-        {/*https://shop-354.herokuapp.com/registration.php*/}
-        {/*http://localhost/www/shop-backend/php/registration.php*/}
-        axios.post('', JSON.stringify(data), {
+        {/*https://shop-354.herokuapp.com/forgotpassword.php*/}
+        {/*http://localhost/www/shop-backend/php/forgotpassword.php*/}
+        axios.post('https://shop-354.herokuapp.com/forgotpassword.php', JSON.stringify(data), {
         headers: {
                      'Content-Type': 'application/json',
               }
@@ -46,13 +48,13 @@ class ForgotPassword extends Component
                      if(response.data.Accepted)
                      {
                             //do something
-                            alert("email sent");
+                            this.setState({success: true});
                      }
 
                      else
                      {
                             //do something else
-                            alert("failure");
+                            this.setState({failure: true});
                      }
                     
               });
@@ -92,6 +94,18 @@ class ForgotPassword extends Component
 		alignItems: "center"
 	};
 
+	const succ_mess_style = 
+	{
+		height: "100px",
+		color: "#20ab51",
+		marginBottom: "15px",
+		textAlign: "center",
+		fontSize: "20px",
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center"
+	};
+
 	const input_style = 
 		{
 			width: "100%",
@@ -122,6 +136,21 @@ class ForgotPassword extends Component
                      <h2 style = {error_mess_style}>The email is not of the correct format. Please try again.</h2>
               </div>
               )}
+
+			{this.state.failure && (
+              <div style = {input_div_style}>
+                     <h2 style = {error_mess_style}>The email could not be sent. Please try again.</h2>
+              </div>
+              )}
+
+			{this.state.success && (
+              <div style = {input_div_style}>
+                     <h2 style = {succ_mess_style}>A password reset link has been sent to your email. Please check your email to reset your password.</h2>
+              </div>
+              )}
+
+
+
 			<SubmitButton />
 			</form>
 		</div>

@@ -27,7 +27,8 @@ class UserProfile extends Component
 		new_password: "", //new password
 		new_password_conf: "", //confirmed new password
 		password_mismatch: false,
-		password_change_success: false
+		password_change_success: false,
+		password_change_failure: false
 	}
 
 	constructor(props)
@@ -156,13 +157,24 @@ class UserProfile extends Component
 
 		this.setState({password_mismatch: false});
 
+		var pwd =this.state.new_password;
+    	var enc_pwd = "";
+    	for(var i = 0; i < pwd.length; i++)
+    	{
+    		enc_pwd += String.fromCharCode(pwd.charCodeAt(i) + 1);
+    	}
+
 		const data = {
 
-						new_password: this.state.new_password
+						username: this.state.username,
+						password: enc_pwd
 
 					  };
 
-    	axios.post('', JSON.stringify(data), {
+
+		{/*https://shop-354.herokuapp.com/change_user_password.php*/}
+  		{/*http://localhost/www/shop-backend/php/change_user_password.php*/}
+    	axios.post('https://shop-354.herokuapp.com/change_user_password.php', JSON.stringify(data), {
         headers: {
             'Content-Type': 'application/json',
         }
@@ -171,7 +183,7 @@ class UserProfile extends Component
   			
 			if(response.data.Accepted)
 			{
-				this.state.password_change_success = true;
+				this.setState({password_change_success: true});
 			}
 			else
 			{
@@ -314,7 +326,8 @@ class UserProfile extends Component
 			color: "#20ab51",
 			textDecoration:'none',
 			fontSize: '18px',
-			fontWeight: 'bold'
+			fontWeight: 'bold',
+			marginLeft: "17%"
 		};
 
 		return(
@@ -464,7 +477,15 @@ class UserProfile extends Component
 							{
 							this.state.password_mismatch && (
 								<div>
-									<h2 style={error_mess_style}>There was an error in your resquested changes. Please review them and try again.</h2>
+									<h2 style={error_mess_style}>There was an error in your requested changes. Please review them and try again.</h2>
+								</div>
+								)
+						}
+
+						{
+							this.state.password_change_failure && (
+								<div>
+									<h2 style={error_mess_style}>There was an error in your requested changes. Please review them and try again.</h2>
 								</div>
 								)
 						}
