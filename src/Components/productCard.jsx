@@ -11,7 +11,7 @@ class ProductCard extends Component {
       super();
    
       this.state = {
-         quantity:0,
+         quantity:1,
          product:this.props,
       }
       this.addToCart = this.addToCart.bind(this)
@@ -31,22 +31,38 @@ class ProductCard extends Component {
          }
       )
    }
-   addToCart(){
-     // this.productsToCart.push(this.state.product)
-     /* this.setState({
-         productsToCart: this.state.productsToCart.push(this.state.product)
-      })*/
-      
-     // console.log(this.productsToCart);
-      localStorage.setItem("cart",JSON.stringify(this.state.product))
-      let temp=[];
-      temp.push(JSON.parse(localStorage.getItem("cart")))
-      //let temp1 = JSON.parse(temp);
-      temp.push(this.state.product)
-      localStorage.setItem("cart",JSON.stringify(temp))
+   addToCart(productQuantity){
+     
+      let productToAdd = this.state.product
+      productToAdd["quantity"] = productQuantity
+      if(localStorage.getItem("cart") == null){
+        // let temp=[];
+        // temp.push(this.state.product)
+       console.log(productToAdd)
+       let firstItem = JSON.stringify(productToAdd)
+       localStorage.setItem("cart",firstItem)
+
+      }
+      else{
+         let temp=[];
+         temp.push(this.state.product);
+
+        // console.log(temp);
+        let item = localStorage.getItem("cart")
+       // console.log(item)
+        let item1 = item + "|" + JSON.stringify(productToAdd)
+        //console.log(item1);
+        localStorage.setItem("cart",item1)
+        // temp = item;
+         //temp.push(item)
+         //console.log(JSON.parse(temp));
+        //console.log(typeof(this.state.product));
+        //console.log(item)
+        //localStorage.setItem("cart",JSON.stringify(temp))
+      }
 
 
-      console.log(temp);
+      //console.log(temp);
   }
    render(){
 
@@ -64,9 +80,9 @@ class ProductCard extends Component {
                <p className="brand">brand</p>
                <div className="cartElements">
                <button className="incrementCart" onClick={this.handleIncrement}><span className="glyphicon glyphicon-chevron-right"></span></button>
-               <button className="decrementCart" onClick={this.handleDecrement} disabled={this.state.quantity === 0}><span className="glyphicon glyphicon-chevron-left"></span></button>
+               <button className="decrementCart" onClick={this.handleDecrement} disabled={this.state.quantity === 1}><span className="glyphicon glyphicon-chevron-left"></span></button>
                <input type="number" className="numItems" value={this.state.quantity}></input>
-               <p><button className="addToCart" onClick={this.addToCart}>Add to Cart</button></p>
+               <p><button className="addToCart" onClick={() => this.addToCart(this.state.quantity)}>Add to Cart</button></p>
                </div>
 
             </div>

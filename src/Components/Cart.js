@@ -4,8 +4,43 @@ import CartItem from "./CartItem";
 import ShippingForm from "./shippingForm";
 
 class Cart extends Component {
-  state = {
-    products: [
+  constructor(props) {
+    super();
+    this.state = {
+      products: [],
+      subtotal: 0.0,
+      total: 0.0,
+      shipping: 5,
+      methodSelected: "standard",
+      ableToCheckout: false
+    };
+  }
+  componentDidMount() {
+    this.setState({
+      products: this.props.products
+    });
+    let sTotal = 0;
+    for (var x in this.props.products) {
+      sTotal += this.props.products[x].productPrice;
+    }
+    this.setState({
+      subtotal: sTotal,
+      total: sTotal + sTotal * 0.15
+    });
+  }
+  componentDidUpdate() {
+    if (
+      this.state.total !==
+      this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
+    ) {
+      this.setState({
+        total:
+          this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
+      });
+    }
+  }
+  /*  state = {
+    /*products: [
       {
         name: "Water",
         id: 2,
@@ -30,13 +65,9 @@ class Cart extends Component {
         description: "Yogurt ",
         quantity: 1
       }
-    ],
-    subtotal: 0.0,
-    total: 0.0,
-    shipping: 5.0,
-    methodSelected: "standard",
-    ableToCheckout: false
-  };
+    ]
+  
+  };*/
 
   handleShipping = () => {
     if (document.getElementById("exp").checked) {
@@ -49,18 +80,20 @@ class Cart extends Component {
 
   handleRemove = productID => {
     let productList = this.state.products.filter(toRemove => {
-      return toRemove.id !== productID;
+      return toRemove.productID !== productID;
     });
-
+    console.log("Cart-52", productID);
     /*Subtracts the necessary value from the subtotal*/
     let product = this.state.products.find(
-      toRemove => toRemove.id === productID
+      toRemove => toRemove.productID === productID
     );
-    let total = product.price * product.quantity;
+    console.log("Cart-78", product);
+    let total = product.productPrice * product.quantity;
     this.setState({
       products: productList,
       subtotal: this.state.subtotal - total
     });
+    console.log("Cart-83");
   };
 
   handleCheckout = () => {
@@ -76,7 +109,7 @@ class Cart extends Component {
   receiveQuantity = (quantity, productID) => {
     let updatedProducts = this.state.products;
     updatedProducts.find(
-      toChange => toChange.id === productID
+      toChange => toChange.productID === productID
     ).quantity = quantity;
     this.setState({ products: updatedProducts });
   };
@@ -92,27 +125,6 @@ class Cart extends Component {
     }
   };
 
-  componentDidMount() {
-    let sTotal = 0;
-    for (var x in this.state.products) {
-      sTotal += this.state.products[x].price;
-    }
-    this.setState({
-      subtotal: sTotal,
-      total: sTotal + sTotal * 0.15
-    });
-  }
-  componentDidUpdate() {
-    if (
-      this.state.total !==
-      this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
-    ) {
-      this.setState({
-        total:
-          this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
-      });
-    }
-  }
   render() {
     return (
       <div class="checkout-body">
@@ -130,15 +142,16 @@ class Cart extends Component {
             {this.state.products.map(x => {
               return (
                 <CartItem
-                  id={x.id}
-                  name={x.name}
-                  description={x.description}
-                  price={x.price}
-                  brand={x.brand}
+                  id={x.productID}
+                  name={x.productName}
+                  description={x.descriptionText}
+                  price={x.productPrice}
+                  brand={x.modelName}
                   quantity={x.quantity}
-                  onRemove={this.handleRemove.bind(this)}
+                  onRemove={() => this.handleRemove(x.productID)}
                   receiveTotal={this.adjustSubTotal}
                   receiveQuantity={this.receiveQuantity}
+                  image={x.picture}
                 />
               );
             })}

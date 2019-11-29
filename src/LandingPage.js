@@ -20,7 +20,7 @@ class LandingPage extends Component {
   }
 
   componentDidMount() {
-    fetch("https://localhost:3000/Products.json", {
+    fetch("http://localhost:3000/Products.json", {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -84,7 +84,6 @@ class LandingPage extends Component {
           <Navbar productNames={productNames} tags={tags} products={data} />
           <div className="LandingPageBody">
             <div>
-              <Navbar />
               <div className="LandingPageBody">
                 <div>
                   <Carousel

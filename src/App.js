@@ -69,7 +69,7 @@ class App extends Component {
             );
           }}
         />
-
+        
         {/*The pafe for the user to register a new account on the site*/}
 
         <Route
@@ -90,8 +90,6 @@ class App extends Component {
             return <CheckOut />;
           }}
         />
-
-        <Route path="/results" exact strict component={SearchResults} />
 
         <Route
           path="/productPage/:product_id"
