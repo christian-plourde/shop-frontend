@@ -8,6 +8,8 @@ import exit_blue from "../ressources/icons/exit_blue.png";
 import exit_green from "../ressources/icons/exit_green.png";
 import {Redirect} from "react-router";
 
+import UserProfileLowerDisplay from './UserProfileLowerDisplay';
+
 //A variable to make our lives easier
 import localhost from '../LocalHost.js';
 
@@ -188,7 +190,7 @@ class UserProfile extends Component
         }
     	})
 		.then((response) => {
-  			
+
 			if(response.data.Accepted)
 			{
 				this.setState({password_change_success: true});
@@ -223,7 +225,7 @@ class UserProfile extends Component
 			height: "460px"
 		}
 
-		const change_password_div_style = 
+		const change_password_div_style =
 		{
 			color: "#333",
 			textAlign: "center",
@@ -235,7 +237,7 @@ class UserProfile extends Component
 			border: "2px solid #333",
 			borderRadius: '10px'
 		}
-    
+
 		const inner_style =
 		{
 			margin: "auto auto auto 5%",
@@ -308,7 +310,7 @@ class UserProfile extends Component
 			fontSize: '15px'
 		};
 
-		const pass_button_style = 
+		const pass_button_style =
 		{
 			margin: "0 auto",
 			marginLeft: "40%",
@@ -320,7 +322,7 @@ class UserProfile extends Component
 			color: "#333",
 			fontSize: '15px'
 		};
-    
+
 		const error_mess_style =
 		{
 			color: "#993232",
@@ -571,10 +573,10 @@ class UserProfile extends Component
 						<form onSubmit={this.handlePasswordSubmit}>
 							<h1 style={account_info_style}>Password Management</h1>
 							<h2 style={field_indentifier_style}>New Password:</h2>
-							<input type = "password" onInput={this.handleInput} name = "new_password" style = {input_style} value={this.state.new_password} required/>
+							<input type="password" onInput={this.handleInput} name="new_password" style={input_style} value={this.state.new_password} required/>
 							<h2 style={field_indentifier_style}>Confirm Password:</h2>
-							<input type = "password" onInput={this.handleInput} name = "new_password_conf" style = {input_style} value={this.state.new_password_conf} required/>
-							
+							<input type="password" onInput={this.handleInput} name="new_password_conf" style={input_style} value={this.state.new_password_conf} required/>
+
 							{
 							this.state.password_mismatch && (
 								<div>
@@ -601,8 +603,14 @@ class UserProfile extends Component
 
 							<button style={pass_button_style} type="submit">Submit</button>
 						</form>
-					</div>
 
+					</div>
+				</div>
+				
+				<div>
+					<UserProfileLowerDisplay 	isAdmin={this.state.isAdmin}
+																		username={this.state.username}
+					/>
 				</div>
 
 			</div>
