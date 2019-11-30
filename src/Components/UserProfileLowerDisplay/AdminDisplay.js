@@ -51,10 +51,12 @@ class AdminDisplay extends React.Component {
           "two weeks":"",
           "a month":"",
           "the website's birth":""
-        }
+        },
+        commission:0
       }
 
       this.initialize_date_mappings = this.initialize_date_mappings.bind(this);
+      this.handleClick = this.handleClick.bind(this);
   }
 
   initialize_date_mappings = () =>
@@ -86,9 +88,13 @@ class AdminDisplay extends React.Component {
     DATE_MAPPINGS[DATE_OPTIONS[4]] = date_to_timestamp_string(origin_of_website);//website's
     console.log(DATE_MAPPINGS);
 
+    // this.setState({
+    //     from_date_timestamp:"'2019-09-03 00:00:00'",
+    //     date_mappings:DATE_MAPPINGS});
     this.setState({
         from_date_timestamp:"'2019-09-03 00:00:00'",
-        date_mappings:DATE_MAPPINGS});
+        date_mappings:DATE_MAPPINGS,
+        commission:0});
   }
 
   componentDidMount()
@@ -99,14 +105,14 @@ class AdminDisplay extends React.Component {
 
   }
 
-  displaySiteCommission(){
+  handleClick(timestamp){
+    this.setState({from_date_timestamp:timestamp});
+    console.log('Handle click :: current state.from_date_timestamp', this.state.from_date_timestamp)
     const site = (localhost) ?
-        'http://localhost/shop-backend/php/display_user_products.php'
-        : 'https://shop-354.herokuapp.com/display_user_products.php';
+        'http://localhost/shop-backend/php/get_site_commission.php'
+        : 'https://shop-354.herokuapp.com/get_site_commission.php';
 
-    const data = (this.props.username)
-    ? JSON.stringify({username: this.props.username})
-    : null;
+    const data = JSON.stringify({from_date:timestamp});
     const axiosConfig = {
         headers: {
             'Content-Type': 'application/json',
@@ -116,94 +122,38 @@ class AdminDisplay extends React.Component {
 
     axios.post(site, data, axiosConfig)
     .then((response) => {
-        console.log("display user products for sale :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
+        console.log("Admin display :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
         if(response.data.Accepted)
         {
-          //Return HELLO, where this component's stuff should be
-          const list_of_products = response.data.products;
-          console.log('display user products for sale :: list of products', list_of_products);
-          //If there are no items in this list, then the user has no items for sale
-          if (list_of_products.length < 1)
-          {
-            console.log('No items for sale');
-            return (
-              <div>
-                You have no items for sale!
-              </div>
-            );
-          }
-          else{
-            console.log('display user products for sale :: Displaying products');
-            //For every product in the JSON list of products, we want to be passing the product dictionary's values to this ProductThumbnail object, to display it to the user.
-            this.setState({
-              products:list_of_products
-            });
-            return;
-
-          }//end else
+          const commission = response.data.commission['commission']//To be set following successful PHP
+          console.log('Commission:', commission)
+          this.setState({commission:commission});
         }//end if
-        else{
-          console.log('display user products for sale :: response data not accepted.\nResponse:', response.data);
-        }
     },
     (error) => {
-      console.log("display user products for sale :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
+      console.log("Admin display :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
     });
   }//end function displaySiteCommission
 
-  renderInputField()
-  {
-    if (this.state.from_date_timestamp != "")
-    {
-      console.log('render input field :: date set')
-      return Object.entries(this.state.date_mappings).forEach((entry) => {
-          const key = entry[0];
-          const value = entry[1];
-          console.log('entry', entry, 'key', key, 'value', value);
-          return (
-            <AdminInputField  mapping={key}
-                              timestamp={value}
-            />
-          )
-      })
-    }
-  }
 
     render() {
-      // return(
-      //     <div>
-      //       <table>
-      //         <thead>
-      //         </thead>
-      //         <tbody>
-      //           <tr>
-      //             {this.renderInputField()}
-      //           </tr>
-      //           <tr></tr>
-      //         </tbody>
-      //       </table>
-      //     </div>
-      //  );
 
-      // return(
-      //     <AdminInputField date_mappings="lala" timestamp="baba"/>
-      //  );
+      return (
+        <div>
+          <h1>{this.state.commission != 0 ? 'Commission: ' + this.state.commission : ''}</h1>
+          {Object.entries(this.state.date_mappings).map((entry) => {
+            const since = entry[0];
+            const timestamp = entry[1];
+            return (<AdminInputField  mapping={since}
+                                      timestamp={timestamp}
+                                      onClick={this.handleClick}
+                    />)//end return
+          })//end map f'n
+        }
+      </div>
+    )//end return
 
-      // return(
-      //     Object.entries(this.state.date_mappings).forEach((entry) => {
-      //         const key = entry[0];
-      //         const value = entry[1];
-      //         console.log('entry', entry, 'key', key, 'value', value);
-      //         return (
-      //           <AdminInputField  mapping={key}
-      //                             timestamp={value}
-      //           />
-      //         )
-      //     })
-      //  );
-
-      return (<h1>ADMIN</h1>)
-    }
+  }//end render
 }
 
 export default AdminDisplay;
