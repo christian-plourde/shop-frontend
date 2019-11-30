@@ -50,18 +50,19 @@ class ForgotPassword extends Component
 				};
         axios.post(site, JSON.stringify(data), axiosConfig)
               .then((response) => {
-
-                     if(response.data.Accepted)
-                     {
-                            //do something
-                            this.setState({success: true});
-                     }
-
-                     else
-                     {
-                            //do something else
-                            this.setState({failure: true});
-                     }
+								console.log("axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse', response);
+					
+								const acceptance_string = '{"Accepted":true,"reason":""}'
+								if(response.data.toString().includes(acceptance_string))
+								{
+											 //do something
+											 this.setState({success: true});
+								}
+                else
+                {
+                      //do something else
+                      this.setState({failure: true});
+                }
 
               });
 
