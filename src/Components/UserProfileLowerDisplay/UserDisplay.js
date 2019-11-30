@@ -54,7 +54,7 @@ class UserDisplay extends React.Component {
               );
             }
             else{
-              console.log('display user products for sale :: Displaying products');
+              // console.log('display user products for sale :: Displaying products');
               //For every product in the JSON list of products, we want to be passing the product dictionary's values to this ProductThumbnail object, to display it to the user.
               this.setState({
                 products:list_of_products
@@ -75,13 +75,14 @@ class UserDisplay extends React.Component {
 
     renderTable(){
       return this.state.products.map((product, index) => {
-          const {productID, productName, productPrice, quantity, productDescription} = product
+          const {productID, productName, productPrice, quantity, productDescription, image_url} = product
+          console.log('image url[0]',image_url[0]);
           return (
             <tr key={"tr:"+productID}>
               <td key={"td:" + productID}>
                 <ProductThumbnail 	id={productID}
                                     name={productName}
-                                    picture={product["picture"]}
+                                    picture={image_url[0]}
                                     price={productPrice}
                                     description={productDescription}
                                     quantity={quantity}
