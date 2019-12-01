@@ -606,12 +606,10 @@ class UserProfile extends Component
 
 					</div>
 				</div>
-				
-				<div>
-					<UserProfileLowerDisplay 	isAdmin={this.state.isAdmin}
-																		username={this.state.username}
-					/>
-				</div>
+
+				<UserProfileLowerDisplay 	isAdmin={this.state.isAdmin}
+																	username={this.state.username}
+				/>
 
 			</div>
 
