@@ -127,16 +127,36 @@ class ProductPage extends React.Component {
     axios.post(site, data, axiosConfig)
     .then((response) => {
         console.log("Delete product :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
-        if(response.data.Accepted)
-        {
-          //Redirect to landing page
-          console.log('Response', response.data)
-        }//end if
     },
     (error) => {
       console.log("Delete product :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
     });
   }
+
+  deleteReview = (id) => {
+    const site = (localhost) ?
+        'http://localhost/shop-backend/php/delete_review.php'
+        : 'https://shop-354.herokuapp.com/delete_review.php';
+
+    const data = JSON.stringify({id:id});
+    const axiosConfig = {
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin":"*",
+        },
+      };
+
+    axios.post(site, data, axiosConfig)
+    .then((response) => {
+        console.log("Delete review :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
+        window.location.reload();
+    },
+    (error) => {
+      console.log("Delete review :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
+    });
+  }
+
+
 
   render() {
     const { isLoaded, data } = this.state;
@@ -155,14 +175,24 @@ class ProductPage extends React.Component {
 
       //generating an array of review components
       const reviewComponents = this.state.productReviews.map((reviewItems, index) =>
-        <Review
-          key={reviewItems.index}
-          reviewID={reviewItems.reviewID}
-          productID={reviewItems.productID}
-          reviewerID={reviewItems.reviewerID}
-          rating={reviewItems.rating}
-          reviewText={reviewItems.reviewText}
-        />
+        <div>
+          {this.state.isAdmin ?
+               <DeleteButton   onClick={this.deleteReview}
+                                id={reviewItems.reviewID}
+                                text={'Delete Review'}
+                                redirect_to={'productPage/'+this.props.match.params.product_id}
+                />
+              : ''
+          }
+          <Review
+            key={reviewItems.index}
+            reviewID={reviewItems.reviewID}
+            productID={reviewItems.productID}
+            reviewerID={reviewItems.reviewerID}
+            rating={reviewItems.rating}
+            reviewText={reviewItems.reviewText}
+          />
+        </div>
         //spent the last 3 hours trying to figure out why reviews aren't been rendered, turned out removing curly brackets next to <Review .../> fixed it
       );
 
@@ -177,6 +207,8 @@ class ProductPage extends React.Component {
             {this.state.isAdmin ?
                  <DeleteButton   onClick={this.deleteProduct}
                                   id={this.props.match.params.product_id}
+                                  text={'Delete Product'}
+                                  redirect_to=''//Landing page
                   />
                 : ''
             }

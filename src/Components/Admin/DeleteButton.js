@@ -14,9 +14,9 @@ class DeleteButton extends Component
 	render()
 	{
 		return (
-      <ReactLink to={"/"/*Landing page*/}>
+      <ReactLink to={"/"+this.props.redirect_to/*Landing page*/}>
         <button onClick={() => this.props.onClick(this.props.id)}>
-          <h1>DELETE</h1>
+          <h1>{this.props.text}</h1>
         </button>
       </ReactLink>
     )
