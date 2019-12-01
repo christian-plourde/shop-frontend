@@ -72,6 +72,11 @@ class NavbarFunction extends Component {
             productData: jsonArray});
       })
    }
+
+   search = () => {
+     console.log('search toggled')
+   }
+
    onSubmit = (e) =>{
       const value = e;
       let suggestions = [];
@@ -95,8 +100,6 @@ class NavbarFunction extends Component {
       }
       this.setState(() => ({suggestions,text:value}));
       console.log(suggestions);
-
-
    }
    onTextChanged = (e) =>{
       const value = e.target.value;
@@ -204,9 +207,9 @@ class NavbarFunction extends Component {
             </Nav>
 
             {/* Search Option */}
-            <div className="Results">
-            <FormControl value={text} onChange={this.onTextChanged} type="text" placeholder="Search" className="mr-sm-2" />
 
+            <div className="Results">
+              <FormControl value={text} onChange={this.onTextChanged} type="text" placeholder="Search" className="mr-sm-2" />
             {this.renderSuggestions()}
             </div>
 

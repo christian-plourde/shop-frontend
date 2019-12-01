@@ -3,6 +3,7 @@ import React from 'react';
 import ProductThumbnail from '../ProductThumbnail.js';
 import localhost from '../../LocalHost.js';
 import axios from 'axios';
+import NewProductPosting from '../Client/NewProductPosting.js';
 
 
 class UserDisplay extends React.Component {
@@ -96,7 +97,8 @@ class UserDisplay extends React.Component {
     render() {
       return(
           <div>
-            <h3>USER_DISPLAY :: ITEMS ON SALE {this.props.username}</h3>
+            <h3>New product posting</h3>
+            <NewProductPosting />
             <table>
               <tbody>
                 {this.renderTable()}
