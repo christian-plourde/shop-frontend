@@ -10,7 +10,6 @@ class AdminInputField extends React.Component {
       super(props)
   }
 
-
     render() {
       console.log('AdminInputField', this.props)
       return(<div>

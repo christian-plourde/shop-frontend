@@ -89,10 +89,6 @@ class AdminDisplay extends React.Component {
     DATE_MAPPINGS[DATE_OPTIONS[4]] = date_to_timestamp_string(origin_of_website);//website's
     console.log(DATE_MAPPINGS);
 
-    // this.setState({
-    //     from_date_timestamp:"'2019-09-03 00:00:00'",
-    //     date_mappings:DATE_MAPPINGS,
-    //     commission:0});
         this.setState({
             from_date_timestamp:"'2019-09-03 00:00:00'",
             date_mappings:DATE_MAPPINGS,
