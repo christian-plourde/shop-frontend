@@ -47,7 +47,7 @@ class NavbarFunction extends Component {
 
       axios.post(site, null, axiosConfig)
       .then(response => {
-
+          console.log('Response.data', response.data)
           let jsonArray = JSON.parse(JSON.stringify(response.data.products));
           let tagsArray = [];
           let productNamesArray = [];
