@@ -76,7 +76,7 @@ class Cart extends Component {
       toRemove => toRemove.productID === productID
     );
     console.log("Cart-78",product)
-    let total = product.productPrice * product.quantity;
+    let total = product.productPrice * product.cartQuantity;
     this.setState({
       products: productList,
       subtotal: this.state.subtotal - total
@@ -93,7 +93,7 @@ class Cart extends Component {
     let updatedProducts = this.state.products;
     updatedProducts.find(
       toChange => toChange.productID === productID
-    ).quantity = quantity;
+    ).cartQuantity = quantity;
     this.setState({ products: updatedProducts });
   };
   componentDidUpdate() {
@@ -129,7 +129,7 @@ class Cart extends Component {
                   description={x.descriptionText}
                   price={x.productPrice}
                   brand={x.modelName}
-                  quantity={x.quantity}
+                  quantity={x.cartQuantity}
                   onRemove={() => this.handleRemove(x.productID)}
                   receiveTotal={this.adjustSubTotal}
                   receiveQuantity={this.receiveQuantity}

@@ -23,7 +23,8 @@ class NavbarFunction extends Component {
       isLoaded: false,
       productNamesArray: [],
       tagsArray: [],
-      productData: []
+      productData: [],
+      cartQuantity:""
     };
   }
 
@@ -73,6 +74,10 @@ class NavbarFunction extends Component {
         });
       });
   }
+  /*componentDidUpdate(){
+    console.log("Navbar-78")
+    this.setState({ cartQuantity:"5"})
+  }*/
   onSubmit = e => {
     const value = e;
     let suggestions = [];
@@ -397,6 +402,7 @@ class NavbarFunction extends Component {
                     class="btn btn-secondary btn-sm"
                   >
                     <i id="shoppingCart" class="fas fa-shopping-cart"></i>
+                    <span class="counter">{this.state.cartQuantity}</span>
                   </button>
                 </Link>
               </Navbar.Collapse>

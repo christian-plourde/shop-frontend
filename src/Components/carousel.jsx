@@ -54,8 +54,7 @@ class Carousel extends Component{
                           description={data.descriptionText}
                           picture= {data.picture}
                           id={data.productID}
-                          product={data}
-
+                          updateQuantity={""/*() =>this.props.updateQuantity()*/}
             />
 
           ))}

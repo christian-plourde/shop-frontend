@@ -3,6 +3,7 @@
 	[
 		{
 			"ownerID": 1,
+			"quantity": 5,
 			"productID": 1,
 			"productName": "Microsoft Azure Mug",
 			"modelName": "B46Y9AS0GX",
@@ -21,7 +22,7 @@
 			]
 		},
 		{
-			"ownerID": 1,
+			"ownerID": 1,"quantity": 5,
 			"productID": 2,
 			"productName": "6-Outlet Surge Protector Power Strip",
 			"modelName": "MW01720B",
@@ -41,6 +42,7 @@
 		},
 		{
 			"ownerID": 2,
+			"quantity": 5,
 			"productID": 3,
 			"productName": "Travel Umbrella",
 			"modelName": "B0160HYB8S",
@@ -59,6 +61,7 @@
 		},
 		{
 			"ownerID": 3,
+			"quantity": 5,
 			"productID": 4,
 			"productName": "Wooden Clothes Hangers (Pack of 10)",
 			"modelName": "B01MPY18P3",
@@ -79,6 +82,7 @@
 		},
 		{
 			"ownerID": 4,
+			"quantity": 5,
 			"productID": 5,
 			"productName": "Professional Microsoft IIS 8",
 			"modelName": "1118388046",
@@ -99,6 +103,7 @@
 		},
 		{
 			"ownerID": 4,
+			"quantity": 5,
 			"productID": 6,
 			"productName": "Titanium Kitchen Scale",
 			"modelName": "B06X9NQ8GX",
@@ -119,6 +124,7 @@
 		},
 		{
 			"ownerID": 5,
+			"quantity": 5,
 			"productID": 7,
 			"productName": "Twin Size Inflatable Mattress",
 			"modelName": "B06Y9MQ9GX",
@@ -140,6 +146,7 @@
 		},
 		{
 			"ownerID": 5,
+			"quantity": 5,
 			"productID": 8,
 			"productName": "Digital Alarm Clock",
 			"modelName": "B26Y9MA9IZ",
@@ -160,6 +167,7 @@
 		},
 		{
 			"ownerID": 6,
+			"quantity": 5,
 			"productID": 9,
 			"productName": "Home Adress Plate",
 			"modelName": "B1A7BMA9IZ",
@@ -180,6 +188,7 @@
 		},
 		{
 			"ownerID": 7,
+			"quantity": 5,
 			"productID": 10,
 			"productName": "Shrek Beanie",
 			"modelName": "B1A7BMB973",
@@ -200,6 +209,7 @@
 		},
 		{
 			"ownerID": 7,
+			"quantity": 5,
 			"productID": 11,
 			"productName": "Shrek Mug",
 			"modelName": "A3B12MB973",
@@ -219,6 +229,7 @@
 		},
 		{
 			"ownerID": 7,
+			"quantity": 5,
 			"productID": 12,
 			"productName": "Foldable Wooden Desk",
 			"modelName": "CM7322B973",
@@ -238,6 +249,7 @@
 		},
 		{
 			"ownerID": 8,
+			"quantity": 5,
 			"productID": 13,
 			"productName": "Shrek T-Shirt",
 			"modelName": "D7CGHKB973",
@@ -257,6 +269,7 @@
 		},
 		{
 			"ownerID": 8,
+			"quantity": 5,
 			"productID": 14,
 			"productName": "Shrek Pillow",
 			"modelName": "F7CGHKB973",
@@ -277,6 +290,7 @@
 		},
 		{
 			"ownerID": 8,
+			"quantity": 5,
 			"productID": 15,
 			"productName": "Fundamentals of Azure - Second Edition - Michael Collier",
 			"modelName": "G7CGHKB973",
@@ -298,6 +312,7 @@
 		},
 		{
 			"ownerID": 8,
+			"quantity": 5,
 			"productID": 16,
 			"productName": "Straw Cowboy Hat",
 			"modelName": "H7CGHKB973",
@@ -318,6 +333,7 @@
 		},
 		{
 			"ownerID": 9,
+			"quantity": 5,
 			"productID": 17,
 			"productName": "Shrek Clock",
 			"modelName": "I7CGHKB973",
@@ -336,6 +352,7 @@
 		},
 		{
 			"ownerID": 9,
+			"quantity": 5,
 			"productID": 18,
 			"productName": "Unisex Running Shoes",
 			"modelName": "J7CGHKB973",
@@ -358,6 +375,7 @@
 		},
 		{
 			"ownerID": 9,
+			"quantity": 5,
 			"productID": 19,
 			"productName": "Sony Overear Headphones",
 			"modelName": "K7CGHKB973",
@@ -377,6 +395,7 @@
 		},
 		{
 			"ownerID": 9,
+			"quantity": 5,
 			"productID": 20,
 			"productName": "Duracell 9V Batteries (24 Pack)",
 			"modelName": "M7CGHKB973",
@@ -398,6 +417,7 @@
 		},
 		{
 			"ownerID": 10,
+			"quantity": 2,
 			"productID": 21,
 			"productName": "Shrek Themed Phone Case",
 			"modelName": "N7CGHKB973",
@@ -420,6 +440,7 @@
 		},
 		{
 			"ownerID": 10,
+			"quantity": 2,
 			"productID": 22,
 			"productName": "Bronze Medal",
 			"modelName": "P7CGHKB973",
@@ -441,6 +462,7 @@
 		},
 		{
 			"ownerID": 10,
+			"quantity": 2,
 			"productID": 23,
 			"productName": "Roadhouse - 1989 Film",
 			"modelName": "Q7CGHKB973",
@@ -461,6 +483,7 @@
 		},
 		{
 			"ownerID": 11,
+			"quantity": 2,
 			"productID": 24,
 			"productName": "Men's Hockey Stick - Black",
 			"modelName": "S7CGHKB973",
@@ -481,6 +504,7 @@
 		},
 		{
 			"ownerID": 11,
+			"quantity": 2,
 			"productID": 25,
 			"productName": "MLS Soccer Ball",
 			"modelName": "T7CGHKB973",
@@ -503,6 +527,7 @@
 		},
 		{
 			"ownerID": 11,
+			"quantity": 2,
 			"productID": 26,
 			"productName": "Calculator",
 			"modelName": "U7CGHKB973",
@@ -523,6 +548,7 @@
 		},
 		{
 			"ownerID": 12,
+			"quantity": 2,
 			"productID": 27,
 			"productName": "Premium Quality Stethoscope",
 			"modelName": "V7CGHKB973",
@@ -543,6 +569,7 @@
 		},
 		{
 			"ownerID": 12,
+			"quantity": 2,
 			"productID": 28,
 			"productName": "Placebo Pills",
 			"modelName": "W7CGHKB973",
@@ -565,6 +592,7 @@
 		},
 		{
 			"ownerID": 12,
+			"quantity": 2,
 			"productID": 29,
 			"productName": "Shrek Halloween Costume",
 			"modelName": "X7CGHKB973",
@@ -584,6 +612,7 @@
 		},
 		{
 			"ownerID": 12,
+			"quantity": 2,
 			"productID": 30,
 			"productName": "Dog Backpack",
 			"modelName": "Y7CGHKB973",
@@ -604,6 +633,7 @@
 		},
 		{
 			"ownerID": 13,
+			"quantity": 2,
 			"productID": 31,
 			"productName": "Cloak of Invisibility",
 			"modelName": "Z7CGHKB973",
@@ -624,6 +654,7 @@
 		},
 		{
 			"ownerID": 13,
+			"quantity": 2,
 			"productID": 32,
 			"productName": "Hotdog Halloween Costume",
 			"modelName": "A8CGHKB973",
@@ -644,6 +675,7 @@
 		},
 		{
 			"ownerID": 13,
+			"quantity": 6,
 			"productID": 33,
 			"productName": "Bronze Cooking Pot",
 			"modelName": "B8CGHKB973",
@@ -664,6 +696,7 @@
 		},
 		{
 			"ownerID": 14,
+			"quantity": 6,
 			"productID": 34,
 			"productName": "Happy Birthday Lollipop",
 			"modelName": "C8CGHKB973",
@@ -683,6 +716,7 @@
 		},
 		{
 			"ownerID": 14,
+			"quantity": 6,
 			"productID": 35,
 			"productName": "Crazy Straws (4 Pack)",
 			"modelName": "D8CGHKB973",
@@ -703,6 +737,7 @@
 		},
 		{
 			"ownerID": 15,
+			"quantity": 6,
 			"productID": 36,
 			"productName": "Banana Carriers (3 Pack)",
 			"modelName": "E8CGHKB973",
@@ -722,6 +757,7 @@
 		},
 		{
 			"ownerID": 15,
+			"quantity": 6,
 			"productID": 37,
 			"productName": "Slap Chop",
 			"modelName": "F8CGHKB973",
@@ -743,6 +779,7 @@
 		},
 		{
 			"ownerID": 15,
+			"quantity": 6,
 			"productID": 38,
 			"productName": "Flex Tape",
 			"modelName": "G8CGHKB973",
@@ -763,6 +800,7 @@
 		},
 		{
 			"ownerID": 15,
+			"quantity": 6,
 			"productID": 39,
 			"productName": "Tide Pods Laundry Detergent Capsules",
 			"modelName": "H8CGHKB973",
@@ -784,6 +822,7 @@
 		},
 		{
 			"ownerID": 16,
+			"quantity": 6,
 			"productID": 40,
 			"productName": "Short Wave Radio Receiver",
 			"modelName": "I8CGHKB973",
@@ -804,6 +843,7 @@
 		},
 		{
 			"ownerID": 17,
+			"quantity": 6,
 			"productID": 41,
 			"productName": "Gold Medal",
 			"modelName": "J8CGHKB973",
@@ -824,6 +864,7 @@
 		},
 		{
 			"ownerID": 17,
+			"quantity": 6,
 			"productID": 42,
 			"productName": "Men's Rollerblades",
 			"modelName": "K8CGHKB973",
@@ -844,6 +885,7 @@
 		},
 		{
 			"ownerID": 17,
+			"quantity": 6,
 			"productID": 43,
 			"productName": "Industrial Quality Trash Can",
 			"modelName": "L8CGHKB973",
@@ -864,6 +906,7 @@
 		},
 		{
 			"ownerID": 18,
+			"quantity": 6,
 			"productID": 44,
 			"productName": "Telescopic Back Scratcher",
 			"modelName": "M8CGHKB973",
@@ -883,6 +926,7 @@
 		},
 		{
 			"ownerID": 18,
+			"quantity": 6,
 			"productID": 45,
 			"productName": "New Car Scent Air Freshener",
 			"modelName": "N8CGHKB973",
@@ -901,6 +945,7 @@
 		},
 		{
 			"ownerID": 19,
+			"quantity": 6,
 			"productID": 46,
 			"productName": "Stuffed Animal - Penguin",
 			"modelName": "O8CGHKB973",
@@ -920,6 +965,7 @@
 		},
 		{
 			"ownerID": 19,
+			"quantity": 6,
 			"productID": 47,
 			"productName": "Q-Tips Cotton Swabs",
 			"modelName": "P8CGHKB973",
@@ -941,6 +987,7 @@
 		},
 		{
 			"ownerID": 19,
+			"quantity": 6,
 			"productID": 48,
 			"productName": "Thomas The Tank Engine Children's Toy Model Train",
 			"modelName": "Q8CGHKB973",
@@ -962,6 +1009,7 @@
 		},
 		{
 			"ownerID": 19,
+			"quantity": 6,
 			"productID": 49,
 			"productName": "VGA Cable - 12 ft.",
 			"modelName": "R8CGHKB973",
@@ -980,6 +1028,7 @@
 		},
 		{
 			"ownerID": 20,
+			"quantity": 6,
 			"productID": 50,
 			"productName": "Daft Serious Authentic Star Wars Action Figure",
 			"modelName": "S8CGHKB973",
