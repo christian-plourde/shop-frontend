@@ -1,0 +1,19 @@
+body {
+  background-color: whitesmoke !important;
+}
+
+#Container {
+  background-color: white !important;
+  padding: 20px;
+  padding-bottom: 40px;
+  margin-top: 20px;
+}
+
+.label {
+  font-size: 20px;
+}
+
+#submitButton {
+  background-color: #1d1e22;
+  color: white;
+}
