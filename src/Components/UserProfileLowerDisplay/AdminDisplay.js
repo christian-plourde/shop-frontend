@@ -52,7 +52,8 @@ class AdminDisplay extends React.Component {
           "a month":"",
           "the website's birth":""
         },
-        commission:0
+        commission:0,
+        quantity:0
       }
 
       this.initialize_date_mappings = this.initialize_date_mappings.bind(this);
@@ -90,11 +91,13 @@ class AdminDisplay extends React.Component {
 
     // this.setState({
     //     from_date_timestamp:"'2019-09-03 00:00:00'",
-    //     date_mappings:DATE_MAPPINGS});
-    this.setState({
-        from_date_timestamp:"'2019-09-03 00:00:00'",
-        date_mappings:DATE_MAPPINGS,
-        commission:0});
+    //     date_mappings:DATE_MAPPINGS,
+    //     commission:0});
+        this.setState({
+            from_date_timestamp:"'2019-09-03 00:00:00'",
+            date_mappings:DATE_MAPPINGS,
+            commission:0,
+            quantity:0});
   }
 
   componentDidMount()
@@ -104,6 +107,36 @@ class AdminDisplay extends React.Component {
     //Set default value to since the website's birth
 
   }
+
+  // handleClick(timestamp){
+  //   this.setState({from_date_timestamp:timestamp});
+  //   console.log('Handle click :: current state.from_date_timestamp', this.state.from_date_timestamp)
+  //   const site = (localhost) ?
+  //       'http://localhost/shop-backend/php/get_site_commission.php'
+  //       : 'https://shop-354.herokuapp.com/get_site_commission.php';
+  //
+  //   const data = JSON.stringify({from_date:timestamp});
+  //   const axiosConfig = {
+  //       headers: {
+  //           'Content-Type': 'application/json',
+  //           "Access-Control-Allow-Origin":"*",
+  //       },
+  //     };
+  //
+  //   axios.post(site, data, axiosConfig)
+  //   .then((response) => {
+  //       console.log("Admin display :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
+  //       if(response.data.Accepted)
+  //       {
+  //         const commission = response.data.commission['commission']//To be set following successful PHP
+  //         console.log('Commission:', commission)
+  //         this.setState({commission:commission});
+  //       }//end if
+  //   },
+  //   (error) => {
+  //     console.log("Admin display :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
+  //   });
+  // }//end function displaySiteCommission
 
   handleClick(timestamp){
     this.setState({from_date_timestamp:timestamp});
@@ -125,9 +158,15 @@ class AdminDisplay extends React.Component {
         console.log("Admin display :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
         if(response.data.Accepted)
         {
-          const commission = response.data.commission['commission']//To be set following successful PHP
-          console.log('Commission:', commission)
-          this.setState({commission:commission});
+          // const commission = response.data.commission['commission']//To be set following successful PHP
+          const commission = response.data.results[0];
+          console.log('commission',commission['commission'])
+          const commission_val = commission['commission'];
+          const quantity = response.data.results[1];
+          const quantity_val = quantity['quantity'];
+          console.log(timestamp, 'Commission:', commission, 'Quantity', quantity)
+          this.setState({commission:commission_val});
+          this.setState({quantity:quantity_val});
         }//end if
     },
     (error) => {
@@ -140,7 +179,12 @@ class AdminDisplay extends React.Component {
 
       return (
         <div>
-          <h1>{this.state.commission != 0 ? 'Commission: ' + this.state.commission : ''}</h1>
+          <h1>
+            Commission{(this.state.commission > 0) ? ': ' + this.state.commission : ''}
+            <br />
+            Quantity{(this.state.quantity > 0) ? ': ' + this.state.quantity : ''}
+            <br />
+          </h1>
           {Object.entries(this.state.date_mappings).map((entry) => {
             const since = entry[0];
             const timestamp = entry[1];
