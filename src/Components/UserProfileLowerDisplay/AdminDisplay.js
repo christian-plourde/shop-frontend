@@ -89,10 +89,6 @@ class AdminDisplay extends React.Component {
     DATE_MAPPINGS[DATE_OPTIONS[4]] = date_to_timestamp_string(origin_of_website);//website's
     console.log(DATE_MAPPINGS);
 
-    // this.setState({
-    //     from_date_timestamp:"'2019-09-03 00:00:00'",
-    //     date_mappings:DATE_MAPPINGS,
-    //     commission:0});
         this.setState({
             from_date_timestamp:"'2019-09-03 00:00:00'",
             date_mappings:DATE_MAPPINGS,
@@ -107,36 +103,6 @@ class AdminDisplay extends React.Component {
     //Set default value to since the website's birth
 
   }
-
-  // handleClick(timestamp){
-  //   this.setState({from_date_timestamp:timestamp});
-  //   console.log('Handle click :: current state.from_date_timestamp', this.state.from_date_timestamp)
-  //   const site = (localhost) ?
-  //       'http://localhost/shop-backend/php/get_site_commission.php'
-  //       : 'https://shop-354.herokuapp.com/get_site_commission.php';
-  //
-  //   const data = JSON.stringify({from_date:timestamp});
-  //   const axiosConfig = {
-  //       headers: {
-  //           'Content-Type': 'application/json',
-  //           "Access-Control-Allow-Origin":"*",
-  //       },
-  //     };
-  //
-  //   axios.post(site, data, axiosConfig)
-  //   .then((response) => {
-  //       console.log("Admin display :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
-  //       if(response.data.Accepted)
-  //       {
-  //         const commission = response.data.commission['commission']//To be set following successful PHP
-  //         console.log('Commission:', commission)
-  //         this.setState({commission:commission});
-  //       }//end if
-  //   },
-  //   (error) => {
-  //     console.log("Admin display :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
-  //   });
-  // }//end function displaySiteCommission
 
   handleClick(timestamp){
     this.setState({from_date_timestamp:timestamp});
@@ -158,9 +124,8 @@ class AdminDisplay extends React.Component {
         console.log("Admin display :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
         if(response.data.Accepted)
         {
-          // const commission = response.data.commission['commission']//To be set following successful PHP
           const commission = response.data.results[0];
-          console.log('commission',commission['commission'])
+          // console.log('commission',commission['commission'])
           const commission_val = commission['commission'];
           const quantity = response.data.results[1];
           const quantity_val = quantity['quantity'];
