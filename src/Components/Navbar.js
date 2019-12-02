@@ -1,8 +1,6 @@
 // All imports
 import React, { Component } from "react";
 import "../styles/Navbar.css";
-import "../styles/fonts/fontAwesome/all.css";
-import "../styles/fonts/fontAwesome/all.min.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -11,6 +9,15 @@ import Button from "react-bootstrap/Button";
 import "../styles/autoComplete.css";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Route from "react-router-dom/Route";
+import { Redirect } from "react-router";
+
+import axios from "axios";
+
+import DropdownItem from "./Navbar/DropdownItem.js";
+import CategoryButton from "./Navbar/CategoryButton.js";
+
+//A variable to make our lives easier.
+import localhost from "../LocalHost.js";
 
 // The Navigation Bar
 class NavbarFunction extends Component {
@@ -24,64 +31,89 @@ class NavbarFunction extends Component {
       productNamesArray: [],
       tagsArray: [],
       productData: [],
-      cartQuantity:""
+      isEnterPressed: false
     };
   }
 
   componentDidMount() {
-    //https://shop-354.herokuapp.com/Products.json
-    //http://localhost:3000/Products.json
-    fetch("http://localhost:3000/Products.json", {
+    var site = localhost
+      ? "http://localhost:8081/shop-backend/php/get_products.php"
+      : "https://shop-354.herokuapp.com/get_products.php";
+
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        "Access-Control-Allow-Origin": "*"
       }
-    })
-      .then(response => response.json())
-      .then(productData => {
-        this.setState({
-          isLoaded: true
-        });
-        let jsonArray = JSON.parse(JSON.stringify(productData.products));
-        let tagsArray = [];
-        let productNamesArray = [];
-        for (var j in jsonArray) {
-          tagsArray.push(jsonArray[j].tags);
-          productNamesArray.push(jsonArray[j].productName);
-        }
+    };
 
-        let clothing = [];
-        let home = [];
-        let electronic = [];
-        for (var x in tagsArray) {
-          for (var y in tagsArray[x]) {
-            if (tagsArray[x][y] === "clothing") {
-              clothing.push(jsonArray[x]);
-            }
-            if (tagsArray[x][y] === "home") {
-              home.push(jsonArray[x]);
-            }
-            if (tagsArray[x][y] === "electronic") {
-              electronic.push(jsonArray[x]);
-            }
+    axios.post(site, null, axiosConfig).then(response => {
+      console.log("Response.data", response.data);
+      let jsonArray = JSON.parse(JSON.stringify(response.data.products));
+      let tagsArray = [];
+      let productNamesArray = [];
+      for (var j in jsonArray) {
+        tagsArray.push(jsonArray[j].tags);
+        productNamesArray.push(jsonArray[j].productName);
+      }
+
+      let clothing = [];
+      let home = [];
+      let electronic = [];
+      for (var x in tagsArray) {
+        for (var y in tagsArray[x]) {
+          if (tagsArray[x][y] === "clothing") {
+            clothing.push(jsonArray[x]);
+          }
+          if (tagsArray[x][y] === "home") {
+            home.push(jsonArray[x]);
+          }
+          if (tagsArray[x][y] === "electronic") {
+            electronic.push(jsonArray[x]);
           }
         }
+      }
 
-        this.setState({
-          productNamesArray: productNamesArray,
-          tagsArray: tagsArray,
-          productData: jsonArray
-        });
+      this.setState({
+        isLoaded: true
       });
-  }
-  componentDidUpdate(){
-    console.log("Navbar-78")
-    let item = localStorage.getItem("cartQuantity")
-    console.log("Navbar-80-", "newCartValue", item)
-    if(this.state.cartQuantity != item ){
-      this.setState({ cartQuantity:item})
-    }
-  }
+      this.setState({
+        productNamesArray: productNamesArray,
+        tagsArray: tagsArray,
+        productData: jsonArray
+      });
+    }); //end then
+  } //end componentDidMount
+
+  search = () => {
+    console.log("search toggled");
+  };
+
+  // onSubmit = (e) =>{
+  //    const value = e;
+  //    let suggestions = [];
+  //    if(value.length >0){
+  //       const regex = new RegExp(`^${value}`,'i');
+  //       let tags = [];
+  //       let isAlreadyInArray=false;
+  //       for(var x in this.state.tagsArray){
+  //          for(var y in this.state.tagsArray[x]){
+  //             if(regex.test(this.state.tagsArray[x][y])){
+  //                for(var i in tags){
+  //                   if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}
+  //                }
+  //                if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
+  //                isAlreadyInArray=false;
+  //             }
+  //          }
+  //       }
+  //       suggestions = this.state.productNamesArray.filter(v=>regex.test(v)).concat(tags);
+  //
+  //    }
+  //    this.setState(() => ({suggestions,text:value}));
+  //    console.log(suggestions);
+  // }
+
   onSubmit = e => {
     const value = e;
     let suggestions = [];
@@ -111,6 +143,7 @@ class NavbarFunction extends Component {
     this.setState(() => ({ suggestions, text: value }));
     console.log(suggestions);
   };
+
   onTextChanged = e => {
     const value = e.target.value;
     let suggestions = [];
@@ -167,6 +200,18 @@ class NavbarFunction extends Component {
     );
   }
 
+  keyPressHandler(e, newText) {
+    console.log(newText);
+    console.log(this.state.isEnterPressed);
+    if (e.charCode === 13) {
+      // char code for "Enter"
+      this.setState({
+        isEnterPressed: true,
+        text: newText // the value we want to search
+      });
+    }
+  }
+
   render() {
     const { isLoaded, text } = this.state;
 
@@ -176,11 +221,25 @@ class NavbarFunction extends Component {
       return (
         <div>
           {/* First Container */}
-          
+
+          {/* user presses Enter in the search bar */}
+          {this.state.isEnterPressed && (
+            <Redirect
+              to={{
+                pathname: "/results",
+                query: this.state.productData,
+                element: text
+              }}
+            />
+          )}
+
+          {/* reset enter's state */}
+          {(this.state.isEnterPressed = false)}
+
           <div id="firstContainer">
             <Navbar id="Navbar" bg="light" expand="lg">
               {/* Navbar Brand */}
-              <Navbar.Brand href="#home" id="brand">
+              <Navbar.Brand href="../" id="brand">
                 <i id="brandLogo" class="fas fa-spa"></i>
                 BrandTitle
               </Navbar.Brand>
@@ -199,131 +258,64 @@ class NavbarFunction extends Component {
                     <Dropdown.Menu>
                       <table>
                         <tr>
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Home"
-                                }}
-                              >
-                                <h6> Home </h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
-
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Clothing"
-                                }}
-                              >
-                                <h6> Clothing </h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
-
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Kitchen"
-                                }}
-                              >
-                                <h6> Kitchen </h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Home"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Clothing"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Kitchen"
+                          />
                         </tr>
-
                         <tr>
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Electronic"
-                                }}
-                              >
-                                <h6> Electronics</h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Shrek"
-                                }}
-                              >
-                                <h6> Shrek </h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Book"
-                                }}
-                              >
-                                <h6> Books </h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Electronics"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Shrek"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Book"
+                          />
                         </tr>
-
                         <tr>
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Microsoft"
-                                }}
-                              >
-                                <h6> Microsoft</h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Everyday"
-                                }}
-                              >
-                                <h6> Everyday</h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
-                          <td>
-                            <Dropdown.Item href="#/action-1">
-                              <Link
-                                to={{
-                                  pathname: "/results",
-                                  query: this.state.productData,
-                                  element: "Toy"
-                                }}
-                              >
-                                <h6> Toys </h6>
-                              </Link>
-                            </Dropdown.Item>{" "}
-                          </td>
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Microsoft"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Everyday"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Toy"
+                          />
+                        </tr>
+                        <tr>
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="A - Z"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Z - A"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Least to Most Expensive"
+                          />
+                          <DropdownItem
+                            query={this.state.productData}
+                            element="Most to Least Expensive"
+                          />
                         </tr>
                       </table>
                     </Dropdown.Menu>
@@ -331,15 +323,16 @@ class NavbarFunction extends Component {
                 </Nav>
 
                 {/* Search Option */}
+
                 <div className="Results">
                   <FormControl
                     value={text}
                     onChange={this.onTextChanged}
+                    onKeyPress={e => this.keyPressHandler(e, text)}
                     type="text"
                     placeholder="Search"
                     className="mr-sm-2"
                   />
-
                   {this.renderSuggestions()}
                 </div>
 
@@ -359,9 +352,7 @@ class NavbarFunction extends Component {
 
                 <Link
                   to={
-                    sessionStorage.getItem("logged_in_user")
-                      ? "/user"
-                      : "/login"
+                    localStorage.getItem("logged_in_user") ? "/user" : "/login"
                   }
                 >
                   <button
@@ -369,13 +360,13 @@ class NavbarFunction extends Component {
                     type="button"
                     class="btn btn-secondary btn-sm"
                   >
-                    {sessionStorage.getItem("logged_in_user")
-                      ? sessionStorage.getItem("logged_in_user")
+                    {localStorage.getItem("logged_in_user")
+                      ? localStorage.getItem("logged_in_user")
                       : "Guest"}
                   </button>
                 </Link>
 
-                {!sessionStorage.getItem("logged_in_user") && (
+                {!localStorage.getItem("logged_in_user") && (
                   <Link to="/login">
                     <button
                       id="login"
@@ -387,7 +378,7 @@ class NavbarFunction extends Component {
                   </Link>
                 )}
 
-                {!sessionStorage.getItem("logged_in_user") && (
+                {!localStorage.getItem("logged_in_user") && (
                   <Link to="/register">
                     <button
                       id="signup"
@@ -400,155 +391,78 @@ class NavbarFunction extends Component {
                 )}
 
                 {/* Cart */}
-                <Link to="/checkout">
-                  <button
-                    id="cart"
-                    type="button"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    <i id="shoppingCart" class="fas fa-shopping-cart"></i>
-                    <span class="counter">{this.state.cartQuantity}</span>
-                  </button>
-                </Link>
+                <button
+                  id="cart"
+                  type="button"
+                  class="btn btn-secondary btn-sm"
+                >
+                  <i id="shoppingCart" class="fas fa-shopping-cart"></i>
+                </button>
               </Navbar.Collapse>
             </Navbar>
           </div>
 
           {/* Second Container */}
           <div id="secondContainer">
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Home"
-              }}
-            >
-              {" "}
-              <Button id="button2" variant="secondary" size="sm">
-                Home
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Clothing"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Clothing
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Kitchen"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Kitchen
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Electronic"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Electronics
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Shrek"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Shrek
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Book"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Books
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Microsoft"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Microsoft
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Everyday"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Everyday
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Toy"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Toys
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Sports"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Sports
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Outdoor"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Outdoors
-              </Button>
-            </Link>
-            <Link
-              to={{
-                pathname: "/results",
-                query: this.state.productData,
-                element: "Children"
-              }}
-            >
-              <Button id="button2" variant="secondary" size="sm">
-                Children
-              </Button>
-            </Link>
+            <table>
+              <tr>
+                <CategoryButton query={this.state.productData} element="Home" />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Clothing"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Kitchen"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Electronic"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Shrek"
+                />
+                <CategoryButton query={this.state.productData} element="Book" />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Microsoft"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Everyday"
+                />
+                <CategoryButton query={this.state.productData} element="Toy" />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Sports"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Outdoor"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Children"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="A - Z"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Z - A"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Least to Most Expensive"
+                />
+                <CategoryButton
+                  query={this.state.productData}
+                  element="Most to Least Expensive"
+                />
+              </tr>
+            </table>
           </div>
         </div>
       );
