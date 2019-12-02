@@ -94,7 +94,7 @@ class NavbarFunction extends Component {
               tagsArray: tagsArray,
               productData: jsonArray});
         })//end then
-   }
+   }//end set state via axios
 
    setStateViaProp = () => {
      let tagsArray = [];
@@ -121,7 +121,7 @@ class NavbarFunction extends Component {
        this.setState({productNamesArray: productNamesArray,
          tagsArray: tagsArray,
          productData: this.props.data});
-   }
+   }//end set state via props
 
    search = () => {
      console.log('search toggled')
