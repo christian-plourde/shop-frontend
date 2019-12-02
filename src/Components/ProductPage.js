@@ -27,7 +27,7 @@ class ProductPage extends React.Component {
 
     this.state = {
       isLoaded: false,
-      data: [],
+      product: {},
       productReviews: [],
       productReviewsComponents: [],
       productReviewsMeta: {},
@@ -36,9 +36,13 @@ class ProductPage extends React.Component {
   }
 
   componentDidMount() {
+    let product_id = this.props.match.params.product_id;
+    console.log(`the product ID is ${product_id}`)
+
     const productSource = (localhost) ?
-      "http://localhost:3000/Products.json"
-      : 'https://shop-354.herokuapp.com/Products.json';
+      `http://localhost/shop-backend/php/product.php?product=${product_id}`
+      : `https://shop-354.herokuapp.com/product.php?product=${product_id}`;
+
     fetch(productSource, {
       headers: {
         "Content-Type": "application/json",
@@ -48,17 +52,14 @@ class ProductPage extends React.Component {
       .then(response => response.json())
       .then(productData => {
         this.setState({
-          isLoaded: true,
-          data: productData.products
+          product: productData
         });
       });
 
-    let review_product_id = this.props.match.params.product_id; //acquiring the review array associated with the received prop's ID
-    const reviewSource = (localhost) ?
-      `http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`
-      : `https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
+    const reviewSource = (localhost) ? //acquiring the review array associated with the received prop's ID
+      `http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${product_id}`
+      : `https://shop-354.herokuapp.com/reviews.php?review=${product_id}`
 
-    this.setState({ isLoaded: false })
     fetch(reviewSource, {
       headers: {
         "Content-Type": "application/json",
@@ -71,8 +72,8 @@ class ProductPage extends React.Component {
       })
 
     // need to acquire the review meta data
-    //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${review_product_id}`
-    //`http://shop-354.herokuapp.com/reviews.php?averagereview=${review_product_id}`
+    //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${product_id}`
+    //`http://shop-354.herokuapp.com/reviews.php?averagereview=${product_id}`
   }
 
   deleteProduct = (id) => {
@@ -129,14 +130,6 @@ class ProductPage extends React.Component {
     }
     else {
 
-      var product = null;
-
-      for (var i = 0; i < this.state.data.length; i++) {
-        if (this.state.data[i].productID == this.props.match.params.product_id) {
-          product = this.state.data[i];
-        }
-      }
-
       //generating an array of review components
       const reviewComponents = this.state.productReviews.map((reviewItems, index) =>
         <div>
@@ -149,7 +142,7 @@ class ProductPage extends React.Component {
             : ''
           }
           <Review
-            key={reviewItems.index}
+            key={index}
             reviewID={reviewItems.reviewID}
             productID={reviewItems.productID}
             reviewerID={reviewItems.reviewerID}
@@ -162,11 +155,10 @@ class ProductPage extends React.Component {
 
       //`https://shop-354.herokuapp.com/${product.picture.substring(1)}`
       //`http://localhost:3000${product.picture.substring(1)}`
-      const imageSource = (localStorage) ?
-        `http://localhost:3000${product.picture.substring(1)}`
-        : `https://shop-354.herokuapp.com/${product.picture.substring(1)}`
-
-      const imageSources = [imageSource]//generating a product image url array with randomly inserted Shrek, ISS and Donkey(from Shrek)
+      const imageSources = []
+      if (this.state.product.images != undefined){
+        imageSources = this.state.product.images.map(imageUrl => `https://shop-354.herokuapp.com/ressources/img/${imageUrl}`)     //generating a product image url array with randomly inserted Shrek, ISS and Donkey(from Shrek)
+      }
 
       let dice = Math.random() * 10
       if (dice > 2.5) {
@@ -179,7 +171,7 @@ class ProductPage extends React.Component {
         imageSources.push('https://upload.wikimedia.org/wikipedia/en/6/6c/Donkey_%28Shrek%29.png')
       }
       if (dice > 9) {
-        imageSource.push('https://i.redd.it/iu1bhetpmb041.jpg')
+        imageSources.push('https://i.redd.it/iu1bhetpmb041.jpg')
       }
 
       return (
@@ -195,7 +187,7 @@ class ProductPage extends React.Component {
               : ''
             }
             <div className="container">
-              <h1>{product.productName}</h1>
+              <h1>{this.state.product.productName}</h1>
               <div className="rating"> product rating</div>
               <div className="inner_container">
                 <div className="photo">
@@ -205,11 +197,11 @@ class ProductPage extends React.Component {
                   <ProductImageCarousel url={imageSources} />
                 </div>
                 <div className="text">
-                  <p>Item Description:<br />{product.descriptionText}</p>
+                  <p>Item Description:<br />{this.state.product.descriptionText}</p>
                   <ul>
-                    <li>Model Name:{product.modelName}</li>
-                    <li>Product Color:{product.color}</li>
-                    <li>Product Dimension{product.dimensions}</li>
+                    <li>Model Name:{this.state.product.modelName}</li>
+                    <li>Product Color:{this.state.product.color}</li>
+                    <li>Product Dimension{this.state.product.dimensions}</li>
                   </ul>
                 </div>
                 <div id="purchase">
