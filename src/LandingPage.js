@@ -30,7 +30,7 @@ class LandingPage extends Component {
   // http://localhost:80/shop-frontend/shop-backend/php/product.php?products=-1
   componentDidMount() {
     var site = localhost
-      ? "http://localhost:8081/shop-backend/php/get_products.php"
+      ? "http://localhost:80/shop-backend/php/get_products.php"
       : "https://shop-354.herokuapp.com/get_products.php";
 
     const axiosConfig = {
@@ -85,8 +85,6 @@ class LandingPage extends Component {
       });
   }
   changeQuantity() {
-    console.log("LandingPage-72")
-    //localStorage.setItem("cartQuantity","5")
     let quantityNow = localStorage.getItem("cartQuantity")
     if(quantityNow != this.state.quantity){
       this.setState({quantity:quantityNow})

@@ -39,7 +39,10 @@ function sort_list_greatest_to_least(some_list) {
   }
   return some_list;
 }
-
+function updateCartQuantity(){
+   let currentValue = localStorage.getItem("cartQuantity")
+   return currentValue;
+}
 const SearchResults = ({ match, location }) => {
   let products = location.query;
   let searchElement = location.element;
@@ -133,7 +136,7 @@ const SearchResults = ({ match, location }) => {
 
    return(
       <div>
-         <Navbar />
+         <Navbar value={updateCartQuantity()} />
          <div className="ResultsDisplay">
          <h2 className="TitleResults">Search results related to {searchElement}</h2>
          {elementsToDisplay.map((data,index) =>(
@@ -153,6 +156,7 @@ const SearchResults = ({ match, location }) => {
          </div>
       </div>
    )
+}
 }
 
 export default SearchResults;

@@ -33,7 +33,7 @@ class NavbarFunction extends Component {
       productNamesArray: [],
       tagsArray: [],
       productData: [],
-      cartQuantity:""
+      cartQuantity:"",
       isEnterPressed: false
     };
   }
@@ -81,7 +81,7 @@ class NavbarFunction extends Component {
           
 	
 
-	  isLoaded:true		
+	        isLoaded:true	,	
           productNamesArray: productNamesArray,
           tagsArray: tagsArray,
           productData: jsonArray
