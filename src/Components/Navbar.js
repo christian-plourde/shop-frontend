@@ -129,13 +129,23 @@ class NavbarFunction extends Component {
 
 
   componentDidUpdate(){
-    console.log("Navbar-78")
+    // console.log("Navbar-78")
     let item = localStorage.getItem("cartQuantity")
-    console.log("Navbar-80-", "newCartValue", item)
-    if(this.state.cartQuantity != item ){
+    // console.log("Navbar-80-", "newCartValue", item)
+    if(item && this.state.cartQuantity != item ){
       this.setState({ cartQuantity:item})
     }
   }
+
+  // componentWillUnmount(){
+  //   // console.log("Navbar-78")
+  //   let item = localStorage.getItem("cartQuantity")
+  //   // console.log("Navbar-80-", "newCartValue", item)
+  //   if(item && this.state.cartQuantity != item ){
+  //     this.setState({ cartQuantity:item})
+  //   }
+  // }
+
   onSubmit = e => {
     const value = e;
     let suggestions = [];

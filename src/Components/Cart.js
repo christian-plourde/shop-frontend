@@ -61,7 +61,7 @@ class Cart extends Component {
       products: productList,
       subtotal: this.state.subtotal - total
     });
-    
+
     //removing from cart and updating cart
     let updatedCart=""
     let updatedCartQuantity=""
@@ -78,16 +78,16 @@ class Cart extends Component {
           updatedCart = updatedCart + "|" + JSON.stringify(productList[x])
         }
         localStorage.setItem("cart",updatedCart)
-      }   
+      }
       updatedCartQuantity = newIntCartQuantity.toString()
       localStorage.setItem("cartQuantity",updatedCartQuantity)
     }
-    
+
   };
 
   handleCheckout = () => {
     if (this.state.ableToCheckout == true) {
-      
+
     } else alert("Verify the delivery address before checking out!");
   };
 
@@ -104,12 +104,11 @@ class Cart extends Component {
   };
 
   checkShippingInfo = validity => {
-    if (validity == true) {
+    if (validity) {
       this.setState({ ableToCheckout: true });
       return true;
-    } else {
-      return false;
     }
+    return false;
   };
 
   render() {
@@ -178,13 +177,15 @@ class Cart extends Component {
                   <div class="totals-item">
                     <label>Subtotal</label>
                     <div class="totals-value" id="cart-subtotal">
-                      {this.state.subtotal.toFixed(2)}
+                      {!isNaN(this.state.subtotal)
+                        ? Number.parseFloat(this.state.subtotal).toFixed(2) : ''}
                     </div>
                   </div>
                   <div class="totals-item">
                     <label>Tax (15%)</label>
                     <div class="totals-value" id="cart-tax">
-                      {(this.state.subtotal * 0.15).toFixed(2)}
+                    {!isNaN(this.state.subtotal)
+                        ? Number.parseFloat(this.state.subtotal * 0.15).toFixed(2) : ''}
                     </div>
                   </div>
                   <div class="totals-item">
@@ -196,7 +197,8 @@ class Cart extends Component {
                   <div class="totals-item totals-item-total">
                     <label>Grand Total</label>
                     <div class="totals-value" id="cart-total">
-                      {this.state.total.toFixed(2)}
+                    {!isNaN(this.state.total)
+                      ? Number.parseFloat(this.state.total).toFixed(2) : ''}
                     </div>
                   </div>
                 </div>

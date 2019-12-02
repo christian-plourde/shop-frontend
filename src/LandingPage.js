@@ -46,7 +46,7 @@ class LandingPage extends Component {
       });
       // let jsonArray = JSON.parse(JSON.stringify(this.state.data));
       let jsonArray = JSON.parse(JSON.stringify(this.state.data));
-      console.log("JSON array", jsonArray);
+      // console.log("JSON array", jsonArray);
 
       let tagsArray = [];
       let productNamesArray = [];
