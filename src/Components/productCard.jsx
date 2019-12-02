@@ -14,7 +14,8 @@ class ProductCard extends Component {
       this.state = {
          quantity:1,
          product:this.props,
-         notLoggedIn:false
+         notLoggedIn:false,
+         triggered:false
       }
       this.addToCart = this.addToCart.bind(this)
    }
@@ -55,12 +56,29 @@ class ProductCard extends Component {
          console.log(productToAdd)
          let firstItem = JSON.stringify(productToAdd)
          localStorage.setItem("cart",firstItem)
+         localStorage.setItem("cartQuantity",this.state.quantity)
+         this.props.updateQuantity()
 
          }
          else{
-            // console.log(temp);
+            console.log("productCard-62",productQuantity);
             let item = localStorage.getItem("cart")
-            let productArrayStrings= item.split("|") // array of products as Strings
+            //navbar update of cart
+            let cartQuantity = localStorage.getItem("cartQuantity") 
+            let intCartQuantity = parseInt(cartQuantity)
+            intCartQuantity+= productQuantity
+            console.log("productCard-67",intCartQuantity);
+            console.log("productCard-68",typeof(intCartQuantity), " ", intCartQuantity )
+            let updatedCartQuantity = intCartQuantity.toString()
+            console.log("productCard-68",typeof(updatedCartQuantity), " ", updatedCartQuantity )
+            localStorage.setItem("cartQuantity",updatedCartQuantity)
+            this.setState({
+               triggered:this.state.triggered
+            })
+
+            //navbar update of cart
+            
+            let productArrayStrings= item.split("|") 
             let productArrayObjects=[]
             for(var x in productArrayStrings){
                productArrayObjects.push(JSON.parse(productArrayStrings[x]))
@@ -69,20 +87,17 @@ class ProductCard extends Component {
                   if(productArrayObjects[y].productID == productToAdd.productID)
                      return;
             }
-            // console.log(item)
             let item1 = item + "|" + JSON.stringify(productToAdd)
             //console.log(item1);
             localStorage.setItem("cart",item1)
-            // temp = item;
-            //temp.push(item)
-            //console.log(JSON.parse(temp));
-            //console.log(typeof(this.state.product));
-            //console.log(item)
-            //localStorage.setItem("cart",JSON.stringify(temp))
+            //updating cart icon
+            this.props.updateQuantity()
          }
+         
       //}
 
       //console.log(temp);
+      
   }
    render(){
 
@@ -102,7 +117,7 @@ class ProductCard extends Component {
                <button className="incrementCart" onClick={this.handleIncrement}><span className="glyphicon glyphicon-chevron-right"></span></button>
                <button className="decrementCart" onClick={this.handleDecrement} disabled={this.state.quantity === 1}><span className="glyphicon glyphicon-chevron-left"></span></button>
                <input type="number" className="numItems" value={this.state.quantity}></input>
-               <p><button className="addToCart" onClick={() => this.addToCart(this.state.quantity)/*() => this.props.updateQuantity()*/}>Add to Cart</button></p>
+               <p><button className="addToCart" onClick={() => this.addToCart(this.state.quantity)}>Add to Cart</button></p>
                </div>
 
             </div>

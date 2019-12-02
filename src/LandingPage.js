@@ -16,7 +16,7 @@ class LandingPage extends Component {
       clothingProducts: [],
       homeProducts: [],
       electronicProducts: [],
-      quantity:0
+      quantity:""
     };
   }
   //http://localhost:3000/Products.json
@@ -75,8 +75,10 @@ class LandingPage extends Component {
   changeQuantity() {
     console.log("LandingPage-72")
     //localStorage.setItem("cartQuantity","5")
-    let value = this.state.quantity++
-  //  this.setState({quantity:value})
+    let quantityNow = localStorage.getItem("cartQuantity")
+    if(quantityNow != this.state.quantity){
+      this.setState({quantity:quantityNow})
+    }
     
   }
   render() {
@@ -94,7 +96,7 @@ class LandingPage extends Component {
     } else {
       return (
         <div>
-          <Navbar productNames={productNames} tags={tags} products={data}/>
+          <Navbar productNames={productNames} tags={tags} products={data} cartQuantity={this.state.quantity}/>
           <div className="LandingPageBody">
             <div>
               <div className="LandingPageBody">
@@ -102,7 +104,7 @@ class LandingPage extends Component {
                   <Carousel
                     data={clothingProducts}
                     category="Clothing Products"
-                    updateQuantity={""/*() => this.changeQuantity()*/}
+                    updateQuantity={()=> this.changeQuantity()}
                   />
                 </div>
                 <div>

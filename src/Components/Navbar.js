@@ -74,10 +74,14 @@ class NavbarFunction extends Component {
         });
       });
   }
-  /*componentDidUpdate(){
+  componentDidUpdate(){
     console.log("Navbar-78")
-    this.setState({ cartQuantity:"5"})
-  }*/
+    let item = localStorage.getItem("cartQuantity")
+    console.log("Navbar-80-", "newCartValue", item)
+    if(this.state.cartQuantity != item ){
+      this.setState({ cartQuantity:item})
+    }
+  }
   onSubmit = e => {
     const value = e;
     let suggestions = [];
@@ -172,6 +176,7 @@ class NavbarFunction extends Component {
       return (
         <div>
           {/* First Container */}
+          
           <div id="firstContainer">
             <Navbar id="Navbar" bg="light" expand="lg">
               {/* Navbar Brand */}
