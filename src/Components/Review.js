@@ -7,7 +7,7 @@ class Review extends React.Component {
         this.state = {
             reviewID: this.props.reviewID,
             productID: this.props.productID,
-            reviewerID: this.props.reviewerID,
+            reviewerID: this.props.reviewerID, //can display a reviewer's username if needed
             rating: this.props.rating,
             reviewText: this.props.reviewText
         }

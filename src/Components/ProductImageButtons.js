@@ -6,7 +6,7 @@ function ProductImageButtons(props){
     return(
         <button
             className={`slide-arrow ${props.direction}`}
-            onClick={props.clickHandler}
+            onClick={props.clickHandler} //execute appropriate change handler from ProductImageCarousel.js
         >
             {arrow}
         </button>

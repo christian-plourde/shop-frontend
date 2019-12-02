@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/ProductImageButtons.css'
 
-function ProductImageSlider(props){
+function ProductImageSlider(props){ //re-render as url passed from the productImageCarousel is changed
     const styling={
         display:'block',
         marginLeft: 'auto',

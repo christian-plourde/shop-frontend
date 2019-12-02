@@ -4,6 +4,7 @@ import Review from "./Review.js";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProductImageCarousel from './ProductImageCarousel.js'
 import ProductComments from './ProductComments.js'
+import localhost from '../LocalHost.js'
 
 //2019-11-15, product page layout prototype, cannot access the product image for some reason, scr links to the images readily accessible via localhost url address
 //added: basic layout, working rendering of text attributes for product page
@@ -13,7 +14,7 @@ import ProductComments from './ProductComments.js'
 //removed: flex display in css because it messes up the layout, should probably use bootstrap once everything is rendering properly
 
 //need to implement: review score by fetching via API, photo slider with bottom thumbnails, fix lack of key props to child component warning
-
+//gave up tracking onward, but need to implement styling, review rating display, and purchase console
 class ProductPage extends React.Component {
 
   constructor(props) {
@@ -23,15 +24,15 @@ class ProductPage extends React.Component {
       isLoaded: false,
       data: [],
       productReviews: [],
-      productReviewsComponents: [],
       productReviewsMeta: {}
     };
   }
 
   componentDidMount() {
-    //https://shop-354.herokuapp.com/Products.json
-    //http://localhost:3000/Products.json
-    fetch("http://localhost:3000/Products.json", {
+    const productSource = (localhost) ?
+      "http://localhost:3000/Products.json"
+      : 'https://shop-354.herokuapp.com/Products.json';
+    fetch(productSource, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -43,15 +44,16 @@ class ProductPage extends React.Component {
         this.setState({
           isLoaded: true,
           data: productData.products
-        });  
+        });
       });
 
-    //acquiring the review array associated with the received prop's ID
-    //`http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`
-    //`https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
-    let review_product_id = this.props.match.params.product_id;
+    let review_product_id = this.props.match.params.product_id; //acquiring the review array associated with the received prop's ID
+    const reviewSource = (localhost) ?
+      `http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`
+      : `https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
+
     this.setState({ isLoaded: false })
-    fetch(`http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`, {
+    fetch(reviewSource, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -62,9 +64,7 @@ class ProductPage extends React.Component {
         this.setState({ productReviews: productReview, isLoaded: true });
       })
 
-
-
-    //acquiring the review meta data
+    // need to acquire the review meta data
     //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${review_product_id}`
     //`http://shop-354.herokuapp.com/reviews.php?averagereview=${review_product_id}`
   }
@@ -84,8 +84,7 @@ class ProductPage extends React.Component {
         }
       }
 
-      //generating an array of review components
-      const reviewComponents = this.state.productReviews.map((reviewItems, index) =>
+      const reviewComponents = this.state.productReviews.map((reviewItems, index) => //generating an array of review components
         <Review
           key={reviewItems.index}
           reviewID={reviewItems.reviewID}
@@ -97,31 +96,25 @@ class ProductPage extends React.Component {
         //spent the last 3 hours trying to figure out why reviews aren't been rendered, turned out removing curly brackets next to <Review .../> fixed it
       );
 
-      //`https://shop-354.herokuapp.com/${product.picture.substring(1)}`
-      //`http://localhost:3000${product.picture.substring(1)}`
-      const imageSource = `http://localhost:3000${product.picture.substring(1)}` //generating a product image array
-      const imageSources = [imageSource]
-      
-      let dice = Math.random()*10
-      if (dice>2.5){
+      const imageSource = (localStorage) ?
+        `http://localhost:3000${product.picture.substring(1)}`
+        : `https://shop-354.herokuapp.com/${product.picture.substring(1)}`
+
+      const imageSources = [imageSource]//generating a product image url array with randomly inserted Shrek, ISS and Donkey(from Shrek)
+
+      let dice = Math.random() * 10
+      if (dice > 2.5) {
         imageSources.push('https://upload.wikimedia.org/wikipedia/en/4/4d/Shrek_%28character%29.png')
       }
-      if (dice>5){
+      if (dice > 5) {
         imageSources.push('https://www.ctl.io/assets/images/products/managed-services/logos/ms-iis-color.png')
       }
-      if (dice>7.5){
+      if (dice > 7.5) {
         imageSources.push('https://upload.wikimedia.org/wikipedia/en/6/6c/Donkey_%28Shrek%29.png')
       }
-      if (dice>9){
-        imageSource.push('https://i.redd.it/iu1bhetpmb041.jpg')
+      if (dice > 9) {
+        imageSources.push('https://i.redd.it/iu1bhetpmb041.jpg')
       }
-
-      // let isLoggedIn = false
-      // if(sessionStorage.getItem("logged_in_user") != null){
-      //   isLoggedIn = true
-      // }
-
-
 
       return (
         <div className="container">
@@ -129,10 +122,7 @@ class ProductPage extends React.Component {
           <div className="rating"> product rating</div>
           <div className="inner_container">
             <div className="photo">
-              {
-              //<img className="product_image" src={imageSource} />
-              }
-              <ProductImageCarousel url={imageSources}/>
+              <ProductImageCarousel url={imageSources} />
             </div>
             <div className="text">
               <p>Item Description:<br />{product.descriptionText}</p>
@@ -143,7 +133,7 @@ class ProductPage extends React.Component {
               </ul>
             </div>
             <div id="purchase">
-              <ProductComments product_id={this.props.match.params.product_id}/>  
+              <ProductComments product_id={this.props.match.params.product_id} />
             </div>
           </div>
           <div>
