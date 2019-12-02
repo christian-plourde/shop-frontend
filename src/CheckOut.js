@@ -27,7 +27,6 @@ class CheckOut extends Component {
   }
 
   render() {
-
     var cart_array = this.getCart();
 
     return (

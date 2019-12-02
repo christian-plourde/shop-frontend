@@ -39,6 +39,7 @@ class NavbarFunction extends Component {
   }
 
   componentDidMount() {
+
     console.log('Navbar : this.props.data', this.props.data, ' Execute php? ', !this.props.data)
 
     //If we're not getting our data from the landing page...
@@ -245,6 +246,7 @@ class NavbarFunction extends Component {
  render(){
   const{isLoaded,text}= this.state;
 
+  var render_cart = (localStorage.getItem("logged_in_user") && localStorage.getItem("logged_in_user" !== "admin") && localStorage.getItem("cart"))
 
     if (!isLoaded) {
       return <div> loading...</div>;
@@ -426,7 +428,7 @@ class NavbarFunction extends Component {
                   </Link>
                 )}
 
-                {localStorage.getItem("cart") ? (
+                {render_cart ? (
                   <Link to="/checkout">
                     <button
                       id="cart"
@@ -435,7 +437,9 @@ class NavbarFunction extends Component {
                     >
                       <i id="shoppingCart" class="fas fa-shopping-cart"></i>
                       {/*<span class="counter">{this.state.cartQuantity}</span>*/}
-                      <span class="counter">{(!this.props.cartQuantity) ? this.state.cartQuantity : this.props.cartQuantity}</span>
+                      <span class="counter">{
+                        //If we receive cart quantity as a prop, render that. Else, render the state
+                        !this.props.cartQuantity ? this.state.cartQuantity : this.props.cartQuantity}</span>
                     </button>
                   </Link>
                 )
