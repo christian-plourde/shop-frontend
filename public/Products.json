@@ -1,5 +1,5 @@
 {
-	"products": 
+	"products":
 	[
 		{
 			"ownerID": 1,
@@ -11,7 +11,7 @@
 			"productPrice": 20.00,
 			"descriptionText": "Stunning Microsoft Azure mug to make all your coworkers jealous.",
 			"picture": "./ressources/img/images/azure_mug.jpg",
-			"tags": 
+			"tags":
 			[
 				"kitchen",
 				"mug",
@@ -30,7 +30,7 @@
 			"productPrice": 13.46,
 			"descriptionText": "Power strip with 6 outlets and built in 790 joule surge protection with 6 foot ling power cord.",
 			"picture": "./ressources/img/images/power_strip_black.jpg",
-			"tags": 
+			"tags":
 			[
 				"electrical",
 				"power",
@@ -49,7 +49,7 @@
 			"productPrice": 26.95,
 			"descriptionText": "Large umbrella with teflon coating and included carrying pouch",
 			"picture": "./ressources/img/images/black_umbrella.jpg",
-			"tags": 
+			"tags":
 			[
 				"umbrella",
 				"black",
@@ -67,7 +67,7 @@
 			"productPrice": 26.99,
 			"descriptionText": "Pack of ten wooden clothes hangers, wood.",
 			"picture": "./ressources/img/images/wooden_hangers.jpg",
-			"tags": 
+			"tags":
 			[
 				"home",
 				"hanger",
@@ -87,7 +87,7 @@
 			"productPrice": 50.44,
 			"descriptionText": "Comprehensive guide on developing web applications with the wonderful Microsoft IIS 8 Web Server.",
 			"picture": "./ressources/img/images/iis_8_textbook.png",
-			"tags": 
+			"tags":
 			[
 				"home",
 				"hanger",
@@ -107,7 +107,7 @@
 			"productPrice": 15.24,
 			"descriptionText": "Digital kitchen scale for everyday use. Titanium built to last.",
 			"picture": "./ressources/img/images/kitchen_scale.png",
-			"tags": 
+			"tags":
 			[
 				"home",
 				"kitchen",
@@ -127,7 +127,7 @@
 			"productPrice": 61.19,
 			"descriptionText": "Twin size inflatable mattress for camping. Pump included.",
 			"picture": "./ressources/img/images/air_mattress.jpg",
-			"tags": 
+			"tags":
 			[
 				"home",
 				"camping",
@@ -148,7 +148,7 @@
 			"productPrice": 20.19,
 			"descriptionText": "Digital alarm clock with two alarm settings. 4' power cord.",
 			"picture": "./ressources/img/images/alarm_clock.jpg",
-			"tags": 
+			"tags":
 			[
 				"home",
 				"alarm",
@@ -168,7 +168,7 @@
 			"productPrice": 25.69,
 			"descriptionText": "LED 4 number home address plate for driveway.",
 			"picture": "./ressources/img/images/address_plate.jpg",
-			"tags": 
+			"tags":
 			[
 				"home",
 				"address",
@@ -188,7 +188,7 @@
 			"productPrice": 12.29,
 			"descriptionText": "Kitted green Shrek inspired hat to make everyone get out of your swamp.",
 			"picture": "./ressources/img/images/shrek_hat.jpg",
-			"tags": 
+			"tags":
 			[
 				"clothing",
 				"green",
@@ -208,7 +208,7 @@
 			"productPrice": 10.13,
 			"descriptionText": "Beige mug with entire shrek script printed over an image of Shrek's face. The magical text will always be with you.",
 			"picture": "./ressources/img/images/shrek_mug.jpg",
-			"tags": 
+			"tags":
 			[
 				"kitchen",
 				"mug",
@@ -227,7 +227,7 @@
 			"productPrice": 30.99,
 			"descriptionText": "Foldable wooden desk for the mobile office. Has enough space to comfortable place all of your tools for work.",
 			"picture": "./ressources/img/images/foldable_wooden_desk.jpg",
-			"tags": 
+			"tags":
 			[
 				"office",
 				"wood",
@@ -246,7 +246,7 @@
 			"productPrice": 10.99,
 			"descriptionText": "A stunning Shrek themed T-Shirt so you can proudly display your ogre friend.",
 			"picture": "./ressources/img/images/shrek_shirt.jpg",
-			"tags": 
+			"tags":
 			[
 				"clothing",
 				"white",
@@ -265,7 +265,7 @@
 			"productPrice": 16.97,
 			"descriptionText": "Gold sequin throw pillow blending the faces of the legendary Nicolas Cage and Shrek.",
 			"picture": "./ressources/img/images/shrek_pillow.png",
-			"tags": 
+			"tags":
 			[
 				"shrek",
 				"gold",
@@ -285,7 +285,7 @@
 			"productPrice": 30.13,
 			"descriptionText": "Comprehensive guide to Microsoft Azure by Michael Collier and Robin Shahan.",
 			"picture": "./ressources/img/images/azure_textbook.png",
-			"tags": 
+			"tags":
 			[
 				"microsoft",
 				"azure",
@@ -306,7 +306,7 @@
 			"productPrice": 25.99,
 			"descriptionText": "Beige straw cowboy hat for outdoors.",
 			"picture": "./ressources/img/images/cowboy_hat.jpg",
-			"tags": 
+			"tags":
 			[
 				"clothing",
 				"hat",
@@ -326,7 +326,7 @@
 			"productPrice": 12.99,
 			"descriptionText": "Battery operated Shrek themed wall clock. Batteries not included.",
 			"picture": "./ressources/img/images/shrek_clock.jpg",
-			"tags": 
+			"tags":
 			[
 				"home",
 				"shrek",
@@ -344,7 +344,7 @@
 			"productPrice": 40.97,
 			"descriptionText": "Gray men's and women's running shoes. Perfect for running long distances as well as hiking.",
 			"picture": "./ressources/img/images/running_shoes.jpg",
-			"tags": 
+			"tags":
 			[
 				"clothing",
 				"shoes",
@@ -366,7 +366,7 @@
 			"productPrice": 42.12,
 			"descriptionText": "Sony blue overear heaphones with excellent bass.",
 			"picture": "./ressources/img/images/headphones.jpg",
-			"tags": 
+			"tags":
 			[
 				"sony",
 				"blue",
@@ -385,7 +385,7 @@
 			"productPrice": 50.12,
 			"descriptionText": "24 pack long-lasting Duracell 9V batteries for use in everyday electronics.",
 			"picture": "./ressources/img/images/battery.jpg",
-			"tags": 
+			"tags":
 			[
 				"electronic",
 				"duracell",
@@ -406,7 +406,7 @@
 			"productPrice": 8.99,
 			"descriptionText": "Beautiful Shrek and Mike Wazowski inspired phone case.",
 			"picture": "./ressources/img/images/shrek_phone_case.jpg",
-			"tags": 
+			"tags":
 			[
 				"electronic",
 				"shrek",
@@ -428,7 +428,7 @@
 			"productPrice": 8.99,
 			"descriptionText": "Bronze medal for feeling humble. Use when you cannot see yourself as a winner. Strap included.",
 			"picture": "./ressources/img/images/bronze_medal.jpg",
-			"tags": 
+			"tags":
 			[
 				"bronze",
 				"medal",
@@ -449,7 +449,7 @@
 			"productPrice": 8.99,
 			"descriptionText": "Roadhouse film starring Patrick Swayze from 1989.",
 			"picture": "./ressources/img/images/roadhouse.jpg",
-			"tags": 
+			"tags":
 			[
 				"roadhouse",
 				"patrick",
@@ -469,7 +469,7 @@
 			"productPrice": 120.99,
 			"descriptionText": "Men's black graphite hockey stick. Tape included.",
 			"picture": "./ressources/img/images/hockey_stick.jpg",
-			"tags": 
+			"tags":
 			[
 				"hockey",
 				"men",
@@ -489,7 +489,7 @@
 			"productPrice": 41.99,
 			"descriptionText": "Official Major League Soccer ball. Size 5.",
 			"picture": "./ressources/img/images/soccer_ball.jpg",
-			"tags": 
+			"tags":
 			[
 				"soccer",
 				"ball",
@@ -511,7 +511,7 @@
 			"productPrice": 6.99,
 			"descriptionText": "Blue non-scientific calculator for everyday use. Batteries not included.",
 			"picture": "./ressources/img/images/calculator.jpg",
-			"tags": 
+			"tags":
 			[
 				"calculator",
 				"blue",
@@ -531,7 +531,7 @@
 			"productPrice": 50.97,
 			"descriptionText": "Premium quality stethoscope for medical practicioners.",
 			"picture": "./ressources/img/images/stethoscope.jpg",
-			"tags": 
+			"tags":
 			[
 				"stethoscope",
 				"medical",
@@ -551,7 +551,7 @@
 			"productPrice": 53.12,
 			"descriptionText": "Placebo pills (60 capsules) for treating nothing at all. Sugary flavour.",
 			"picture": "./ressources/img/images/placebo.jpg",
-			"tags": 
+			"tags":
 			[
 				"placebo",
 				"medical",
@@ -573,7 +573,7 @@
 			"productPrice": 53.12,
 			"descriptionText": "Shrek children's halloween costume. Terrify your neighbors!",
 			"picture": "./ressources/img/images/shrek_costume.jpg",
-			"tags": 
+			"tags":
 			[
 				"shrek",
 				"clothing",
@@ -592,7 +592,7 @@
 			"productPrice": 67.99,
 			"descriptionText": "Backpack for dogs. Perfect for hiking with your best friend.",
 			"picture": "./ressources/img/images/dog_backpack.jpg",
-			"tags": 
+			"tags":
 			[
 				"dog",
 				"backpack",
@@ -612,7 +612,7 @@
 			"productPrice": 45.99,
 			"descriptionText": "Invisible hoodie. Green camouflage men's hoodie.",
 			"picture": "./ressources/img/images/camo_hoodie.jpg",
-			"tags": 
+			"tags":
 			[
 				"men",
 				"clothing",
@@ -632,7 +632,7 @@
 			"productPrice": 100.99,
 			"descriptionText": "Adult inflatable hotdog costume for halloween. Batteries not included.",
 			"picture": "./ressources/img/images/sausage_costume.jpg",
-			"tags": 
+			"tags":
 			[
 				"sausage",
 				"hotdog",
@@ -652,7 +652,7 @@
 			"productPrice": 25.99,
 			"descriptionText": "Bronze coated cooking pot.",
 			"picture": "./ressources/img/images/pot.jpg",
-			"tags": 
+			"tags":
 			[
 				"cooking",
 				"kitchen",
@@ -672,7 +672,7 @@
 			"productPrice": 3.99,
 			"descriptionText": "Birthday celebration lollipop. Used.",
 			"picture": "./ressources/img/images/lollipop.jpg",
-			"tags": 
+			"tags":
 			[
 				"birthday",
 				"home",
@@ -691,7 +691,7 @@
 			"productPrice": 6.99,
 			"descriptionText": "Crazy drinking straw assortment for parties. Contains 4.",
 			"picture": "./ressources/img/images/crazy_straw.jpg",
-			"tags": 
+			"tags":
 			[
 				"party",
 				"home",
@@ -711,7 +711,7 @@
 			"productPrice": 4.99,
 			"descriptionText": "Plastic carrying container for bananas. 3 pack.",
 			"picture": "./ressources/img/images/banana_holder.jpg",
-			"tags": 
+			"tags":
 			[
 				"kitchen",
 				"home",
@@ -730,7 +730,7 @@
 			"productPrice": 17.99,
 			"descriptionText": "Plastic food slicer. Can be used with almost anything.",
 			"picture": "./ressources/img/images/slap_chop.jpg",
-			"tags": 
+			"tags":
 			[
 				"kitchen",
 				"home",
@@ -751,7 +751,7 @@
 			"productPrice": 8.99,
 			"descriptionText": "Waterproof tape for sealing anything. Especially effective on boats.",
 			"picture": "./ressources/img/images/flex_tape.jpg",
-			"tags": 
+			"tags":
 			[
 				"flex",
 				"home",
@@ -771,7 +771,7 @@
 			"productPrice": 13.99,
 			"descriptionText": "Laundry detergent capsules that dissolve in the wash. Pack of 20. Do not eat.",
 			"picture": "./ressources/img/images/tide_pods.jpg",
-			"tags": 
+			"tags":
 			[
 				"tide",
 				"pods",
@@ -792,7 +792,7 @@
 			"productPrice": 85.99,
 			"descriptionText": "State of the art short wave radio receiver pair. Perfect for communicating with your grandparents.",
 			"picture": "./ressources/img/images/short_wave_radio.jpg",
-			"tags": 
+			"tags":
 			[
 				"short",
 				"wave",
@@ -812,7 +812,7 @@
 			"productPrice": 5.99,
 			"descriptionText": "Gold medal for self help purposes. Feel like a winner! Strap not included.",
 			"picture": "./ressources/img/images/gold_medal.jpg",
-			"tags": 
+			"tags":
 			[
 				"gold",
 				"medal",
@@ -832,7 +832,7 @@
 			"productPrice": 67.99,
 			"descriptionText": "Men's rollerblades. Three wheels for added speed.",
 			"picture": "./ressources/img/images/rollerblades.jpg",
-			"tags": 
+			"tags":
 			[
 				"black",
 				"men",
@@ -852,7 +852,7 @@
 			"productPrice": 112.99,
 			"descriptionText": "Industrial quality waste basket. Made from the best aerospace grade materials.",
 			"picture": "./ressources/img/images/trash_can.jpg",
-			"tags": 
+			"tags":
 			[
 				"silver",
 				"trash",
@@ -872,7 +872,7 @@
 			"productPrice": 10.99,
 			"descriptionText": "Revolutionary telescopic back scratcher.",
 			"picture": "./ressources/img/images/back_scratcher.jpg",
-			"tags": 
+			"tags":
 			[
 				"back",
 				"scratcher",
@@ -891,7 +891,7 @@
 			"productPrice": 25.99,
 			"descriptionText": "Car air freshener refill to give your car that new car smell. 1 gallon.",
 			"picture": "./ressources/img/images/air_freshener.png",
-			"tags": 
+			"tags":
 			[
 				"car",
 				"air",
@@ -909,7 +909,7 @@
 			"productPrice": 11.27,
 			"descriptionText": "Stuffed animal shaped like a penguin.",
 			"picture": "./ressources/img/images/penguin.jpg",
-			"tags": 
+			"tags":
 			[
 				"stuffed",
 				"animal",
@@ -928,7 +928,7 @@
 			"productPrice": 8.27,
 			"descriptionText": "Box of 100 Q-Tips brand cotton swap. Opened and used.",
 			"picture": "./ressources/img/images/q_tips.jpg",
-			"tags": 
+			"tags":
 			[
 				"q-tips",
 				"cotton",
@@ -949,7 +949,7 @@
 			"productPrice": 29.87,
 			"descriptionText": "Model train toy of Thomas the Tank Engine.",
 			"picture": "./ressources/img/images/thomas.jpg",
-			"tags": 
+			"tags":
 			[
 				"thomas",
 				"tank",
@@ -970,7 +970,7 @@
 			"productPrice": 37.87,
 			"descriptionText": "12 ft. long VGA cable perfect for connecting all your obsolete devices.",
 			"picture": "./ressources/img/images/vga_cable.jpg",
-			"tags": 
+			"tags":
 			[
 				"VGA",
 				"cable",
@@ -988,7 +988,7 @@
 			"productPrice": 2.99,
 			"descriptionText": "Authentic Star Wars action figure of famous villain Daft Serious.",
 			"picture": "./ressources/img/images/daft_serious.jpg",
-			"tags": 
+			"tags":
 			[
 				"wars",
 				"star",
