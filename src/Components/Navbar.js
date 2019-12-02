@@ -9,6 +9,7 @@ import Button from "react-bootstrap/Button";
 import "../styles/autoComplete.css";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
+import {Redirect} from "react-router";
 
 import DropdownItem from './Navbar/DropdownItem.js';
 import CategoryButton from './Navbar/CategoryButton.js';
@@ -27,7 +28,8 @@ class NavbarFunction extends Component {
          isLoaded:false,
          productNamesArray: [],
          tagsArray: [],
-         productData: []
+         productData: [],
+         isEnterPressed: false
       }
    }
 
@@ -149,6 +151,17 @@ class NavbarFunction extends Component {
       );
    }
 
+   keyPressHandler(e, newText){
+      console.log(newText);
+      console.log(this.state.isEnterPressed);
+      if(e.charCode === 13){     // char code for "Enter"
+         this.setState({
+            isEnterPressed: true,
+            text: newText        // the value we want to search
+         });
+      }
+   }
+
  render(){
   const{isLoaded,text}= this.state;
 
@@ -159,6 +172,16 @@ class NavbarFunction extends Component {
    return (
       <div>
          {/* First Container */}
+
+         {/* user presses Enter in the search bar */}
+         {this.state.isEnterPressed && <Redirect to={{
+            pathname: "/results",
+            query: this.state.productData,
+            element: text}} />}
+         
+         {/* reset enter's state */}
+         {this.state.isEnterPressed = false}
+
          <div id="firstContainer">
             <Navbar id="Navbar" bg="light" expand="lg">
                {/* Navbar Brand */}
@@ -171,6 +194,7 @@ class NavbarFunction extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                <Nav className="mr-auto">
+
                {/* Dropdown */}
                <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -209,7 +233,9 @@ class NavbarFunction extends Component {
             {/* Search Option */}
 
             <div className="Results">
-              <FormControl value={text} onChange={this.onTextChanged} type="text" placeholder="Search" className="mr-sm-2" />
+              <FormControl value={text} onChange={this.onTextChanged} 
+              onKeyPress={(e) => this.keyPressHandler(e, text)}
+              type="text" placeholder="Search" className="mr-sm-2" />
             {this.renderSuggestions()}
             </div>
 
