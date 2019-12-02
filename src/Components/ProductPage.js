@@ -179,7 +179,7 @@ class ProductPage extends React.Component {
         imageSources.push('https://upload.wikimedia.org/wikipedia/en/6/6c/Donkey_%28Shrek%29.png')
       }
       if (dice > 9) {
-        imageSource.push('https://i.redd.it/iu1bhetpmb041.jpg')
+        imageSources.push('https://i.redd.it/iu1bhetpmb041.jpg')
       }
 
       return (
