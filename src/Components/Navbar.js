@@ -11,6 +11,8 @@ import {BrowserRouter as Router, Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
 import {Redirect} from "react-router";
 
+import axios from 'axios';
+
 import DropdownItem from './Navbar/DropdownItem.js';
 import CategoryButton from './Navbar/CategoryButton.js';
 
@@ -35,49 +37,76 @@ class NavbarFunction extends Component {
 
    componentDidMount(){
      var site = (localhost) ?
-       "http://localhost:3000/Products.json"
-       : "https://shop-354.herokuapp.com/Products.json";
-      fetch(site, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      }
-    })
+       "http://localhost/shop-backend/php/get_products.php"
+       : "https://shop-354.herokuapp.com/get_products.php";
 
-      .then(response => response.json())
-      .then(productData => {
-        this.setState({
-          isLoaded: true
-        });
-        let jsonArray = JSON.parse(JSON.stringify(productData.products));
-        let tagsArray = [];
-        let productNamesArray = [];
-        for (var j in jsonArray) {
-          tagsArray.push(jsonArray[j].tags);
-          productNamesArray.push(jsonArray[j].productName);
-        }
+       const axiosConfig = {
+ 				headers: {
+             'Content-Type': 'application/json',
+ 						"Access-Control-Allow-Origin":"*",
+         },
+ 			};
 
-         let clothing = [];
-         let home = [];
-         let electronic = [];
-           for(var x in tagsArray){
-               for(var y in tagsArray[x]){
-                  if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
-                  if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
-                  if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
-               }
+      axios.post(site, null, axiosConfig)
+      .then(response => {
+          console.log('Response.data', response.data)
+          let jsonArray = JSON.parse(JSON.stringify(response.data.products));
+          let tagsArray = [];
+          let productNamesArray = [];
+          for (var j in jsonArray) {
+            tagsArray.push(jsonArray[j].tags);
+            productNamesArray.push(jsonArray[j].productName);
+          }
 
-           }
+           let clothing = [];
+           let home = [];
+           let electronic = [];
+             for(var x in tagsArray){
+                 for(var y in tagsArray[x]){
+                    if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
+                    if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
+                    if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
+                 }
 
-          this.setState({productNamesArray: productNamesArray,
-            tagsArray: tagsArray,
-            productData: jsonArray});
-      })
-   }
+             }
+
+             this.setState({
+               isLoaded: true
+             });
+            this.setState({productNamesArray: productNamesArray,
+              tagsArray: tagsArray,
+              productData: jsonArray});
+        })//end then
+   }//end componentDidMount
 
    search = () => {
      console.log('search toggled')
    }
+
+   // onSubmit = (e) =>{
+   //    const value = e;
+   //    let suggestions = [];
+   //    if(value.length >0){
+   //       const regex = new RegExp(`^${value}`,'i');
+   //       let tags = [];
+   //       let isAlreadyInArray=false;
+   //       for(var x in this.state.tagsArray){
+   //          for(var y in this.state.tagsArray[x]){
+   //             if(regex.test(this.state.tagsArray[x][y])){
+   //                for(var i in tags){
+   //                   if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}
+   //                }
+   //                if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
+   //                isAlreadyInArray=false;
+   //             }
+   //          }
+   //       }
+   //       suggestions = this.state.productNamesArray.filter(v=>regex.test(v)).concat(tags);
+   //
+   //    }
+   //    this.setState(() => ({suggestions,text:value}));
+   //    console.log(suggestions);
+   // }
 
    onSubmit = (e) =>{
       const value = e;
@@ -103,6 +132,7 @@ class NavbarFunction extends Component {
       this.setState(() => ({suggestions,text:value}));
       console.log(suggestions);
    }
+
    onTextChanged = (e) =>{
       const value = e.target.value;
       let suggestions = [];
