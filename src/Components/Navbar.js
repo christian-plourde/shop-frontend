@@ -33,12 +33,13 @@ class NavbarFunction extends Component {
       productNamesArray: [],
       tagsArray: [],
       productData: [],
-      cartQuantity:"",
+      cartQuantity:0,
       isEnterPressed: false
     };
   }
 
   componentDidMount() {
+
     console.log('Navbar : this.props.data', this.props.data, ' Execute php? ', !this.props.data)
 
     //If we're not getting our data from the landing page...
@@ -245,6 +246,7 @@ class NavbarFunction extends Component {
  render(){
   const{isLoaded,text}= this.state;
 
+  var render_cart = (localStorage.getItem("cart"))
 
     if (!isLoaded) {
       return <div> loading...</div>;
@@ -426,17 +428,36 @@ class NavbarFunction extends Component {
                   </Link>
                 )}
 
-                {/* Cart */}
-                <Link to="/checkout">
+                {render_cart ? (
+                  <Link to="/checkout">
+                    <button
+                      id="cart"
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                    >
+                      <i id="shoppingCart" class="fas fa-shopping-cart"></i>
+                      {/*<span class="counter">{this.state.cartQuantity}</span>*/}
+                      <span class="counter">{
+                        //If we receive cart quantity as a prop, render that. Else, render the state
+                        !this.props.cartQuantity ? this.state.cartQuantity : this.props.cartQuantity}</span>
+                    </button>
+                  </Link>
+                )
+                :(
                   <button
                     id="cart"
                     type="button"
                     class="btn btn-secondary btn-sm"
+                    onClick={()=>{window.alert('Your cart is empty!')}}
                   >
                     <i id="shoppingCart" class="fas fa-shopping-cart"></i>
-                    <span class="counter">{this.state.cartQuantity}</span>
+                    {/*<span class="counter">{this.state.cartQuantity}</span>*/}
+                    <span class="counter">{(!this.props.cartQuantity) ? this.state.cartQuantity : this.props.cartQuantity}</span>
                   </button>
-                </Link>
+                )
+                }
+
+
               </Navbar.Collapse>
             </Navbar>
           </div>

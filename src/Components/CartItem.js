@@ -1,71 +1,35 @@
 import React from "react";
 import "../styles/Cart.css";
 export default class CartItem extends React.Component {
-  state = {
-    quantity: 1,
-    total: 0
-  };
-  handleIncrement = () => {
-    this.setState({ quantity: ++this.state.quantity });
-    this.setState({ total: this.state.total + this.props.price });
-    this.sendTotal("+");
-    this.sendQuantity();
-  };
-  handleDecrement = () => {
-    if (this.state.quantity !== 1) {
-      this.setState({ quantity: --this.state.quantity });
-      this.setState({ total: this.state.total - this.props.price });
-      this.sendTotal("-");
-      this.sendQuantity();
-    } else
-      alert(
-        "Cannot decrease quantity. If you want to remove a product, please use the 'Remove' button"
-      );
-  };
 
-  sendTotal = s => {
-    if (s === "+") this.props.receiveTotal(this.props.price);
-    else this.props.receiveTotal(-this.props.price);
-  };
-
-  sendQuantity = () => {
-    this.props.receiveQuantity(this.state.quantity, this.props.id);
-    console.log(this.state.quantity);
-  };
-  componentDidMount() {
-    this.setState({
-      quantity: this.props.quantity,
-      total: this.props.price
-    });
-  }
-  componentDidUpdate() {
-    if (this.state.quantity !== this.props.quantity) {
-      this.setState({
-        quantity: this.props.quantity,
-        total: this.props.quantity * this.props.price
-      });
-    }
-  }
   render() {
-    const { name, brand, id, description, price, image } = this.props;
+
+    const { productName, brand, productID, descriptionText, productPrice, picture, cartQuantity } = this.props.product;
+
+    const total = parseFloat(cartQuantity) * parseFloat(productPrice);
+
     return (
       <div className="product" onLoad={this.sendQuantity}>
         <div className="product-image">
-          <img src={image} alt="Product" />
+          <img src={picture} alt="Product" />
         </div>
         <div className="product-details">
-          <div className="product-name">{name}</div>
+          <div className="product-name">{productName}</div>
           <div>{brand}</div>
-          <p className="product-description">{description}</p>
+          <p className="product-description">{descriptionText}</p>
         </div>
-        <div className="product-price">{price}</div>
+        <div className="product-price">{productPrice}</div>
         <div className="product-quantity">
           <div>
-            <button className="plus" onClick={this.handleIncrement}>
+            <button   className="plus"
+                      onClick={()=>this.props.handleIncrement(true, productID)}
+            >
               +
             </button>
-            <div>{this.state.quantity}</div>
-            <button className="minus" onClick={this.handleDecrement}>
+            <div>{cartQuantity}</div>
+            <button   className="minus"
+                      onClick={()=>this.props.handleIncrement(false, productID)}
+            >
               -
             </button>
           </div>
@@ -73,15 +37,15 @@ export default class CartItem extends React.Component {
         <div class="product-removal">
           <button
             class="remove-product"
-            onClick={() => this.props.onRemove(id)}
+            onClick={() => this.props.onRemove(productID)}
           >
             Remove
           </button>
         </div>
         <div class="product-line-price">
-        {!isNaN(this.state.total) ? Number.parseFloat(this.state.total).toFixed(2) : ''}
+        {total ? total.toFixed(2) : ''}
         </div>
       </div>
-    );
+    );//end return
   }
 }
