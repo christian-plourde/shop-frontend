@@ -33,7 +33,7 @@ class NavbarFunction extends Component {
       productNamesArray: [],
       tagsArray: [],
       productData: [],
-      cartQuantity:"",
+      cartQuantity:0,
       isEnterPressed: false
     };
   }
@@ -426,17 +426,34 @@ class NavbarFunction extends Component {
                   </Link>
                 )}
 
-                {/* Cart */}
-                <Link to="/checkout">
+                {localStorage.getItem("cart") ? (
+                  <Link to="/checkout">
+                    <button
+                      id="cart"
+                      type="button"
+                      class="btn btn-secondary btn-sm"
+                    >
+                      <i id="shoppingCart" class="fas fa-shopping-cart"></i>
+                      {/*<span class="counter">{this.state.cartQuantity}</span>*/}
+                      <span class="counter">{(!this.props.cartQuantity) ? this.state.cartQuantity : this.props.cartQuantity}</span>
+                    </button>
+                  </Link>
+                )
+                :(
                   <button
                     id="cart"
                     type="button"
                     class="btn btn-secondary btn-sm"
+                    onClick={()=>{window.alert('Your cart is empty!')}}
                   >
                     <i id="shoppingCart" class="fas fa-shopping-cart"></i>
-                    <span class="counter">{this.state.cartQuantity}</span>
+                    {/*<span class="counter">{this.state.cartQuantity}</span>*/}
+                    <span class="counter">{(!this.props.cartQuantity) ? this.state.cartQuantity : this.props.cartQuantity}</span>
                   </button>
-                </Link>
+                )
+                }
+
+
               </Navbar.Collapse>
             </Navbar>
           </div>

@@ -28,13 +28,15 @@ class CheckOut extends Component {
 
   render() {
 
+    var cart_array = this.getCart();
+
     return (
       <div>
         <div>
-          <Navbar />
+          <Navbar cartQuantity={cart_array.length} />
         </div>
         <div className="CheckOutBody">
-          <Cart products={this.getCart()}></Cart>
+          <Cart products={cart_array}></Cart>
         </div>
       </div>
     );
