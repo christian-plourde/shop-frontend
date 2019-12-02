@@ -15,60 +15,23 @@ class Cart extends Component {
       ableToCheckout: false
     };
   }
-  // componentDidMount() {
-  //   this.setState({
-  //     products: this.props.products
-  //   });
-  //   let sTotal = 0;
-  //   for (var x in this.props.products) {
-  //     sTotal += this.props.products[x].productPrice;
-  //   }
-  //   this.setState({
-  //     subtotal: sTotal,
-  //     total: sTotal + sTotal * 0.15
-  //   });
-  // }
 
   componentDidMount() {
     this.setState({
       products: this.props.products
     });
+    //Also recompute subtotal and total
     let sTotal = 0;
     for (var x in this.props.products) {
-      sTotal += Number.parseFloat(this.props.products[x].productPrice);
+      let product = this.props.products[x];
+      sTotal += Number.parseFloat(product.productPrice) * Number.parseFloat(product.cartQuantity);
     }
     this.setState({
       subtotal: sTotal.toFixed(2),
       total: (sTotal.toFixed(2) * 1.15).toFixed(2)
     });
-
-
   }
-  // componentDidUpdate() {
-  //   if (
-  //     this.state.total !==
-  //     this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
-  //   ) {
-  //     this.setState({
-  //       total:
-  //         this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
-  //     });
-  //   }
-  // }
 
-  componentDidUpdate() {
-    //If there's been an update...
-    //What our total should be
-    let supposed_total = this.state.subtotal * 1.15 + this.state.shipping;
-    //...and If the total value is no longer equal to the subtotal
-    if (this.state.total !== supposed_total) {
-      this.setState({
-        total:
-          supposed_total
-      });
-    }
-  }
-  
   handleShipping = () => {
     if (document.getElementById("exp").checked) {
       this.setState({ shipping: 15.0, methodSelected: "express" });
@@ -121,17 +84,6 @@ class Cart extends Component {
     } else alert("Verify the delivery address before checking out!");
   };
 
-  adjustSubTotal = price => {
-    this.setState({ subtotal: price + this.state.subtotal });
-  };
-
-  receiveQuantity = (quantity, productID) => {
-    let updatedProducts = this.state.products;
-    updatedProducts.find(
-      toChange => toChange.productID === productID
-    ).cartQuantity = quantity;
-    this.setState({ products: updatedProducts });
-  };
 
   checkShippingInfo = validity => {
     if (validity) {
@@ -140,6 +92,55 @@ class Cart extends Component {
     }
     return false;
   };
+
+//A function to handle button presses + or -, to be passed to the cart component.
+//If isIncrement is true, increment the quantity. Else, decrement.
+  handleButtonPress = (isIncrement, product_id) =>
+  {
+    // console.log('Handle button press; products before button press ', this.state.products)
+    // console.log('Handle button press; subtotal before button press ', this.state.subtotal)
+    // return;
+    let product_list = [];
+    for(var index = 0; index < this.state.products.length; index++)
+    {
+      let product = this.state.products[index];
+      // console.log('Handle button press :: Verifying product ', product)
+      let product_to_push = product;
+      let product_quantity = Number.parseInt(product_to_push.cartQuantity)
+      if (product_to_push.productID == product_id)
+      {
+        if(product_quantity == 1 && !isIncrement)
+        {
+          window.alert(
+            'Use the remove button'
+          );
+          return;
+        }
+        product_to_push.cartQuantity = (isIncrement)
+          ? product_quantity + 1
+          : product_quantity - 1;
+        // console.log('Updated quantity from', product_quantity, ' to ', product_to_push.cartQuantity,' of product ', product)
+      }
+      //Replace the product list
+      product_list.push(product_to_push)
+    }
+    this.setState({products:product_list})
+
+    // console.log('Handle button press; products after button press ', this.state.products)
+
+    //Also recompute subtotal and total
+    let sTotal = 0;
+    for (var x in this.props.products) {
+      let product = this.props.products[x];
+      sTotal += Number.parseFloat(product.productPrice) * Number.parseFloat(product.cartQuantity);
+    }
+    this.setState({
+      subtotal: sTotal.toFixed(2),
+      total: (sTotal.toFixed(2) * 1.15).toFixed(2)
+    });
+
+    // console.log('Handle button press; subtotal after button press ', this.state.subtotal)
+  }
 
   render() {
     return (
@@ -155,19 +156,13 @@ class Cart extends Component {
             <label class="product-line-price">Total</label>
           </div>
           <div>
-            {this.state.products.map(x => {
+            {this.state.products.map(product => {
+            
               return (
                 <CartItem
-                  id={x.productID}
-                  name={x.productName}
-                  description={x.descriptionText}
-                  price={x.productPrice}
-                  brand={x.modelName}
-                  quantity={x.cartQuantity}
-                  onRemove={() => this.handleRemove(x.productID)}
-                  receiveTotal={this.adjustSubTotal}
-                  receiveQuantity={this.receiveQuantity}
-                  image={x.picture}
+                  product={product}
+                  handleIncrement={this.handleButtonPress}
+                  onRemove={() => this.handleRemove(product.productID)}
                 />
               );
             })}
