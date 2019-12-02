@@ -159,7 +159,7 @@ class NavbarFunction extends Component {
       suggestions: []
     }));
   }
-  renderSuggestions() {
+ renderSuggestions() {
     const { suggestions } = this.state;
     if (suggestions.length === 0) {
       return null;
@@ -173,28 +173,28 @@ class NavbarFunction extends Component {
               query: this.state.productData,
               element: item
             }}
-          >
-            <li onClick={() => this.suggestionSelected(item)}>{item}</li>{" "}
-          </Link>
-        ))}
-      </ul>
-    );
-  }
 
-  keyPressHandler(e, newText) {
-    console.log(newText);
-    console.log(this.state.isEnterPressed);
-    if (e.charCode === 13) {
-      // char code for "Enter"
-      this.setState({
-        isEnterPressed: true,
-        text: newText // the value we want to search
-      });
-    }
-  }
+            >
+               <li onClick={() => this.suggestionSelected(item)}>{item}</li> </Link>))}
+         </ul>
+      );
+}
 
-  render() {
-    const { isLoaded, text } = this.state;
+   keyPressHandler(e, newText){
+      console.log(newText);
+      console.log(this.state.isEnterPressed);
+      // charcode 13 is "Enter" && text can't be empty && text can't be whitespaces only
+      if(e.charCode === 13 && !!newText && newText.trim().length > 0){
+         this.setState({
+            isEnterPressed: true,
+            text: newText        // the user's input
+         });
+      }
+   }
+
+ render(){
+  const{isLoaded,text}= this.state;
+
 
     if (!isLoaded) {
       return <div> loading...</div>;
@@ -219,6 +219,7 @@ class NavbarFunction extends Component {
 
           <div id="firstContainer">
             <Navbar id="Navbar" bg="light" expand="lg">
+
               {/* Navbar Brand */}
               <Navbar.Brand href="../" id="brand">
                 <i id="brandLogo" class="fas fa-spa"></i>
@@ -324,9 +325,13 @@ class NavbarFunction extends Component {
                     element: this.state.text
                   }}
                 >
-                  <Button id="search" variant="outline-success">
-                    Search
-                  </Button>
+                  /* Button is disabed if search bar is empty or only contains whitespaces */}
+
+            <Button id="search" disabled={!text || text.trim().length <= 0} variant="outline-success">
+
+              Search
+
+            </Button>
                 </Link>
 
                 {/* Login */}
