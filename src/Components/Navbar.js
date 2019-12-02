@@ -39,57 +39,95 @@ class NavbarFunction extends Component {
   }
 
   componentDidMount() {
-    var site = localhost
-      ? "http://localhost:80/shop-backend/php/get_products.php"
+    console.log('Navbar : this.props.data', this.props.data, ' Execute php? ', !this.props.data)
+
+    //If we're not getting our data from the landing page...
+    if (!this.props.data)
+    {
+      //...then go fetch the data from the database
+      this.setStateViaAxios();
+    }
+    //...else if we're getting our data as a prop already,...
+    else
+    {
+      //...then just use that.
+      this.setStateViaProp();
+    }
+
+  }//end component did mount
+
+  setStateViaAxios = () => {
+    var site = (localhost) ?
+      "http://localhost/shop-backend/php/get_products.php"
       : "https://shop-354.herokuapp.com/get_products.php";
 
-    const axiosConfig = {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-      }
-    };
+      const axiosConfig = {
+       headers: {
+            'Content-Type': 'application/json',
+           "Access-Control-Allow-Origin":"*",
+        },
+     };
 
-    axios.post(site, null, axiosConfig)
-    .then(response => {
-      console.log("Response.data", response.data);
-      let jsonArray = JSON.parse(JSON.stringify(response.data.products));
-      let tagsArray = [];
-      let productNamesArray = [];
-      for (var j in jsonArray) {
-        tagsArray.push(jsonArray[j].tags);
-        productNamesArray.push(jsonArray[j].productName);
-      }
+     axios.post(site, null, axiosConfig)
+     .then(response => {
+         console.log('Response.data', response.data)
+         let jsonArray = JSON.parse(JSON.stringify(response.data.products));
+         let tagsArray = [];
+         let productNamesArray = [];
+         for (var j in jsonArray) {
+           tagsArray.push(jsonArray[j].tags);
+           productNamesArray.push(jsonArray[j].productName);
+         }
 
-      let clothing = [];
-      let home = [];
-      let electronic = [];
-      for (var x in tagsArray) {
-        for (var y in tagsArray[x]) {
-          if (tagsArray[x][y] === "clothing") {
-            clothing.push(jsonArray[x]);
-          }
-          if (tagsArray[x][y] === "home") {
-            home.push(jsonArray[x]);
-          }
-          if (tagsArray[x][y] === "electronic") {
-            electronic.push(jsonArray[x]);
-          }
-        }
-      }
+          let clothing = [];
+          let home = [];
+          let electronic = [];
+            for(var x in tagsArray){
+                for(var y in tagsArray[x]){
+                   if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
+                   if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
+                   if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
+                }
 
-        this.setState({
-          isLoaded:true	,
-          productNamesArray: productNamesArray,
-          tagsArray: tagsArray,
-          productData: jsonArray
-        });
-      },
-      error => {
-        console.log("Error", error);
-      }
-    );//end then
-  }
+            }
+
+            this.setState({
+              isLoaded: true
+            });
+           this.setState({productNamesArray: productNamesArray,
+             tagsArray: tagsArray,
+             productData: jsonArray});
+       })//end then
+  }//end set state via axios
+
+  setStateViaProp = () => {
+    let tagsArray = [];
+    let productNamesArray = [];
+    for (var j in this.props.data) {
+      tagsArray.push(this.props.data[j].tags);
+      productNamesArray.push(this.props.data[j].productName);
+    }
+     let clothing = [];
+     let home = [];
+     let electronic = [];
+       for(var x in this.props.data){
+           for(var y in this.props.data[x]){
+              if(tagsArray[x][y] ==="clothing"){clothing.push(this.props.data[x])}
+              if(tagsArray[x][y] ==="home"){home.push(this.props.data[x])}
+              if(tagsArray[x][y] ==="electronic"){electronic.push(this.props.data[x])}
+           }
+
+       }
+
+       this.setState({
+         isLoaded: true
+       });
+      this.setState({productNamesArray: productNamesArray,
+        tagsArray: tagsArray,
+        productData: this.props.data});
+  }//end set state via props
+
+
   componentDidUpdate(){
     console.log("Navbar-78")
     let item = localStorage.getItem("cartQuantity")
@@ -327,7 +365,7 @@ class NavbarFunction extends Component {
                     element: this.state.text
                   }}
                 >
-                  /* Button is disabed if search bar is empty or only contains whitespaces */}
+                  {/* Button is disabed if search bar is empty or only contains whitespaces */}
 
             <Button id="search" disabled={!text || text.trim().length <= 0} variant="outline-success">
 

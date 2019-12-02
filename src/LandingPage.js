@@ -25,9 +25,7 @@ class LandingPage extends Component {
       quantity: ""
     };
   }
-  //http://localhost:3000/Products.json
-  //https://shop-354.herokuapp.com/product.php?products=-1
-  // http://localhost:80/shop-frontend/shop-backend/php/product.php?products=-1
+
   componentDidMount() {
     var site = localhost
       ? "http://localhost:80/shop-backend/php/get_products.php"
@@ -83,13 +81,14 @@ class LandingPage extends Component {
           data: jsonArray
         });
       });
-  }
+  }//end component did mount
+
   changeQuantity() {
     let quantityNow = localStorage.getItem("cartQuantity")
     if(quantityNow != this.state.quantity){
       this.setState({quantity:quantityNow})
     }
-    
+
   }
   render() {
     const {
@@ -106,7 +105,8 @@ class LandingPage extends Component {
     } else {
       return (
         <div>
-          <Navbar productNames={productNames} tags={tags} products={data} cartQuantity={this.state.quantity}/>
+          {/*<Navbar productNames={productNames} tags={tags} products={data} cartQuantity={this.state.quantity}/>*/}
+          <Navbar data={data} />
           <div className="LandingPageBody">
             <div>
               <div className="LandingPageBody">
@@ -118,10 +118,10 @@ class LandingPage extends Component {
                   />
                 </div>
                 <div>
-                  <Carousel 
-                  data={homeProducts} 
-                  category="Home Products" 
-                  updateQuantity={()=> this.changeQuantity()} 
+                  <Carousel
+                  data={homeProducts}
+                  category="Home Products"
+                  updateQuantity={()=> this.changeQuantity()}
                   />
                 </div>
                 <div>
