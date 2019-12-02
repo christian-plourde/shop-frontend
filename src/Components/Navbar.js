@@ -126,7 +126,7 @@ class NavbarFunction extends Component {
    search = () => {
      console.log('search toggled')
    }
-   
+
    onSubmit = (e) =>{
       const value = e;
       let suggestions = [];
