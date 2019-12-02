@@ -246,7 +246,7 @@ class NavbarFunction extends Component {
  render(){
   const{isLoaded,text}= this.state;
 
-  var render_cart = (localStorage.getItem("logged_in_user") && localStorage.getItem("logged_in_user" !== "admin") && localStorage.getItem("cart"))
+  var render_cart = (localStorage.getItem("cart"))
 
     if (!isLoaded) {
       return <div> loading...</div>;
