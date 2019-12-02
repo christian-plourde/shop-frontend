@@ -18,6 +18,9 @@ class Carousel extends Component{
         isLoaded:true,
      })
     }
+    change(){
+      console.log("Carousel-22")
+    }
 
    render(){
       const settings = {
@@ -55,7 +58,7 @@ class Carousel extends Component{
                           picture= {data.picture}
                           id={data.productID}
                           product={data}
-
+                          updateQuantity={()=> this.props.updateQuantity()}
             />
 
           ))}

@@ -15,10 +15,13 @@ class LandingPage extends Component {
       productNames: [],
       clothingProducts: [],
       homeProducts: [],
-      electronicProducts: []
+      electronicProducts: [],
+      quantity:""
     };
   }
-
+  //http://localhost:3000/Products.json
+  //https://shop-354.herokuapp.com/product.php?products=-1
+ // http://localhost:80/shop-frontend/shop-backend/php/product.php?products=-1
   componentDidMount() {
     fetch("http://localhost:3000/Products.json", {
       headers: {
@@ -26,12 +29,15 @@ class LandingPage extends Component {
         Accept: "application/json"
       }
     })
-      .then(response => response.json())
+      .then(response =>{
+        return response.json();
+      })//response is mapped on productData
       .then(productData => {
+        console.log(typeof(productData))
         this.setState({
           isLoaded: true,
           data: productData.products
-        });
+      });
         let jsonArray = JSON.parse(JSON.stringify(this.state.data));
         let tagsArray = [];
         let productNamesArray = [];
@@ -66,6 +72,15 @@ class LandingPage extends Component {
         });
       });
   }
+  changeQuantity() {
+    console.log("LandingPage-72")
+    //localStorage.setItem("cartQuantity","5")
+    let quantityNow = localStorage.getItem("cartQuantity")
+    if(quantityNow != this.state.quantity){
+      this.setState({quantity:quantityNow})
+    }
+    
+  }
   render() {
     const {
       isLoaded,
@@ -81,7 +96,7 @@ class LandingPage extends Component {
     } else {
       return (
         <div>
-          <Navbar productNames={productNames} tags={tags} products={data} />
+          <Navbar productNames={productNames} tags={tags} products={data} cartQuantity={this.state.quantity}/>
           <div className="LandingPageBody">
             <div>
               <div className="LandingPageBody">
@@ -89,6 +104,7 @@ class LandingPage extends Component {
                   <Carousel
                     data={clothingProducts}
                     category="Clothing Products"
+                    updateQuantity={()=> this.changeQuantity()}
                   />
                 </div>
                 <div>

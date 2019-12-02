@@ -23,7 +23,8 @@ class NavbarFunction extends Component {
       isLoaded: false,
       productNamesArray: [],
       tagsArray: [],
-      productData: []
+      productData: [],
+      cartQuantity:""
     };
   }
 
@@ -72,6 +73,14 @@ class NavbarFunction extends Component {
           productData: jsonArray
         });
       });
+  }
+  componentDidUpdate(){
+    console.log("Navbar-78")
+    let item = localStorage.getItem("cartQuantity")
+    console.log("Navbar-80-", "newCartValue", item)
+    if(this.state.cartQuantity != item ){
+      this.setState({ cartQuantity:item})
+    }
   }
   onSubmit = e => {
     const value = e;
@@ -167,6 +176,7 @@ class NavbarFunction extends Component {
       return (
         <div>
           {/* First Container */}
+          
           <div id="firstContainer">
             <Navbar id="Navbar" bg="light" expand="lg">
               {/* Navbar Brand */}
@@ -397,6 +407,7 @@ class NavbarFunction extends Component {
                     class="btn btn-secondary btn-sm"
                   >
                     <i id="shoppingCart" class="fas fa-shopping-cart"></i>
+                    <span class="counter">{this.state.cartQuantity}</span>
                   </button>
                 </Link>
               </Navbar.Collapse>

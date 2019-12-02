@@ -29,6 +29,23 @@ class App extends Component {
           }}
         />
 
+        {/*The main login page*/}
+      
+
+        {/*The page to recover the user's password*/}
+
+        
+        {/*The pafe for the user to register a new account on the site*/}
+
+        <Route
+          path="/register"
+          exact
+          strict
+          render={() => {
+            return <Registration />;
+          }}
+        />
+
         <Route
           path="/checkout"
           exact
@@ -86,15 +103,6 @@ class App extends Component {
         />
 
         {/*The pafe for the user to register a new account on the site*/}
-
-        <Route
-          path="/register"
-          exact
-          strict
-          render={() => {
-            return <Registration />;
-          }}
-        />
 
         <Route path="/results" exact strict component={SearchResults} />
 
