@@ -81,6 +81,31 @@ class NavbarFunction extends Component {
      console.log('search toggled')
    }
 
+   // onSubmit = (e) =>{
+   //    const value = e;
+   //    let suggestions = [];
+   //    if(value.length >0){
+   //       const regex = new RegExp(`^${value}`,'i');
+   //       let tags = [];
+   //       let isAlreadyInArray=false;
+   //       for(var x in this.state.tagsArray){
+   //          for(var y in this.state.tagsArray[x]){
+   //             if(regex.test(this.state.tagsArray[x][y])){
+   //                for(var i in tags){
+   //                   if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}
+   //                }
+   //                if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
+   //                isAlreadyInArray=false;
+   //             }
+   //          }
+   //       }
+   //       suggestions = this.state.productNamesArray.filter(v=>regex.test(v)).concat(tags);
+   //
+   //    }
+   //    this.setState(() => ({suggestions,text:value}));
+   //    console.log(suggestions);
+   // }
+
    onSubmit = (e) =>{
       const value = e;
       let suggestions = [];
@@ -105,6 +130,7 @@ class NavbarFunction extends Component {
       this.setState(() => ({suggestions,text:value}));
       console.log(suggestions);
    }
+
    onTextChanged = (e) =>{
       const value = e.target.value;
       let suggestions = [];

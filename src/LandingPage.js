@@ -26,53 +26,6 @@ class LandingPage extends Component {
   }
 
 
-  // componentDidMount() {
-  //   var site = (localhost) ?
-  //     "http://localhost:3000/Products.json"
-  //     : "https://shop-354.herokuapp.com/Products.json";
-  //   fetch(site, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json"
-  //     }
-  //   })
-  //
-  //     .then(response => response.json())
-  //     .then(productData => {
-  //       this.setState({
-  //         isLoaded: true,
-  //         data: productData.products
-  //       });
-  //       let jsonArray = JSON.parse(JSON.stringify(this.state.data));
-  //       let tagsArray = [];
-  //       let productNamesArray = [];
-  //       for (var j in jsonArray) {
-  //         tagsArray.push(jsonArray[j].tags);
-  //         productNamesArray.push(jsonArray[j].productName);
-  //       }
-  //
-  //        let clothing = [];
-  //        let home = [];
-  //        let electronic = [];
-  //          for(var x in tagsArray){
-  //              for(var y in tagsArray[x]){
-  //                 if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
-  //                 if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
-  //                 if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
-  //              }
-  //
-  //          }
-  //          this.setState({
-  //             clothingProducts:clothing,
-  //             homeProducts:home,
-  //             electronicProducts:electronic,
-  //             tags:tagsArray,
-  //             productNames:productNamesArray,
-  //             data:jsonArray
-  //          })
-  //     })
-  //  }
-
   componentDidMount() {
     var site = (localhost) ?
       "http://localhost/shop-backend/php/get_products.php"
@@ -87,17 +40,19 @@ class LandingPage extends Component {
 
      axios.post(site, null, axiosConfig)
      .then(response => {
-       console.log('Response',response.data.products);
+       // console.log('Response', response.data.products);
        this.setState({
          isLoaded: true,
          data: response.data.products
        });
+       // let jsonArray = JSON.parse(JSON.stringify(this.state.data));
        let jsonArray = JSON.parse(JSON.stringify(this.state.data));
+       console.log('JSON array', jsonArray);
 
        let tagsArray = [];
        let productNamesArray = [];
        for (var j in jsonArray) {
-         console.log('json array[', j,']:', jsonArray[j]);
+         // console.log('json array[', j,']:', jsonArray[j]);
          tagsArray.push(jsonArray[j].tags);
          productNamesArray.push(jsonArray[j].productName);
        }
@@ -146,7 +101,7 @@ class LandingPage extends Component {
              </div>
              </div>
             </div>
-         );
+         );//end return
 
       }
    }
