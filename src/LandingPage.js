@@ -25,61 +25,7 @@ class LandingPage extends Component {
     };
   }
 
-
-  // componentDidMount() {
-  //   var site = (localhost) ?
-  //     "http://localhost/shop-backend/php/get_products.php"
-  //     : "https://shop-354.herokuapp.com/get_products.php";
-  //
-  //     const axiosConfig = {
-  //      headers: {
-  //           'Content-Type': 'application/json',
-  //          "Access-Control-Allow-Origin":"*",
-  //       },
-  //    };
-  //
-  //    axios.post(site, null, axiosConfig)
-  //    .then(response => {
-  //      // console.log('Response', response.data.products);
-  //      this.setState({
-  //        isLoaded: true,
-  //        data: response.data.products
-  //      });
-  //      // let jsonArray = JSON.parse(JSON.stringify(this.state.data));
-  //      let jsonArray = JSON.parse(JSON.stringify(this.state.data));
-  //      console.log('JSON array', jsonArray);
-  //
-  //      let tagsArray = [];
-  //      let productNamesArray = [];
-  //      for (var j in jsonArray) {
-  //        // console.log('json array[', j,']:', jsonArray[j]);
-  //        tagsArray.push(jsonArray[j].tags);
-  //        productNamesArray.push(jsonArray[j].productName);
-  //      }
-  //
-  //       let clothing = [];
-  //       let home = [];
-  //       let electronic = [];
-  //         for(var x in tagsArray){
-  //             for(var y in tagsArray[x]){
-  //                if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
-  //                if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
-  //                if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
-  //             }
-  //
-  //         }
-  //         this.setState({
-  //            clothingProducts:clothing,
-  //            homeProducts:home,
-  //            electronicProducts:electronic,
-  //            tags:tagsArray,
-  //            productNames:productNamesArray,
-  //            data:jsonArray
-  //         })
-  //    })//end then
-  //  }//end component did mount
-
-  componentWillMount() {
+  componentDidMount() {
     var site = (localhost) ?
       "http://localhost/shop-backend/php/get_products.php"
       : "https://shop-354.herokuapp.com/get_products.php";
