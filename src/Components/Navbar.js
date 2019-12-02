@@ -355,7 +355,7 @@ class NavbarFunction extends Component {
                     placeholder="Search"
                     className="mr-sm-2"
                   />
-                  {this.renderSuggestions()}
+                  {/*this.renderSuggestions()*/}
                 </div>
 
                 <Link
