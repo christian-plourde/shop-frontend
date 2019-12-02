@@ -174,9 +174,9 @@ class NavbarFunction extends Component {
               element: item
             }}
 
-            >
+              >
                <li onClick={() => this.suggestionSelected(item)}>{item}</li> </Link>)}
-         </ul>
+</ul>
       );
    }
 
