@@ -159,7 +159,7 @@ class NavbarFunction extends Component {
       suggestions: []
     }));
   }
-  renderSuggestions() {
+ renderSuggestions() {
     const { suggestions } = this.state;
     if (suggestions.length === 0) {
       return null;
@@ -174,11 +174,11 @@ class NavbarFunction extends Component {
               element: item
             }}
 
-              >
+            >
                <li onClick={() => this.suggestionSelected(item)}>{item}</li> </Link>)}
-</ul>
+         </ul>
       );
-   }
+}
 
    keyPressHandler(e, newText){
       console.log(newText);
