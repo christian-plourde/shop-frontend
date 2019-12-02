@@ -29,8 +29,8 @@ class ProductComments extends React.Component {
             : sessionStorage.getItem("logged_in_user")
 
         const site = (localhost) ?
-        'http://localhost/shop-backend/php/login.php'
-        : 'https://shop-354.herokuapp.com/login.php';
+        'http://localhost/shop-backend/php/reviews.php'
+        : 'https://shop-354.herokuapp.com/reviews.php';
 
         const reviewData = {
             rating: this.state.rating,
