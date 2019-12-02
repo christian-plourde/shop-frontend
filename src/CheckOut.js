@@ -12,9 +12,7 @@ class CheckOut extends Component {
     };
   }
   getCart(){
-    //const{products}= this.state
     let storage = localStorage.getItem("cart")
-    //console.log(temp);
     let productArrayStrings= storage.split("|") // array of products as Strings
     let productArrayObjects=[]
     for(var x in productArrayStrings){

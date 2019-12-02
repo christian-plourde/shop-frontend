@@ -5,9 +5,7 @@ import Navbar from "./Navbar"
 const SearchResults = ({match,location}) => {
 
    let products = location.query;
-   let state = ""
    let searchElement = location.element;
-   console.log(searchElement);
    let elementsToDisplay=[];
    for(var x in products){
       if(products[x].productName.toLowerCase() == searchElement.toLowerCase()){
@@ -18,7 +16,6 @@ const SearchResults = ({match,location}) => {
             
             if(products[x].tags[y].toLowerCase() == searchElement.toLowerCase()){
             elementsToDisplay.push(products[x]);
-            console.log(products[x]);
             }
          }
       }

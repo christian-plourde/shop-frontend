@@ -75,9 +75,7 @@ class NavbarFunction extends Component {
       });
   }
   componentDidUpdate(){
-    console.log("Navbar-78")
     let item = localStorage.getItem("cartQuantity")
-    console.log("Navbar-80-", "newCartValue", item)
     if(this.state.cartQuantity != item ){
       this.setState({ cartQuantity:item})
     }
@@ -109,7 +107,6 @@ class NavbarFunction extends Component {
         .concat(tags);
     }
     this.setState(() => ({ suggestions, text: value }));
-    console.log(suggestions);
   };
   onTextChanged = e => {
     const value = e.target.value;

@@ -33,7 +33,6 @@ class LandingPage extends Component {
         return response.json();
       })//response is mapped on productData
       .then(productData => {
-        console.log(typeof(productData))
         this.setState({
           isLoaded: true,
           data: productData.products
@@ -73,7 +72,6 @@ class LandingPage extends Component {
       });
   }
   changeQuantity() {
-    console.log("LandingPage-72")
     //localStorage.setItem("cartQuantity","5")
     let quantityNow = localStorage.getItem("cartQuantity")
     if(quantityNow != this.state.quantity){

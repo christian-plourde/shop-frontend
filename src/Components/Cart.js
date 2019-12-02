@@ -39,36 +39,6 @@ class Cart extends Component {
       });
     }
   }
-  /*  state = {
-    /*products: [
-      {
-        name: "Water",
-        id: 2,
-        brand: "Evian",
-        price: 49.99,
-        description: "Water for rich ass mofos",
-        quantity: 1
-      },
-      {
-        name: "Chips",
-        id: 1,
-        brand: "Kettle",
-        price: 4.99,
-        description: "chips n shit",
-        quantity: 1
-      },
-      {
-        name: "Yogurt",
-        id: 3,
-        brand: "IA",
-        price: 8,
-        description: "Yogurt ",
-        quantity: 1
-      }
-    ]
-  
-  };*/
-
   handleShipping = () => {
     if (document.getElementById("exp").checked) {
       this.setState({ shipping: 15.0, methodSelected: "express" });
@@ -82,23 +52,42 @@ class Cart extends Component {
     let productList = this.state.products.filter(toRemove => {
       return toRemove.productID !== productID;
     });
-    console.log("Cart-52", productID);
     /*Subtracts the necessary value from the subtotal*/
     let product = this.state.products.find(
       toRemove => toRemove.productID === productID
     );
-    console.log("Cart-78",product)
     let total = product.productPrice * product.cartQuantity;
     this.setState({
       products: productList,
       subtotal: this.state.subtotal - total
     });
-    console.log("Cart-83");
+    
+    //removing from cart and updating cart
+    let updatedCart=""
+    let updatedCartQuantity=""
+    let intCartQuantity = parseInt(localStorage.getItem("cartQuantity"))
+    let newIntCartQuantity = intCartQuantity - product.cartQuantity
+    if(productList.length == 0){
+      localStorage.removeItem("cart")
+      localStorage.removeItem("cartQuantity")
+    }
+    else{
+      for(var x in productList){
+        if(x == 0){updatedCart = JSON.stringify(productList[x])}
+        else{
+          updatedCart = updatedCart + "|" + JSON.stringify(productList[x])
+        }
+        localStorage.setItem("cart",updatedCart)
+      }   
+      updatedCartQuantity = newIntCartQuantity.toString()
+      localStorage.setItem("cartQuantity",updatedCartQuantity)
+    }
+    
   };
 
   handleCheckout = () => {
     if (this.state.ableToCheckout == true) {
-      console.log("can checkout");
+      
     } else alert("Verify the delivery address before checking out!");
   };
 
@@ -117,10 +106,8 @@ class Cart extends Component {
   checkShippingInfo = validity => {
     if (validity == true) {
       this.setState({ ableToCheckout: true });
-      console.log("yes");
       return true;
     } else {
-      console.log("no");
       return false;
     }
   };

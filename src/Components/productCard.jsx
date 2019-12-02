@@ -41,19 +41,16 @@ class ProductCard extends Component {
    addToCart(productQuantity){
       //verifying if user is logged in. Make sure to comment in the if else statement
       let isUserloggedIn = localStorage.getItem("logged_in_user")
-    /*  if(isUserloggedIn == null) {
+      if(isUserloggedIn == null) {
          //should be redirected to login page
          this.setState({
             notLoggedIn:true
          })
       }
-      else{*/
+      else{
          let productToAdd = this.state.product
          productToAdd["cartQuantity"] = productQuantity
          if(localStorage.getItem("cart") == null){
-            // let temp=[];
-            // temp.push(this.state.product)
-         console.log(productToAdd)
          let firstItem = JSON.stringify(productToAdd)
          localStorage.setItem("cart",firstItem)
          localStorage.setItem("cartQuantity",this.state.quantity)
@@ -61,16 +58,12 @@ class ProductCard extends Component {
 
          }
          else{
-            console.log("productCard-62",productQuantity);
             let item = localStorage.getItem("cart")
             //navbar update of cart
             let cartQuantity = localStorage.getItem("cartQuantity") 
             let intCartQuantity = parseInt(cartQuantity)
             intCartQuantity+= productQuantity
-            console.log("productCard-67",intCartQuantity);
-            console.log("productCard-68",typeof(intCartQuantity), " ", intCartQuantity )
             let updatedCartQuantity = intCartQuantity.toString()
-            console.log("productCard-68",typeof(updatedCartQuantity), " ", updatedCartQuantity )
             localStorage.setItem("cartQuantity",updatedCartQuantity)
             //navbar update of cart
             
@@ -97,16 +90,13 @@ class ProductCard extends Component {
                      
             }
             let item1 = item + "|" + JSON.stringify(productToAdd)
-            //console.log(item1);
             localStorage.setItem("cart",item1)
             //updating cart icon
             this.props.updateQuantity()
          }
          
-      //}
+      }
 
-      //console.log(temp);
-      
   }
    render(){
 
