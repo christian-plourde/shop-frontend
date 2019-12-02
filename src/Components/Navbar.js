@@ -40,7 +40,7 @@ class NavbarFunction extends Component {
 
   componentDidMount() {
     var site = localhost
-      ? "http://localhost:8081/shop-backend/php/get_products.php"
+      ? "http://localhost:80/shop-backend/php/get_products.php"
       : "https://shop-354.herokuapp.com/get_products.php";
 
     const axiosConfig = {
@@ -50,7 +50,8 @@ class NavbarFunction extends Component {
       }
     };
 
-    axios.post(site, null, axiosConfig).then(response => {
+    axios.post(site, null, axiosConfig)
+    .then(response => {
       console.log("Response.data", response.data);
       let jsonArray = JSON.parse(JSON.stringify(response.data.products));
       let tagsArray = [];
@@ -78,15 +79,16 @@ class NavbarFunction extends Component {
       }
 
         this.setState({
-          
-	
-
-	        isLoaded:true	,	
+          isLoaded:true	,
           productNamesArray: productNamesArray,
           tagsArray: tagsArray,
           productData: jsonArray
         });
-      });
+      },
+      error => {
+        console.log("Error", error);
+      }
+    );//end then
   }
   componentDidUpdate(){
     console.log("Navbar-78")
