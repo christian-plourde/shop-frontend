@@ -72,10 +72,6 @@ class ProductCard extends Component {
             let updatedCartQuantity = intCartQuantity.toString()
             console.log("productCard-68",typeof(updatedCartQuantity), " ", updatedCartQuantity )
             localStorage.setItem("cartQuantity",updatedCartQuantity)
-            this.setState({
-               triggered:this.state.triggered
-            })
-
             //navbar update of cart
             
             let productArrayStrings= item.split("|") 
@@ -84,8 +80,21 @@ class ProductCard extends Component {
                productArrayObjects.push(JSON.parse(productArrayStrings[x]))
             }
             for(var y in productArrayObjects ){
-                  if(productArrayObjects[y].productID == productToAdd.productID)
+                  if(productArrayObjects[y].productID == productToAdd.productID){
+                     productArrayObjects[y].cartQuantity+=productToAdd.cartQuantity
+                     let newUpdatedCart=""
+                     for(var z in productArrayObjects ){
+                        if(z == 0){newUpdatedCart = JSON.stringify(productArrayObjects[z]) }
+                        else{
+                           newUpdatedCart = newUpdatedCart + "|" + JSON.stringify(productArrayObjects[z])
+                        }
+                        
+                     }
+                     localStorage.setItem("cart",newUpdatedCart)
+                     this.props.updateQuantity()
                      return;
+                  }
+                     
             }
             let item1 = item + "|" + JSON.stringify(productToAdd)
             //console.log(item1);

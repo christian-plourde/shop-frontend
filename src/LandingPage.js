@@ -108,24 +108,20 @@ class LandingPage extends Component {
                   />
                 </div>
                 <div>
-                  <Carousel data={homeProducts} category="Home Products" />
+                  <Carousel 
+                  data={homeProducts} 
+                  category="Home Products" 
+                  updateQuantity={()=> this.changeQuantity()} 
+                  />
                 </div>
                 <div>
                   <Carousel
                     data={electronicProducts}
                     category="Electronic Products"
+                    updateQuantity={()=> this.changeQuantity()}
                   />
                 </div>
               </div>
-            </div>
-            <div>
-              <Carousel data={homeProducts} category="Home Products" />
-            </div>
-            <div>
-              <Carousel
-                data={electronicProducts}
-                category="Electronic Products"
-              />
             </div>
           </div>
         </div>
