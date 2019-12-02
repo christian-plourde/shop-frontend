@@ -19,7 +19,7 @@ import NavbarFunction from './Navbar'
 //removed: flex display in css because it messes up the layout, should probably use bootstrap once everything is rendering properly
 
 //need to implement: review score by fetching via API, photo slider with bottom thumbnails, fix lack of key props to child component warning
-
+//gave up tracking onward, but need to implement styling, review rating display, and purchase console
 class ProductPage extends React.Component {
 
   constructor(props) {
@@ -36,9 +36,10 @@ class ProductPage extends React.Component {
   }
 
   componentDidMount() {
-    //https://shop-354.herokuapp.com/Products.json
-    //http://localhost:3000/Products.json
-    fetch("http://localhost:3000/Products.json", {
+    const productSource = (localhost) ?
+      "http://localhost:3000/Products.json"
+      : 'https://shop-354.herokuapp.com/Products.json';
+    fetch(productSource, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -52,10 +53,13 @@ class ProductPage extends React.Component {
         });
       });
 
-    //acquiring the review array associated with the received prop's ID`
-    let review_product_id = this.props.match.params.product_id;
+    let review_product_id = this.props.match.params.product_id; //acquiring the review array associated with the received prop's ID
+    const reviewSource = (localhost) ?
+      `http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`
+      : `https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`
+
     this.setState({ isLoaded: false })
-    fetch(`http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${review_product_id}`, {
+    fetch(reviewSource, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -66,9 +70,7 @@ class ProductPage extends React.Component {
         this.setState({ productReviews: productReview, isLoaded: true });
       })
 
-
-
-    //acquiring the review meta data
+    // need to acquire the review meta data
     //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${review_product_id}`
     //`http://shop-354.herokuapp.com/reviews.php?averagereview=${review_product_id}`
   }
@@ -160,8 +162,11 @@ class ProductPage extends React.Component {
 
       //`https://shop-354.herokuapp.com/${product.picture.substring(1)}`
       //`http://localhost:3000${product.picture.substring(1)}`
-      const imageSource = `http://localhost:3000${product.picture.substring(1)}` //generating a product image array
-      const imageSources = [imageSource]
+      const imageSource = (localStorage) ?
+        `http://localhost:3000${product.picture.substring(1)}`
+        : `https://shop-354.herokuapp.com/${product.picture.substring(1)}`
+
+      const imageSources = [imageSource]//generating a product image url array with randomly inserted Shrek, ISS and Donkey(from Shrek)
 
       let dice = Math.random() * 10
       if (dice > 2.5) {
@@ -176,13 +181,6 @@ class ProductPage extends React.Component {
       if (dice > 9) {
         imageSource.push('https://i.redd.it/iu1bhetpmb041.jpg')
       }
-
-      // let isLoggedIn = false
-      // if(sessionStorage.getItem("logged_in_user") != null){
-      //   isLoggedIn = true
-      // }
-
-
 
       return (
         <div>
