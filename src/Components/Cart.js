@@ -15,30 +15,60 @@ class Cart extends Component {
       ableToCheckout: false
     };
   }
+  // componentDidMount() {
+  //   this.setState({
+  //     products: this.props.products
+  //   });
+  //   let sTotal = 0;
+  //   for (var x in this.props.products) {
+  //     sTotal += this.props.products[x].productPrice;
+  //   }
+  //   this.setState({
+  //     subtotal: sTotal,
+  //     total: sTotal + sTotal * 0.15
+  //   });
+  // }
+
   componentDidMount() {
     this.setState({
       products: this.props.products
     });
     let sTotal = 0;
     for (var x in this.props.products) {
-      sTotal += this.props.products[x].productPrice;
+      sTotal += Number.parseFloat(this.props.products[x].productPrice);
     }
     this.setState({
-      subtotal: sTotal,
-      total: sTotal + sTotal * 0.15
+      subtotal: sTotal.toFixed(2),
+      total: (sTotal.toFixed(2) * 1.15).toFixed(2)
     });
+
+
   }
+  // componentDidUpdate() {
+  //   if (
+  //     this.state.total !==
+  //     this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
+  //   ) {
+  //     this.setState({
+  //       total:
+  //         this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
+  //     });
+  //   }
+  // }
+
   componentDidUpdate() {
-    if (
-      this.state.total !==
-      this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
-    ) {
+    //If there's been an update...
+    //What our total should be
+    let supposed_total = this.state.subtotal * 1.15 + this.state.shipping;
+    //...and If the total value is no longer equal to the subtotal
+    if (this.state.total !== supposed_total) {
       this.setState({
         total:
-          this.state.subtotal + this.state.subtotal * 0.15 + this.state.shipping
+          supposed_total
       });
     }
   }
+  
   handleShipping = () => {
     if (document.getElementById("exp").checked) {
       this.setState({ shipping: 15.0, methodSelected: "express" });
