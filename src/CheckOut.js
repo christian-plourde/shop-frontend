@@ -11,18 +11,23 @@ class CheckOut extends Component {
       isLoaded: false,
     };
   }
+
   getCart(){
     let storage = localStorage.getItem("cart")
-    let productArrayStrings= storage.split("|") // array of products as Strings
+
+    let productArrayStrings= storage.split("|") //Return an array of products as Strings
+
+
     let productArrayObjects=[]
     for(var x in productArrayStrings){
       productArrayObjects.push(JSON.parse(productArrayStrings[x]))
     }
+    console.log('getCart() :: product array objects', productArrayObjects)
     return productArrayObjects
   }
 
   render() {
-    
+
     return (
       <div>
         <div>
@@ -34,6 +39,6 @@ class CheckOut extends Component {
       </div>
     );
   }
-  
+
 }
 export default CheckOut;

@@ -76,7 +76,7 @@ class Login extends Component {
         } else {
           this.setState({ wrong_information: true });
         }
-      },
+      },//end response
       error => {
         console.log(
           "Didn't succeed for axios.post call with params\nsite:",

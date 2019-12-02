@@ -47,7 +47,6 @@ export default class CartItem extends React.Component {
     }
   }
   render() {
-    // let product = this.props.product;
     const { name, brand, id, description, price, image } = this.props;
     return (
       <div className="product" onLoad={this.sendQuantity}>
@@ -79,7 +78,9 @@ export default class CartItem extends React.Component {
             Remove
           </button>
         </div>
-        <div class="product-line-price">{this.state.total.toFixed(2)}</div>
+        <div class="product-line-price">
+        {!isNaN(this.state.total) ? Number.parseFloat(this.state.total).toFixed(2) : ''}
+        </div>
       </div>
     );
   }
