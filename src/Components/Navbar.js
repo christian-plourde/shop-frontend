@@ -184,10 +184,11 @@ class NavbarFunction extends Component {
    keyPressHandler(e, newText){
       console.log(newText);
       console.log(this.state.isEnterPressed);
-      if(e.charCode === 13){     // char code for "Enter"
+      // charcode 13 is "Enter" && text can't be empty && text can't be whitespaces only
+      if(e.charCode === 13 && !!newText && newText.trim().length > 0){
          this.setState({
             isEnterPressed: true,
-            text: newText        // the value we want to search
+            text: newText        // the user's input
          });
       }
    }
@@ -275,7 +276,8 @@ class NavbarFunction extends Component {
              element:this.state.text
 
            } }>
-            <Button id="search" variant="outline-success">
+            {/* Button is disabed if search bar is empty or only contains whitespaces */}
+            <Button id="search" disabled={!text || text.trim().length <= 0} variant="outline-success">
               Search
             </Button>
          </Link>
