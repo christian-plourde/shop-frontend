@@ -1,0 +1,50 @@
+.shippingform {
+  width: 100%;
+  float: left;
+  padding-left: 50px;
+}
+
+.shippingform h1 {
+  font-family: "HelveticaNeue-Medium";
+  font-size: 16px;
+}
+
+.ship:hover {
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.05);
+}
+
+.ship {
+  width: 600px;
+  height: 40px;
+  padding: 2px 2px;
+  border-width: 1px;
+  border-radius: 4px;
+  font-family: "HelveticaNeue-Medium";
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  background-color: transparent;
+  color: #282828;
+  outline: none;
+  box-shadow: 0px 4px 20px 0px transparent;
+  transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out,
+    0.1s padding ease-in-out;
+  -webkit-appearance: none;
+}
+
+.shippingform label {
+  font-size: 12px;
+}
+
+.deliver {
+  float: left;
+  border: 0;
+  margin-top: 20px;
+  margin-right: 50px;
+  padding: 6px 6px;
+  background-color: rgb(187, 181, 102);
+  color: #fff;
+  font-size: 20px;
+  border-radius: 3px;
+}

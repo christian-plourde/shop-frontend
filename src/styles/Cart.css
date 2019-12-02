@@ -1,0 +1,257 @@
+.product-image {
+  float: left;
+  width: 20%;
+}
+
+.product-details {
+  float: left;
+  width: 37%;
+}
+
+.product-price {
+  float: left;
+  width: 12%;
+}
+
+.product-quantity {
+  float: left;
+  text-align: center;
+  width: 10%;
+}
+
+.product-removal {
+  float: left;
+  width: 9%;
+}
+
+.product-line-price {
+  float: left;
+  width: 12%;
+  text-align: right;
+  padding-right: 50px;
+}
+
+/* This is used as the traditional .clearfix class */
+.group:before,
+.shopping-cart:before,
+.column-labels:before,
+.product:before,
+.totals-item:before,
+.group:after,
+.shopping-cart:after,
+.column-labels:after,
+.product:after,
+.totals-item:after {
+  content: "";
+  display: table;
+}
+
+.group:after,
+.shopping-cart:after,
+.column-labels:after,
+.product:after,
+.totals-item:after {
+  clear: both;
+}
+
+.group,
+.shopping-cart,
+.column-labels,
+.product,
+.totals-item {
+  zoom: 1;
+}
+
+/* Apply clearfix in a few places */
+/* Apply dollar signs */
+.product .product-price:before,
+.product .product-line-price:before,
+.totals-value:before {
+  content: "$";
+}
+
+/* Body/Header stuff */
+body {
+  padding: 0px 30px 30px 20px;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
+  font-weight: 100;
+}
+
+h1 {
+  font-weight: 100;
+}
+
+label {
+  color: #aaa;
+}
+.checkout-body .cart-title {
+  text-align: center;
+  font-family: "Helvetica Neue";
+  font-size: 30px;
+  color: #eee;
+  background-color: #1d1e22;
+}
+.shopping-cart {
+  margin-top: -45px;
+}
+
+/* Column headers */
+.column-labels label {
+  padding-bottom: 15px;
+  padding-top: 15px;
+  margin-bottom: 15px;
+  margin-top: 40px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+}
+.column-labels .product-image,
+.column-labels .product-removal {
+  text-indent: -9999px;
+}
+
+/* Product entries */
+.product {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+.product .product-image {
+  text-align: center;
+}
+.product .product-image img {
+  width: 100px;
+}
+.product .product-details .product-name {
+  margin-right: 20px;
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+.product .product-details .product-description {
+  margin: 5px 20px 5px 0;
+  line-height: 1.4em;
+  font-family: "HelveticaNeue-Medium";
+}
+.product .product-quantity .plus {
+  width: 30px;
+  border: 0;
+  padding: 4px 8px;
+  background-color: #6b6;
+  color: #fff;
+  font-family: "HelveticaNeue-Medium";
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 12px;
+}
+
+.product .product-quantity .minus {
+  width: 30px;
+  border: 0;
+  padding: 4px 8px;
+  background-color: #c66;
+  color: #fff;
+  font-family: "HelveticaNeue-Medium";
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  font-size: 12px;
+}
+.product .product-quantity .minus:hover {
+  background-color: #a44;
+}
+
+.product .product-quantity .plus:hover {
+  background-color: #494;
+}
+
+.product .remove-product {
+  border: 0;
+  padding: 4px 8px;
+  margin-top: 20px;
+  background-color: #c66;
+  color: #fff;
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+  font-size: 12px;
+  border-radius: 3px;
+  text-align: center;
+}
+.product .remove-product:hover {
+  background-color: #a44;
+}
+
+/* Totals section */
+.totals .totals-item {
+  float: right;
+  clear: both;
+  width: 100%;
+  font-family: "HelveticaNeue-Medium";
+  margin-bottom: 10px;
+  text-align: right;
+}
+.totals .totals-item label {
+  float: left;
+  font-size: 15px;
+  clear: both;
+  width: 79%;
+  font-family: "HelveticaNeue-Medium";
+  text-align: right;
+}
+.totals .totals-item .totals-value {
+  float: right;
+  font-size: 15px;
+  width: 21%;
+  text-align: right;
+  padding-right: 50px;
+}
+.totals .totals-item-total {
+  font-family: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+}
+
+.checkout {
+  float: right;
+  border: 0;
+  margin-top: 20px;
+  margin-right: 50px;
+  padding: 6px 25px;
+  margin-bottom: 50px;
+  background-color: #6b6;
+  color: #fff;
+  font-size: 25px;
+  border-radius: 3px;
+}
+
+.checkout:hover {
+  background-color: #494;
+}
+
+.shipping-method {
+  text-align: right;
+  padding-right: 50px;
+  padding-bottom: 25px;
+}
+.shipping-method label {
+  padding: 5px;
+  font-family: "HelveticaNeue-Medium";
+  font-size: 15px;
+}
+.shipping-method .shipping {
+  padding-left: 50px;
+  font-size: 15px;
+  color: #1d1e22;
+  font-family: "HelveticaNeue-Medium";
+}
+
+.checkout-title {
+  background-color: #1d1e22;
+  color: #eee;
+  text-align: center;
+}
+
+.Cart-shipping {
+  display: flex;
+  flex-direction: row;
+}
+
+.financial-details {
+  width: 100%;
+}
