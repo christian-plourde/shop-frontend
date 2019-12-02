@@ -7,13 +7,14 @@ import Route from "react-router-dom/Route";
 import SubmitButton from "./Components/SubmitButton";
 import LandingPage from "./LandingPage.js";
 import ProductCard from "./Components/productCard.jsx";
-import ForgotPasswordText from "./Components/ForgotPasswordText.js";
+import ForgotPassword from "./Components/ForgotPassword.js";
 import SearchResults from "./Components/searchResults";
 import Registration from "./Components/Registration.js";
 import ProductPage from "./Components/ProductPage.js";
 import CheckOut from "./CheckOut";
 import Navbar from "./Components/Navbar";
 import UserProfile from "./Components/UserProfile";
+import ProductPosting from "./Components/Client/ProductPosting.js";
 
 class App extends Component {
   render() {
@@ -30,11 +31,9 @@ class App extends Component {
         />
 
         {/*The main login page*/}
-      
 
         {/*The page to recover the user's password*/}
 
-        
         {/*The pafe for the user to register a new account on the site*/}
 
         <Route
@@ -82,9 +81,6 @@ class App extends Component {
             );
           }}
         />
-
-        {/*The page to recover the user's password*/}
-
         <Route
           path="/forgot_password"
           exact
@@ -93,18 +89,18 @@ class App extends Component {
             return (
               <div>
                 <Navbar />
-                <form action="">
-                  <ForgotPasswordText text="Please click the button below to reset your password. An email will be sent to you." />
-                  <SubmitButton />
-                </form>
+                <ForgotPassword />
               </div>
             );
           }}
         />
 
-        {/*The pafe for the user to register a new account on the site*/}
+        {/*The page to recover the user's password*/}
 
+        <Route path="/productPosting" exact strict component={ProductPosting} />
         <Route path="/results" exact strict component={SearchResults} />
+
+        {/*The pafe for the user to register a new account on the site*/}
 
         <Route
           path="/productPage/:product_id"

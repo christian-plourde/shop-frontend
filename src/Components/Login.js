@@ -5,6 +5,9 @@ import { Redirect } from "react-router";
 import Link from "./Link.js";
 import axios from "axios";
 
+//A variable to make our lives easier
+import localhost from "../LocalHost.js";
+
 class Login extends Component {
   state = {
     username: "",
@@ -40,36 +43,52 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+
+    const site = localhost
+      ? "http://localhost/shop-backend/php/login.php"
+      : "https://shop-354.herokuapp.com/login.php";
+
     const data = {
       username: this.state.username,
       password: this.state.encrypted_password
     };
-    {
-      /*https://shop-354.herokuapp.com/login.php*/
-    }
-    {
-      /*http://localhost/www/shop-backend/php/login.php*/
-    }
-    axios
-      .post("https://shop-354.herokuapp.com/login.php", JSON.stringify(data), {
-        headers: {
-          "Content-Type": "application/json"
+
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
+    };
+
+    axios.post(site, data, axiosConfig).then(
+      response => {
+        console.log(
+          "axios.post call successful for params\nsite:",
+          site,
+          "\ndata:",
+          data,
+          "\nconfig:",
+          axiosConfig
+        );
+        if (response.data.Accepted) {
+          this.setState({ redirect: true });
+          localStorage.setItem("logged_in_user", this.state.username);
+        } else {
+          this.setState({ wrong_information: true });
         }
-      })
-      .then(
-        response => {
-          if (response.data.Accepted) {
-            this.setState({ redirect: true });
-            sessionStorage.setItem("logged_in_user", this.state.username);
-          } else {
-            this.setState({ wrong_information: true });
-          }
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  };
+      },
+      error => {
+        console.log(
+          "Didn't succeed for axios.post call with params\nsite:",
+          site,
+          "\ndata:",
+          data,
+          "\nconfig:",
+          axiosConfig
+        );
+      }
+    );
+  }; //end handle Submit
 
   render() {
     var password_redirect_link = {

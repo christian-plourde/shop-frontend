@@ -4,6 +4,12 @@ import Carousel from "./Components/carousel";
 import Navbar from "./Components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+
+import axios from "axios";
+
+//A variable to make our lives easier
+import localhost from "./LocalHost.js"; //Set to true if working locally
+
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -16,34 +22,41 @@ class LandingPage extends Component {
       clothingProducts: [],
       homeProducts: [],
       electronicProducts: [],
-      quantity:""
+      quantity: ""
     };
   }
   //http://localhost:3000/Products.json
   //https://shop-354.herokuapp.com/product.php?products=-1
- // http://localhost:80/shop-frontend/shop-backend/php/product.php?products=-1
+  // http://localhost:80/shop-frontend/shop-backend/php/product.php?products=-1
   componentDidMount() {
-    fetch("http://localhost:3000/Products.json", {
+    var site = localhost
+      ? "http://localhost:8081/shop-backend/php/get_products.php"
+      : "https://shop-354.herokuapp.com/get_products.php";
+
+    const axiosConfig = {
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json"
+        "Access-Control-Allow-Origin": "*"
       }
-    })
-      .then(response =>{
-        return response.json();
-      })//response is mapped on productData
-      .then(productData => {
-        this.setState({
-          isLoaded: true,
-          data: productData.products
+    };
+
+    axios.post(site, null, axiosConfig).then(response => {
+      // console.log('Response', response.data.products);
+      this.setState({
+        isLoaded: true,
+        data: response.data.products
       });
-        let jsonArray = JSON.parse(JSON.stringify(this.state.data));
-        let tagsArray = [];
-        let productNamesArray = [];
-        for (var j in jsonArray) {
-          tagsArray.push(jsonArray[j].tags);
-          productNamesArray.push(jsonArray[j].productName);
-        }
+      // let jsonArray = JSON.parse(JSON.stringify(this.state.data));
+      let jsonArray = JSON.parse(JSON.stringify(this.state.data));
+      console.log("JSON array", jsonArray);
+
+      let tagsArray = [];
+      let productNamesArray = [];
+      for (var j in jsonArray) {
+        // console.log('json array[', j,']:', jsonArray[j]);
+        tagsArray.push(jsonArray[j].tags);
+        productNamesArray.push(jsonArray[j].productName);
+      }
 
         let clothing = [];
         let home = [];
@@ -72,6 +85,7 @@ class LandingPage extends Component {
       });
   }
   changeQuantity() {
+    console.log("LandingPage-72")
     //localStorage.setItem("cartQuantity","5")
     let quantityNow = localStorage.getItem("cartQuantity")
     if(quantityNow != this.state.quantity){

@@ -8,13 +8,20 @@ import exit_blue from "../ressources/icons/exit_blue.png";
 import exit_green from "../ressources/icons/exit_green.png";
 import {Redirect} from "react-router";
 
+import UserProfileLowerDisplay from './UserProfileLowerDisplay';
+
+//A variable to make our lives easier
+import localhost from '../LocalHost.js';
+
+import ProductThumbnail from './ProductThumbnail.js';
+
 class UserProfile extends Component
 {
 
 	state =
 	{
 		edit_mode: false,
-		username: sessionStorage.getItem("logged_in_user"),
+		username: localStorage.getItem("logged_in_user"),
 		email: "",
 		firstName: "",
 		lastName: "",
@@ -23,7 +30,12 @@ class UserProfile extends Component
 		isAdmin: false,
 		logout: false,
 		changeError: false,
-		changeSuccess: false
+		changeSuccess: false,
+		new_password: "", //new password
+		new_password_conf: "", //confirmed new password
+		password_mismatch: false,
+		password_change_success: false,
+		password_change_failure: false
 	}
 
 	constructor(props)
@@ -33,17 +45,25 @@ class UserProfile extends Component
 
 	componentDidMount()
 	{
-		{/*https://shop-354.herokuapp.com/user_profile_display.php*/}
-  		{/*http://localhost/www/shop-backend/php/user_profile_display.php*/}
-		axios.post('https://shop-354.herokuapp.com/user_profile_display.php', JSON.stringify({username: sessionStorage.getItem("logged_in_user")}), {
+
+		const site = (localhost) ?
+			'http://localhost/shop-backend/php/user_profile_display.php'
+			: 'https://shop-354.herokuapp.com/user_profile_display.php';
+		const data = {username: localStorage.getItem("logged_in_user")};
+		const axiosConfig = {
         headers: {
             'Content-Type': 'application/json',
-        }
-    	})
+						"Access-Control-Allow-Origin":"*",
+        },
+    	};
+
+		axios.post(site, data, axiosConfig)
 		.then((response) => {
-  			
+				console.log("axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
+				console.log("Response", response.data);
   			if(response.data.Accepted)
   			{
+					console.log("Response accepted");
   				this.setState({email: response.data.email});
   				this.setState({firstName: response.data.firstName});
   				this.setState({lastName: response.data.lastName});
@@ -51,23 +71,18 @@ class UserProfile extends Component
   				this.setState({country: response.data.country});
   				this.setState({isAdmin: response.data.isAdmin});
   			}
-
-  			else
-  			{
-
-  			}
-  			
-
+		}, (error) => {
+			console.log("Didn't succeed for axios.post call with params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig);
 		});
 	}
 
 
-	handleSubmit = (e) => 
+	handleSubmit = (e) =>
 	{
 		e.preventDefault();
-		const data = {userName: this.state.username, 
-					  email: this.state.email, 
-					  firstName: this.state.firstName, 
+		const data = {userName: this.state.username,
+					  email: this.state.email,
+					  firstName: this.state.firstName,
 					  lastName: this.state.lastName,
 					  address: this.state.address,
 					  country: this.state.country
@@ -81,7 +96,7 @@ class UserProfile extends Component
         }
     	})
 		.then((response) => {
-  			
+
 			if(response.data.Accepted)
 			{
 				this.setState({changeError: false, changeSuccess: true, edit_mode: false});
@@ -128,7 +143,7 @@ class UserProfile extends Component
 
 	handleExitClick = (e) => {
 
-		sessionStorage.removeItem("logged_in_user");
+		localStorage.removeItem("logged_in_user");
 		this.setState({logout: true});
 	}
 
@@ -138,30 +153,99 @@ class UserProfile extends Component
 		this.setState({[e.target.name]: e.target.value});
 	}
 
+	handlePasswordSubmit = (e) =>
+	{
+		e.preventDefault();
+
+		//check if the passwords match first
+
+		if(this.state.new_password != this.state.new_password_conf)
+		{
+			this.setState({password_mismatch: true});
+			return;
+		}
+
+		this.setState({password_mismatch: false});
+
+		var pwd =this.state.new_password;
+    	var enc_pwd = "";
+    	for(var i = 0; i < pwd.length; i++)
+    	{
+    		enc_pwd += String.fromCharCode(pwd.charCodeAt(i) + 1);
+    	}
+
+		const data = {
+
+						username: this.state.username,
+						password: enc_pwd
+
+					  };
+
+
+		{/*https://shop-354.herokuapp.com/change_user_password.php*/}
+  		{/*http://localhost/www/shop-backend/php/change_user_password.php*/}
+    	axios.post('https://shop-354.herokuapp.com/change_user_password.php', JSON.stringify(data), {
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    	})
+		.then((response) => {
+
+			if(response.data.Accepted)
+			{
+				this.setState({password_change_success: true});
+			}
+			else
+			{
+
+			}
+
+
+		}, (error) => {
+  		console.log(error);
+		});
+
+
+	}
+
 	render()
 	{
 
-		const user_div_style = 
+		const user_div_style =
 		{
 			color: "#333",
 			textAlign: "center",
 			marginTop: "2%",
 			width: "40%",
-			marginLeft: "30%",
+			float: "left",
+			marginLeft: "5%",
 			padding: "20px",
 			border: "2px solid #333",
 			borderRadius: '10px',
 			height: "460px"
 		}
 
-		const inner_style = 
+		const change_password_div_style =
+		{
+			color: "#333",
+			textAlign: "center",
+			marginTop: "2%",
+			marginLeft: "5%",
+			width: "45%",
+			float: "left",
+			padding: "20px",
+			border: "2px solid #333",
+			borderRadius: '10px'
+		}
+
+		const inner_style =
 		{
 			margin: "auto auto auto 5%",
 			width: "100%",
 			textAlign: 'left'
 		};
 
-		const input_style = 
+		const input_style =
 		{
 			width: "60%",
 			fontSize: "20px",
@@ -202,7 +286,7 @@ class UserProfile extends Component
 			paddingTop: "8px"
 		}
 
-		const exit_button = 
+		const exit_button =
 		{
 			float: "right",
 			marginRight: "10px",
@@ -214,7 +298,7 @@ class UserProfile extends Component
 			color: "blue"
 		}
 
-		const button_style = 
+		const button_style =
 		{
 			margin: "0 auto",
 			marginTop: "20px",
@@ -226,7 +310,20 @@ class UserProfile extends Component
 			fontSize: '15px'
 		};
 
-		const error_mess_style = 
+		const pass_button_style =
+		{
+			margin: "0 auto",
+			marginLeft: "40%",
+			marginTop: "20px",
+			border: "3px solid #333",
+			padding: "5px",
+			borderRadius: "10px",
+			backgroundColor: "whitesmoke",
+			color: "#333",
+			fontSize: '15px'
+		};
+
+		const error_mess_style =
 		{
 			color: "#993232",
 			textDecoration:'none',
@@ -234,16 +331,18 @@ class UserProfile extends Component
 			fontWeight: 'bold'
 		};
 
-		const success_mess_style = 
+		const success_mess_style =
 		{
 			color: "#20ab51",
 			textDecoration:'none',
 			fontSize: '18px',
-			fontWeight: 'bold'
+			fontWeight: 'bold',
+			marginLeft: "17%"
 		};
 
+
 		return(
-		
+
 			<div>
 				<Navbar />
 
@@ -350,7 +449,7 @@ class UserProfile extends Component
 						{
 							this.state.changeError && (
 								<div>
-									<h2 style={error_mess_style}>There was an error in your resquested changes. Please review them and try again.</h2>
+									<h2 style={error_mess_style}>There was an error in your requested changes. Please review them and try again.</h2>
 								</div>
 								)
 						}
@@ -373,12 +472,58 @@ class UserProfile extends Component
           						<Redirect to={"/"}/>
         					)}
 					</div>
+
 				</form>
+
+				<div style={change_password_div_style}>
+
+					<div style={inner_style}>
+						<form onSubmit={this.handlePasswordSubmit}>
+							<h1 style={account_info_style}>Password Management</h1>
+							<h2 style={field_indentifier_style}>New Password:</h2>
+							<input type="password" onInput={this.handleInput} name="new_password" style={input_style} value={this.state.new_password} required/>
+							<h2 style={field_indentifier_style}>Confirm Password:</h2>
+							<input type="password" onInput={this.handleInput} name="new_password_conf" style={input_style} value={this.state.new_password_conf} required/>
+
+							{
+							this.state.password_mismatch && (
+								<div>
+									<h2 style={error_mess_style}>There was an error in your requested changes. Please review them and try again.</h2>
+								</div>
+								)
+						}
+
+						{
+							this.state.password_change_failure && (
+								<div>
+									<h2 style={error_mess_style}>There was an error in your requested changes. Please review them and try again.</h2>
+								</div>
+								)
+						}
+
+						{
+							this.state.password_change_success && (
+								<div>
+									<h2 style={success_mess_style}>Changes to your profile have been saved.</h2>
+								</div>
+								)
+						}
+
+							<button style={pass_button_style} type="submit">Submit</button>
+						</form>
+
+					</div>
+				</div>
+
+				<UserProfileLowerDisplay 	isAdmin={this.state.isAdmin}
+																	username={this.state.username}
+				/>
+
 			</div>
-    
+
 			);
 	}
-	
+
 }
 
 export default UserProfile;
