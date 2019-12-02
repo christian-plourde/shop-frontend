@@ -36,16 +36,33 @@ class NavbarFunction extends Component {
    }
 
    componentDidMount(){
+     // console.log('Navbar : this.props.data', this.props.data, ' Execute php? ', !this.props.data)
+
+     //If we're not getting our data from the landing page...
+     if (!this.props.data)
+     {
+       //...then go fetch the data from the database
+       this.setStateViaAxios();
+     }
+     //...else if we're getting our data as a prop already,...
+     else
+     {
+       //...then just use that.
+       this.setStateViaProp();
+     }
+   }//end componentDidMount
+
+   setStateViaAxios = () => {
      var site = (localhost) ?
        "http://localhost/shop-backend/php/get_products.php"
        : "https://shop-354.herokuapp.com/get_products.php";
 
        const axiosConfig = {
- 				headers: {
+        headers: {
              'Content-Type': 'application/json',
- 						"Access-Control-Allow-Origin":"*",
+            "Access-Control-Allow-Origin":"*",
          },
- 			};
+      };
 
       axios.post(site, null, axiosConfig)
       .then(response => {
@@ -77,37 +94,39 @@ class NavbarFunction extends Component {
               tagsArray: tagsArray,
               productData: jsonArray});
         })//end then
-   }//end componentDidMount
+   }
+
+   setStateViaProp = () => {
+     let tagsArray = [];
+     let productNamesArray = [];
+     for (var j in this.props.data) {
+       tagsArray.push(this.props.data[j].tags);
+       productNamesArray.push(this.props.data[j].productName);
+     }
+      let clothing = [];
+      let home = [];
+      let electronic = [];
+        for(var x in this.props.data){
+            for(var y in this.props.data[x]){
+               if(tagsArray[x][y] ==="clothing"){clothing.push(this.props.data[x])}
+               if(tagsArray[x][y] ==="home"){home.push(this.props.data[x])}
+               if(tagsArray[x][y] ==="electronic"){electronic.push(this.props.data[x])}
+            }
+
+        }
+
+        this.setState({
+          isLoaded: true
+        });
+       this.setState({productNamesArray: productNamesArray,
+         tagsArray: tagsArray,
+         productData: this.props.data});
+   }
 
    search = () => {
      console.log('search toggled')
    }
-
-   // onSubmit = (e) =>{
-   //    const value = e;
-   //    let suggestions = [];
-   //    if(value.length >0){
-   //       const regex = new RegExp(`^${value}`,'i');
-   //       let tags = [];
-   //       let isAlreadyInArray=false;
-   //       for(var x in this.state.tagsArray){
-   //          for(var y in this.state.tagsArray[x]){
-   //             if(regex.test(this.state.tagsArray[x][y])){
-   //                for(var i in tags){
-   //                   if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}
-   //                }
-   //                if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
-   //                isAlreadyInArray=false;
-   //             }
-   //          }
-   //       }
-   //       suggestions = this.state.productNamesArray.filter(v=>regex.test(v)).concat(tags);
-   //
-   //    }
-   //    this.setState(() => ({suggestions,text:value}));
-   //    console.log(suggestions);
-   // }
-
+   
    onSubmit = (e) =>{
       const value = e;
       let suggestions = [];
@@ -208,7 +227,7 @@ class NavbarFunction extends Component {
             pathname: "/results",
             query: this.state.productData,
             element: text}} />}
-         
+
          {/* reset enter's state */}
          {this.state.isEnterPressed = false}
 
@@ -263,7 +282,7 @@ class NavbarFunction extends Component {
             {/* Search Option */}
 
             <div className="Results">
-              <FormControl value={text} onChange={this.onTextChanged} 
+              <FormControl value={text} onChange={this.onTextChanged}
               onKeyPress={(e) => this.keyPressHandler(e, text)}
               type="text" placeholder="Search" className="mr-sm-2" />
             {this.renderSuggestions()}

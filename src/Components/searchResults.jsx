@@ -58,7 +58,7 @@ const SearchResults = ({match,location}) => {
    const pricesort = (searchElement == 'Least to Most Expensive'
                       || searchElement == 'Most to Least Expensive');
 
-   console.log('Products:', products, '\nsearch element:', searchElement);
+   // console.log('Products:', products, '\nsearch element:', searchElement);
    if (alphabeticalsort)
    {
      //Fill a dictionary with product names as keys => products
@@ -71,8 +71,8 @@ const SearchResults = ({match,location}) => {
        product_dict[products[i].productName.toLowerCase()] = products[i];
        PRODUCT_NAMES.push(products[i].productName.toLowerCase());
      }
-     console.log('Product dictionary', product_dict);
-     console.log('Product names', PRODUCT_NAMES);
+     // console.log('Product dictionary', product_dict);
+     // console.log('Product names', PRODUCT_NAMES);
      // var SORTED_NAMES = sort_list_least_to_greatest(PRODUCT_NAMES);
      var SORTED_NAMES = (searchElement == 'A - Z') ? sort_list_least_to_greatest(PRODUCT_NAMES) :
      sort_list_greatest_to_least(PRODUCT_NAMES);
@@ -102,24 +102,24 @@ const SearchResults = ({match,location}) => {
        product_dict[products[i].productPrice].push(products[i]);
        PRODUCT_PRICES.push(products[i].productPrice);
      }
-     console.log('Product dictionary', product_dict);
-     console.log('Product prices', PRODUCT_PRICES);
+     // console.log('Product dictionary', product_dict);
+     // console.log('Product prices', PRODUCT_PRICES);
      // var SORTED_NAMES = sort_list_least_to_greatest(PRODUCT_NAMES);
      var SORTED_PRICES = (searchElement == 'Least to Most Expensive') ? sort_list_least_to_greatest(PRODUCT_PRICES) :
      sort_list_greatest_to_least(PRODUCT_PRICES);
-     console.log('Sorted prices', SORTED_PRICES);
+     // console.log('Sorted prices', SORTED_PRICES);
      //The thing about products sharing a price is it doesn't matter which of them is "first".
      for (var index = 0; index < SORTED_PRICES.length; index++)
      {
        //Show me the product at the head of the price list in the dictionary
        const product = product_dict[SORTED_PRICES[index]][0];
-       console.log(product)
+       // console.log(product)
        //This product is next in line to be displayed
        elementsToDisplay.push(product);
        //Remove this product from the product dictionary, so if there's another product who shares the price, they can go next.
        product_dict[SORTED_PRICES[index]].shift()
      }
-     console.log('AFTER SORT', elementsToDisplay);
+     // console.log('AFTER SORT', elementsToDisplay);
    }
    else
    {
