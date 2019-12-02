@@ -13,6 +13,7 @@ import Registration from "./Components/Registration.js";
 import ProductPage from './Components/ProductPage.js';
 import Navbar from "./Components/Navbar";
 import UserProfile from "./Components/UserProfile";
+import ProductPosting from './Components/Client/ProductPosting.js';
 
 class App extends Component {
   render() {
@@ -60,6 +61,7 @@ class App extends Component {
 
       		}} />
 
+          <Route path="/productPosting" exact strict component={ProductPosting}/>
           <Route path="/results" exact strict component={SearchResults}/>
 
 

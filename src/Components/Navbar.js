@@ -9,6 +9,9 @@ import Button from "react-bootstrap/Button";
 import "../styles/autoComplete.css";
 import {BrowserRouter as Router, Link} from "react-router-dom";
 import Route from "react-router-dom/Route";
+import {Redirect} from "react-router";
+import localhost from '../LocalHost.js';
+import axios from 'axios';
 
 // The Navigation Bar
 class NavbarFunction extends Component {
@@ -21,50 +24,84 @@ class NavbarFunction extends Component {
          isLoaded:false,
          productNamesArray: [],
          tagsArray: [],
-         productData: []
+         productData: [],
+         isEnterPressed: false
       }
    }
 
    componentDidMount(){
-      //https://shop-354.herokuapp.com/Products.json
-      //http://localhost:3000/Products.json
-      fetch("http://localhost:3000/Products.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      }
-    })
+     var site = (localhost) ?
+       "http://localhost/shop-backend/php/get_products.php"
+       : "https://shop-354.herokuapp.com/get_products.php";
 
-      .then(response => response.json())
-      .then(productData => {
-        this.setState({
-          isLoaded: true
-        });
-        let jsonArray = JSON.parse(JSON.stringify(productData.products));
-        let tagsArray = [];
-        let productNamesArray = [];
-        for (var j in jsonArray) {
-          tagsArray.push(jsonArray[j].tags);
-          productNamesArray.push(jsonArray[j].productName);
-        }
+       const axiosConfig = {
+ 				headers: {
+             'Content-Type': 'application/json',
+ 						"Access-Control-Allow-Origin":"*",
+         },
+ 			};
 
-         let clothing = [];
-         let home = [];
-         let electronic = [];
-           for(var x in tagsArray){
-               for(var y in tagsArray[x]){
-                  if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
-                  if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
-                  if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
-               }
+      axios.post(site, null, axiosConfig)
+      .then(response => {
+          console.log('Response.data', response.data)
+          let jsonArray = JSON.parse(JSON.stringify(response.data.products));
+          let tagsArray = [];
+          let productNamesArray = [];
+          for (var j in jsonArray) {
+            tagsArray.push(jsonArray[j].tags);
+            productNamesArray.push(jsonArray[j].productName);
+          }
 
-           }
+           let clothing = [];
+           let home = [];
+           let electronic = [];
+             for(var x in tagsArray){
+                 for(var y in tagsArray[x]){
+                    if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
+                    if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
+                    if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
+                 }
 
-          this.setState({productNamesArray: productNamesArray,
-            tagsArray: tagsArray,
-            productData: jsonArray});
-      })
+             }
+
+             this.setState({
+               isLoaded: true
+             });
+            this.setState({productNamesArray: productNamesArray,
+              tagsArray: tagsArray,
+              productData: jsonArray});
+        })//end then
+   }//end componentDidMount
+
+   search = () => {
+     console.log('search toggled')
    }
+
+   // onSubmit = (e) =>{
+   //    const value = e;
+   //    let suggestions = [];
+   //    if(value.length >0){
+   //       const regex = new RegExp(`^${value}`,'i');
+   //       let tags = [];
+   //       let isAlreadyInArray=false;
+   //       for(var x in this.state.tagsArray){
+   //          for(var y in this.state.tagsArray[x]){
+   //             if(regex.test(this.state.tagsArray[x][y])){
+   //                for(var i in tags){
+   //                   if(this.state.tagsArray[x][y] === tags[i]){isAlreadyInArray=true;}
+   //                }
+   //                if(!isAlreadyInArray){tags.push(this.state.tagsArray[x][y])};
+   //                isAlreadyInArray=false;
+   //             }
+   //          }
+   //       }
+   //       suggestions = this.state.productNamesArray.filter(v=>regex.test(v)).concat(tags);
+   //
+   //    }
+   //    this.setState(() => ({suggestions,text:value}));
+   //    console.log(suggestions);
+   // }
+
    onSubmit = (e) =>{
       const value = e;
       let suggestions = [];
@@ -88,9 +125,8 @@ class NavbarFunction extends Component {
       }
       this.setState(() => ({suggestions,text:value}));
       console.log(suggestions);
-      
-      
    }
+
    onTextChanged = (e) =>{
       const value = e.target.value;
       let suggestions = [];
@@ -139,6 +175,17 @@ class NavbarFunction extends Component {
       );
    }
 
+   keyPressHandler(e, newText){
+      console.log(newText);
+      console.log(this.state.isEnterPressed);
+      if(e.charCode === 13){     // char code for "Enter"
+         this.setState({
+            isEnterPressed: true,
+            text: newText        // the value we want to search
+         });
+      }
+   }
+
  render(){
   const{isLoaded,text}= this.state;
 
@@ -149,6 +196,16 @@ class NavbarFunction extends Component {
    return (
       <div>
          {/* First Container */}
+
+         {/* user presses Enter in the search bar */}
+         {this.state.isEnterPressed && <Redirect to={{
+            pathname: "/results",
+            query: this.state.productData,
+            element: text}} />}
+         
+         {/* reset enter's state */}
+         {this.state.isEnterPressed = false}
+
          <div id="firstContainer">
             <Navbar id="Navbar" bg="light" expand="lg">
                {/* Navbar Brand */}
@@ -161,6 +218,7 @@ class NavbarFunction extends Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                <Nav className="mr-auto">
+
                {/* Dropdown */}
                <Dropdown>
                   <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -294,9 +352,11 @@ class NavbarFunction extends Component {
             </Nav>
 
             {/* Search Option */}
+
             <div className="Results">
-            <FormControl value={text} onChange={this.onTextChanged} type="text" placeholder="Search" className="mr-sm-2" />
-            
+              <FormControl value={text} onChange={this.onTextChanged} 
+              onKeyPress={(e) => this.keyPressHandler(e, text)}
+              type="text" placeholder="Search" className="mr-sm-2" />
             {this.renderSuggestions()}
             </div>
             
