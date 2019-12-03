@@ -144,6 +144,8 @@ class UserProfile extends Component
 	handleExitClick = (e) => {
 
 		localStorage.removeItem("logged_in_user");
+		localStorage.removeItem("cart");
+		localStorage.removeItem("cartQuantity");
 		this.setState({logout: true});
 		localStorage.setItem('username', 'Guest');
 	}
