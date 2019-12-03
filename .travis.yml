@@ -9,12 +9,20 @@ install:
   - npm install
   - composer install
 script:
+  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
   - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
   - sudo mv shop-backend/php/* public/
+  - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
+  - rm -R tests/
+  - unset CI
+  - npm run-script build
+  - sudo rm -R shop-tests
+  - sudo rm -R node_modules
+  - sudo rm -R build/
 deploy:
   provider: heroku
   api_key:
-    secure: sYbAT6kL4uiO8JYWa/CUxXKv+FXGrJ/5xa1WIiQBpnMjC1JSLqGDm8ETTs29p4kdPHE3szW/Eabn7Y/8g8HOuXS2JDJOGIYMzmjYAJRS87Pb8YCLkWdkfXT4sTbVlVlOZi/fgMBnZLVYvlg5o2aKOGk9JUnVwDSSEenmiwQQIwActzgVkrz/Nx2vO5sGCGDXXoKt/8B/gbhOAMDPlnNEqsH6PDPKYjpMdiUUTKl0xsCoYDRsECho8jo+UB72gHR4lKMhb0pE+0J7VNr+9Zjrm5DsbI9U8wJunt03y+YkejplwtNJP8/bM7usgn0CaCplXxctSIVuhA/N8gNS2RWahl8U18a6vwyebZS90FbrloD6q/+y1tO0nnO2xC6H580m+glwoUC+aLf2ae5n0x0v1dXbLfLD58eKhg/2HHQ4sLmbtOrv4lqwcKzYEw5EX9Bbfa9Vsg8k9KoSMphlAxiPUYsk/OdegvDgqh+jTvrnFqLDRtxQbAbQ1THoOhudgPLMJUcLqGYHFJ4sKhk+b92DeTg1oL8Ndp96JvdxXW+LdA+xHehSNvxmIl5k33dEjXJOP9RMmjyKtKlk+ARCpl3S44FA1czeDwrCZK2aI9PIc2VHFE+PKL7SNcF0IG420/H637yYDskpAcBumguHCxWCOZANd0zUelM9bt/8lE0kRTQ=
-  app: shop-354-backend
-  on: test-merge
+    secure: Reo4OebrHZHnwmOi9zf0p2QnHRBb2JNuvjRFbQGvWzvPFfUloxXjd+orDFmlIvH2MjW0S/frE/HIWNh0/LZ/PfH6M7nfbo7qMvF44t3TjqPpAD7GpYfZ5UsKbF6dbPEmatENA/q6NwFLZwlFN8Wp5trpkGil/Gmdo18QA5LlGklGrhgppRaTNqewGjIkuyvVQJFYhT2lyl22t3aIgm/4bAdU8/Xk5Om9+Jr4BsJOREe40y6iyG5Fo9GhhAq+hLp+CC6oEDN152ul26H8L2Twar1UAeITbsSO2ajzare3IPMsaV5ilP4FdC82xtehM2w8mOjttAR5n3Q/Bmh7wHVkh5Zf/1UQEZWIqRi1xXhLY6vIDArygAtKZFpBneasQj9mWXjqQIBwhXDJ7CsuMZDoK8aFhbmqWSDwLTGUMxyOXwaTPfT8PjJ3H8BDYuiqsguToUhQdFBPSEiJq8Kqz7c08Scf43ES0+X/GEjrHQvmI0hLAk938m5GytaItzXJPNfhbcS2pE96QTrUoCsqgiWG3nWB+ed3GY1eEqPwLp9NIwvG3YGn9yHoT/ID9kvvsntE9utDCffs850rD7qqdoeT2qgzyentm1fL+c7KNesvSsPYlscZd7bCt99rNV6hfnDKfBuVmzHQLGB/AexOFyFoGQqk4IjWMq/NdxkUGEPYBt4=
+  app: shop-354
+  on: master
   skip_cleanup: true
