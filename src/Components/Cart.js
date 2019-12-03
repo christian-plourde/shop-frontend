@@ -125,7 +125,7 @@ class Cart extends Component {
     //s2: THIS SECTION POST JSON PAYLOAD TO BACKEND
     axios({
       method: 'post',
-      url: 'http://localhost:80/shop-backend/php/transaction_1_1.php',
+      url: 'https://shop-354.herokuapp.com/transaction.php',
       data:payload
     })
     .then((response) => {
