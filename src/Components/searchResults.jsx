@@ -29,6 +29,21 @@ function sort_list_greatest_to_least(some_list) {
   for (var i = 0; i < some_list.length; i++) {
     for (var j = 0; j < some_list.length; j++) {
       if (i != j) {
+        if (some_list[i] > some_list[j]) {
+          var tmp = some_list[i];
+          some_list[i] = some_list[j];
+          some_list[j] = tmp;
+        }
+      }
+    }
+  }
+  return some_list;
+}
+
+function sort_list_greatest_to_least_f(some_list) {
+  for (var i = 0; i < some_list.length; i++) {
+    for (var j = 0; j < some_list.length; j++) {
+      if (i != j) {
         var var1 = parseFloat(some_list[i]);
         var var2 = parseFloat(some_list[j])
         if (var1 > var2) {
@@ -59,20 +74,7 @@ function sort_list_least_to_greatest_f(some_list) {
   return some_list;
 }
 
-function sort_list_greatest_to_least_f(some_list) {
-  for (var i = 0; i < some_list.length; i++) {
-    for (var j = 0; j < some_list.length; j++) {
-      if (i != j) {
-        if (some_list[i] > some_list[j]) {
-          var tmp = some_list[i];
-          some_list[i] = some_list[j];
-          some_list[j] = tmp;
-        }
-      }
-    }
-  }
-  return some_list;
-}
+
 
 function updateCartQuantity(){
    let currentValue = localStorage.getItem("cartQuantity")
