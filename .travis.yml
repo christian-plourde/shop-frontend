@@ -2,27 +2,27 @@ language: node_js
 cache:
   npm: true
   directories:
-    - node_modules
+  - node_modules
 before_install:
-  - nvm install v10.16.2
+- nvm install v10.16.2
 install:
-  - npm install
-  - composer install
+- npm install
+- composer install
 script:
-  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
-  - git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
-  - sudo mv shop-backend/php/* public/
-  - cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
-  - rm -R tests/
-  - unset CI
-  - npm run-script build
-  - sudo rm -R shop-tests
-  - sudo rm -R node_modules
-  - sudo rm -R build/
+- git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-tests.git
+- git clone https://$GITHUB_TOKEN@github.com/SparrowOchon/shop-backend.git
+- sudo mv shop-backend/php/* public/
+- cp -R shop-tests/frontend $TRAVIS_BUILD_DIR/tests/
+- rm -R tests/
+- unset CI
+- npm run-script build
+- sudo rm -R shop-tests
+- sudo rm -R node_modules
+- sudo rm -R build/
 deploy:
   provider: heroku
   api_key:
-    secure: PdvLPOErUBASg/amdAEGnVulPUz7Hf7l10/2cvhbZcZl4HLklfHBqmHKFxPSnMaUCdXYb6P6TVVeV/rnfp8HQMAJP4BasOTNR1Xatajhc5oed2ajuUW7Nw3yb70iZT5SGdCQspiIGkj3DsG3NCPO9fLErb/cttYYDPeDfzzm+bnQ6cd8mw95O2XYOYoFKzhLosZpGSKLbZBesijBHjxEeeFRJ0Y2brOy3xZwXcWD+ir2tXchDQbiuD3Nw2fTro4TgpSqfjx1hVvbqqUtVpSVh2s0tpiBD6TaYwQXaBvv8zvjRVTcsV7Y2rwgcpTu1B5QOroJi9LaF+6VqKcMRk3nwOg3gprCAhUftice9HeJTnJtadVEKpM3JbMBzlZXdbz3pn2OaevcBIEaAzEGQoUGDcP//sSmDSEAAL8cvUGp11bxsmOAOuA8lJM8GtFkrc4axZTQeyeuaqntqEoQvxOXJmkI//4IAeeMzsiDqALjanSeAY7sg0FXs4KsiQKwaJfw6s6wkTtTLCS2uxLJNr2hZz3DOUqQJcQ3sMkq7DdRV1C/XmlWeg9iQoHefL8DPVQlCxRFaDyqHEr0lUgojkh8h94iXA28B1PzCoTCgVyIYa2bdvq9VbTVU/r4soVtx5F2YjljOP3k3v/ENjn9+SEuWvkO22/XjkUOKttos4WhTwU=
+    secure: sYbAT6kL4uiO8JYWa/CUxXKv+FXGrJ/5xa1WIiQBpnMjC1JSLqGDm8ETTs29p4kdPHE3szW/Eabn7Y/8g8HOuXS2JDJOGIYMzmjYAJRS87Pb8YCLkWdkfXT4sTbVlVlOZi/fgMBnZLVYvlg5o2aKOGk9JUnVwDSSEenmiwQQIwActzgVkrz/Nx2vO5sGCGDXXoKt/8B/gbhOAMDPlnNEqsH6PDPKYjpMdiUUTKl0xsCoYDRsECho8jo+UB72gHR4lKMhb0pE+0J7VNr+9Zjrm5DsbI9U8wJunt03y+YkejplwtNJP8/bM7usgn0CaCplXxctSIVuhA/N8gNS2RWahl8U18a6vwyebZS90FbrloD6q/+y1tO0nnO2xC6H580m+glwoUC+aLf2ae5n0x0v1dXbLfLD58eKhg/2HHQ4sLmbtOrv4lqwcKzYEw5EX9Bbfa9Vsg8k9KoSMphlAxiPUYsk/OdegvDgqh+jTvrnFqLDRtxQbAbQ1THoOhudgPLMJUcLqGYHFJ4sKhk+b92DeTg1oL8Ndp96JvdxXW+LdA+xHehSNvxmIl5k33dEjXJOP9RMmjyKtKlk+ARCpl3S44FA1czeDwrCZK2aI9PIc2VHFE+PKL7SNcF0IG420/H637yYDskpAcBumguHCxWCOZANd0zUelM9bt/8lE0kRTQ=
   app: shop-354-backend
   on: test-merge
   skip_cleanup: true
