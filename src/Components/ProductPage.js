@@ -1,18 +1,13 @@
 import React, { Component } from "react";
-import "../styles/LandingPage.css";
-import Navbar from "./Navbar.js";
-import Carousel from "./carousel.jsx";
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import "../styles/productPage.css";
 import Review from "./Review.js";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ProductImageCarousel from './ProductImageCarousel.js'
+import ProductComments from './ProductComments.js'
 import axios from 'axios';
-
 import DeleteButton from './Admin/DeleteButton.js';
-
-//A variable to make our lives easier
 import localhost from '../LocalHost.js';
+import NavbarFunction from './Navbar'
 
 // const localhost = true;//Set to true if working locally
 
@@ -23,8 +18,8 @@ import localhost from '../LocalHost.js';
 //added: review components by rendering from review objects fetched from backend via API
 //removed: flex display in css because it messes up the layout, should probably use bootstrap once everything is rendering properly
 
-//need to implement: review score by fetching via API, photo slider with bottom thumbnails, order console/button, fix lack of key props to child component warning, removing unnecessary setstates/imports
-
+//need to implement: review score by fetching via API, photo slider with bottom thumbnails, fix lack of key props to child component warning
+//gave up tracking onward, but need to implement styling, review rating display, and purchase console
 class ProductPage extends React.Component {
 
   constructor(props) {
@@ -32,24 +27,23 @@ class ProductPage extends React.Component {
 
     this.state = {
       isLoaded: false,
-      data: [],
-      tags: [],
-      productNames: [],
-      clothingProducts: [],
-      homeProducts: [],
-      electronicProducts: [],
+      product: {},
       productReviews: [],
       productReviewsComponents: [],
       productReviewsMeta: {},
-      isAdmin:(localStorage.getItem("logged_in_user") == 'admin')
+      isAdmin: (localStorage.getItem("logged_in_user") == 'admin')
     };
   }
 
   componentDidMount() {
-    var site = (localhost) ?
-      "http://localhost:3000/Products.json"
-      : "https://shop-354.herokuapp.com/Products.json";
-    fetch(site, {
+    let product_id = this.props.match.params.product_id;
+    console.log(`the product ID is ${product_id}`)
+
+    const productSource = (localhost) ?
+      `http://localhost/shop-backend/php/product.php?product=${product_id}`
+      : `https://shop-354.herokuapp.com/product.php?product=${product_id}`;
+
+    fetch(productSource, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -58,42 +52,15 @@ class ProductPage extends React.Component {
       .then(response => response.json())
       .then(productData => {
         this.setState({
-          isLoaded: true,
-          data: productData.products
+          product: productData
         });
-        let jsonArray = JSON.parse(JSON.stringify(this.state.data));
-        let tagsArray = [];
-        let productNamesArray = [];
-        for (var j in jsonArray) {
-          tagsArray.push(jsonArray[j].tags);
-          productNamesArray.push(jsonArray[j].productName);
-        }
-
-        let clothing = [];
-        let home = [];
-        let electronic = [];
-        for (var x in tagsArray) {
-          for (var y in tagsArray[x]) {
-            if (tagsArray[x][y] === "clothing") { clothing.push(jsonArray[x]) }
-            if (tagsArray[x][y] === "home") { home.push(jsonArray[x]) }
-            if (tagsArray[x][y] === "electronic") { electronic.push(jsonArray[x]) }
-          }
-
-        }
-        this.setState({
-          clothingProducts: clothing,
-          homeProducts: home,
-          electronicProducts: electronic,
-          tags: tagsArray,
-          productNames: productNamesArray,
-          data: jsonArray
-        })
       });
 
-    //acquiring the review array associated with the received prop's ID`
-    let review_product_id = this.props.match.params.product_id;
-    this.setState({ isLoaded: false })
-    fetch(`https://shop-354.herokuapp.com/reviews.php?review=${review_product_id}`, {
+    const reviewSource = (localhost) ? //acquiring the review array associated with the received prop's ID
+      `http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${product_id}`
+      : `https://shop-354.herokuapp.com/reviews.php?review=${product_id}`
+
+    fetch(reviewSource, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json"
@@ -104,56 +71,54 @@ class ProductPage extends React.Component {
         this.setState({ productReviews: productReview, isLoaded: true });
       })
 
-
-
-    //acquiring the review meta data
-    //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${review_product_id}`
-    //`http://shop-354.herokuapp.com/reviews.php?averagereview=${review_product_id}`
+    // need to acquire the review meta data
+    //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${product_id}`
+    //`http://shop-354.herokuapp.com/reviews.php?averagereview=${product_id}`
   }
 
   deleteProduct = (id) => {
     const site = (localhost) ?
-        'http://localhost/shop-backend/php/delete_product.php'
-        : 'https://shop-354.herokuapp.com/delete_product.php';
+      'http://localhost/shop-backend/php/delete_product.php'
+      : 'https://shop-354.herokuapp.com/delete_product.php';
 
-    const data = JSON.stringify({id:id});
+    const data = JSON.stringify({ id: id });
     const axiosConfig = {
-        headers: {
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin":"*",
-        },
-      };
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
 
     axios.post(site, data, axiosConfig)
-    .then((response) => {
+      .then((response) => {
         console.log("Delete product :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
-    },
-    (error) => {
-      console.log("Delete product :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
-    });
+      },
+        (error) => {
+          console.log("Delete product :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
+        });
   }
 
   deleteReview = (id) => {
     const site = (localhost) ?
-        'http://localhost/shop-backend/php/delete_review.php'
-        : 'https://shop-354.herokuapp.com/delete_review.php';
+      'http://localhost/shop-backend/php/delete_review.php'
+      : 'https://shop-354.herokuapp.com/delete_review.php';
 
-    const data = JSON.stringify({id:id});
+    const data = JSON.stringify({ id: id });
     const axiosConfig = {
-        headers: {
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin":"*",
-        },
-      };
+      headers: {
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
 
     axios.post(site, data, axiosConfig)
-    .then((response) => {
+      .then((response) => {
         console.log("Delete review :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
         window.location.reload();
-    },
-    (error) => {
-      console.log("Delete review :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
-    });
+      },
+        (error) => {
+          console.log("Delete review :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
+        });
   }
 
 
@@ -165,27 +130,19 @@ class ProductPage extends React.Component {
     }
     else {
 
-      var product = null;
-
-      for (var i = 0; i < this.state.data.length; i++) {
-        if (this.state.data[i].productID == this.props.match.params.product_id) {
-          product = this.state.data[i];
-        }
-      }
-
       //generating an array of review components
       const reviewComponents = this.state.productReviews.map((reviewItems, index) =>
         <div>
           {this.state.isAdmin ?
-               <DeleteButton   onClick={this.deleteReview}
-                                id={reviewItems.reviewID}
-                                text={'Delete Review'}
-                                redirect_to={'productPage/'+this.props.match.params.product_id}
-                />
-              : ''
+            <DeleteButton onClick={this.deleteReview}
+              id={reviewItems.reviewID}
+              text={'Delete Review'}
+              redirect_to={'productPage/' + this.props.match.params.product_id}
+            />
+            : ''
           }
           <Review
-            key={reviewItems.index}
+            key={index}
             reviewID={reviewItems.reviewID}
             productID={reviewItems.productID}
             reviewerID={reviewItems.reviewerID}
@@ -198,48 +155,70 @@ class ProductPage extends React.Component {
 
       //`https://shop-354.herokuapp.com/${product.picture.substring(1)}`
       //`http://localhost:3000${product.picture.substring(1)}`
-      const imageSource = `https://shop-354.herokuapp.com/${product.picture.substring(1)}`
+      const imageSources = []
+      if (this.state.product.images != undefined){
+        imageSources = this.state.product.images.map(imageUrl => `https://shop-354.herokuapp.com/ressources/img/${imageUrl}`)     //generating a product image url array with randomly inserted Shrek, ISS and Donkey(from Shrek)
+      }
+
+      let dice = Math.random() * 10
+      if (dice > 2.5) {
+        imageSources.push('https://upload.wikimedia.org/wikipedia/en/4/4d/Shrek_%28character%29.png')
+      }
+      if (dice > 5) {
+        imageSources.push('https://www.ctl.io/assets/images/products/managed-services/logos/ms-iis-color.png')
+      }
+      if (dice > 7.5) {
+        imageSources.push('https://upload.wikimedia.org/wikipedia/en/6/6c/Donkey_%28Shrek%29.png')
+      }
+      if (dice > 9) {
+        imageSources.push('https://i.redd.it/iu1bhetpmb041.jpg')
+      }
 
       return (
         <div>
-          <Navbar />
+          <NavbarFunction />
           <div className="container">
             {this.state.isAdmin ?
-                 <DeleteButton   onClick={this.deleteProduct}
-                                  id={this.props.match.params.product_id}
-                                  text={'Delete Product'}
-                                  redirect_to=''//Landing page
-                  />
-                : ''
+              <DeleteButton onClick={this.deleteProduct}
+                id={this.props.match.params.product_id}
+                text={'Delete Product'}
+                redirect_to=''//Landing page
+              />
+              : ''
             }
-            <h1>{product.productName}</h1>
-            <div className="rating"> product rating</div>
-            <div className="inner_container">
-              <div className="photo">
-                <img className="product_image" src={imageSource} />
+            <div className="container">
+              <h1>{this.state.product.productName}</h1>
+              <div className="rating"> product rating</div>
+              <div className="inner_container">
+                <div className="photo">
+                  {
+                    //<img className="product_image" src={imageSource} />
+                  }
+                  <ProductImageCarousel url={imageSources} />
+                </div>
+                <div className="text">
+                  <p>Item Description:<br />{this.state.product.descriptionText}</p>
+                  <ul>
+                    <li>Model Name:{this.state.product.modelName}</li>
+                    <li>Product Color:{this.state.product.color}</li>
+                    <li>Product Dimension{this.state.product.dimensions}</li>
+                  </ul>
+                </div>
+                <div id="purchase">
+                  <ProductComments product_id={this.props.match.params.product_id} />
+                </div>
               </div>
-              <div className="text">
-                <p>Item Description:<br />{product.descriptionText}</p>
-                <ul>
-                  <li>Model Name:{product.modelName}</li>
-                  <li>Product Color:{product.color}</li>
-                  <li>Product Dimension{product.dimensions}</li>
-                </ul>
+              <div>
+                {reviewComponents}
               </div>
-              <div id="purchase">
-                purchase box
-                      </div>
-            </div>
-            <div>
-              {reviewComponents}
             </div>
           </div>
         </div>
-      );
+          );
+        }
+    
+      }
+    
     }
-
-  }
-
-}
-
+    
 export default ProductPage;

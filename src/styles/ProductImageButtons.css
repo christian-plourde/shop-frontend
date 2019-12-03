@@ -1,0 +1,27 @@
+.slide-arrow {
+	color: black;
+	cursor: pointer;
+	font-size: 2rem;
+	position: fixed;
+	top: 50%;
+}
+
+.slide-arrow.right {
+	right: 1rem;
+}
+
+.slide-arrow.left {
+	left: 1rem;
+}
+
+.carousel {
+	height:100%;
+	margin: 0;
+	width: 100%;
+}
+
+.image-slide {
+	height: 100%;
+	width: 100%;
+	transition: 1s ease-in-out;
+}
