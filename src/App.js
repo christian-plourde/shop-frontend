@@ -102,13 +102,6 @@ class App extends Component {
 
         {/*The pafe for the user to register a new account on the site*/}
 
-        <Route
-          path="/productPage/:product_id"
-          exact
-          strict
-          render={props => <ProductPage {...props} />}
-        />
-
         <Route path="/user" exact strict component={UserProfile} />
       </Router>
     );
