@@ -217,7 +217,6 @@ class NavbarFunction extends Component {
       return null;
     }
     return (
-      <div>
       <ul>
         {suggestions.map(item => (
           <Link
@@ -228,8 +227,7 @@ class NavbarFunction extends Component {
             }}
             >
                <li onClick={() => this.suggestionSelected(item)}>{item}</li> </Link>))}
-         </ul>
-      </div>
+      </ul>
     );
 }
 
