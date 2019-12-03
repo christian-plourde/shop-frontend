@@ -130,8 +130,8 @@ class Cart extends Component {
 
     //Also recompute subtotal and total
     let sTotal = 0;
-    for (var x in this.props.products) {
-      let product = this.props.products[x];
+    for (var x in this.state.products) {
+      let product = this.state.products[x];
       sTotal += Number.parseFloat(product.productPrice) * Number.parseFloat(product.cartQuantity);
     }
     this.setState({
@@ -157,7 +157,7 @@ class Cart extends Component {
           </div>
           <div>
             {this.state.products.map(product => {
-            
+
               return (
                 <CartItem
                   product={product}

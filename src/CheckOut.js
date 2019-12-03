@@ -28,14 +28,24 @@ class CheckOut extends Component {
 
   render() {
     var cart_array = this.getCart();
+    console.log('Checkout :: render -> cart array', cart_array);
+    var item_quantity = 0;
+    for(var i = 0; i < cart_array.length; i++)
+    {
+      console.log('Checkout :: render -> cart item ', i, ' :', cart_array[i]);
+      var product = cart_array[i];
+      item_quantity += product.cartQuantity;
+    }
+    console.log('Checkout :: render -> Detected', item_quantity, 'items.')
+
 
     return (
       <div>
         <div>
-          <Navbar cartQuantity={cart_array.length} />
+          <Navbar cartQuantity={item_quantity} />
         </div>
         <div className="CheckOutBody">
-          <Cart products={cart_array}></Cart>
+          <Cart products={cart_array} />
         </div>
       </div>
     );
