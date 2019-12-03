@@ -4,6 +4,7 @@ import ProductThumbnail from '../ProductThumbnail.js';
 import localhost from '../../LocalHost.js';
 import axios from 'axios';
 import NewProductPosting from '../Client/NewProductPosting.js';
+import DeleteButton from '../Admin/DeleteButton.js';
 
 
 class UserDisplay extends React.Component {
@@ -73,6 +74,27 @@ class UserDisplay extends React.Component {
       });
     }//end function displayUserProductsCurrentlyForSale()
 
+    deleteProduct = (id) => {
+      const site = (localhost) ?
+        'http://localhost/shop-backend/php/delete_product.php'
+        : 'https://shop-354.herokuapp.com/delete_product.php';
+
+      const data = JSON.stringify({ id: id });
+      const axiosConfig = {
+        headers: {
+          'Content-Type': 'application/json',
+          "Access-Control-Allow-Origin": "*",
+        },
+      };
+
+      axios.post(site, data, axiosConfig)
+        .then((response) => {
+          console.log("Delete product :: axios.post call successful for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nResponse data:', response.data);
+        },
+          (error) => {
+            console.log("Delete product :: axios.post call failure for params\nsite:", site, '\ndata:', data, '\nconfig:', axiosConfig, '\nError:', error);
+          });
+    }
 
     renderTable(){
       return this.state.products.map((product, index) => {
@@ -88,6 +110,11 @@ class UserDisplay extends React.Component {
                                     description={productDescription}
                                     quantity={quantity}
                 />
+                <div>
+                    <h1>Delete button!!!</h1>
+                    <DeleteButton id={productID} onClick={this.deleteProduct} disabled/>
+                    {console.log('UserDisplay :: delete product button is currently disabled.')}
+                </div>
               </td>
             </tr>
           )

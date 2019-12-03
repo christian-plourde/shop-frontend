@@ -40,13 +40,51 @@ function sort_list_greatest_to_least(some_list) {
   return some_list;
 }
 
+function sort_list_greatest_to_least_f(some_list) {
+  for (var i = 0; i < some_list.length; i++) {
+    for (var j = 0; j < some_list.length; j++) {
+      if (i != j) {
+        var var1 = parseFloat(some_list[i]);
+        var var2 = parseFloat(some_list[j])
+        if (var1 > var2) {
+          var tmp = some_list[i];
+          some_list[i] = some_list[j];
+          some_list[j] = tmp;
+        }
+      }
+    }
+  }
+  return some_list;
+}
+
+function sort_list_least_to_greatest_f(some_list) {
+  for (var i = 0; i < some_list.length; i++) {
+    for (var j = 0; j < some_list.length; j++) {
+      if (i != j) {
+        var var1 = parseFloat(some_list[i]);
+        var var2 = parseFloat(some_list[j])
+        if (var1 < var2) {
+          var tmp = some_list[i];
+          some_list[i] = some_list[j];
+          some_list[j] = tmp;
+        }
+      }
+    }
+  }
+  return some_list;
+}
+
+
+
 function updateCartQuantity(){
    let currentValue = localStorage.getItem("cartQuantity")
    return currentValue;
 }
 
 const SearchResults = ({ match, location }) => {
-  let products = location.query;
+  // let products = location.query;
+  let products = Object.values(location.query);
+  console.log(products)
   let searchElement = location.element;
   let elementsToDisplay = [];
 
@@ -91,34 +129,64 @@ const SearchResults = ({ match, location }) => {
         ? "Least to Most Expensive"
         : "Most to Least Expensive";
     // console.log(message_string, " detected");
+    // console.log('type of a product:', typeof products[0])
+    // console.log('try value:',Object.values(products)[0].productPrice)
+    // for (var i = 0; i < products.length; i++) {
+    //   //If there is no list at that key, create an empty list
+    //   var key = Object.values(products)[i].productPrice;
+    //   var value = Object.values(products)[i];
+    //
+    //   if (!product_dict["'"+key+"'"]) {
+    //     product_dict["'"+key+"'"] = [];
+    //   }
+    //   product_dict["'"+key+"'"].push(value);
+    //   //Add this product to that list, at that key
+    //
+    //   PRODUCT_PRICES.push(parseFloat(key).toFixed(2));
+    //   // console.log('is key defined? ', key)
+    //   // console.log('is value defined? ', value)
+    //   // console.log('is product_dict[',key,'] defined? ', product_dict[key])
+    //   // console.log('is product_dict[',key,'] an array? ', typeof product_dict[key])
+    // }
+
     for (var i = 0; i < products.length; i++) {
       //If there is no list at that key, create an empty list
-      if (!product_dict[products[i].productPrice]) {
-        product_dict[products[i].productPrice] = [];
+      var key = products[i].productPrice;
+      var value = products[i];
+      console.log('key ', key, ' value ', value)
+
+      if (!product_dict[key]) {
+        product_dict[key] = [];
       }
+      product_dict[key].push(value);
       //Add this product to that list, at that key
-      product_dict[products[i].productPrice].push(products[i]);
-      PRODUCT_PRICES.push(products[i].productPrice);
+
+      PRODUCT_PRICES.push(parseFloat(key).toFixed(2));
+      // console.log('is key defined? ', key)
+      // console.log('is value defined? ', value)
+      // console.log('is product_dict[',key,'] defined? ', product_dict[key])
+      // console.log('is product_dict[',key,'] an array? ', typeof product_dict[key])
     }
-    // console.log("Product dictionary", product_dict);
-    // console.log("Product prices", PRODUCT_PRICES);
+    console.log("Product dictionary", product_dict);
+    console.log("Product prices", PRODUCT_PRICES);
     // var SORTED_NAMES = sort_list_least_to_greatest(PRODUCT_NAMES);
     var SORTED_PRICES =
       searchElement == "Least to Most Expensive"
-        ? sort_list_least_to_greatest(PRODUCT_PRICES)
-        : sort_list_greatest_to_least(PRODUCT_PRICES);
-    // console.log("Sorted prices", SORTED_PRICES);
+        ? sort_list_least_to_greatest_f(PRODUCT_PRICES)
+        : sort_list_greatest_to_least_f(PRODUCT_PRICES);
+    console.log("Sorted prices", SORTED_PRICES);
     //The thing about products sharing a price is it doesn't matter which of them is "first".
     for (var index = 0; index < SORTED_PRICES.length; index++) {
+      var key = SORTED_PRICES[index]
       //Show me the product at the head of the price list in the dictionary
-      const product = product_dict[SORTED_PRICES[index]][0];
-      // console.log('Printing product', product);
+      const product = product_dict[key].pop();
       //This product is next in line to be displayed
       elementsToDisplay.push(product);
       //Remove this product from the product dictionary, so if there's another product who shares the price, they can go next.
-      product_dict[SORTED_PRICES[index]].shift();
     }
-    // console.log("AFTER SORT", elementsToDisplay);
+    console.log("AFTER SORT", elementsToDisplay);
+
+
   } else {
     for (var x in products) {
       if (
