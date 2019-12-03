@@ -33,7 +33,7 @@ class NavbarFunction extends Component {
       productNamesArray: [],
       tagsArray: [],
       productData: [],
-      cartQuantity:"",
+      cartQuantity:0,
       isEnterPressed: false,
       isSearchFocused: false
     };
