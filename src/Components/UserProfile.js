@@ -145,6 +145,7 @@ class UserProfile extends Component
 
 		localStorage.removeItem("logged_in_user");
 		this.setState({logout: true});
+		localStorage.setItem('username', 'Guest');
 	}
 
 
@@ -182,8 +183,6 @@ class UserProfile extends Component
 					  };
 
 
-		{/*https://shop-354.herokuapp.com/change_user_password.php*/}
-  		{/*http://localhost/www/shop-backend/php/change_user_password.php*/}
     	axios.post('https://shop-354.herokuapp.com/change_user_password.php', JSON.stringify(data), {
         headers: {
             'Content-Type': 'application/json',

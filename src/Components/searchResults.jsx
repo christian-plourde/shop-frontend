@@ -39,10 +39,12 @@ function sort_list_greatest_to_least(some_list) {
   }
   return some_list;
 }
+
 function updateCartQuantity(){
    let currentValue = localStorage.getItem("cartQuantity")
    return currentValue;
 }
+
 const SearchResults = ({ match, location }) => {
   let products = location.query;
   let searchElement = location.element;
@@ -53,26 +55,26 @@ const SearchResults = ({ match, location }) => {
     searchElement == "Least to Most Expensive" ||
     searchElement == "Most to Least Expensive";
 
-  console.log("Products:", products, "\nsearch element:", searchElement);
+  // console.log("Search results ::\nproduct list", products, "\nsearch element:", searchElement);
   if (alphabeticalsort) {
     //Fill a dictionary with product names as keys => products
     var product_dict = {};
     var PRODUCT_NAMES = [];
     var message_string = searchElement == "A - Z" ? "A to Z" : "Z to A";
-    console.log(message_string, " detected");
+    // console.log(message_string, " detected");
     for (var i = 0; i < products.length; i++) {
       // console.log(products[i]);
       product_dict[products[i].productName.toLowerCase()] = products[i];
       PRODUCT_NAMES.push(products[i].productName.toLowerCase());
     }
-    console.log("Product dictionary", product_dict);
-    console.log("Product names", PRODUCT_NAMES);
+    // console.log("Product dictionary", product_dict);
+    // console.log("Product names", PRODUCT_NAMES);
     // var SORTED_NAMES = sort_list_least_to_greatest(PRODUCT_NAMES);
     var SORTED_NAMES =
       searchElement == "A - Z"
         ? sort_list_least_to_greatest(PRODUCT_NAMES)
         : sort_list_greatest_to_least(PRODUCT_NAMES);
-    console.log("Sorted names", SORTED_NAMES);
+    // console.log("Sorted names", SORTED_NAMES);
     // Now for everybody in this dictionary, find the one with the next alphabetical name
     for (var index = 0; index < SORTED_NAMES.length; index++) {
       // console.log('Pushing product_dict[', SORTED_NAMES[index], ']:', product_dict[SORTED_NAMES[index]], ' to things to display');
@@ -87,8 +89,8 @@ const SearchResults = ({ match, location }) => {
     var message_string =
       searchElement == "Least to Most Expensive"
         ? "Least to Most Expensive"
-        : "Least to Most Expensive";
-    console.log(message_string, " detected");
+        : "Most to Least Expensive";
+    // console.log(message_string, " detected");
     for (var i = 0; i < products.length; i++) {
       //If there is no list at that key, create an empty list
       if (!product_dict[products[i].productPrice]) {
@@ -98,25 +100,25 @@ const SearchResults = ({ match, location }) => {
       product_dict[products[i].productPrice].push(products[i]);
       PRODUCT_PRICES.push(products[i].productPrice);
     }
-    console.log("Product dictionary", product_dict);
-    console.log("Product prices", PRODUCT_PRICES);
+    // console.log("Product dictionary", product_dict);
+    // console.log("Product prices", PRODUCT_PRICES);
     // var SORTED_NAMES = sort_list_least_to_greatest(PRODUCT_NAMES);
     var SORTED_PRICES =
       searchElement == "Least to Most Expensive"
         ? sort_list_least_to_greatest(PRODUCT_PRICES)
         : sort_list_greatest_to_least(PRODUCT_PRICES);
-    console.log("Sorted prices", SORTED_PRICES);
+    // console.log("Sorted prices", SORTED_PRICES);
     //The thing about products sharing a price is it doesn't matter which of them is "first".
     for (var index = 0; index < SORTED_PRICES.length; index++) {
       //Show me the product at the head of the price list in the dictionary
       const product = product_dict[SORTED_PRICES[index]][0];
-      console.log(product);
+      // console.log('Printing product', product);
       //This product is next in line to be displayed
       elementsToDisplay.push(product);
       //Remove this product from the product dictionary, so if there's another product who shares the price, they can go next.
       product_dict[SORTED_PRICES[index]].shift();
     }
-    console.log("AFTER SORT", elementsToDisplay);
+    // console.log("AFTER SORT", elementsToDisplay);
   } else {
     for (var x in products) {
       if (
@@ -132,31 +134,32 @@ const SearchResults = ({ match, location }) => {
             }
          }
       }
-   }
+   }//end for
+ }//end else
 
    return(
       <div>
-         <Navbar value={updateCartQuantity()} />
+         <Navbar value={updateCartQuantity()} data={products} />
          <div className="ResultsDisplay">
          <h2 className="TitleResults">Search results related to {searchElement}</h2>
          {elementsToDisplay.map((data,index) =>(
             <ul className="ResultsList">
             <li className="ResultsList-inner">
-            <ProductCard  
-               key={index} 
-               name = {data.productName} 
-               price = {data.productPrice} 
-               description = {data.descriptionText} 
-               picture= {data.picture} id={data.productID} 
-               product={data} 
+            <ProductCard
+               key={index}
+               name = {data.productName}
+               price = {data.productPrice}
+               description = {data.descriptionText}
+               picture= {data.picture} id={data.productID}
+               product={data}
             />
             </li>
-            </ul> 
+            </ul>
          ))}
          </div>
       </div>
    )
-}
-}
+}//end SearchResults
+
 
 export default SearchResults;

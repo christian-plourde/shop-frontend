@@ -11,29 +11,35 @@ class CheckOut extends Component {
       isLoaded: false,
     };
   }
+
   getCart(){
     let storage = localStorage.getItem("cart")
-    let productArrayStrings= storage.split("|") // array of products as Strings
+
+    let productArrayStrings= storage.split("|") //Return an array of products as Strings
+
+
     let productArrayObjects=[]
     for(var x in productArrayStrings){
       productArrayObjects.push(JSON.parse(productArrayStrings[x]))
     }
+    console.log('getCart() :: product array objects', productArrayObjects)
     return productArrayObjects
   }
 
   render() {
-    
+    var cart_array = this.getCart();
+
     return (
       <div>
         <div>
-          <Navbar />
+          <Navbar cartQuantity={cart_array.length} />
         </div>
         <div className="CheckOutBody">
-          <Cart products={this.getCart()}></Cart>
+          <Cart products={cart_array}></Cart>
         </div>
       </div>
     );
   }
-  
+
 }
 export default CheckOut;
