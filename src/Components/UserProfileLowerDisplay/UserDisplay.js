@@ -95,8 +95,16 @@ class UserDisplay extends React.Component {
     }
 
     render() {
+
+      const account_info_style =
+      {
+        textDecoration: "underline",
+        paddingBottom: '10px'
+      }
+
       return(
           <div>
+            <h1 style={account_info_style}>Sell Listings</h1>
             <NewProductPosting />
             <table>
               <tbody>
