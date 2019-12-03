@@ -255,3 +255,9 @@ label {
 .financial-details {
   width: 100%;
 }
+.finalMessage{
+  display:block;
+  width:100%;
+  border:1px solid;
+  color:green;
+}
