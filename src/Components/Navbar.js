@@ -34,7 +34,8 @@ class NavbarFunction extends Component {
       tagsArray: [],
       productData: [],
       cartQuantity:0,
-      isEnterPressed: false
+      isEnterPressed: false,
+      isSearchFocused: false
     };
   }
 
@@ -224,16 +225,17 @@ class NavbarFunction extends Component {
               query: this.state.productData,
               element: item
             }}
-
             >
                <li onClick={() => this.suggestionSelected(item)}>{item}</li> </Link>))}
-         </ul>
-      );
+      </ul>
+    );
+}
+
+searchFocusHandler(isFocused){
+  this.setState({isSearchFocused: isFocused})
 }
 
    keyPressHandler(e, newText){
-      console.log(newText);
-      console.log(this.state.isEnterPressed);
       // charcode 13 is "Enter" && text can't be empty && text can't be whitespaces only
       if(e.charCode === 13 && !!newText && newText.trim().length > 0){
          this.setState({
@@ -363,11 +365,13 @@ class NavbarFunction extends Component {
                     value={text}
                     onChange={this.onTextChanged}
                     onKeyPress={e => this.keyPressHandler(e, text)}
+                    onFocus={() => this.searchFocusHandler(true)}
+                    onBlur={() => this.searchFocusHandler(false)}
                     type="text"
                     placeholder="Search"
                     className="mr-sm-2"
                   />
-                  {/*this.renderSuggestions()*/}
+                  {this.state.isSearchFocused ? this.renderSuggestions() : ''}
                 </div>
 
                 <Link
@@ -377,8 +381,7 @@ class NavbarFunction extends Component {
                     element: this.state.text
                   }}
                 >
-                  {/* Button is disabed if search bar is empty or only contains whitespaces */}
-
+            {/* Button is disabed if search bar is empty or only contains whitespaces */}
             <Button id="search" disabled={!text || text.trim().length <= 0} variant="outline-success">
 
               Search
