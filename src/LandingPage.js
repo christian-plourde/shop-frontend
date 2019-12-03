@@ -100,13 +100,17 @@ class LandingPage extends Component {
       electronicProducts,
       productNames
     } = this.state;
+
+    const isGuest = (localStorage.getItem("username") != null && localStorage.getItem("username") == 'Guest');
+    const isClient = !isGuest && (localStorage.getItem("logged_in_user") != null && localStorage.getItem("logged_in_user") != 'admin');
+
     if (!isLoaded) {
       return <div> loading...</div>;
     } else {
       return (
         <div>
           {/*<Navbar productNames={productNames} tags={tags} products={data} cartQuantity={this.state.quantity}/>*/}
-          <Navbar data={data} />
+          <Navbar data={data} renderCart={isClient}/>
           <div className="LandingPageBody">
             <div>
               <div className="LandingPageBody">

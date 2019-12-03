@@ -39,6 +39,7 @@ class NavbarFunction extends Component {
     };
   }
 
+
   componentDidMount() {
 
     console.log('Navbar : this.props.data', this.props.data, ' Execute php? ', !this.props.data)
@@ -129,24 +130,14 @@ class NavbarFunction extends Component {
         productData: this.props.data});
   }//end set state via props
 
-
   componentDidUpdate(){
-    // console.log("Navbar-78")
-    let item = localStorage.getItem("cartQuantity")
-    // console.log("Navbar-80-", "newCartValue", item)
-    if(item && this.state.cartQuantity != item ){
-      this.setState({ cartQuantity:item})
+      // console.log("Navbar-78")
+      let item = localStorage.getItem("cartQuantity")
+      // console.log("Navbar-80-", "newCartValue", item)
+      if(item && this.state.cartQuantity != item ){
+        this.setState({ cartQuantity:item})
+      }
     }
-  }
-
-  // componentWillUnmount(){
-  //   // console.log("Navbar-78")
-  //   let item = localStorage.getItem("cartQuantity")
-  //   // console.log("Navbar-80-", "newCartValue", item)
-  //   if(item && this.state.cartQuantity != item ){
-  //     this.setState({ cartQuantity:item})
-  //   }
-  // }
 
   onSubmit = e => {
     const value = e;
@@ -248,7 +239,57 @@ searchFocusHandler(isFocused){
  render(){
   const{isLoaded,text}= this.state;
 
-  var render_cart = (localStorage.getItem("cart"))
+  const isGuest = (localStorage.getItem("username") != null && localStorage.getItem("username") == 'Guest');
+  const isClient = !isGuest && (localStorage.getItem("logged_in_user") != null && localStorage.getItem("logged_in_user") != 'admin');
+  const hasCart = (localStorage.getItem("cart") != null);
+
+  console.log('Navbar::render -> isGuest:', isGuest, ' isClient:', isClient)
+
+//Render the cart is this is a client and they have a cart
+  var render_cart = (isClient);
+  //unless I specifically say not to render the cart
+  if (this.props.renderCart != null && !this.props.renderCart)
+  {
+    render_cart = false;
+  }
+  var cart_empty = !localStorage.getItem("cart");
+
+  console.log('Navbar::render -> render cart:', render_cart, ' has Cart:', hasCart)
+
+  const cart = () => {
+      if (render_cart)
+      {
+        return (
+          (!cart_empty) ? (
+            <Link to="/checkout">
+              <button
+                id="cart"
+                type="button"
+                class="btn btn-secondary btn-sm"
+              >
+                <i id="shoppingCart" class="fas fa-shopping-cart"></i>
+                {/*<span class="counter">{this.state.cartQuantity}</span>*/}
+                <span class="counter">{
+                  //If we receive cart quantity as a prop, render that. Else, render the state
+                  !this.props.cartQuantity ? this.state.cartQuantity : this.props.cartQuantity}</span>
+              </button>
+            </Link>
+          )
+          :(
+            <button
+              id="cart"
+              type="button"
+              class="btn btn-secondary btn-sm"
+              onClick={()=>{window.alert('Your cart is empty!')}}
+            >
+              <i id="shoppingCart" class="fas fa-shopping-cart"></i>
+              {/*<span class="counter">{this.state.cartQuantity}</span>*/}
+              <span class="counter">{(!this.props.cartQuantity) ? this.state.cartQuantity : this.props.cartQuantity}</span>
+            </button>
+          )
+        )
+      }//end if
+  }
 
     if (!isLoaded) {
       return <div> loading...</div>;
@@ -431,34 +472,7 @@ searchFocusHandler(isFocused){
                   </Link>
                 )}
 
-                {render_cart ? (
-                  <Link to="/checkout">
-                    <button
-                      id="cart"
-                      type="button"
-                      class="btn btn-secondary btn-sm"
-                    >
-                      <i id="shoppingCart" class="fas fa-shopping-cart"></i>
-                      {/*<span class="counter">{this.state.cartQuantity}</span>*/}
-                      <span class="counter">{
-                        //If we receive cart quantity as a prop, render that. Else, render the state
-                        !this.props.cartQuantity ? this.state.cartQuantity : this.props.cartQuantity}</span>
-                    </button>
-                  </Link>
-                )
-                :(
-                  <button
-                    id="cart"
-                    type="button"
-                    class="btn btn-secondary btn-sm"
-                    onClick={()=>{window.alert('Your cart is empty!')}}
-                  >
-                    <i id="shoppingCart" class="fas fa-shopping-cart"></i>
-                    {/*<span class="counter">{this.state.cartQuantity}</span>*/}
-                    <span class="counter">{(!this.props.cartQuantity) ? this.state.cartQuantity : this.props.cartQuantity}</span>
-                  </button>
-                )
-                }
+                {cart()}
 
 
               </Navbar.Collapse>

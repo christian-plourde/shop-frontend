@@ -42,7 +42,9 @@ class CheckOut extends Component {
     return (
       <div>
         <div>
-          <Navbar cartQuantity={item_quantity} />
+          <Navbar renderCart={false} cartQuantity={item_quantity} />
+          {/*<Navbar cartQuantity={item_quantity} />*/
+        /*Uncomment the above to render cart*/}
         </div>
         <div className="CheckOutBody">
           <Cart products={cart_array} />
