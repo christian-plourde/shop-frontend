@@ -27,6 +27,8 @@ class LandingPage extends Component {
       electronicProducts: [],
       quantity: ""
     };
+
+    this.changeQuantity = this.changeQuantity.bind(this)
   }
 
   componentDidMount() {
@@ -88,10 +90,10 @@ class LandingPage extends Component {
 
   changeQuantity() {
     let quantityNow = localStorage.getItem("cartQuantity")
+    // console.log('LandingPage :: changeQuantity\nIs cart quantity now equal to local storage?', quantityNow != this.state.quantity)
     if(quantityNow != this.state.quantity){
       this.setState({quantity:quantityNow})
     }
-
   }
 
 
@@ -157,8 +159,9 @@ class LandingPage extends Component {
                 <h1 className="TrendingTitle">Holiday Trending Products</h1>
                 <ul className="TrendingProducts"> 
                   {isClient ?
-                  (<TrendingProducts   num_to_return={3}
-                                        toggleCartUpdate={this.changeQuantity()}
+                  (<TrendingProducts    num_to_return={3}
+                                        toggleCartUpdate={this.changeQuantity}
+                                        isClient={isClient}
                   />)
                   :
                   (<TrendingProducts   num_to_return={3}
