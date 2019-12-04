@@ -102,28 +102,6 @@ class ProductCard extends Component {
 
     var href = "/productPage/" + this.props.id;
 
-      // return(
-      //
-      //    <div className="productContainer">
-      //     <h3 className="productTitle">{this.props.name}</h3>
-      //     <Link to={href} ><img  src={this.props.picture} alt="product"/></Link>
-      //     <div className="productContainerInner">
-      //
-      //          <p className="productDescription">{this.props.description}</p>
-      //          <p className="price">${this.props.price}</p>
-      //          <p className="brand">{this.props.modelName}</p>
-      //          <div className="cartElements">
-      //          <button className="incrementCart" onClick={this.handleIncrement}><span className="glyphicon glyphicon-chevron-right"></span></button>
-      //          <button className="decrementCart" onClick={this.handleDecrement} disabled={this.state.quantity === 1}><span className="glyphicon glyphicon-chevron-left"></span></button>
-      //          <input type="number" className="numItems" value={this.state.quantity}></input>
-      //          <p><button className="addToCart" onClick={() => this.addToCart(this.state.quantity)}>Add to Cart</button></p>
-      //          </div>
-      //
-      //       </div>
-      //       {this.state.notLoggedIn && <Redirect to={"/login"} />}
-      //    </div>
-      //
-      // )
 
       return(
 
@@ -148,7 +126,12 @@ class ProductCard extends Component {
                         </span>
               </button>
                <input type="number" className="numItems" value={this.state.quantity}></input>
-               <p><button className="addToCart" onClick={() => this.addToCart(this.state.quantity)}>Add to Cart</button></p>
+               <p>
+                  <button   className="addToCart"
+                            onClick={() => this.addToCart(this.state.quantity)}
+                  >Add to Cart
+                  </button>
+                </p>
                </div>
 
             </div>
