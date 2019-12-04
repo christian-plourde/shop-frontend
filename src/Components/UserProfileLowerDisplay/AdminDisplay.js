@@ -50,7 +50,9 @@ class AdminDisplay extends React.Component {
           "one week":"",
           "two weeks":"",
           "a month":"",
-          "the website's birth":""
+          "the website's birth":"",
+          "top_items": null,
+          "top_sellers": null
         },
         commission:0,
         quantity:0
@@ -102,6 +104,107 @@ class AdminDisplay extends React.Component {
     this.initialize_date_mappings();
     //Set default value to since the website's birth
 
+    //load the top selling
+    const site = (localhost) ?
+        'http://localhost/shop-backend/php/get_best_selling_items.php'
+        : 'https://shop-354.herokuapp.com/get_best_selling_items.php';
+
+    const axiosConfig = {
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin":"*",
+        },
+      };
+
+    axios.post(site, null, axiosConfig)
+    .then((response) => {
+        
+      var top = {};
+
+      top.products = new Array();
+      for(var i = 0; i < response.data.products.length; i++)
+      {
+        top.products.push({productName: response.data.products[i].productName, amount: response.data.products[i].amount_sold});
+      }
+
+      this.setState({top_items: top});
+      
+    },
+    (error) => {
+      console.log(error);
+    });
+
+    //load top sellers (people)
+    const site_2 = (localhost) ?
+        'http://localhost/shop-backend/php/get_best_sellers.php'
+        : 'https://shop-354.herokuapp.com/get_best_sellers.php';
+
+    const axiosConfig_2 = {
+        headers: {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin":"*",
+        },
+      };
+
+    axios.post(site_2, null, axiosConfig_2)
+    .then((response) => {
+        
+      var top = {};
+
+      top.sellers = new Array();
+      for(var i = 0; i < response.data.sellers.length; i++)
+      {
+        top.sellers.push({username: response.data.sellers[i].username, totalSold: response.data.sellers[i].TotalSold});
+      }
+
+      this.setState({top_sellers: top});
+    },
+    (error) => {
+      console.log(error);
+    });
+
+
+  }
+
+
+  createTopItems = () => 
+  {
+    try
+    {
+      var items = [];
+
+      for(var i = 0; i < this.state.top_items.products.length; i++)
+      {
+        items.push(<h1>{i+1}. {this.state.top_items.products[i].productName}: {this.state.top_items.products[i].amount} sold</h1>)
+      }
+      return <div>{items}</div>;
+    }
+
+    catch(error)
+    {
+
+    }
+      
+  }
+
+  createTopSellers = () =>
+  {
+    try
+    {
+      var items = [];
+
+      for(var i = 0; i < this.state.top_sellers.sellers.length; i++)
+      {
+        items.push(<h1>{i+1}. {this.state.top_sellers.sellers[i].username}: {this.state.top_sellers.sellers[i].totalSold}$</h1>);
+      }
+
+      return <div>{items}</div>
+    }
+
+    catch(error)
+    {
+
+    }
   }
 
   handleClick(timestamp){
@@ -148,13 +251,23 @@ class AdminDisplay extends React.Component {
         paddingBottom: '10px'
       }
 
+      const top_selling_items_style = 
+      {
+        paddingLeft: "20px",
+        verticalAlign: "top",
+        textAlign: "left"
+      }
+
       return (
         <div>
 
+        <table>
+        <tr>
+        <td rowspan="2">
           <h1 style = {account_info_style}>Earnings</h1>
 
           <h1>
-            Commission{(this.state.commission > 0) ? ': ' + this.state.commission : ''}
+            Commission{(this.state.commission > 0) ? ': ' + Math.round(this.state.commission*100)/100 + '$' : ''}
             <br />
             Quantity{(this.state.quantity > 0) ? ': ' + this.state.quantity : ''}
             <br />
@@ -168,6 +281,24 @@ class AdminDisplay extends React.Component {
                     />)//end return
           })//end map f'n
         }
+        </td>
+        <td style={top_selling_items_style} >
+          <h1 style = {account_info_style}>Top Selling Items</h1>
+
+          {this.createTopItems()}
+        </td>
+        </tr>
+        <tr>
+        <td style={top_selling_items_style}>
+          <h1 style={account_info_style}>Top Sellers</h1>
+
+          {this.createTopSellers()}
+
+        </td>
+        </tr>
+
+        </table>
+
       </div>
     )//end return
 
