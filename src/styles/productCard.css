@@ -25,6 +25,7 @@ img {
    max-height:auto;
 }
 .productContainer{
+   display:table;
    margin-top:10px;
    margin-left:8px;
    text-align:center;
@@ -35,6 +36,7 @@ img {
    background-color: white;
 }
 .productContainerInner{
+   display:table-row;
    margin-bottom:1px;
    margin-top:20px;
 }
