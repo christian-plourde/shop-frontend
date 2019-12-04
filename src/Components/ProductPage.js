@@ -8,6 +8,7 @@ import axios from 'axios';
 import DeleteButton from './Admin/DeleteButton.js';
 import localhost from '../LocalHost.js';
 import NavbarFunction from './Navbar'
+import AddToCartButton from './ProductPageAddToCartButton.js'
 
 // const localhost = true;//Set to true if working locally
 
@@ -57,7 +58,7 @@ class ProductPage extends React.Component {
       });
 
     const reviewSource = (localhost) ? //acquiring the review array associated with the received prop's ID
-      `http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${product_id}`
+      `http://localhost/shop-backend/php/reviews.php?review=${product_id}`
       : `https://shop-354.herokuapp.com/reviews.php?review=${product_id}`
 
     fetch(reviewSource, {
@@ -196,6 +197,7 @@ class ProductPage extends React.Component {
                   }
                   <ProductImageCarousel url={imageSources} />
                 </div>
+                <AddToCartButton product={this.state.product}/>
                 <div className="text">
                   <p>Item Description:<br />{this.state.product.descriptionText}</p>
                   <ul>
