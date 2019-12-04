@@ -7,7 +7,7 @@ import ProductComments from './ProductComments.js'
 import axios from 'axios';
 import DeleteButton from './Admin/DeleteButton.js';
 import localhost from '../LocalHost.js';
-import NavbarFunction from './Navbar'
+import NavbarFunction from './Navbar.js'
 import AddToCartButton from './ProductPageAddToCartButton.js'
 
 // const localhost = true;//Set to true if working locally
@@ -55,7 +55,9 @@ class ProductPage extends React.Component {
         this.setState({
           product: productData
         });
-      });
+        console.log('successfully fetch products', this.state.product)
+
+      });//end then
 
     const reviewSource = (localhost) ? //acquiring the review array associated with the received prop's ID
       `http://localhost/shop-backend/php/reviews.php?review=${product_id}`
@@ -216,7 +218,7 @@ class ProductPage extends React.Component {
             </div>
           </div>
         </div>
-          );
+      );//end return
         }
     
       }

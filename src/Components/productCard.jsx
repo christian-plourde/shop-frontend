@@ -10,7 +10,7 @@ import { Redirect } from "react-router";
 class ProductCard extends Component {
    constructor(){
       super();
-   
+
       this.state = {
          quantity:1,
          product:this.props,
@@ -27,7 +27,7 @@ class ProductCard extends Component {
    handleDecrement = () =>{
       this.setState({
          quantity: this.state.quantity - 1
-      
+
       });
    }
    componentDidMount(){
@@ -60,14 +60,14 @@ class ProductCard extends Component {
          else{
             let item = localStorage.getItem("cart")
             //navbar update of cart
-            let cartQuantity = localStorage.getItem("cartQuantity") 
+            let cartQuantity = localStorage.getItem("cartQuantity")
             let intCartQuantity = parseInt(cartQuantity)
             intCartQuantity+= productQuantity
             let updatedCartQuantity = intCartQuantity.toString()
             localStorage.setItem("cartQuantity",updatedCartQuantity)
             //navbar update of cart
-            
-            let productArrayStrings= item.split("|") 
+
+            let productArrayStrings= item.split("|")
             let productArrayObjects=[]
             for(var x in productArrayStrings){
                productArrayObjects.push(JSON.parse(productArrayStrings[x]))
@@ -81,26 +81,49 @@ class ProductCard extends Component {
                         else{
                            newUpdatedCart = newUpdatedCart + "|" + JSON.stringify(productArrayObjects[z])
                         }
-                        
+
                      }
                      localStorage.setItem("cart",newUpdatedCart)
                      this.props.updateQuantity()
                      return;
                   }
-                     
+
             }
             let item1 = item + "|" + JSON.stringify(productToAdd)
             localStorage.setItem("cart",item1)
             //updating cart icon
             this.props.updateQuantity()
          }
-         
+
       }
 
   }
    render(){
 
     var href = "/productPage/" + this.props.id;
+
+      // return(
+      //
+      //    <div className="productContainer">
+      //     <h3 className="productTitle">{this.props.name}</h3>
+      //     <Link to={href} ><img  src={this.props.picture} alt="product"/></Link>
+      //     <div className="productContainerInner">
+      //
+      //          <p className="productDescription">{this.props.description}</p>
+      //          <p className="price">${this.props.price}</p>
+      //          <p className="brand">{this.props.modelName}</p>
+      //          <div className="cartElements">
+      //          <button className="incrementCart" onClick={this.handleIncrement}><span className="glyphicon glyphicon-chevron-right"></span></button>
+      //          <button className="decrementCart" onClick={this.handleDecrement} disabled={this.state.quantity === 1}><span className="glyphicon glyphicon-chevron-left"></span></button>
+      //          <input type="number" className="numItems" value={this.state.quantity}></input>
+      //          <p><button className="addToCart" onClick={() => this.addToCart(this.state.quantity)}>Add to Cart</button></p>
+      //          </div>
+      //
+      //       </div>
+      //       {this.state.notLoggedIn && <Redirect to={"/login"} />}
+      //    </div>
+      //
+      // )
 
       return(
 
@@ -111,10 +134,19 @@ class ProductCard extends Component {
 
                <p className="productDescription">{this.props.description}</p>
                <p className="price">${this.props.price}</p>
-               <p className="brand">brand</p>
+               <p className="brand">{this.props.modelName}</p>
                <div className="cartElements">
-               <button className="incrementCart" onClick={this.handleIncrement}><span className="glyphicon glyphicon-chevron-right"></span></button>
-               <button className="decrementCart" onClick={this.handleDecrement} disabled={this.state.quantity === 1}><span className="glyphicon glyphicon-chevron-left"></span></button>
+               <button  className="incrementCart"
+                        onClick={this.handleIncrement}>
+                          <span className="glyphicon glyphicon-chevron-right">
+                          </span>
+              </button>
+               <button className="decrementCart"
+                        onClick={this.handleDecrement}
+                        disabled={this.state.quantity === 1}>
+                        <span className="glyphicon glyphicon-chevron-left">
+                        </span>
+              </button>
                <input type="number" className="numItems" value={this.state.quantity}></input>
                <p><button className="addToCart" onClick={() => this.addToCart(this.state.quantity)}>Add to Cart</button></p>
                </div>
