@@ -251,8 +251,8 @@ class ProductPage extends React.Component {
                 <div class="product-configuration">
                   <div class="product-details">
                     <ul>
-                      <li>{this.state.product.dimensions}</li>
-                      <li>{this.state.product.color}</li>
+                      <li>Dimensions: {this.state.product.dimensions}</li>
+                      <li>Color: {this.state.product.color}</li>
                     </ul>
                   </div>
                 </div>
