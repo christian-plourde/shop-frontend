@@ -155,8 +155,7 @@ class LandingPage extends Component {
             <div>
               <div className="TrendingContainer">
                 <h1 className="TrendingTitle">Holiday Trending Products</h1>
-                <ul className="TrendingProducts">
-                  
+                <ul className="TrendingProducts"> 
                   {isClient ?
                   (<TrendingProducts   num_to_return={3}
                                         toggleCartUpdate={this.changeQuantity()}
