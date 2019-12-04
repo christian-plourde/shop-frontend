@@ -13,6 +13,12 @@
 .review-text {
   width: 100%;
 }
+
+.review-header {
+  clear: both;
+  padding-left: 50px;
+  text-emphasis: bold;
+}
 .cartAdd {
   position: relative;
   left: 26px;

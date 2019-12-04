@@ -28,7 +28,7 @@ class LandingPage extends Component {
 
   componentDidMount() {
     var site = localhost
-      ? "http://localhost:80/shop-backend/php/get_products.php"
+      ? "http://localhost:8081/shop-backend/php/get_products.php"
       : "https://shop-354.herokuapp.com/get_products.php";
 
     const axiosConfig = {
@@ -56,39 +56,38 @@ class LandingPage extends Component {
         productNamesArray.push(jsonArray[j].productName);
       }
 
-        let clothing = [];
-        let home = [];
-        let electronic = [];
-        for (var x in tagsArray) {
-          for (var y in tagsArray[x]) {
-            if (tagsArray[x][y] === "clothing") {
-              clothing.push(jsonArray[x]);
-            }
-            if (tagsArray[x][y] === "home") {
-              home.push(jsonArray[x]);
-            }
-            if (tagsArray[x][y] === "electronic") {
-              electronic.push(jsonArray[x]);
-            }
+      let clothing = [];
+      let home = [];
+      let electronic = [];
+      for (var x in tagsArray) {
+        for (var y in tagsArray[x]) {
+          if (tagsArray[x][y] === "clothing") {
+            clothing.push(jsonArray[x]);
+          }
+          if (tagsArray[x][y] === "home") {
+            home.push(jsonArray[x]);
+          }
+          if (tagsArray[x][y] === "electronic") {
+            electronic.push(jsonArray[x]);
           }
         }
-        this.setState({
-          clothingProducts: clothing,
-          homeProducts: home,
-          electronicProducts: electronic,
-          tags: tagsArray,
-          productNames: productNamesArray,
-          data: jsonArray
-        });
+      }
+      this.setState({
+        clothingProducts: clothing,
+        homeProducts: home,
+        electronicProducts: electronic,
+        tags: tagsArray,
+        productNames: productNamesArray,
+        data: jsonArray
       });
-  }//end component did mount
+    });
+  } //end component did mount
 
   changeQuantity() {
-    let quantityNow = localStorage.getItem("cartQuantity")
-    if(quantityNow != this.state.quantity){
-      this.setState({quantity:quantityNow})
+    let quantityNow = localStorage.getItem("cartQuantity");
+    if (quantityNow != this.state.quantity) {
+      this.setState({ quantity: quantityNow });
     }
-
   }
   render() {
     const {
@@ -101,8 +100,13 @@ class LandingPage extends Component {
       productNames
     } = this.state;
 
-    const isGuest = (localStorage.getItem("username") != null && localStorage.getItem("username") == 'Guest');
-    const isClient = !isGuest && (localStorage.getItem("logged_in_user") != null && localStorage.getItem("logged_in_user") != 'admin');
+    const isGuest =
+      localStorage.getItem("username") != null &&
+      localStorage.getItem("username") == "Guest";
+    const isClient =
+      !isGuest &&
+      localStorage.getItem("logged_in_user") != null &&
+        localStorage.getItem("logged_in_user") != "admin";
 
     if (!isLoaded) {
       return <div> loading...</div>;
@@ -110,7 +114,7 @@ class LandingPage extends Component {
       return (
         <div>
           {/*<Navbar productNames={productNames} tags={tags} products={data} cartQuantity={this.state.quantity}/>*/}
-          <Navbar data={data} renderCart={isClient}/>
+          <Navbar data={data} renderCart={isClient} />
           <div className="LandingPageBody">
             <div>
               <div className="LandingPageBody">
@@ -118,21 +122,21 @@ class LandingPage extends Component {
                   <Carousel
                     data={clothingProducts}
                     category="Clothing Products"
-                    updateQuantity={()=> this.changeQuantity()}
+                    updateQuantity={() => this.changeQuantity()}
                   />
                 </div>
                 <div>
                   <Carousel
-                  data={homeProducts}
-                  category="Home Products"
-                  updateQuantity={()=> this.changeQuantity()}
+                    data={homeProducts}
+                    category="Home Products"
+                    updateQuantity={() => this.changeQuantity()}
                   />
                 </div>
                 <div>
                   <Carousel
                     data={electronicProducts}
                     category="Electronic Products"
-                    updateQuantity={()=> this.changeQuantity()}
+                    updateQuantity={() => this.changeQuantity()}
                   />
                 </div>
               </div>

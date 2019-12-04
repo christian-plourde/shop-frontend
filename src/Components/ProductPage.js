@@ -268,6 +268,7 @@ class ProductPage extends React.Component {
               />
             </div>
           </div>
+          <h1 class="review-header">Reviews</h1>
           <div>{reviewComponents}</div>
         </div>
       );
