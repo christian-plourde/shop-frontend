@@ -7,7 +7,8 @@ import ProductComments from './ProductComments.js'
 import axios from 'axios';
 import DeleteButton from './Admin/DeleteButton.js';
 import localhost from '../LocalHost.js';
-import NavbarFunction from './Navbar.js';
+import NavbarFunction from './Navbar.js'
+import AddToCartButton from './ProductPageAddToCartButton.js'
 
 // const localhost = true;//Set to true if working locally
 
@@ -73,7 +74,6 @@ class ProductPage extends React.Component {
         this.setState({ productReviews: productReview, isLoaded: true });
       })
 
-
     // need to acquire the review meta data
     //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${product_id}`
     //`http://shop-354.herokuapp.com/reviews.php?averagereview=${product_id}`
@@ -129,7 +129,7 @@ class ProductPage extends React.Component {
   render() {
     const { isLoaded, data } = this.state;
     if (!isLoaded) {
-      return <div> Loading product page...</div>;
+      return <div> loading...</div>;
     }
     else {
 
@@ -199,6 +199,7 @@ class ProductPage extends React.Component {
                   }
                   <ProductImageCarousel url={imageSources} />
                 </div>
+                <AddToCartButton product={this.state.product}/>
                 <div className="text">
                   <p>Item Description:<br />{this.state.product.descriptionText}</p>
                   <ul>
@@ -219,9 +220,9 @@ class ProductPage extends React.Component {
         </div>
       );//end return
         }
-
+    
       }
-
+    
     }
-
+    
 export default ProductPage;

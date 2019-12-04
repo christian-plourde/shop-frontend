@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SubmitButton from "./SubmitButton.js";
+import Advertisement from "./Advertisement.js";
 import Header from "./Header.js";
 import Navbar from "./Navbar.js";
 import axios from "axios";
@@ -18,7 +19,8 @@ class Registration extends Component {
     password_mismatch: false,
     registration_failed: false,
     email_mismatch: false,
-    redirect: false
+    redirect: false,
+    pass_length_mismatch: false
   };
 
   constructor(props) {
@@ -34,6 +36,15 @@ class Registration extends Component {
     }
 
     this.setState({ password_mismatch: false });
+
+    //check if password is between 8 and 50 chars
+    if(!(this.state.password.length >= 8 && this.state.password.length <= 50))
+    {
+      this.setState({pass_length_mismatch: true});
+      return;
+    }
+
+    this.setState({pass_length_mismatch: true});
 
     //check email
     if (
@@ -252,6 +263,13 @@ class Registration extends Component {
               </h2>
             </div>
           )}
+          {this.state.pass_length_mismatch && (
+            <div style={error_div_style}>
+              <h2 style={error_mess_style}>
+                The passwords must be between 8 and 50 characters long. Please try again.
+              </h2>
+            </div>
+          )}
           {this.state.registration_failed && (
             <div style={error_div_style}>
               <h2 style={error_mess_style}>Unable to register this user.</h2>
@@ -260,6 +278,7 @@ class Registration extends Component {
           <SubmitButton />
         </form>
         {this.state.redirect && <Redirect to={"/login"} />}
+        <Advertisement />
       </div>
     );
   }
