@@ -3,7 +3,8 @@ import "../styles/slick.css"
 import "../styles/slick-theme.css"
 import Slider from "react-slick";
 import "../styles/carousel.css"
-import ProductCard from "./productCard.jsx";
+// import ProductCard from "./productCard.jsx";
+import TrendingProductItem from "./TrendingProduct/TrendingProductItem.js";
 
 import axios from "axios";
 
@@ -18,77 +19,81 @@ class TrendingProducts extends Component{
     };
   }
 
-  handleButtonPress = (isIncrement, product_id) =>
+//Assumes product has cartQuantity and is not stringified
+  isInCart = (product_obj_with_cartQuantity) =>
   {
-    // console.log('Handle button press; products before button press ', this.state.products)
-    // console.log('Handle button press; subtotal before button press ', this.state.subtotal)
-    // return;
-    let product_list = [];
-    for(var index = 0; index < this.state.products.length; index++)
-    {
-      let product = this.state.products[index];
-      // console.log('Handle button press :: Verifying product ', product)
-      let product_to_push = product;
-      let product_quantity = Number.parseInt(product_to_push.cartQuantity)
-      if (product_to_push.productID == product_id)
-      {
-        if(product_quantity == 1 && !isIncrement)
+    const cart = localStorage.getItem('cart')
+    const product_id = product_obj_with_cartQuantity['productID'];
+
+    console.log('TrendingProducts :: cart\ncart string:', cart, '\ncart split', cart.split())
+
+    cart.split('|').forEach(item => {
+      var tmp_product = JSON.parse(item);
+        console.log('is in cart :: JSON.parse(item)', tmp_product)
+        if (tmp_product['productID'] == product_id)
         {
-          window.alert(
-            'Use the remove button'
-          );
-          return;
+          console.log('TrendingProducts :: isInCart :: product ', tmp_product, ' is already in the cart.')
+          return true;
         }
-        product_to_push.cartQuantity = (isIncrement)
-          ? product_quantity + 1
-          : product_quantity - 1;
-        // console.log('Updated quantity from', product_quantity, ' to ', product_to_push.cartQuantity,' of product ', product)
-
-        //Update local storage
-        const list = localStorage.getItem('cart').split('|')
-        var new_string = "";
-        for (var i = 0; i < list.length; i++)
-        {
-          var product = JSON.parse(list[i])
-          // console.log(product, 'stringified\n', JSON.stringify(product))
-          if (product.productID == product_to_push.productID)
-          {
-            // console.log('this is the product whose quantity we need to change', product)
-            var current_quantity = product.cartQuantity;
-            product.cartQuantity = (isIncrement) ? current_quantity + 1 : current_quantity - 1;
-            // console.log('new cart quantity', product.cartQuantity);
-          }
-          new_string = new_string.concat(JSON.stringify(product))
-          new_string = new_string.concat((i < list.length - 1) ? '|' : '');
-        }//end for
-
-
-        localStorage.setItem('cart', new_string)
-        var new_quantity = parseInt(localStorage.getItem('cartQuantity')) + ((isIncrement) ? 1 : -1);
-        localStorage.setItem('cartQuantity', new_quantity)
-      }
-      //Replace the product list
-      product_list.push(product_to_push)
-    }
-    this.setState({products:product_list})
-
-
-    // console.log('Handle button press; products after button press ', this.state.products)
-    //Also recompute subtotal and total
-    let sTotal = 0;
-    for (var x in this.state.products) {
-      let product = this.state.products[x];
-      sTotal += Number.parseFloat(product.productPrice) * Number.parseFloat(product.cartQuantity);
-    }
-    this.setState({
-      subtotal: sTotal.toFixed(2),
-      total: (sTotal.toFixed(2) * 1.15).toFixed(2)
-    });
-
-    // console.log('Handle button press; subtotal after button press ', this.state.subtotal)
+    })
+    return false;
   }
 
+  addToCart = (product, quantity) => {
+    console.log("TrendingProduct :: \nproduct", product, "\nquantity", quantity)
+    if(!this.props.isClient)
+    {
+      window.alert('Sign in to purchase items!')
+      return;
+    }
 
+    const cart = localStorage.getItem('cart')
+    var product_obj = product;
+    product_obj["cartQuantity"] = quantity;
+
+    //If the cart doesn't exist, then just add this to the cart.
+    if (!cart)
+    {
+      localStorage.setItem('cart', JSON.stringify(product_obj));
+      localStorage.setItem('cartQuantity', quantity);
+      this.props.toggleCartUpdate();
+      return;
+    }
+    //else if the cart already exists...
+    else
+    {
+      //If the product we want to add is already in the cart...
+      if (this.isInCart(product_obj))
+      {
+        //...then just increase the amount in the product object, within the cart
+        var replacement_cart = [];
+        cart.split('|').forEach(item => {
+            var tmp_product = JSON.parse(item);
+            console.log('Comparing\n', item, '\nwith\n', product_obj)
+            if (tmp_product['productID'] == product_obj['productID'])
+            {
+              tmp_product['cartQuantity'] += quantity;
+              console.log('TrendingProducts :: isInCart :: increasing quantity of product ', tmp_product, ' to', tmp_product['cartQuantity']);
+            }
+            replacement_cart.push(tmp_product);
+        })
+        localStorage.setItem('cart', JSON.stringify(replacement_cart.join('|')));
+        localStorage.setItem('cartQuantity', parseInt(localStorage.getItem('cartQuantity')) + quantity);
+      }
+      //If the product is not already in the cart...
+      else
+      {
+        //...then just append to the cart
+        var new_cart = JSON.stringify(product_obj).concat("|".concat(cart));
+
+        localStorage.setItem('cart', new_cart);
+        localStorage.setItem('cartQuantity', parseInt(localStorage.getItem('cartQuantity')) + quantity);
+      }
+    }
+    //Update the cart quantity on the landing page
+    this.props.toggleCartUpdate();
+  }
+  
     componentDidMount(){
       // console.log('TrendingProducts :: Hello?')
       //fetch data via axios
@@ -156,22 +161,13 @@ class TrendingProducts extends Component{
       return(
         this.state.data.map(product => {
           return (
-            <li className="TrendingProductsList">
-              <ProductCard
-                name={product.productName}
-                modelName={product.modelName}
-                id={product.productID}
-                descriptionText={product.descriptionText}
-                price={product.productPrice}
-                picture={product.images[0]}
-                handleIncrement={this.handleButtonPress}
-                onRemove={() => this.handleRemove(product.productID)}
-              />
-            </li>
-          );//end return
-        }//end f'n
-      )//end map
-
+            <TrendingProductItem
+              product={product}
+              add_to_cart={this.addToCart}
+            />
+            );//end return
+          }//end f'n
+        )//end map
       );//end return
     }//end else
   }//end render
