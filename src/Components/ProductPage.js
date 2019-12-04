@@ -7,7 +7,7 @@ import ProductComments from './ProductComments.js'
 import axios from 'axios';
 import DeleteButton from './Admin/DeleteButton.js';
 import localhost from '../LocalHost.js';
-import NavbarFunction from './Navbar'
+import NavbarFunction from './Navbar.js'
 import AddToCartButton from './ProductPageAddToCartButton.js'
 
 // const localhost = true;//Set to true if working locally
