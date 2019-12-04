@@ -210,6 +210,7 @@ class Cart extends Component {
       // console.log('Handle button press :: Verifying product ', product)
       let product_to_push = product;
       let product_quantity = Number.parseInt(product_to_push.cartQuantity)
+
       if (product_to_push.productID == product_id)
       {
         if(product_quantity == 1 && !isIncrement)
@@ -219,6 +220,13 @@ class Cart extends Component {
           );
           return;
         }
+
+        if((product_to_push.cartQuantity + 1) > product.quantity && isIncrement)
+        {
+          return;
+        }
+
+
         product_to_push.cartQuantity = (isIncrement)
           ? product_quantity + 1
           : product_quantity - 1;
