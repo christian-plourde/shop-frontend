@@ -1,3 +1,30 @@
 .LandingPageBody{
    margin-top:50px;
 }
+.TrendingContainer{
+   width:90%;
+   display: table; /*allows content of div to be centered*/
+   margin: 0 auto; /*allows content of div to be centered*/
+   text-align: center; /*allows content of div to be centered*/
+   margin-bottom:20px;
+   background-color: red;
+   background-image: linear-gradient(to right,#F5624D,#CC231E,#34A65F); /*provides fade colors*/
+}
+.TrendingContainer .productContainer{
+   border:1px solid;
+   background-image: linear-Gradient(to right, white,grey);
+}
+.TrendingTitle{
+   font-size: 24px;
+   font-style: oblique;
+   font-variant: normal;
+   font-weight: 500; 
+   line-height: 26.4px;
+}
+.TrendingProducts{
+   list-style-type: none;
+}
+.TrendingProductsList{
+   display:inline-block;
+
+}

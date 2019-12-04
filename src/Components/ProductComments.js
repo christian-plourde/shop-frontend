@@ -25,11 +25,9 @@ class ProductComments extends React.Component {
     //sending review
     alert("Review Submitted!");
 
-    event.preventDefault();
-
     let reviewerID = localhost
       ? localStorage.getItem("logged_in_user")
-      : sessionStorage.getItem("logged_in_user");
+      : localStorage.getItem("logged_in_user");
 
     const site = localhost
       ? "http://localhost:8081/shop-backend/php/reviews.php"

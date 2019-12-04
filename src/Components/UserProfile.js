@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import SubmitButton from "./SubmitButton.js";
 import Navbar from "./Navbar.js";
 import axios from 'axios';
+import Advertisement from "./Advertisement.js";
 import edit_blue from "../ressources/icons/edit_blue.png";
 import edit_green from "../ressources/icons/edit_green.png";
 import exit_blue from "../ressources/icons/exit_blue.png";
@@ -520,6 +521,8 @@ class UserProfile extends Component
 																	username={this.state.username}
 				/>
 
+
+			<Advertisement />
 			</div>
 
 			);

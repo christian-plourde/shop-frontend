@@ -317,7 +317,7 @@ class NavbarFunction extends Component {
     };
 
     if (!isLoaded) {
-      return <div> loading...</div>;
+      return <div> loading navbar...</div>;
     } else {
       return (
         <div>
@@ -341,8 +341,8 @@ class NavbarFunction extends Component {
             <Navbar id="Navbar" bg="light" expand="lg">
               {/* Navbar Brand */}
               <Navbar.Brand href="../" id="brand">
-                <i id="brandLogo" class="fas fa-spa"></i>
-                BrandTitle
+              <img src="./favicon.ico" height={50} />
+                SwampHouse
               </Navbar.Brand>
 
               {/* Toggle Effect */}

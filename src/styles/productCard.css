@@ -29,9 +29,10 @@ img {
    margin-left:8px;
    text-align:center;
    font-family: arial;
-   box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+   box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2) !important;
    width:290px;
    height:400px;
+   background-color: white;
 }
 .productContainerInner{
    margin-bottom:1px;
@@ -60,8 +61,8 @@ img {
   border: none;
   outline: 0;
   padding: 12px;
-  color: white;
-  background-color: #000;
+  color: white !important;
+  background-color: #000 !important;
   text-align: center;
   cursor: pointer;
   width: 100%;
@@ -72,6 +73,6 @@ img {
    width:40px;
 }
 .price{
-   color: grey;
+   color: grey !important;
   font-size: 22px;
 }
