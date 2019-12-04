@@ -160,3 +160,4 @@ class ProductComments extends React.Component {
 }
 
 export default ProductComments
+
