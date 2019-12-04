@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SubmitButton from "./SubmitButton.js";
 import Navbar from "./Navbar.js";
+import Advertisement from "./Advertisement.js";
 import { Redirect } from "react-router";
 import Link from "./Link.js";
 import axios from "axios";
@@ -197,7 +198,9 @@ class Login extends Component {
           <Link redirect_link={password_redirect_link} />
         </div>
         {this.state.redirect && <Redirect to={"/"} />}
+        <Advertisement />
       </form>
+
     );
   }
 }

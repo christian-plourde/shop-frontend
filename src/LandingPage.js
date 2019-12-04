@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./styles/LandingPage.css";
+import Advertisement from "./Components/Advertisement.js";
 import Carousel from "./Components/carousel";
 import Navbar from "./Components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
@@ -138,6 +139,7 @@ class LandingPage extends Component {
               </div>
             </div>
           </div>
+          <Advertisement />
         </div>
       );
     }
