@@ -31,8 +31,9 @@ class ProductPage extends React.Component {
       product: {},
       productReviews: [],
       productReviewsComponents: [],
-      productReviewsMeta: {},
-      isAdmin: (localStorage.getItem("logged_in_user") == 'admin')
+      productRating: 0,
+      reviewNumber: 0,
+      isAdmin: (localStorage.getItem("logged_in_user") === 'admin')
     };
   }
 
@@ -52,10 +53,8 @@ class ProductPage extends React.Component {
     })
       .then(response => response.json())
       .then(productData => {
-        this.setState({
-          product: productData
-        });
-      });
+        this.setState({product: productData})
+      })
 
     const reviewSource = (localhost) ? //acquiring the review array associated with the received prop's ID
       `http://localhost/shop-backend/php/reviews.php?review=${product_id}`
@@ -69,12 +68,36 @@ class ProductPage extends React.Component {
     })
       .then(response => response.json())
       .then(productReview => {
-        this.setState({ productReviews: productReview, isLoaded: true });
+        this.setState({ productReviews: productReview});
       })
 
-    // need to acquire the review meta data
-    //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${product_id}`
-    //`http://shop-354.herokuapp.com/reviews.php?averagereview=${product_id}`
+    const reviewMetaSources = (localhost) ?
+      `http://localhost/shop-backend/php/reviews.php?averagereview=${product_id}`
+      : `http://shop-354.herokuapp.com/reviews.php?averagereview=${product_id}`
+    fetch(reviewMetaSources, { //accessing rating and number of reviews
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(reviewMeta => {
+        if(reviewMeta != null){
+          this.setState({
+            productRating: Math.round(reviewMeta.rating),
+            reviewNumber: reviewMeta.count,
+            isLoaded: true
+          })
+        }
+        else{
+          this.setState({
+            productRating: 0,
+            reviewNumber: 0,
+            isLoaded: true
+          })
+        }
+        
+      })
   }
 
   deleteProduct = (id) => {
@@ -130,37 +153,39 @@ class ProductPage extends React.Component {
       return <div> loading...</div>;
     }
     else {
-
+      const reviewComponents = []
       //generating an array of review components
-      const reviewComponents = this.state.productReviews.map((reviewItems, index) =>
-        <div>
-          {this.state.isAdmin ?
-            <DeleteButton onClick={this.deleteReview}
-              id={reviewItems.reviewID}
-              text={'Delete Review'}
-              redirect_to={'productPage/' + this.props.match.params.product_id}
+      if(this.state.productReviews.length>0){
+          reviewComponents = this.state.productReviews.map((reviewItems, index) =>
+          <div>
+            {this.state.isAdmin ?
+              <DeleteButton onClick={this.deleteReview}
+                id={reviewItems.reviewID}
+                text={'Delete Review'}
+                redirect_to={'productPage/' + this.props.match.params.product_id}
+              />
+              : ''
+            }
+            <Review
+              key={index}
+              reviewID={reviewItems.reviewID}
+              productID={reviewItems.productID}
+              reviewerID={reviewItems.reviewerID}
+              rating={reviewItems.rating}
+              reviewText={reviewItems.reviewText}
             />
-            : ''
-          }
-          <Review
-            key={index}
-            reviewID={reviewItems.reviewID}
-            productID={reviewItems.productID}
-            reviewerID={reviewItems.reviewerID}
-            rating={reviewItems.rating}
-            reviewText={reviewItems.reviewText}
-          />
-        </div>
-        //spent the last 3 hours trying to figure out why reviews aren't been rendered, turned out removing curly brackets next to <Review .../> fixed it
-      );
-
+          </div>
+          //spent the last 3 hours trying to figure out why reviews aren't been rendered, turned out removing curly brackets next to <Review .../> fixed it
+        );
+      }
+      
       //`https://shop-354.herokuapp.com/${product.picture.substring(1)}`
       //`http://localhost:3000${product.picture.substring(1)}`
       const imageSources = []
-      if (this.state.product.images != undefined){
+      console.log(this.state.product)
+      if (this.state.product.images != undefined) {
         imageSources = this.state.product.images.map(imageUrl => `https://shop-354.herokuapp.com/ressources/img/${imageUrl}`)     //generating a product image url array with randomly inserted Shrek, ISS and Donkey(from Shrek)
       }
-
       let dice = Math.random() * 10
       if (dice > 2.5) {
         imageSources.push('https://upload.wikimedia.org/wikipedia/en/4/4d/Shrek_%28character%29.png')
@@ -178,7 +203,7 @@ class ProductPage extends React.Component {
       return (
         <div>
           <NavbarFunction />
-          <div className="container">
+          <div>
             {this.state.isAdmin ?
               <DeleteButton onClick={this.deleteProduct}
                 id={this.props.match.params.product_id}
@@ -189,7 +214,7 @@ class ProductPage extends React.Component {
             }
             <div className="container">
               <h1>{this.state.product.productName}</h1>
-              <div className="rating"> product rating</div>
+              <div className="rating"><p>{`${this.state.productRating} (${this.state.reviewNumber})`}</p></div>
               <div className="inner_container">
                 <div className="photo">
                   {
@@ -197,7 +222,7 @@ class ProductPage extends React.Component {
                   }
                   <ProductImageCarousel url={imageSources} />
                 </div>
-                <AddToCartButton product={this.state.product}/>
+                <AddToCartButton product={this.state.product} />
                 <div className="text">
                   <p>Item Description:<br />{this.state.product.descriptionText}</p>
                   <ul>
@@ -216,11 +241,11 @@ class ProductPage extends React.Component {
             </div>
           </div>
         </div>
-          );
-        }
-    
-      }
-    
+      );
     }
-    
+
+  }
+
+}
+
 export default ProductPage;

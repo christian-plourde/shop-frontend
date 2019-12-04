@@ -13,6 +13,9 @@ class AddToCartButton extends React.Component { //adds product to cart once and 
 
     changeHandler() {
         let productToAdd = this.props.product
+        let newUrl = `./ressources/img/${productToAdd.images[0]}`
+        delete productToAdd.images
+        productToAdd.picture = newUrl
         productToAdd.cartQuantity = '1'
         let cart = localStorage.getItem('cart')
 
