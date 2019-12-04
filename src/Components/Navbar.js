@@ -292,7 +292,7 @@ searchFocusHandler(isFocused){
   }
 
     if (!isLoaded) {
-      return <div> loading...</div>;
+      return <div> loading navbar...</div>;
     } else {
       return (
         <div>
