@@ -9,6 +9,7 @@ import DeleteButton from './Admin/DeleteButton.js';
 import localhost from '../LocalHost.js';
 import NavbarFunction from './Navbar.js'
 import AddToCartButton from './ProductPageAddToCartButton.js'
+import { Link } from "react-router-dom";
 
 // const localhost = true;//Set to true if working locally
 
@@ -33,7 +34,8 @@ class ProductPage extends React.Component {
       productReviewsComponents: [],
       productRating: 0,
       reviewNumber: 0,
-      isAdmin: (localStorage.getItem("logged_in_user") === 'admin')
+      isAdmin: (localStorage.getItem("logged_in_user") === 'admin'),
+      sellerName: null
     };
   }
 
@@ -53,7 +55,31 @@ class ProductPage extends React.Component {
     })
       .then(response => response.json())
       .then(productData => {
-        this.setState({product: productData})
+        this.setState({ product: productData })
+
+        const site = localhost
+          ? "http://localhost/shop-backend/php/get_seller_name.php"
+          : "https://shop-354.herokuapp.com/get_seller_name.php";
+
+        const data = {
+          ownerId: this.state.product.ownerID
+        };
+
+        const axiosConfig = {
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+          }
+        };
+
+        axios.post(site, data, axiosConfig).then(
+          response => {
+            this.setState({ sellerName: response.data.username, isLoaded: true })
+          },//end response
+          error => {
+            console.log(error);
+          }
+        );
       })
 
     const reviewSource = (localhost) ? //acquiring the review array associated with the received prop's ID
@@ -68,12 +94,14 @@ class ProductPage extends React.Component {
     })
       .then(response => response.json())
       .then(productReview => {
-        this.setState({ productReviews: productReview});
+        this.setState({ productReviews: productReview });
       })
+
+
 
     const reviewMetaSources = (localhost) ?
       `http://localhost/shop-backend/php/reviews.php?averagereview=${product_id}`
-      : `http://shop-354.herokuapp.com/reviews.php?averagereview=${product_id}`
+      : `https://shop-354.herokuapp.com/reviews.php?averagereview=${product_id}`
     fetch(reviewMetaSources, { //accessing rating and number of reviews
       headers: {
         "Content-Type": "application/json",
@@ -82,21 +110,19 @@ class ProductPage extends React.Component {
     })
       .then(response => response.json())
       .then(reviewMeta => {
-        if(reviewMeta != null){
+        if (reviewMeta != null) {
           this.setState({
             productRating: Math.round(reviewMeta.rating),
-            reviewNumber: reviewMeta.count,
-            isLoaded: true
+            reviewNumber: reviewMeta.count
           })
         }
-        else{
+        else {
           this.setState({
             productRating: 0,
-            reviewNumber: 0,
-            isLoaded: true
+            reviewNumber: 0
           })
         }
-        
+
       })
   }
 
@@ -148,15 +174,17 @@ class ProductPage extends React.Component {
 
 
   render() {
-    const { isLoaded, data } = this.state;
-    if (!isLoaded) {
+    if (!this.state.isLoaded) {
       return <div> loading...</div>;
     }
     else {
+      var href = "/seller/" + this.state.sellerName
+      
+      const { isLoaded, data } = this.state;
       const reviewComponents = []
       //generating an array of review components
-      if(this.state.productReviews.length>0){
-          reviewComponents = this.state.productReviews.map((reviewItems, index) =>
+      if (this.state.productReviews.length > 0) {
+        reviewComponents = this.state.productReviews.map((reviewItems, index) =>
           <div>
             {this.state.isAdmin ?
               <DeleteButton onClick={this.deleteReview}
@@ -178,9 +206,7 @@ class ProductPage extends React.Component {
           //spent the last 3 hours trying to figure out why reviews aren't been rendered, turned out removing curly brackets next to <Review .../> fixed it
         );
       }
-      
-      //`https://shop-354.herokuapp.com/${product.picture.substring(1)}`
-      //`http://localhost:3000${product.picture.substring(1)}`
+
       const imageSources = []
       console.log(this.state.product)
       if (this.state.product.images != undefined) {
@@ -214,6 +240,7 @@ class ProductPage extends React.Component {
             }
             <div className="container">
               <h1>{this.state.product.productName}</h1>
+              <Link to={href}>sold by {this.state.sellerName}</Link>
               <div className="rating"><p>{`${this.state.productRating} (${this.state.reviewNumber})`}</p></div>
               <div className="inner_container">
                 <div className="photo">
