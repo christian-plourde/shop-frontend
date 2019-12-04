@@ -150,22 +150,24 @@ class TrendingProducts extends Component{
 
       const{isLoaded} = this.state;
       if(!isLoaded){
-        return <div> loading trending products...</div>;
+        return <div> <h2>loading trending products...</h2></div>;
      }//end if
      else{
       return(
         this.state.data.map(product => {
           return (
-            <ProductCard
-              name={product.productName}
-              modelName={product.modelName}
-              id={product.productID}
-              descriptionText={product.descriptionText}
-              price={product.productPrice}
-              picture={product.images[0]}
-              handleIncrement={this.handleButtonPress}
-              onRemove={() => this.handleRemove(product.productID)}
-            />
+            <li className="TrendingProductsList">
+              <ProductCard
+                name={product.productName}
+                modelName={product.modelName}
+                id={product.productID}
+                descriptionText={product.descriptionText}
+                price={product.productPrice}
+                picture={product.images[0]}
+                handleIncrement={this.handleButtonPress}
+                onRemove={() => this.handleRemove(product.productID)}
+              />
+            </li>
           );//end return
         }//end f'n
       )//end map
