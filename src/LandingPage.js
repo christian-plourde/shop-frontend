@@ -153,8 +153,9 @@ class LandingPage extends Component {
           <Navbar data={data} renderCart={isClient}/>
           <div className="LandingPageBody">
             <div>
-              <div>
-                <h1>
+              <div className="TrendingContainer">
+                <h1 className="TrendingTitle">Holiday Trending Products</h1>
+                <ul className="TrendingProducts"> 
                   {isClient ?
                   (<TrendingProducts   num_to_return={3}
                                         toggleCartUpdate={this.changeQuantity()}
@@ -164,7 +165,7 @@ class LandingPage extends Component {
 
                   />)
                   }
-                </h1>
+                </ul>
               </div>
               <div className="LandingPageBody">
                 <div>
