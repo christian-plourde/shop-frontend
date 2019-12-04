@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Advertisement from "./Advertisement.js";
 import ProductCard from "./productCard";
 import Navbar from "./Navbar.js";
 import "../styles/searchResults.css";
@@ -225,6 +226,7 @@ const SearchResults = ({ match, location }) => {
             </ul>
          ))}
          </div>
+         <Advertisement />
       </div>
    )
 }//end SearchResults

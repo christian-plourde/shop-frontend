@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./styles/Cart.css";
+import Advertisement from "./Components/Advertisement.js";
 import Navbar from "./Components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -49,6 +50,7 @@ class CheckOut extends Component {
         <div className="CheckOutBody">
           <Cart products={cart_array} />
         </div>
+        <Advertisement />
       </div>
     );
   }
