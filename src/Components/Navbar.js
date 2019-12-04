@@ -317,8 +317,8 @@ searchFocusHandler(isFocused){
 
               {/* Navbar Brand */}
               <Navbar.Brand href="../" id="brand">
-                <i id="brandLogo" class="fas fa-spa"></i>
-                BrandTitle
+              <img src="./favicon.ico" height={50} />
+                SwampHouse
               </Navbar.Brand>
 
               {/* Toggle Effect */}
