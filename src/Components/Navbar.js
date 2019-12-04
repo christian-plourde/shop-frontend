@@ -35,7 +35,8 @@ class NavbarFunction extends Component {
       productData: [],
       cartQuantity:0,
       isEnterPressed: false,
-      isSearchFocused: false
+      isSearchFocused: false,
+      isHover:false
     };
   }
 
@@ -197,12 +198,14 @@ class NavbarFunction extends Component {
     this.setState(() => ({ suggestions, text: value }));
   };
   suggestionSelected(value) {
+    console.log("Navbar-200")
     this.setState(() => ({
       text: value,
       suggestions: []
     }));
   }
  renderSuggestions() {
+  console.log("Navbar-207")
     const { suggestions } = this.state;
     if (suggestions.length === 0) {
       return null;
@@ -217,7 +220,9 @@ class NavbarFunction extends Component {
               element: item
             }}
             >
-               <li onClick={() => this.suggestionSelected(item)}>{item}</li> </Link>))}
+               <li onClick={() => this.suggestionSelected(item)}>{item}</li> 
+          </Link>
+        ))}
       </ul>
     );
 }
@@ -225,6 +230,12 @@ class NavbarFunction extends Component {
 searchFocusHandler(isFocused){
   this.setState({isSearchFocused: isFocused})
 }
+hoverToggle(hoverStatus){
+  //this method varies according to form control in div classname="Results"
+  //upon onhover event, the value toggles to true, and upon onmouseLeave event, the value toggles to false
+  this.setState({isHover:hoverStatus})
+}
+
 
    keyPressHandler(e, newText){
       // charcode 13 is "Enter" && text can't be empty && text can't be whitespaces only
@@ -237,7 +248,7 @@ searchFocusHandler(isFocused){
    }
 
  render(){
-  const{isLoaded,text}= this.state;
+  const{isLoaded,text,}= this.state;
 
   const isGuest = (localStorage.getItem("username") != null && localStorage.getItem("username") == 'Guest');
   const isClient = !isGuest && (localStorage.getItem("logged_in_user") != null && localStorage.getItem("logged_in_user") != 'admin');
@@ -292,7 +303,7 @@ searchFocusHandler(isFocused){
   }
 
     if (!isLoaded) {
-      return <div> loading...</div>;
+      return <div> loading navbar...</div>;
     } else {
       return (
         <div>
@@ -317,8 +328,8 @@ searchFocusHandler(isFocused){
 
               {/* Navbar Brand */}
               <Navbar.Brand href="../" id="brand">
-                <i id="brandLogo" class="fas fa-spa"></i>
-                BrandTitle
+              <img src="./favicon.ico" height={50} />
+                SwampHouse
               </Navbar.Brand>
 
               {/* Toggle Effect */}
@@ -401,18 +412,18 @@ searchFocusHandler(isFocused){
 
                 {/* Search Option */}
 
-                <div className="Results">
+                <div className="Results" onMouseOver={()=> this.hoverToggle(true)} onMouseLeave={()=> this.hoverToggle(false)}  >
                   <FormControl
                     value={text}
                     onChange={this.onTextChanged}
                     onKeyPress={e => this.keyPressHandler(e, text)}
-                    onFocus={() => this.searchFocusHandler(true)}
+                    onFocus={() => this.searchFocusHandler(true)} 
                     onBlur={() => this.searchFocusHandler(false)}
                     type="text"
                     placeholder="Search"
                     className="mr-sm-2"
                   />
-                  {this.state.isSearchFocused ? this.renderSuggestions() : ''}
+                  {this.state.isSearchFocused || this.state.isHover ? this.renderSuggestions() : ''}
                 </div>
 
                 <Link

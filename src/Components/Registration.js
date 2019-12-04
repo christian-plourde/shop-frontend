@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SubmitButton from "./SubmitButton.js";
+import Advertisement from "./Advertisement.js";
 import Header from "./Header.js";
 import Navbar from "./Navbar.js";
 import axios from "axios";
@@ -277,6 +278,7 @@ class Registration extends Component {
           <SubmitButton />
         </form>
         {this.state.redirect && <Redirect to={"/login"} />}
+        <Advertisement />
       </div>
     );
   }

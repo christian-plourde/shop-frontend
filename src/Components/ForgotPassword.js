@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import SubmitButton from "./SubmitButton.js";
+import Advertisement from "./Advertisement.js";
 import {Redirect} from "react-router";
 import Link from "./Link.js";
 import axios from 'axios';
@@ -160,6 +161,7 @@ class ForgotPassword extends Component
 
 			<SubmitButton />
 			</form>
+			<Advertisement />
 		</div>
 
 		);

@@ -261,10 +261,14 @@ class AdminDisplay extends React.Component {
       return (
         <div>
 
+<<<<<<< HEAD
+          <h1 style={account_info_style}>Earnings</h1>
+=======
         <table>
         <tr>
         <td rowspan="2">
-          <h1 style={account_info_style}>Earnings</h1>
+          <h1 style = {account_info_style}>Earnings</h1>
+>>>>>>> 1ae97c3c41de735632881efe2f64b3e4fa8572a9
 
           <h1>
             Commission{(this.state.commission > 0) ? ': ' + Math.round(this.state.commission*100)/100 + '$' : ''}
@@ -283,7 +287,7 @@ class AdminDisplay extends React.Component {
         }
         </td>
         <td style={top_selling_items_style} >
-          <h1 style={account_info_style}>Top Selling Items</h1>
+          <h1 style = {account_info_style}>Top Selling Items</h1>
 
           {this.createTopItems()}
         </td>

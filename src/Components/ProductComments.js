@@ -10,6 +10,7 @@ class ProductComments extends React.Component {
             comment: '',
             reviewData: null,
             photoSelected: [],
+            photoSelectedUrls:[],
             reviewEligibility: 0
         }
         this.formHandler = this.formHandler.bind(this)
@@ -51,11 +52,16 @@ class ProductComments extends React.Component {
         else {
             this.setState(prevState => {
                 let newPhotos = prevState.photoSelected
+                let newPhotoUrls = prevState.photoSelectedUrls
                 for (let photo of photos) {
-                    newPhotos.push(URL.createObjectURL(photo)) //make the images accessible by the render method via URLs
+                    newPhotos.push(photo) //make the images accessible by the render method via URLs
+                    newPhotoUrls.push(URL.createObjectURL(photo))
                 }
                 return (
-                    { photoSelected: newPhotos }
+                    {
+                        photoSelected: newPhotos,
+                        photoSelectedUrls: newPhotoUrls
+                    }
                 )
             })
         }
@@ -72,7 +78,7 @@ class ProductComments extends React.Component {
 
         let reviewerID = (localhost) ?
             localStorage.getItem("logged_in_user")
-            : sessionStorage.getItem("logged_in_user")
+            : localStorage.getItem("logged_in_user")
 
         const site = (localhost) ?
             'http://localhost/shop-backend/php/reviews.php'
@@ -82,7 +88,8 @@ class ProductComments extends React.Component {
             rating: this.state.rating,
             reviewerText: this.state.comment,
             pid: this.props.product_id,
-            rid: reviewerID
+            rid: reviewerID,
+            images: this.state.photoSelected
         }
 
         const axiosConfig = {
@@ -106,7 +113,7 @@ class ProductComments extends React.Component {
         if (localStorage.getItem("logged_in_user") != null && this.state.reviewEligibility == 0) { //conditional rendering, currently, any logged in user can leave a review, set it to 1 to only have eligible user being able to leave a review
             const images = []
             if (this.state.photoSelected.length > 0) {
-                images = this.state.photoSelected.map(image => <img src={image}/>)
+                images = this.state.photoSelectedUrls.map(image => <img src={image}/>)
             }
             return (
                 <div>
