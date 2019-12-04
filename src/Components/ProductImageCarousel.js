@@ -39,7 +39,11 @@ class ProductImageCarousel extends React.Component{ //accept an array of image u
                     <ImageSlider url={currentImage}/>
                     <ControlArrow direction='right' clickHandler={this.nextSlide}/>
                 </div>
-                <p>{this.state.currentImageIndex}</p>
+                <p>
+                    {
+                        //this.state.currentImageIndex
+                    }
+                </p>
             </div>
         )
     }
