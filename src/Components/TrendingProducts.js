@@ -155,7 +155,7 @@ class TrendingProducts extends Component{
 
       const{isLoaded} = this.state;
       if(!isLoaded){
-        return <div> loading trending products...</div>;
+        return <div> <h2>loading trending products...</h2></div>;
      }//end if
      else{
       return(
