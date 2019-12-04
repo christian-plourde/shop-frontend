@@ -15,6 +15,7 @@ import CheckOut from "./CheckOut";
 import Navbar from "./Components/Navbar";
 import UserProfile from "./Components/UserProfile";
 import ProductPosting from "./Components/Client/ProductPosting.js";
+import SellerPage from "./Components/SellerPage.js";
 
 class App extends Component {
   render() {
@@ -61,6 +62,15 @@ class App extends Component {
           strict
           render={props => <ProductPage {...props} />}
         />
+
+        <Route
+          path="/seller/:seller_name"
+          exact
+          strict
+          render={props => <SellerPage {...props} />}
+        />
+
+
         <Route
           path="/login"
           exact
