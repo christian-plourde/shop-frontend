@@ -90,10 +90,12 @@ class LandingPage extends Component {
 
   changeQuantity() {
     let quantityNow = localStorage.getItem("cartQuantity")
-    // console.log('LandingPage :: changeQuantity\nIs cart quantity now equal to local storage?', quantityNow != this.state.quantity)
+    console.log('LandingPage :: changeQuantity\nIs cart quantity now equal to local storage?', quantityNow != this.state.quantity)
+
     if(quantityNow != this.state.quantity){
       this.setState({quantity:quantityNow})
     }
+
   }
 
 
