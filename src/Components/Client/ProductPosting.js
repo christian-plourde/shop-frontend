@@ -21,7 +21,8 @@ class ProductPosting extends Component {
     dimensions: "",
     quantity:0,//Assume this is a number
     userName:(localStorage.getItem("username")),
-    isSubmitted:false
+    isSubmitted:false,
+    description_text_error: false
   };
 
 
@@ -44,6 +45,14 @@ class ProductPosting extends Component {
   // Submit handler
   submitHandler = e => {
     e.preventDefault();
+
+    if(this.state.descriptionText.length > 1000)
+    {
+       this.setState({description_text_error: true});
+       return;
+    }
+
+    this.setState({description_text_error: false});
 
     const site = (localhost) ?
       'http://localhost/shop-backend/php/add_product.php'
@@ -168,6 +177,17 @@ class ProductPosting extends Component {
   // Render Method
   render() {
     const input_field = () => {
+
+      const error_mess_style = 
+      {
+        color: "#993232",
+        textDecoration: "none",
+        fontSize: "18px",
+        fontWeight: "bold",
+        textAlign: 'center',
+        padding: "10px"
+      }
+
       return (<div>
         <Form onSubmit={this.submitHandler}>
           <Container id="Container">
@@ -261,6 +281,15 @@ class ProductPosting extends Component {
             </button>
           </Container>
         </Form>
+
+        {
+          this.state.description_text_error &&
+          <div>
+            <h1 style={error_mess_style}>Description Text is limited to 1000 characters. Please try again.</h1>
+          </div>
+        }
+
+
       </div>);
     }
 
