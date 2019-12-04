@@ -1,8 +1,21 @@
-.review{
-    background: dimgrey;
-    /* width: 700px;
+.review {
+  /* width: 700px;
     height: 700px; */
-    border: 15px solid darkslategray;
-    padding: 50px;
-    margin: 20px;
+  border: 1px solid darkslategray;
+
+  padding: 20px;
+  margin: 50px;
+  display: absolute;
+  clear: both;
+}
+
+.review h1 {
+  border: 1px black;
+}
+
+.review .review-text {
+  font-size: 14px;
+}
+.stars {
+  font-size: 26px;
 }

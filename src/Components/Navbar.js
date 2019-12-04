@@ -33,75 +33,81 @@ class NavbarFunction extends Component {
       productNamesArray: [],
       tagsArray: [],
       productData: [],
-      cartQuantity:0,
+      cartQuantity: 0,
       isEnterPressed: false,
       isSearchFocused: false
     };
   }
 
-
   componentDidMount() {
-
-    console.log('Navbar : this.props.data', this.props.data, ' Execute php? ', !this.props.data)
+    console.log(
+      "Navbar : this.props.data",
+      this.props.data,
+      " Execute php? ",
+      !this.props.data
+    );
 
     //If we're not getting our data from the landing page...
-    if (!this.props.data)
-    {
+    if (!this.props.data) {
       //...then go fetch the data from the database
       this.setStateViaAxios();
     }
     //...else if we're getting our data as a prop already,...
-    else
-    {
+    else {
       //...then just use that.
       this.setStateViaProp();
     }
-
-  }//end component did mount
+  } //end component did mount
 
   setStateViaAxios = () => {
-    var site = (localhost) ?
-      "http://localhost/shop-backend/php/get_products.php"
+    var site = localhost
+      ? "http://localhost:8081/shop-backend/php/get_products.php"
       : "https://shop-354.herokuapp.com/get_products.php";
 
-      const axiosConfig = {
-       headers: {
-            'Content-Type': 'application/json',
-           "Access-Control-Allow-Origin":"*",
-        },
-     };
+    const axiosConfig = {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      }
+    };
 
-     axios.post(site, null, axiosConfig)
-     .then(response => {
-         console.log('Response.data', response.data)
-         let jsonArray = JSON.parse(JSON.stringify(response.data.products));
-         let tagsArray = [];
-         let productNamesArray = [];
-         for (var j in jsonArray) {
-           tagsArray.push(jsonArray[j].tags);
-           productNamesArray.push(jsonArray[j].productName);
-         }
+    axios.post(site, null, axiosConfig).then(response => {
+      console.log("Response.data", response.data);
+      let jsonArray = JSON.parse(JSON.stringify(response.data.products));
+      let tagsArray = [];
+      let productNamesArray = [];
+      for (var j in jsonArray) {
+        tagsArray.push(jsonArray[j].tags);
+        productNamesArray.push(jsonArray[j].productName);
+      }
 
-          let clothing = [];
-          let home = [];
-          let electronic = [];
-            for(var x in tagsArray){
-                for(var y in tagsArray[x]){
-                   if(tagsArray[x][y] ==="clothing"){clothing.push(jsonArray[x])}
-                   if(tagsArray[x][y] ==="home"){home.push(jsonArray[x])}
-                   if(tagsArray[x][y] ==="electronic"){electronic.push(jsonArray[x])}
-                }
+      let clothing = [];
+      let home = [];
+      let electronic = [];
+      for (var x in tagsArray) {
+        for (var y in tagsArray[x]) {
+          if (tagsArray[x][y] === "clothing") {
+            clothing.push(jsonArray[x]);
+          }
+          if (tagsArray[x][y] === "home") {
+            home.push(jsonArray[x]);
+          }
+          if (tagsArray[x][y] === "electronic") {
+            electronic.push(jsonArray[x]);
+          }
+        }
+      }
 
-            }
-
-            this.setState({
-              isLoaded: true
-            });
-           this.setState({productNamesArray: productNamesArray,
-             tagsArray: tagsArray,
-             productData: jsonArray});
-       })//end then
-  }//end set state via axios
+      this.setState({
+        isLoaded: true
+      });
+      this.setState({
+        productNamesArray: productNamesArray,
+        tagsArray: tagsArray,
+        productData: jsonArray
+      });
+    }); //end then
+  }; //end set state via axios
 
   setStateViaProp = () => {
     let tagsArray = [];
@@ -110,34 +116,41 @@ class NavbarFunction extends Component {
       tagsArray.push(this.props.data[j].tags);
       productNamesArray.push(this.props.data[j].productName);
     }
-     let clothing = [];
-     let home = [];
-     let electronic = [];
-       for(var x in this.props.data){
-           for(var y in this.props.data[x]){
-              if(tagsArray[x][y] ==="clothing"){clothing.push(this.props.data[x])}
-              if(tagsArray[x][y] ==="home"){home.push(this.props.data[x])}
-              if(tagsArray[x][y] ==="electronic"){electronic.push(this.props.data[x])}
-           }
-
-       }
-
-       this.setState({
-         isLoaded: true
-       });
-      this.setState({productNamesArray: productNamesArray,
-        tagsArray: tagsArray,
-        productData: this.props.data});
-  }//end set state via props
-
-  componentDidUpdate(){
-      // console.log("Navbar-78")
-      let item = localStorage.getItem("cartQuantity")
-      // console.log("Navbar-80-", "newCartValue", item)
-      if(item && this.state.cartQuantity != item ){
-        this.setState({ cartQuantity:item})
+    let clothing = [];
+    let home = [];
+    let electronic = [];
+    for (var x in this.props.data) {
+      for (var y in this.props.data[x]) {
+        if (tagsArray[x][y] === "clothing") {
+          clothing.push(this.props.data[x]);
+        }
+        if (tagsArray[x][y] === "home") {
+          home.push(this.props.data[x]);
+        }
+        if (tagsArray[x][y] === "electronic") {
+          electronic.push(this.props.data[x]);
+        }
       }
     }
+
+    this.setState({
+      isLoaded: true
+    });
+    this.setState({
+      productNamesArray: productNamesArray,
+      tagsArray: tagsArray,
+      productData: this.props.data
+    });
+  }; //end set state via props
+
+  componentDidUpdate() {
+    // console.log("Navbar-78")
+    let item = localStorage.getItem("cartQuantity");
+    // console.log("Navbar-80-", "newCartValue", item)
+    if (item && this.state.cartQuantity != item) {
+      this.setState({ cartQuantity: item });
+    }
+  }
 
   onSubmit = e => {
     const value = e;
@@ -202,7 +215,7 @@ class NavbarFunction extends Component {
       suggestions: []
     }));
   }
- renderSuggestions() {
+  renderSuggestions() {
     const { suggestions } = this.state;
     if (suggestions.length === 0) {
       return null;
@@ -216,80 +229,92 @@ class NavbarFunction extends Component {
               query: this.state.productData,
               element: item
             }}
-            >
-               <li onClick={() => this.suggestionSelected(item)}>{item}</li> </Link>))}
+          >
+            <li onClick={() => this.suggestionSelected(item)}>{item}</li>{" "}
+          </Link>
+        ))}
       </ul>
     );
-}
-
-searchFocusHandler(isFocused){
-  this.setState({isSearchFocused: isFocused})
-}
-
-   keyPressHandler(e, newText){
-      // charcode 13 is "Enter" && text can't be empty && text can't be whitespaces only
-      if(e.charCode === 13 && !!newText && newText.trim().length > 0){
-         this.setState({
-            isEnterPressed: true,
-            text: newText        // the user's input
-         });
-      }
-   }
-
- render(){
-  const{isLoaded,text}= this.state;
-
-  const isGuest = (localStorage.getItem("username") != null && localStorage.getItem("username") == 'Guest');
-  const isClient = !isGuest && (localStorage.getItem("logged_in_user") != null && localStorage.getItem("logged_in_user") != 'admin');
-  const hasCart = (localStorage.getItem("cart") != null);
-
-  console.log('Navbar::render -> isGuest:', isGuest, ' isClient:', isClient)
-
-//Render the cart is this is a client and they have a cart
-  var render_cart = (isClient);
-  //unless I specifically say not to render the cart
-  if (this.props.renderCart != null && !this.props.renderCart)
-  {
-    render_cart = false;
   }
-  var cart_empty = !localStorage.getItem("cart");
 
-  console.log('Navbar::render -> render cart:', render_cart, ' has Cart:', hasCart)
+  searchFocusHandler(isFocused) {
+    this.setState({ isSearchFocused: isFocused });
+  }
 
-  const cart = () => {
-      if (render_cart)
-      {
-        return (
-          (!cart_empty) ? (
-            <Link to="/checkout">
-              <button
-                id="cart"
-                type="button"
-                class="btn btn-secondary btn-sm"
-              >
-                <i id="shoppingCart" class="fas fa-shopping-cart"></i>
-                {/*<span class="counter">{this.state.cartQuantity}</span>*/}
-                <span class="counter">{
-                  //If we receive cart quantity as a prop, render that. Else, render the state
-                  !this.props.cartQuantity ? this.state.cartQuantity : this.props.cartQuantity}</span>
-              </button>
-            </Link>
-          )
-          :(
-            <button
-              id="cart"
-              type="button"
-              class="btn btn-secondary btn-sm"
-              onClick={()=>{window.alert('Your cart is empty!')}}
-            >
+  keyPressHandler(e, newText) {
+    // charcode 13 is "Enter" && text can't be empty && text can't be whitespaces only
+    if (e.charCode === 13 && !!newText && newText.trim().length > 0) {
+      this.setState({
+        isEnterPressed: true,
+        text: newText // the user's input
+      });
+    }
+  }
+
+  render() {
+    const { isLoaded, text } = this.state;
+
+    const isGuest =
+      localStorage.getItem("username") != null &&
+      localStorage.getItem("username") == "Guest";
+    const isClient =
+      !isGuest &&
+      localStorage.getItem("logged_in_user") != null &&
+        localStorage.getItem("logged_in_user") != "admin";
+    const hasCart = localStorage.getItem("cart") != null;
+
+    console.log("Navbar::render -> isGuest:", isGuest, " isClient:", isClient);
+
+    //Render the cart is this is a client and they have a cart
+    var render_cart = isClient;
+    //unless I specifically say not to render the cart
+    if (this.props.renderCart != null && !this.props.renderCart) {
+      render_cart = false;
+    }
+    var cart_empty = !localStorage.getItem("cart");
+
+    console.log(
+      "Navbar::render -> render cart:",
+      render_cart,
+      " has Cart:",
+      hasCart
+    );
+
+    const cart = () => {
+      if (render_cart) {
+        return !cart_empty ? (
+          <Link to="/checkout">
+            <button id="cart" type="button" class="btn btn-secondary btn-sm">
               <i id="shoppingCart" class="fas fa-shopping-cart"></i>
               {/*<span class="counter">{this.state.cartQuantity}</span>*/}
-              <span class="counter">{(!this.props.cartQuantity) ? this.state.cartQuantity : this.props.cartQuantity}</span>
+              <span class="counter">
+                {//If we receive cart quantity as a prop, render that. Else, render the state
+                !this.props.cartQuantity
+                  ? this.state.cartQuantity
+                  : this.props.cartQuantity}
+              </span>
             </button>
-          )
-        )
-      }//end if
-  }
+          </Link>
+        ) : (
+          <button
+            id="cart"
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onClick={() => {
+              window.alert("Your cart is empty!");
+            }}
+          >
+            <i id="shoppingCart" class="fas fa-shopping-cart"></i>
+            {/*<span class="counter">{this.state.cartQuantity}</span>*/}
+            <span class="counter">
+              {!this.props.cartQuantity
+                ? this.state.cartQuantity
+                : this.props.cartQuantity}
+            </span>
+          </button>
+        );
+      } //end if
+    };
 
     if (!isLoaded) {
       return <div> loading...</div>;
@@ -314,7 +339,6 @@ searchFocusHandler(isFocused){
 
           <div id="firstContainer">
             <Navbar id="Navbar" bg="light" expand="lg">
-
               {/* Navbar Brand */}
               <Navbar.Brand href="../" id="brand">
                 <i id="brandLogo" class="fas fa-spa"></i>
@@ -412,7 +436,7 @@ searchFocusHandler(isFocused){
                     placeholder="Search"
                     className="mr-sm-2"
                   />
-                  {this.state.isSearchFocused ? this.renderSuggestions() : ''}
+                  {this.state.isSearchFocused ? this.renderSuggestions() : ""}
                 </div>
 
                 <Link
@@ -422,12 +446,14 @@ searchFocusHandler(isFocused){
                     element: this.state.text
                   }}
                 >
-            {/* Button is disabed if search bar is empty or only contains whitespaces */}
-            <Button id="search" disabled={!text || text.trim().length <= 0} variant="outline-success">
-
-              Search
-
-            </Button>
+                  {/* Button is disabed if search bar is empty or only contains whitespaces */}
+                  <Button
+                    id="search"
+                    disabled={!text || text.trim().length <= 0}
+                    variant="outline-success"
+                  >
+                    Search
+                  </Button>
                 </Link>
 
                 {/* Login */}
@@ -473,8 +499,6 @@ searchFocusHandler(isFocused){
                 )}
 
                 {cart()}
-
-
               </Navbar.Collapse>
             </Navbar>
           </div>
