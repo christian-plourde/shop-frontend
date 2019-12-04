@@ -328,7 +328,7 @@ hoverToggle(hoverStatus){
 
               {/* Navbar Brand */}
               <Navbar.Brand href="../" id="brand">
-              <img src="./favicon.ico" height={50} />
+              <img src="../favicon.ico" height={50} />
                 SwampHouse
               </Navbar.Brand>
 
