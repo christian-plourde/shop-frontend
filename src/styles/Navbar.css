@@ -75,5 +75,9 @@
  }
  
  #shoppingCart {
-   font-size: 15px;
+   font-size: 30px;
+ }
+ .counter{
+   padding-left:3px;
+   font-size:15px;
  }

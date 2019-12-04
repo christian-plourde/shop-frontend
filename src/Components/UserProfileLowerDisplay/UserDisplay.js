@@ -97,7 +97,6 @@ class UserDisplay extends React.Component {
     render() {
       return(
           <div>
-            <h3>New product posting</h3>
             <NewProductPosting />
             <table>
               <tbody>

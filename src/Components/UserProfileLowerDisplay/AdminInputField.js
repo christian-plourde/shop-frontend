@@ -11,7 +11,6 @@ class AdminInputField extends React.Component {
   }
 
     render() {
-      console.log('AdminInputField', this.props)
       return(<div>
         <button onClick={() => this.props.onClick(this.props.timestamp)}>
           <h1>{this.props.mapping}</h1>

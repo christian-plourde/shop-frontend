@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 class CategoryButton extends Component {
   render()
   {
+    
     return(
       <td>
         <Link to={{
