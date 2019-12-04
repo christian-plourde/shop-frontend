@@ -26,7 +26,7 @@ class ProductComments extends React.Component {
 
         let reviewerID = (localhost) ?
             localStorage.getItem("logged_in_user")
-            : sessionStorage.getItem("logged_in_user")
+            : localStorage.getItem("logged_in_user")
 
         const site = (localhost) ?
         'http://localhost/shop-backend/php/reviews.php'
