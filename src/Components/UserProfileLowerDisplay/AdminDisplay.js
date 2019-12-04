@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import AdminInputField from './AdminInputField.js';
 
-const DATE_OPTIONS = ["24 hours", "one week", "two weeks", "a month", "the website's birth"];
+const DATE_OPTIONS = ["24 hours", "One Week", "Two Weeks", "A Month", "All Time"];
 
 var DATE_MAPPINGS = null;
 
@@ -142,8 +142,17 @@ class AdminDisplay extends React.Component {
 
     render() {
 
+      const account_info_style =
+      {
+        textDecoration: "underline",
+        paddingBottom: '10px'
+      }
+
       return (
         <div>
+
+          <h1 style={account_info_style}>Earnings</h1>
+
           <h1>
             Commission{(this.state.commission > 0) ? ': ' + this.state.commission : ''}
             <br />
