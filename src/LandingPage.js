@@ -5,6 +5,8 @@ import Navbar from "./Components/Navbar";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import TrendingProducts from './Components/TrendingProducts.js';
+
 import axios from "axios";
 
 //A variable to make our lives easier
@@ -90,6 +92,8 @@ class LandingPage extends Component {
     }
 
   }
+
+
   render() {
     const {
       isLoaded,
@@ -107,12 +111,60 @@ class LandingPage extends Component {
     if (!isLoaded) {
       return <div> loading...</div>;
     } else {
+      // return (
+      //   <div>
+      //     {/*<Navbar productNames={productNames} tags={tags} products={data} cartQuantity={this.state.quantity}/>*/}
+      //     <Navbar data={data} renderCart={isClient}/>
+      //     <div className="LandingPageBody">
+      //       <div>
+      //         <div><h1>Trending products</h1></div>
+      //         <div className="LandingPageBody">
+      //           <div>
+      //             <Carousel
+      //               data={clothingProducts}
+      //               category="Clothing Products"
+      //               updateQuantity={()=> this.changeQuantity()}
+      //             />
+      //           </div>
+      //           <div>
+      //             <Carousel
+      //             data={homeProducts}
+      //             category="Home Products"
+      //             updateQuantity={()=> this.changeQuantity()}
+      //             />
+      //           </div>
+      //           <div>
+      //             <Carousel
+      //               data={electronicProducts}
+      //               category="Electronic Products"
+      //               updateQuantity={()=> this.changeQuantity()}
+      //             />
+      //           </div>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   </div>
+      // );//end return
+
       return (
         <div>
           {/*<Navbar productNames={productNames} tags={tags} products={data} cartQuantity={this.state.quantity}/>*/}
           <Navbar data={data} renderCart={isClient}/>
           <div className="LandingPageBody">
             <div>
+              <div>
+                <h1>
+                  {isClient ?
+                  (<TrendingProducts   num_to_return={3}
+                                        toggleCartUpdate={this.changeQuantity()}
+                  />)
+                  :
+                  (<TrendingProducts   num_to_return={3}
+
+                  />)
+                  }
+                </h1>
+              </div>
               <div className="LandingPageBody">
                 <div>
                   <Carousel
@@ -139,9 +191,9 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-      );
-    }
-  }
+      );//end return
+    }//end else
+  }//end render
 }
 
 export default LandingPage;

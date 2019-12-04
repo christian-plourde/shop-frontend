@@ -7,7 +7,7 @@ import ProductComments from './ProductComments.js'
 import axios from 'axios';
 import DeleteButton from './Admin/DeleteButton.js';
 import localhost from '../LocalHost.js';
-import NavbarFunction from './Navbar'
+import NavbarFunction from './Navbar.js';
 
 // const localhost = true;//Set to true if working locally
 
@@ -54,10 +54,12 @@ class ProductPage extends React.Component {
         this.setState({
           product: productData
         });
-      });
+        console.log('successfully fetch products', this.state.product)
+
+      });//end then
 
     const reviewSource = (localhost) ? //acquiring the review array associated with the received prop's ID
-      `http://localhost/shop-frontend/shop-backend/php/reviews.php?review=${product_id}`
+      `http://localhost/shop-backend/php/reviews.php?review=${product_id}`
       : `https://shop-354.herokuapp.com/reviews.php?review=${product_id}`
 
     fetch(reviewSource, {
@@ -70,6 +72,7 @@ class ProductPage extends React.Component {
       .then(productReview => {
         this.setState({ productReviews: productReview, isLoaded: true });
       })
+
 
     // need to acquire the review meta data
     //`http://localhost/shop-frontend/shop-backend/php/reviews.php?averagereview=${product_id}`
@@ -126,7 +129,7 @@ class ProductPage extends React.Component {
   render() {
     const { isLoaded, data } = this.state;
     if (!isLoaded) {
-      return <div> loading...</div>;
+      return <div> Loading product page...</div>;
     }
     else {
 
@@ -214,11 +217,11 @@ class ProductPage extends React.Component {
             </div>
           </div>
         </div>
-          );
+      );//end return
         }
-    
+
       }
-    
+
     }
-    
+
 export default ProductPage;

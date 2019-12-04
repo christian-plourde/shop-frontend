@@ -97,7 +97,7 @@ class Cart extends Component {
       this.setState({displayThankYouMessage:true})
       setTimeout(this.checkoutCompleteAndRedirect, 5000)
     }
-    else alert("Verify the delivery address before checking out!"); 
+    else alert("Verify the delivery address before checking out!");
   };
   checkoutCompleteAndRedirect(){
     console.log("Cart-99")
@@ -139,7 +139,7 @@ class Cart extends Component {
     localStorage.removeItem("cart")
     localStorage.removeItem("cartQuantity")
   }
-  
+
 
   checkShippingInfo = validity => {
     if (validity) {
@@ -241,7 +241,8 @@ class Cart extends Component {
           new_string = new_string.concat(JSON.stringify(product))
           new_string = new_string.concat((i < list.length - 1) ? '|' : '');
         }//end for
-        // console.log(new_string)
+
+        
         localStorage.setItem('cart', new_string)
         var new_quantity = parseInt(localStorage.getItem('cartQuantity')) + ((isIncrement) ? 1 : -1);
         localStorage.setItem('cartQuantity', new_quantity)
@@ -251,12 +252,8 @@ class Cart extends Component {
     }
     this.setState({products:product_list})
 
-    //Update localStorage
-
-
 
     // console.log('Handle button press; products after button press ', this.state.products)
-
     //Also recompute subtotal and total
     let sTotal = 0;
     for (var x in this.state.products) {
