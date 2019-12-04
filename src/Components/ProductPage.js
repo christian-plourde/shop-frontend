@@ -184,11 +184,10 @@ class ProductPage extends React.Component {
       const imageSources = []
       console.log(this.state.product)
       if (this.state.product.images != undefined) {
-	      if((this.state.product.images)includes("https://")){ // You need to find out if the imageUrl string contains https
+	      if((this.state.product.images[0])includes("https://")){ // You need to find out if the imageUrl string contains https
 		      imageSources = this.state.product.images.map(imageUrl=>`${imageUrl}`);
 	      }else{
 		      imageSources = this.state.product.images.map(imageUrl => `https://shop-354.herokuapp.com/ressources/img/${imageUrl}`)     //generating a product image url array with randomly inserted Shrek, ISS and Donkey(from Shrek)
-
 	      }
       }
       let dice = Math.random() * 10
