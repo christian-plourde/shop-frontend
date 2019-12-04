@@ -111,9 +111,7 @@ class UserDisplay extends React.Component {
                                     quantity={quantity}
                 />
                 <div>
-                    <h1>Delete button!!!</h1>
-                    <DeleteButton id={productID} onClick={this.deleteProduct} disabled/>
-                    {console.log('UserDisplay :: delete product button is currently disabled.')}
+                    <DeleteButton id={productID} text="Delete Product" onClick={this.deleteProduct}/>
                 </div>
               </td>
             </tr>
